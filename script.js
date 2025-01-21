@@ -297,6 +297,7 @@ function setDefaultDateTime() {
   inputTimeElement.min = time; // Set the min attribute to current time
 }
 
+// takes whatever was put in priority & category sections then calls updateTodoList
 function sortTodos(sortBy) {
   if (sortBy === 'priority') {
     currentSortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
