@@ -1,12 +1,14 @@
 class FilterManager {
   constructor(taskList) {
-    this.filteredToDo = taskList;
+    this.taskList = taskList;
   }
 
   // ORIGINAL FUNCTIONS PORTED OVER
   filterTodos() {
     const filterElement = document.querySelector('.js-filter-input');
     filterMethod = filterElement.value;
-    updateTodoList();
+    this.taskList.updateTodoList();
   }
 }
+
+export default FilterManager;

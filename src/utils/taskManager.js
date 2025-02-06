@@ -1,61 +1,87 @@
 class TaskManager {
-  constructor(nameInput, dateInput, timeInput, categoryInput, priorityInput, completedInput) {
-    this.nameInput = nameInput;
-    this.dateInput = dateInput;
-    this.timeInput = timeInput;
-    this.categoryInput = categoryInput;
-    this.priorityInput = priorityInput;
-    this.completedInput = completedInput;
+  constructor(taskList) {
+    // I actually dont think we need anything in the constructor... we are all getting the input from the selector right as the buttons are clicked... not before
+    // this.nameInput = nameInput;
+    // this.dateInput = dateInput;
+    // this.timeInput = timeInput;
+    // this.categoryInput = categoryInput;
+    // this.priorityInput = priorityInput;
+    // this.completedInput = completedInput;
+
+    this.taskList = taskList;
+    this.isEditing = false;
+    this.editIndex = null;
+    
+    this.setDefaultDateTime();
   }
 
-  // ORIGINAL FUNCTIONS PORTED OVER
+    // ORIGINAL FUNCTIONS PORTED OVER
+
+  // Honestly... this should be in the manager - it sets the date and time for the initial load in
+  setDefaultDateTime() {
+    const inputDateElement = document.querySelector('.js-date-input');
+    const inputTimeElement = document.querySelector('.js-time-input');
+
+    const now = new Date();
+    const date = now.toISOString().split('T')[0];
+    const time = now.toTimeString().split(' ')[0].slice(0, 5);
+
+    inputDateElement.value = date;
+    inputDateElement.min = date; // Set the min attribute to today's date
+    inputTimeElement.value = time;
+    inputTimeElement.min = time; // Set the min attribute to current time
+  }
+
   editTodo(index) {
     let inputNameElement = document.querySelector('.js-name-input');
     let inputDateElement = document.querySelector('.js-date-input');
     let inputTimeElement = document.querySelector('.js-time-input');
     let inputCategoryElement = document.querySelector('.js-category-input');
     let inputPriorityElement = document.querySelector('.js-priority-input');
-  
+
     // Fill the input fields with the current values
-    inputNameElement.value = todoList[index].name;
-    inputDateElement.value = todoList[index].date;
-    inputTimeElement.value = todoList[index].time;
-    inputCategoryElement.value = todoList[index].category;
-    inputPriorityElement.value = todoList[index].priority;
-  
+    inputNameElement.value = this.taskList[index].name;
+    inputDateElement.value = this.taskList[index].date;
+    inputTimeElement.value = this.taskList[index].time;
+    inputCategoryElement.value = this.taskList[index].category;
+    inputPriorityElement.value = this.taskList[index].priority;
+
     // Set editing mode and the index of the todo being edited
-    isEditing = true;
-    editIndex = index;
-  
+    this.isEditing = true;
+    this.editIndex = index;
+
     // Enable cancel option
     const cancelEditBtn = document.querySelector('.js-cancel-button');
     cancelEditBtn.style.display = 'block';
-  
+
     // Change the add button to 'Update'
     const addButton = document.querySelector('.js-add-button');
     addButton.innerHTML = '';
     addButton.title = 'Update';
     addButton.appendChild(checkIcon);
-    updateTaskCounter();
+    //why is edit even calling this? it should only be create/delete
+    // updateTaskCounter(); 
   }
 
   cancelEditTodo() {
-    isEditing = false; // Reset edit mode
-    editIndex = null;
-  
+    this.isEditing = false; // Reset edit mode
+    this.editIndex = null;
+
     // Reset the inputs
-    clearInputs();
-  
+    this.clearInputs();
+
     // Hide edit cancel action button on page load
     const cancelEditBtn = document.querySelector('.js-cancel-button');
     cancelEditBtn.style.display = 'none';
-  
+
     // Change the button back to 'Add'
     const addButton = document.querySelector('.js-add-button');
     addButton.innerHTML = '';
     addButton.title = 'Add';
-    addButton.appendChild(addIcon);
-    updateTaskCounter();
+    
+    const foundIcon = document.getElementById('addIcon');
+    addButton.appendChild(foundIcon);
+    // updateTaskCounter();
   }
 
   clearInputs() {
@@ -64,13 +90,15 @@ class TaskManager {
     const inputTimeElement = document.querySelector('.js-time-input');
     const inputCategoryElement = document.querySelector('.js-category-input');
     const inputPriorityElement = document.querySelector('.js-priority-input');
-  
+
     // Clear the inputs
     inputNameElement.value = '';
     inputDateElement.value = '';
     inputTimeElement.value = '';
     inputCategoryElement.value = '';
     inputPriorityElement.value = '';
-    setDefaultDateTime();
+    this.setDefaultDateTime();
   }
 }
+
+export default TaskManager;

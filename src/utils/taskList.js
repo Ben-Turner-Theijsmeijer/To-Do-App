@@ -1,46 +1,57 @@
+// This class contains updateTodoList... which is an absolute mess... need to fix this
 class TaskList {
   constructor() {
-    this.tasks = [];
+    this.todoList = JSON.parse(localStorage.getItem('todoList')) || [];
+    this.todoListhtml = '';
+    this.filterMethod = 'all';
+
+    // NOTE: Remove these once updateTodoList gets fixed, should be in Sort
+    this.currentSortMethod = 'date';
+    this.currentSortOrder = 'asc';
+    this.currentCategorySortOrder = 'asc';
+
+    
+    this.updateTodoList();
   }
 
   // ORIGINAL FUNCTIONS PORTED OVER
   updateTodoList() {
     // Sort todoList based on the current sort method
-    let filteredTodos = todoList;
+    let filteredTodos = this.todoList;
 
     // Apply filtering based on the selected filter method
-    if (filterMethod === 'pending') {
-      filteredTodos = todoList.filter((todo) => !todo.completed);
-    } else if (filterMethod === 'completed') {
-      filteredTodos = todoList.filter((todo) => todo.completed);
+    if (this.filterMethod === 'pending') {
+      filteredTodos = filteredTodos.filter((todo) => !todo.completed);
+    } else if (this.filterMethod === 'completed') {
+      filteredTodos = filteredTodos.filter((todo) => todo.completed);
     }
 
     filteredTodos.sort((a, b) => {
-      if (currentSortMethod === 'date') {
+      if (this.currentSortMethod === 'date') {
         const dateA = new Date(a.date + ' ' + a.time);
         const dateB = new Date(b.date + ' ' + b.time);
         return dateA - dateB;
-      } else if (currentSortMethod === 'category') {
-        return currentCategorySortOrder === 'asc'
+      } else if (this.currentSortMethod === 'category') {
+        return this.currentCategorySortOrder === 'asc'
           ? a.category.localeCompare(b.category)
           : b.category.localeCompare(a.category);
-      } else if (currentSortMethod === 'priority') {
+      } else if (this.currentSortMethod === 'priority') {
         const priorityOrder = { high: 0, medium: 1, low: 2 };
-        return currentSortOrder === 'asc'
+        return this.currentSortOrder === 'asc'
           ? priorityOrder[a.priority] - priorityOrder[b.priority]
           : priorityOrder[b.priority] - priorityOrder[a.priority];
       }
-      updateTaskCounter();
+      this.updateTaskCounter();
     });
 
     const addElement = document.querySelector('.js-add-html');
-    todoListhtml = '';
+    this.todoListhtml = ''; //probably not needed
 
     for (let i = 0; i < filteredTodos.length; i++) {
       const todo = filteredTodos[i];
-      todoListhtml += `
+      this.todoListhtml += `
         <div class="small-container ${todo.completed ? 'completed' : ''}">
-          <input type="checkbox" class="js-complete-checkbox" data-index="${i}" ${todo.completed ? 'checked' : ''} onchange="toggleComplete(${todoList.indexOf(todo)})">
+          <input type="checkbox" class="js-complete-checkbox" data-index="${i}" ${todo.completed ? 'checked' : ''} onchange="toggleComplete(${this.todoList.indexOf(todo)})">
           <div class="task-info">
             <span class="task-name">${todo.name}</span>
             <span class="category-tag">${todo.category}</span>
@@ -58,11 +69,11 @@ class TaskList {
     }
 
     // Show or hide the task container based on the presence of tasks
-    if (todoList.length === 0) {
+    if (filteredTodos.length === 0) {
       addElement.style.display = 'none'; // Hide if no tasks
     } else {
       addElement.style.display = 'grid'; // Show if tasks exist
-      addElement.innerHTML = todoListhtml;
+      addElement.innerHTML = this.todoListhtml;
     }
 
     console.log(window.innerWidth);
@@ -71,21 +82,22 @@ class TaskList {
     document.querySelectorAll('.js-delete-button').forEach((button) => {
       button.addEventListener('click', (event) => {
         const index = event.currentTarget.getAttribute('data-index');
-        deleteTodo(index);
+        this.deleteTodo(index);
       });
     });
 
     document.querySelectorAll('.js-edit-button').forEach((button) => {
       button.addEventListener('click', (event) => {
         const index = event.currentTarget.getAttribute('data-index');
-        editTodo(index);
+        TaskManager.editTodo(index); //idk if this will work
       });
     });
 
     // Call the task counter update function
-    updateTaskCounter();
+    this.updateTaskCounter();
   }
 
+  // Do we even need task if we are just getting straight from the DOM? Need to reorganize this
   addTodo() {
     const inputNameElement = document.querySelector('.js-name-input');
     const inputDateElement = document.querySelector('.js-date-input');
@@ -118,55 +130,55 @@ class TaskList {
       alert('Please select a future time.');
       return;
     }
+    // I don't think the user can ever been editing and adding a task at the same time
+    // if (isEditing) {
+    //   // Update the existing todo
+    //   todoList[editIndex] = {
+    //     name,
+    //     date,
+    //     time,
+    //     category,
+    //     priority,
+    //     completed: false,
+    //   }; // Ensure completed is set
+    //   isEditing = false; // Reset edit mode
+    //   editIndex = null;
   
-    if (isEditing) {
-      // Update the existing todo
-      todoList[editIndex] = {
-        name,
-        date,
-        time,
-        category,
-        priority,
-        completed: false,
-      }; // Ensure completed is set
-      isEditing = false; // Reset edit mode
-      editIndex = null;
+    //   // Change the button back to 'Add'
+    //   const addButton = document.querySelector('.js-add-button');
+    //   addButton.innerHTML = '';
+    //   addButton.title = 'Add';
+    //   addButton.appendChild(addIcon);
   
-      // Change the button back to 'Add'
-      const addButton = document.querySelector('.js-add-button');
-      addButton.innerHTML = '';
-      addButton.title = 'Add';
-      addButton.appendChild(addIcon);
-  
-      // Hide cancel button
-      const cancelEditBtn = document.querySelector('.js-cancel-button');
-      cancelEditBtn.style.display = 'none';
-    } else {
+    //   // Hide cancel button
+    //   const cancelEditBtn = document.querySelector('.js-cancel-button');
+    //   cancelEditBtn.style.display = 'none';
+    // } else {
       // Add a new todo
-      todoList.push({ name, date, time, category, priority, completed: false }); // Ensure completed is set
-    }
+      this.todoList.push({ name, date, time, category, priority, completed: false }); // Ensure completed is set
+    // }
   
     // Save to localStorage
-    localStorage.setItem('todoList', JSON.stringify(todoList));
+    localStorage.setItem('todoList', JSON.stringify(this.todoList));
   
     // Reset the inputs
-    clearInputs();
+    TaskManager.clearInputs();
   
     // Update the displayed list
-    updateTodoList();
-    updateTaskCounter();
+    this.updateTodoList();
+    this.updateTaskCounter();
   }
 
   deleteTodo(index) {
     // Remove the specific todo from the list
-    todoList.splice(index, 1);
-    localStorage.setItem('todoList', JSON.stringify(todoList));
-    updateTodoList();
-    updateTaskCounter();
+    this.todoList.splice(index, 1);
+    localStorage.setItem('todoList', JSON.stringify(this.todoList));
+    this.updateTodoList();
+    this.updateTaskCounter();
   }
 
   updateTaskCounter() {
-    const totalTasks = todoList.length;
+    const totalTasks = this.todoList.length;
   
     // Select the element where the task counter is displayed
     const taskCounterButton = document.querySelector('.task-counter-button');
@@ -177,3 +189,5 @@ class TaskList {
     }
   }
 }
+
+export default TaskList;

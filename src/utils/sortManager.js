@@ -1,8 +1,12 @@
 class SortManager {
-  constructor() {
-      this.currentSortMethod = 'date' //Defualt sort method
-      this.currentSortOrder = 'asc'; // Default sort order for priority
-      this.currentCategorySortOrder = 'asc'; // Default sort order for category
+  constructor(taskList) {
+    this.taskList = taskList;
+
+      // Once we actually edit updateToDoList, and make the sort functionality separate, these will be in the constructor.
+
+      // this.currentSortMethod = 'date' //Defualt sort method
+      // this.currentSortOrder = 'asc'; // Default sort order for priority
+      // this.currentCategorySortOrder = 'asc'; // Default sort order for category
   }
 
   // takes whatever was put in priority & category sections then calls updateTodoList
@@ -14,6 +18,8 @@ class SortManager {
         currentCategorySortOrder === 'asc' ? 'desc' : 'asc';
     }
     currentSortMethod = sortBy;
-    updateTodoList();
+    this.taskList.updateTodoList(); //connect TaskList
   }
 }
+
+export default SortManager;

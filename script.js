@@ -198,7 +198,7 @@ function cancelEditTodo() {
   addButton.innerHTML = '';
   addButton.title = 'Add';
   addButton.appendChild(addIcon);
-  updateTaskCounter();
+  // updateTaskCounter();
 }
 
 function updateTodoList() {
