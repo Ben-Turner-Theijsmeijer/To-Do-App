@@ -12,7 +12,7 @@ class UIManager {
     document.querySelector('.js-add-button').addEventListener('click', () => {
       // for now... TaskManager just manages the list, but Task lists creates the task I guess
       // we need to create subclasses for TaskCreator and TaskEditor, if we are still doing that
-      this.taskList.addTodo()
+      this.taskList.addTodo();
     });
     // Add event listeners to buttons
     document
@@ -75,8 +75,8 @@ class UIManager {
 
 }
 
-// Not really sure what to do with this... just gonna keep it here for now.
 // I think we need another setup() that deals with setting up html
+// Note: add this to app class as html setup
 document.addEventListener('DOMContentLoaded', () => {
 
   // Set focus on the name input field
@@ -94,9 +94,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const addIcon = document.createElement('i');
   addIcon.setAttribute('id', 'addIcon');  
   addIcon.classList.add('fa-solid', 'fa-add');
+  // console.log("Test:" + addIcon);
+  // console.log("HELLOO")
 
   // Check icon - for update action
   const checkIcon = document.createElement('i');
+  checkIcon.setAttribute('id', 'checkIcon')
   checkIcon.classList.add('fa-solid', 'fa-check');
 
 

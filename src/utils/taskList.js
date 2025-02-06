@@ -1,3 +1,6 @@
+import TaskManager from "./taskManager.js";
+// import {clearInputs} from "./taskManager.js";
+
 // This class contains updateTodoList... which is an absolute mess... need to fix this
 class TaskList {
   constructor() {
@@ -16,6 +19,9 @@ class TaskList {
 
   // ORIGINAL FUNCTIONS PORTED OVER
   updateTodoList() {
+    const filterElement = document.querySelector('.js-filter-input');
+    this.filterMethod = filterElement.value;
+
     // Sort todoList based on the current sort method
     let filteredTodos = this.todoList;
 
@@ -89,7 +95,7 @@ class TaskList {
     document.querySelectorAll('.js-edit-button').forEach((button) => {
       button.addEventListener('click', (event) => {
         const index = event.currentTarget.getAttribute('data-index');
-        TaskManager.editTodo(index); //idk if this will work
+        editTodo(index); //idk if this will work
       });
     });
 
@@ -162,6 +168,7 @@ class TaskList {
     localStorage.setItem('todoList', JSON.stringify(this.todoList));
   
     // Reset the inputs
+    // FIX ME
     TaskManager.clearInputs();
   
     // Update the displayed list

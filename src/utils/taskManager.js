@@ -1,3 +1,4 @@
+// const {checkIcon} = require('./UIManager')
 class TaskManager {
   constructor(taskList) {
     // I actually dont think we need anything in the constructor... we are all getting the input from the selector right as the buttons are clicked... not before
@@ -12,13 +13,13 @@ class TaskManager {
     this.isEditing = false;
     this.editIndex = null;
     
-    this.setDefaultDateTime();
+    TaskManager.setDefaultDateTime();
   }
 
     // ORIGINAL FUNCTIONS PORTED OVER
 
   // Honestly... this should be in the manager - it sets the date and time for the initial load in
-  setDefaultDateTime() {
+  static setDefaultDateTime() {
     const inputDateElement = document.querySelector('.js-date-input');
     const inputTimeElement = document.querySelector('.js-time-input');
 
@@ -58,6 +59,9 @@ class TaskManager {
     const addButton = document.querySelector('.js-add-button');
     addButton.innerHTML = '';
     addButton.title = 'Update';
+
+    const checkIcon  = document.getElementById("checkIcon")
+    // console.log(checkIcon);
     addButton.appendChild(checkIcon);
     //why is edit even calling this? it should only be create/delete
     // updateTaskCounter(); 
@@ -68,7 +72,7 @@ class TaskManager {
     this.editIndex = null;
 
     // Reset the inputs
-    this.clearInputs();
+    TaskManager.clearInputs();
 
     // Hide edit cancel action button on page load
     const cancelEditBtn = document.querySelector('.js-cancel-button');
@@ -80,11 +84,12 @@ class TaskManager {
     addButton.title = 'Add';
     
     const foundIcon = document.getElementById('addIcon');
-    addButton.appendChild(foundIcon);
+    console.log(foundIcon);
+    // addButton.appendChild(foundIcon);
     // updateTaskCounter();
   }
 
-  clearInputs() {
+  static clearInputs() {
     const inputNameElement = document.querySelector('.js-name-input');
     const inputDateElement = document.querySelector('.js-date-input');
     const inputTimeElement = document.querySelector('.js-time-input');

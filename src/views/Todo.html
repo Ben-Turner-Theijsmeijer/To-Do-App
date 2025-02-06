@@ -69,6 +69,7 @@
         <div class="js-actions-wrapper">
           <button class="js-add-button" title="Add tasks">
             <i class="fa-solid fa-add"></i> &nbsp; Add tasks
+            <i class="fa-solid fa-add"></i> &nbsp; Update
           </button>
           <button class="js-cancel-button" title="Cancel">
             <i class="fa-solid fa-times"></i>
@@ -82,10 +83,11 @@
       <!-- Sorting and task counter section -->
       <div class="sort-buttons">
         <div class="sort-filter-container">
-          <button class="sort-button" onclick="sortTodos('category')">
+          <!-- Fix styling because class changed -->
+          <button class="sort-button-category">
             Sort by Category
           </button>
-          <button class="sort-button" onclick="sortTodos('priority')">
+          <button class="sort-button-priority">
             Sort by Priority
           </button>
           <select class="js-filter-input" onchange="filterTodos()">

@@ -5,8 +5,6 @@ class FilterManager {
 
   // ORIGINAL FUNCTIONS PORTED OVER
   filterTodos() {
-    const filterElement = document.querySelector('.js-filter-input');
-    filterMethod = filterElement.value;
     this.taskList.updateTodoList();
   }
 }
