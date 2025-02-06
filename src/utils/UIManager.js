@@ -17,7 +17,7 @@ class UIManager {
     // Add event listeners to buttons
     document
       .querySelector('.js-cancel-button')
-      .addEventListener('click', this.taskManager.cancelEditTodo());
+      .addEventListener('click', () => this.taskManager.cancelEditTodo());
 
     // Add event listeners for sorting buttons
     document

@@ -33,7 +33,7 @@ class TaskManager {
     inputTimeElement.min = time; // Set the min attribute to current time
   }
 
-  editTodo(index) {
+  static editTodo(task) {
     let inputNameElement = document.querySelector('.js-name-input');
     let inputDateElement = document.querySelector('.js-date-input');
     let inputTimeElement = document.querySelector('.js-time-input');
@@ -41,15 +41,15 @@ class TaskManager {
     let inputPriorityElement = document.querySelector('.js-priority-input');
 
     // Fill the input fields with the current values
-    inputNameElement.value = this.taskList[index].name;
-    inputDateElement.value = this.taskList[index].date;
-    inputTimeElement.value = this.taskList[index].time;
-    inputCategoryElement.value = this.taskList[index].category;
-    inputPriorityElement.value = this.taskList[index].priority;
+    inputNameElement.value = task.name;
+    inputDateElement.value = task.date;
+    inputTimeElement.value = task.time;
+    inputCategoryElement.value = task.category;
+    inputPriorityElement.value = task.priority;
 
     // Set editing mode and the index of the todo being edited
     this.isEditing = true;
-    this.editIndex = index;
+    // this.editIndex = index;
 
     // Enable cancel option
     const cancelEditBtn = document.querySelector('.js-cancel-button');
@@ -61,7 +61,7 @@ class TaskManager {
     addButton.title = 'Update';
 
     const checkIcon  = document.getElementById("checkIcon")
-    // console.log(checkIcon);
+    console.log(checkIcon);
     addButton.appendChild(checkIcon);
     //why is edit even calling this? it should only be create/delete
     // updateTaskCounter(); 
@@ -69,7 +69,7 @@ class TaskManager {
 
   cancelEditTodo() {
     this.isEditing = false; // Reset edit mode
-    this.editIndex = null;
+    this.editIndex = null; // might not use this anymore
 
     // Reset the inputs
     TaskManager.clearInputs();
@@ -103,6 +103,14 @@ class TaskManager {
     inputCategoryElement.value = '';
     inputPriorityElement.value = '';
     this.setDefaultDateTime();
+  }
+
+  static getIsEditing() {
+    return this.isEditing;
+  }
+
+  static setIsEditing() {
+    this.isEditing = false;
   }
 }
 

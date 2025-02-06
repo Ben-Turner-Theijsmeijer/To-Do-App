@@ -7,12 +7,12 @@ class TaskList {
     this.todoList = JSON.parse(localStorage.getItem('todoList')) || [];
     this.todoListhtml = '';
     this.filterMethod = 'all';
+    this.index = null;
 
     // NOTE: Remove these once updateTodoList gets fixed, should be in Sort
     this.currentSortMethod = 'date';
     this.currentSortOrder = 'asc';
     this.currentCategorySortOrder = 'asc';
-
     
     this.updateTodoList();
   }
@@ -87,15 +87,15 @@ class TaskList {
     // Add event listeners for delete and edit buttons
     document.querySelectorAll('.js-delete-button').forEach((button) => {
       button.addEventListener('click', (event) => {
-        const index = event.currentTarget.getAttribute('data-index');
-        this.deleteTodo(index);
+        this.index = event.currentTarget.getAttribute('data-index');
+        this.deleteTodo(this.index);
       });
     });
 
     document.querySelectorAll('.js-edit-button').forEach((button) => {
       button.addEventListener('click', (event) => {
-        const index = event.currentTarget.getAttribute('data-index');
-        editTodo(index); //idk if this will work
+        this.index = event.currentTarget.getAttribute('data-index');
+        TaskManager.editTodo(this.todoList[this.index]); //idk if this will work
       });
     });
 
@@ -136,33 +136,33 @@ class TaskList {
       alert('Please select a future time.');
       return;
     }
-    // I don't think the user can ever been editing and adding a task at the same time
-    // if (isEditing) {
-    //   // Update the existing todo
-    //   todoList[editIndex] = {
-    //     name,
-    //     date,
-    //     time,
-    //     category,
-    //     priority,
-    //     completed: false,
-    //   }; // Ensure completed is set
-    //   isEditing = false; // Reset edit mode
-    //   editIndex = null;
+
+    if (TaskManager.getIsEditing()) {
+      // Update the existing todo
+      this.todoList[this.index] = {
+        name,
+        date,
+        time,
+        category,
+        priority,
+        completed: false,
+      }; // Ensure completed is set
+      TaskManager.setIsEditing();
+      this.index = null;
   
-    //   // Change the button back to 'Add'
-    //   const addButton = document.querySelector('.js-add-button');
-    //   addButton.innerHTML = '';
-    //   addButton.title = 'Add';
-    //   addButton.appendChild(addIcon);
+      // Change the button back to 'Add'
+      const addButton = document.querySelector('.js-add-button');
+      addButton.innerHTML = '';
+      addButton.title = 'Add';
+      // addButton.appendChild(addIcon);
   
-    //   // Hide cancel button
-    //   const cancelEditBtn = document.querySelector('.js-cancel-button');
-    //   cancelEditBtn.style.display = 'none';
-    // } else {
+      // Hide cancel button
+      const cancelEditBtn = document.querySelector('.js-cancel-button');
+      cancelEditBtn.style.display = 'none';
+    } else {
       // Add a new todo
       this.todoList.push({ name, date, time, category, priority, completed: false }); // Ensure completed is set
-    // }
+    }
   
     // Save to localStorage
     localStorage.setItem('todoList', JSON.stringify(this.todoList));

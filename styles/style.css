@@ -423,7 +423,8 @@ Animating title
   flex-wrap: wrap;
 }
 
-.sort-button,
+.sort-button-category,
+.sort-button-priority,
 .js-filter-input {
   background-color: #4caf50;
   border: none;
@@ -439,7 +440,8 @@ Animating title
   transition: background-color 0.3s;
 }
 
-.sort-button:hover,
+.sort-button-category:hover,
+.sort-button-priority:hover,
 .js-filter-input:hover {
   background-color: #45a049;
 }
@@ -662,7 +664,8 @@ Animating title
 
 /* For Add task counter */
 @media screen and (max-width: 611px) {
-  .sort-button,
+  .sort-button-category,
+  .sort-button-priority,
   .js-filter-input {
     padding-left: 10px;
     padding-right: 10px;
