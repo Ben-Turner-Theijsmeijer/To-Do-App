@@ -10,6 +10,8 @@ class Task {
 
   // ORIGINAL FUNCTIONS PORTED OVER
 
+  // functions moved to tasklist as they fit better there
+  /*
   // this shows the sucessNotification for 4000ms
   successNotification() {
     const success = document.getElementById('js-success-notification');
@@ -32,4 +34,5 @@ class Task {
     updateTodoList('');
     updateTaskCounter();
   }
+    */
 }

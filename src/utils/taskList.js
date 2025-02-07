@@ -26,7 +26,7 @@ class TaskList {
       const todo = sortedtTodos[i];
       this.todoListhtml += `
         <div class="small-container ${todo.completed ? 'completed' : ''}">
-          <input type="checkbox" class="js-complete-checkbox" data-index="${i}" ${todo.completed ? 'checked' : ''} onchange="toggleComplete(${this.todoList.indexOf(todo)})">
+          <input type="checkbox" class="js-complete-checkbox" data-index="${i}" ${todo.completed ? 'checked' : ''}">
           <div class="task-info">
             <span class="task-name">${todo.name}</span>
             <span class="category-tag">${todo.category}</span>
@@ -53,20 +53,8 @@ class TaskList {
 
     console.log(window.innerWidth);
 
-    // Add event listeners for delete and edit buttons
-    document.querySelectorAll('.js-delete-button').forEach((button) => {
-      button.addEventListener('click', (event) => {
-        this.index = event.currentTarget.getAttribute('data-index');
-        this.deleteTodo(this.index);
-      });
-    });
-
-    document.querySelectorAll('.js-edit-button').forEach((button) => {
-      button.addEventListener('click', (event) => {
-        this.index = event.currentTarget.getAttribute('data-index');
-        TaskManager.editTodo(this.todoList[this.index]); //idk if this will work
-      });
-    });
+    // add event listeners for new todo list html elements
+    this.addListeners();
 
     // Call the task counter update function
     this.updateTaskCounter();
@@ -163,6 +151,50 @@ class TaskList {
     if (taskCounterButton) {
       taskCounterButton.innerText = `Tasks: ${totalTasks}`;
     }
+  }
+
+  // this shows the sucessNotification for 4000ms
+  successNotification() {
+    const success = document.getElementById('js-success-notification');
+    success.style.display = 'flex';
+    setTimeout(() => {
+      success.style.display = 'none';
+    }, 4000);
+  }
+
+  // Add event listeners for delete, edit, and complete buttons
+  addListeners(){
+    document.querySelectorAll('.js-delete-button').forEach((button) => {
+      button.addEventListener('click', (event) => {
+        this.index = event.currentTarget.getAttribute('data-index');
+        this.deleteTodo(this.index);
+      });
+    });
+
+    document.querySelectorAll('.js-edit-button').forEach((button) => {
+      button.addEventListener('click', (event) => {
+        this.index = event.currentTarget.getAttribute('data-index');
+        TaskManager.editTodo(this.todoList[this.index]); //idk if this will work
+      });
+    });
+
+    document.querySelectorAll('.js-complete-checkbox').forEach(checkbox => {
+      checkbox.addEventListener('change', (event) => {
+        this.index = event.target.dataset.index;  // Get the todo index
+        this.toggleComplete(this.index);  // Call the method from TaskList
+      });
+    });
+  }
+
+  // toggles a tasks to complete (not this.index)
+  toggleComplete(index) {
+    this.todoList[index].completed = !this.todoList[index].completed;
+    if (this.todoList[index].completed) {
+      this.successNotification();
+    }
+    localStorage.setItem('todoList', JSON.stringify(this.todoList));
+    this.updateTodoList('');
+    this.updateTaskCounter();
   }
 }
 
