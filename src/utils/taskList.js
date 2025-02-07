@@ -1,7 +1,6 @@
 import TaskManager from "./taskManager.js";
-// import {clearInputs} from "./taskManager.js";
+import Task from "./task.js";
 
-// This class contains updateTodoList... which is an absolute mess... need to fix this
 class TaskList {
   constructor(sortManager, filterManager) {
     this.todoList = JSON.parse(localStorage.getItem('todoList')) || [];
@@ -21,6 +20,7 @@ class TaskList {
 
     const addElement = document.querySelector('.js-add-html');
     this.todoListhtml = ''; //probably not needed // (Ben) Is needed otherwise it will just append a new copy to the end of the html instead of starting fresh
+    // (Emily) Oh truee nice catch Ben
 
     for (let i = 0; i < sortedtTodos.length; i++) {
       const todo = sortedtTodos[i];
@@ -60,7 +60,6 @@ class TaskList {
     this.updateTaskCounter();
   }
 
-  // Do we even need task if we are just getting straight from the DOM? Need to reorganize this
   addTodo() {
     const inputNameElement = document.querySelector('.js-name-input');
     const inputDateElement = document.querySelector('.js-date-input');
@@ -94,16 +93,12 @@ class TaskList {
       return;
     }
 
+    // I don't really like this if... but I'm too tired to rewrite it 
     if (TaskManager.getIsEditing()) {
       // Update the existing todo
-      this.todoList[this.index] = {
-        name,
-        date,
-        time,
-        category,
-        priority,
-        completed: false,
-      }; // Ensure completed is set
+      this.todoList[this.index].updateTask({name, date, time, category, priority, 
+        completed: false}); 
+
       TaskManager.setIsEditing();
       this.index = null;
 
@@ -122,7 +117,9 @@ class TaskList {
       cancelEditBtn.style.display = 'none';
     } else {
       // Add a new todo
-      this.todoList.push({ name, date, time, category, priority, completed: false }); // Ensure completed is set
+      const newTask = new Task(name, date, time, category, priority, false);
+      this.todoList.push(newTask); 
+      // this.todoList.push({ name, date, time, category, priority, completed: false });
     }
 
     // Save to localStorage
@@ -157,15 +154,6 @@ class TaskList {
     }
   }
 
-  // this shows the sucessNotification for 4000ms
-  successNotification() {
-    const success = document.getElementById('js-success-notification');
-    success.style.display = 'flex';
-    setTimeout(() => {
-      success.style.display = 'none';
-    }, 4000);
-  }
-
   // Add event listeners for delete, edit, and complete buttons
   addListeners(){
     document.querySelectorAll('.js-delete-button').forEach((button) => {
@@ -185,20 +173,10 @@ class TaskList {
     document.querySelectorAll('.js-complete-checkbox').forEach(checkbox => {
       checkbox.addEventListener('change', (event) => {
         this.index = event.target.dataset.index;  // Get the todo index
-        this.toggleComplete(this.index);  // Call the method from TaskList
+        console.log(this.todoList);
+        Task.toggleComplete(this.todoList[this.index], this);  // Call the method from TaskList
       });
     });
-  }
-
-  // toggles a tasks to complete (not this.index)
-  toggleComplete(index) {
-    this.todoList[index].completed = !this.todoList[index].completed;
-    if (this.todoList[index].completed) {
-      this.successNotification();
-    }
-    localStorage.setItem('todoList', JSON.stringify(this.todoList));
-    this.updateTodoList('');
-    this.updateTaskCounter();
   }
 }
 

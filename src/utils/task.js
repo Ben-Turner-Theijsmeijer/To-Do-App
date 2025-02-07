@@ -8,12 +8,18 @@ class Task {
     this.completed = completed;
   }
 
-  // ORIGINAL FUNCTIONS PORTED OVER
+  // Single responsibility: Task updates itself
+  updateTask({name, date, time, category, priority, completed}){
+    this.name = name;
+    this.date = date;
+    this.time = time;
+    this.category = category;
+    this.priority = priority;
+    this.completed = completed;
+  }
 
-  // functions moved to tasklist as they fit better there
-  /*
   // this shows the sucessNotification for 4000ms
-  successNotification() {
+  static successNotification() {
     const success = document.getElementById('js-success-notification');
     success.style.display = 'flex';
     setTimeout(() => {
@@ -23,16 +29,16 @@ class Task {
 
   // eslint-disable-next-line no-unused-vars
 
-  // This should be completely changed... just to the task item.
-  // Broken for now
-  toggleComplete(index) {
-    todoList[index].completed = !todoList[index].completed;
-    if (todoList[index].completed) {
-      successNotification();
+  static toggleComplete(task, todoList) {
+    task.completed = !task.completed;
+    if (task.completed) {
+      Task.successNotification();
     }
-    localStorage.setItem('todoList', JSON.stringify(todoList));
-    updateTodoList('');
-    updateTaskCounter();
+    // have this line in updateTodoList
+    // localStorage.setItem('todoList', JSON.stringify(todoList));
+    todoList.updateTodoList('');
+    todoList.updateTaskCounter();
   }
-    */
 }
+
+export default Task;
