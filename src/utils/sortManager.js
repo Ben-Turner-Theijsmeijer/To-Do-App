@@ -1,24 +1,42 @@
 class SortManager {
-  constructor(taskList) {
-    this.taskList = taskList;
-
-      // Once we actually edit updateToDoList, and make the sort functionality separate, these will be in the constructor.
-
-      // this.currentSortMethod = 'date' //Defualt sort method
-      // this.currentSortOrder = 'asc'; // Default sort order for priority
-      // this.currentCategorySortOrder = 'asc'; // Default sort order for category
+  constructor() {
+      this.SortMethod = 'date' //Defualt sort method
+      this.currentSortOrder = 'asc'; // Default sort order for priority
+      this.currentCategorySortOrder = 'asc'; // Default sort order for category
   }
 
-  // takes whatever was put in priority & category sections then calls updateTodoList
-  sortTodos(sortBy) {
+  // sorts the passed list of tasks based on the set priority or category
+  sortTodos(unsortedTasks, sortBy) {
+    // set to either ascending or descending sort order
     if (sortBy === 'priority') {
-      currentSortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
+      this.currentSortOrder = this.currentSortOrder === 'asc' ? 'desc' : 'asc';
     } else if (sortBy === 'category') {
-      currentCategorySortOrder =
-        currentCategorySortOrder === 'asc' ? 'desc' : 'asc';
+      this.currentCategorySortOrder = this.currentCategorySortOrder === 'asc' ? 'desc' : 'asc';
     }
-    currentSortMethod = sortBy;
-    this.taskList.updateTodoList(); //connect TaskList
+
+    // check if the sort criteria changed before setting it
+    if (sortBy !== '') this.SortMethod = sortBy;
+    
+    // sort the list either ascending or descending based on sort criteria
+    let sortedTasks = unsortedTasks;
+    sortedTasks.sort((a, b) => {
+      if (this.SortMethod === 'date') {
+        const dateA = new Date(a.date + ' ' + a.time);
+        const dateB = new Date(b.date + ' ' + b.time);
+        return dateA - dateB;
+      } else if (this.SortMethod === 'category') {
+        return this.currentCategorySortOrder === 'asc'
+          ? a.category.localeCompare(b.category)
+          : b.category.localeCompare(a.category);
+      } else if (this.SortMethod === 'priority') {
+        const priorityOrder = { high: 0, medium: 1, low: 2 };
+        return this.currentSortOrder === 'asc'
+          ? priorityOrder[a.priority] - priorityOrder[b.priority]
+          : priorityOrder[b.priority] - priorityOrder[a.priority];
+      }
+    });
+
+    return sortedTasks;
   }
 }
 

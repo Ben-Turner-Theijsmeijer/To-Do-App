@@ -1,11 +1,20 @@
 class FilterManager {
-  constructor(taskList) {
-    this.taskList = taskList;
+  constructor() {
+    this.filterMethod = 'all';
   }
 
-  // ORIGINAL FUNCTIONS PORTED OVER
-  filterTodos() {
-    this.taskList.updateTodoList();
+  // Filters the to do list based on the selected filter method
+  filterTodos(unfilteredTasks) {
+    let filteredTasks = unfilteredTasks;
+    const filterElement = document.querySelector('.js-filter-input');
+    this.filterMethod = filterElement.value;
+    
+    if (this.filterMethod === 'pending') {
+      return filteredTasks.filter(task => !task.completed);
+    } else if (this.filterMethod === 'completed') {
+      return filteredTasks.filter(task => task.completed);
+    }
+    return filteredTasks;
   }
 }
 

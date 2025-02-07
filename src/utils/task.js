@@ -29,7 +29,7 @@ class Task {
       successNotification();
     }
     localStorage.setItem('todoList', JSON.stringify(todoList));
-    updateTodoList();
+    updateTodoList('');
     updateTaskCounter();
   }
 }
