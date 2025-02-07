@@ -3,58 +3,27 @@ import TaskManager from "./taskManager.js";
 
 // This class contains updateTodoList... which is an absolute mess... need to fix this
 class TaskList {
-  constructor() {
+  constructor(sortManager, filterManager) {
     this.todoList = JSON.parse(localStorage.getItem('todoList')) || [];
     this.todoListhtml = '';
-    this.filterMethod = 'all';
     this.index = null;
 
-    // NOTE: Remove these once updateTodoList gets fixed, should be in Sort
-    this.currentSortMethod = 'date';
-    this.currentSortOrder = 'asc';
-    this.currentCategorySortOrder = 'asc';
+    this.sortManager = sortManager;
+    this.filterManager = filterManager;
     
-    this.updateTodoList();
+    this.updateTodoList('');
   }
 
-  // ORIGINAL FUNCTIONS PORTED OVER
-  updateTodoList() {
-    const filterElement = document.querySelector('.js-filter-input');
-    this.filterMethod = filterElement.value;
-
-    // Sort todoList based on the current sort method
-    let filteredTodos = this.todoList;
-
-    // Apply filtering based on the selected filter method
-    if (this.filterMethod === 'pending') {
-      filteredTodos = filteredTodos.filter((todo) => !todo.completed);
-    } else if (this.filterMethod === 'completed') {
-      filteredTodos = filteredTodos.filter((todo) => todo.completed);
-    }
-
-    filteredTodos.sort((a, b) => {
-      if (this.currentSortMethod === 'date') {
-        const dateA = new Date(a.date + ' ' + a.time);
-        const dateB = new Date(b.date + ' ' + b.time);
-        return dateA - dateB;
-      } else if (this.currentSortMethod === 'category') {
-        return this.currentCategorySortOrder === 'asc'
-          ? a.category.localeCompare(b.category)
-          : b.category.localeCompare(a.category);
-      } else if (this.currentSortMethod === 'priority') {
-        const priorityOrder = { high: 0, medium: 1, low: 2 };
-        return this.currentSortOrder === 'asc'
-          ? priorityOrder[a.priority] - priorityOrder[b.priority]
-          : priorityOrder[b.priority] - priorityOrder[a.priority];
-      }
-      this.updateTaskCounter();
-    });
+  updateTodoList(sortCriteria) {
+    // filter and sort todoList based on the current criteria
+    let filteredTodos = this.filterManager.filterTodos(this.todoList);
+    let sortedtTodos = this.sortManager.sortTodos(filteredTodos, sortCriteria);
 
     const addElement = document.querySelector('.js-add-html');
-    this.todoListhtml = ''; //probably not needed
+    this.todoListhtml = ''; //probably not needed // (Ben) Is needed otherwise it will just append a new copy to the end of the html instead of starting fresh
 
-    for (let i = 0; i < filteredTodos.length; i++) {
-      const todo = filteredTodos[i];
+    for (let i = 0; i < sortedtTodos.length; i++) {
+      const todo = sortedtTodos[i];
       this.todoListhtml += `
         <div class="small-container ${todo.completed ? 'completed' : ''}">
           <input type="checkbox" class="js-complete-checkbox" data-index="${i}" ${todo.completed ? 'checked' : ''} onchange="toggleComplete(${this.todoList.indexOf(todo)})">
@@ -75,7 +44,7 @@ class TaskList {
     }
 
     // Show or hide the task container based on the presence of tasks
-    if (filteredTodos.length === 0) {
+    if (sortedtTodos.length === 0) {
       addElement.style.display = 'none'; // Hide if no tasks
     } else {
       addElement.style.display = 'grid'; // Show if tasks exist
@@ -172,7 +141,7 @@ class TaskList {
     TaskManager.clearInputs();
   
     // Update the displayed list
-    this.updateTodoList();
+    this.updateTodoList('');
     this.updateTaskCounter();
   }
 
@@ -180,7 +149,7 @@ class TaskList {
     // Remove the specific todo from the list
     this.todoList.splice(index, 1);
     localStorage.setItem('todoList', JSON.stringify(this.todoList));
-    this.updateTodoList();
+    this.updateTodoList('');
     this.updateTaskCounter();
   }
 

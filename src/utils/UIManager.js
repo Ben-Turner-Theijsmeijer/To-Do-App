@@ -1,8 +1,6 @@
 class UIManager {
-  constructor(taskManager, filterManager, sortManager, taskList) {
+  constructor(taskManager, taskList) {
     this.taskManager = taskManager;
-    this.filterManager = filterManager;
-    this.sortManager = sortManager;
     this.taskList = taskList;
 
     this.setupEventListeners();
@@ -22,15 +20,15 @@ class UIManager {
     // Add event listeners for sorting buttons
     document
       .querySelector('.sort-button-category')
-      .addEventListener('click', () => this.sortManager.sortTodos('category'));
+      .addEventListener('click', () => this.taskList.updateTodoList('category'));
     document
       .querySelector('.sort-button-priority')
-      .addEventListener('click', () => this.sortManager.sortTodos('priority'));
+      .addEventListener('click', () => this.taskList.updateTodoList('priority'));
 
     // Add event listener for filter button
     document
       .querySelector('.js-filter-input')
-      .addEventListener('change', this.filterManager.filterTodos());
+      .addEventListener('change', () => this.taskList.updateTodoList(''));
 
     document.querySelector('.js-name-input').addEventListener('input', (e) => {
       let input = e.target.value;
