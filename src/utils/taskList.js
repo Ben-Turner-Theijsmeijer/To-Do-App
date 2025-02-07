@@ -26,7 +26,7 @@ class TaskList {
       const todo = sortedtTodos[i];
       this.todoListhtml += `
         <div class="small-container ${todo.completed ? 'completed' : ''}">
-          <input type="checkbox" class="js-complete-checkbox" data-index="${i}" ${todo.completed ? 'checked' : ''}">
+          <input type="checkbox" class="js-complete-checkbox" data-index="${i}" ${todo.completed ? 'checked' : ''}>
           <div class="task-info">
             <span class="task-name">${todo.name}</span>
             <span class="category-tag">${todo.category}</span>
