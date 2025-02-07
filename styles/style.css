@@ -319,6 +319,11 @@ h1 {
   margin-right: 5px;
 }
 
+.js-add-button span,
+.js-cancel-button span {
+  margin-right: 5px;
+}
+
 /* Footer Styling */
 footer {
   background-color: transparent;

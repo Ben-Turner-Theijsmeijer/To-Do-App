@@ -12,11 +12,11 @@ class TaskManager {
     this.taskList = taskList;
     this.isEditing = false;
     this.editIndex = null;
-    
+
     TaskManager.setDefaultDateTime();
   }
 
-    // ORIGINAL FUNCTIONS PORTED OVER
+  // ORIGINAL FUNCTIONS PORTED OVER
 
   // Honestly... this should be in the manager - it sets the date and time for the initial load in
   static setDefaultDateTime() {
@@ -52,19 +52,21 @@ class TaskManager {
     // this.editIndex = index;
 
     // Enable cancel option
-    const cancelEditBtn = document.querySelector('.js-cancel-button');
-    cancelEditBtn.style.display = 'block';
+    const cancelEditBtn = document.querySelector(".js-cancel-button");
+    cancelEditBtn.style.display = "";
 
     // Change the add button to 'Update'
-    const addButton = document.querySelector('.js-add-button');
-    addButton.innerHTML = '';
-    addButton.title = 'Update';
+    const addButton = document.querySelector(".js-add-button");
+    addButton.innerHTML = " Update";
+    addButton.title = "Update";
 
-    const checkIcon  = document.getElementById("checkIcon")
-    console.log(checkIcon);
-    addButton.appendChild(checkIcon);
+    // Add checkmark icon
+    const checkIcon = document.createElement("span");
+    checkIcon.classList.add("fa-solid", "fa-check");
+    addButton.prepend(checkIcon);
+
     //why is edit even calling this? it should only be create/delete
-    // updateTaskCounter(); 
+    // updateTaskCounter();
   }
 
   cancelEditTodo() {
@@ -75,17 +77,19 @@ class TaskManager {
     TaskManager.clearInputs();
 
     // Hide edit cancel action button on page load
-    const cancelEditBtn = document.querySelector('.js-cancel-button');
-    cancelEditBtn.style.display = 'none';
+    const cancelEditBtn = document.querySelector(".js-cancel-button");
+    cancelEditBtn.style.display = "none";
 
     // Change the button back to 'Add'
-    const addButton = document.querySelector('.js-add-button');
-    addButton.innerHTML = '';
-    addButton.title = 'Add';
-    
-    const foundIcon = document.getElementById('addIcon');
-    console.log(foundIcon);
-    // addButton.appendChild(foundIcon);
+    const addButton = document.querySelector(".js-add-button");
+    addButton.innerHTML = " Add Task";
+    addButton.title = "Add";
+
+    // add plus icon
+    const addIcon = document.createElement("span");
+    addIcon.classList.add("fa-solid", "fa-add");
+    addButton.prepend(addIcon);
+
     // updateTaskCounter();
   }
 

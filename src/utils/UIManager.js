@@ -91,18 +91,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // Need to make sure this can be accessed in TaskList (addTodo) & TaskManager (cancelEditToDo)
 
   // Add icon - for add action
-  const addIcon = document.createElement('i');
-  addIcon.setAttribute('id', 'addIcon');  
-  addIcon.classList.add('fa-solid', 'fa-add');
+  // const addIcon = document.createElement('span');
+  // addIcon.setAttribute('id', 'addIcon');
+  // addIcon.classList.add('fa-solid', 'fa-add');
   // console.log("Test:" + addIcon);
   // console.log("HELLOO")
 
   // Check icon - for update action
-  const checkIcon = document.createElement('i');
-  checkIcon.setAttribute('id', 'checkIcon')
-  checkIcon.classList.add('fa-solid', 'fa-check');
-
-
+  // const checkIcon = document.createElement('span');
+  // checkIcon.setAttribute('id', 'checkIcon')
+  // checkIcon.classList.add('fa-solid', 'fa-check');
 });
 
 // Add year in the footer(CopyRight Notice)
