@@ -26,7 +26,7 @@ class TaskList {
       const todo = sortedtTodos[i];
       this.todoListhtml += `
         <div class="small-container ${todo.completed ? 'completed' : ''}">
-          <input type="checkbox" class="js-complete-checkbox" data-index="${i}" ${todo.completed ? 'checked' : ''}">
+          <input type="checkbox" class="js-complete-checkbox" data-index="${i}" ${todo.completed ? 'checked' : ''}>
           <div class="task-info">
             <span class="task-name">${todo.name}</span>
             <span class="category-tag">${todo.category}</span>
@@ -67,13 +67,13 @@ class TaskList {
     const inputTimeElement = document.querySelector('.js-time-input');
     const inputCategoryElement = document.querySelector('.js-category-input');
     const inputPriorityElement = document.querySelector('.js-priority-input');
-  
+
     let name = inputNameElement.value;
     let date = inputDateElement.value;
     let time = inputTimeElement.value;
     let category = inputCategoryElement.value;
     let priority = inputPriorityElement.value;
-  
+
     // Validation checks
     if (!name || !date || !time || !category || !priority) {
       alert(
@@ -81,13 +81,13 @@ class TaskList {
       );
       return;
     }
-  
+
     // Check that date is not in past
     if (date < inputDateElement.min) {
       alert('Please select the current date or a future date.');
       return;
     }
-  
+
     // Check that time is not in past
     if (time < inputTimeElement.min && date === inputDateElement.min) {
       alert('Please select a future time.');
@@ -106,13 +106,17 @@ class TaskList {
       }; // Ensure completed is set
       TaskManager.setIsEditing();
       this.index = null;
-  
+
       // Change the button back to 'Add'
       const addButton = document.querySelector('.js-add-button');
-      addButton.innerHTML = '';
+      addButton.innerHTML = ' Add Task';
       addButton.title = 'Add';
-      // addButton.appendChild(addIcon);
-  
+
+      // add plus icon
+      const addIcon = document.createElement('span');
+      addIcon.classList.add('fa-solid', 'fa-add');
+      addButton.prepend(addIcon);
+
       // Hide cancel button
       const cancelEditBtn = document.querySelector('.js-cancel-button');
       cancelEditBtn.style.display = 'none';
@@ -120,14 +124,14 @@ class TaskList {
       // Add a new todo
       this.todoList.push({ name, date, time, category, priority, completed: false }); // Ensure completed is set
     }
-  
+
     // Save to localStorage
     localStorage.setItem('todoList', JSON.stringify(this.todoList));
-  
+
     // Reset the inputs
     // FIX ME
     TaskManager.clearInputs();
-  
+
     // Update the displayed list
     this.updateTodoList('');
     this.updateTaskCounter();
@@ -143,10 +147,10 @@ class TaskList {
 
   updateTaskCounter() {
     const totalTasks = this.todoList.length;
-  
+
     // Select the element where the task counter is displayed
     const taskCounterButton = document.querySelector('.task-counter-button');
-  
+
     // Update the text of the task counter button
     if (taskCounterButton) {
       taskCounterButton.innerText = `Tasks: ${totalTasks}`;
