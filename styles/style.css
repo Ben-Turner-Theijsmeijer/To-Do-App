@@ -142,6 +142,12 @@ h1 {
   text-shadow: 2px 2px 4px #000;
 }
 
+.js-time-input:disabled {
+  background-color: #e0e0e0; /* Light gray background */
+  color: #888; /* Dim text color */
+  cursor: not-allowed; /* Show "not allowed" cursor */
+}
+
 .js-name-input,
 .js-date-input,
 .js-time-input,
