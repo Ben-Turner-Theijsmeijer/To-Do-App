@@ -64,9 +64,6 @@ class TaskManager {
     const checkIcon = document.createElement("span");
     checkIcon.classList.add("fa-solid", "fa-check");
     addButton.prepend(checkIcon);
-
-    //why is edit even calling this? it should only be create/delete
-    // updateTaskCounter();
   }
 
   cancelEditTask() {
@@ -89,8 +86,6 @@ class TaskManager {
     const addIcon = document.createElement("span");
     addIcon.classList.add("fa-solid", "fa-add");
     addButton.prepend(addIcon);
-
-    // updateTaskCounter();
   }
 
   static clearInputs() {

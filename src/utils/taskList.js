@@ -19,28 +19,12 @@ class TaskList {
     let sortedTasks = this.sortManager.sortTasks(filteredTasks, sortCriteria);
 
     const addElement = document.querySelector('.js-add-html');
-    this.taskListhtml = ''; //probably not needed // (Ben) Is needed otherwise it will just append a new copy to the end of the html instead of starting fresh
-    // (Emily) Oh truee nice catch Ben
+    this.taskListhtml = '';
 
+    // generate all task HTML
     for (let i = 0; i < sortedTasks.length; i++) {
       const task = sortedTasks[i];
-      this.taskListhtml += `
-        <div class="small-container ${task.completed ? 'completed' : ''}">
-          <input type="checkbox" class="js-complete-checkbox" data-index="${i}" ${task.completed ? 'checked' : ''}>
-          <div class="task-info">
-            <span class="task-name">${task.name}</span>
-            <span class="category-tag">${task.category}</span>
-            <span class="priority-tag priority-${task.priority}">${task.priority}</span>
-          </div>
-        </div>
-        <div class="small-container">${task.date}</div>
-        <div class="small-container">${task.time}</div>
-        <button class="js-delete-button" data-index="${i}">
-        <i class="fa-solid fa-trash"></i>
-        </button>
-        <button class="js-edit-button" data-index="${i}">
-        <i class="fa-solid fa-pen"></i>
-        </button>`;
+      this.taskListhtml += this.createTaskHTML(task, i);
     }
 
     // Show or hide the task container based on the presence of tasks
@@ -154,8 +138,29 @@ class TaskList {
     }
   }
 
+  // Create the HTML element to represent a task visually
+  createTaskHTML(task, referenceNumber) {
+    return `
+        <div class="small-container ${task.completed ? 'completed' : ''}">
+          <input type="checkbox" class="js-complete-checkbox" data-index="${referenceNumber}" ${task.completed ? 'checked' : ''}>
+          <div class="task-info">
+            <span class="task-name">${task.name}</span>
+            <span class="category-tag">${task.category}</span>
+            <span class="priority-tag priority-${task.priority}">${task.priority}</span>
+          </div>
+        </div>
+        <div class="small-container">${task.date}</div>
+        <div class="small-container">${task.time}</div>
+        <button class="js-delete-button" data-index="${referenceNumber}">
+        <i class="fa-solid fa-trash"></i>
+        </button>
+        <button class="js-edit-button" data-index="${referenceNumber}">
+        <i class="fa-solid fa-pen"></i>
+        </button>`;
+  }
+
   // Add event listeners for delete, edit, and complete buttons
-  addListeners(){
+  addListeners() {
     document.querySelectorAll('.js-delete-button').forEach((button) => {
       button.addEventListener('click', (event) => {
         this.index = event.currentTarget.getAttribute('data-index');
