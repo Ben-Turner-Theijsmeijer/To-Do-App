@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo-List</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../../styles/style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -34,7 +34,7 @@
       <div class="navlinks-container">
         <ul class="navlinks">
           <li class="link">
-            <a href="index.html"
+            <a href="../../index.html"
               >Back to main <i class="fa-solid fa-arrow-right"></i
             ></a>
           </li>
@@ -44,7 +44,7 @@
     <div class="container">
       <h1 class="subtitle">Todo-List</h1>
 
-      <div class="js-add-grid" id="add-todo">
+      <div class="js-add-grid" id="add-task">
         <input
           type="text"
           placeholder="Add a new task here...."
@@ -68,10 +68,10 @@
         </select>
         <div class="js-actions-wrapper">
           <button class="js-add-button" title="Add tasks">
-            <i class="fa-solid fa-add"></i> &nbsp; Add tasks
+            <span class="fa-solid fa-add"></span> Add Task
           </button>
           <button class="js-cancel-button" title="Cancel">
-            <i class="fa-solid fa-times"></i>
+            <span class="fa-solid fa-times"></span> Cancel
           </button>
         </div>
         <div id="js-success-notification" style="display: none">
@@ -82,13 +82,13 @@
       <!-- Sorting and task counter section -->
       <div class="sort-buttons">
         <div class="sort-filter-container">
-          <button class="sort-button" onclick="sortTodos('category')">
+          <button class="sort-button-category">
             Sort by Category
           </button>
-          <button class="sort-button" onclick="sortTodos('priority')">
+          <button class="sort-button-priority">
             Sort by Priority
           </button>
-          <select class="js-filter-input" onchange="filterTodos()">
+          <select class="js-filter-input">
             <option value="all">All</option>
             <option value="pending">Pending</option>
             <option value="completed">Completed</option>
@@ -99,7 +99,7 @@
         <button class="task-counter-button">Tasks: 0</button>
       </div>
 
-      <div class="test">
+      <div class="task-list display">
         <div class="js-add-html js-add-grid js-add-html-tasks"></div>
       </div>
     </div>
@@ -131,6 +131,6 @@
       </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script type="module" src="../utils/app.js"></script>
   </body>
 </html>

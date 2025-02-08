@@ -104,7 +104,7 @@ why-need-link {
 }
 .container {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1100px;
   padding: 20px;
   box-sizing: border-box;
   margin-bottom: 170px;
@@ -318,6 +318,11 @@ h1 {
   margin-right: 5px;
 }
 
+.js-add-button span,
+.js-cancel-button span {
+  margin-right: 5px;
+}
+
 /* Footer Styling */
 footer {
   background-color: transparent;
@@ -422,7 +427,8 @@ Animating title
   flex-wrap: wrap;
 }
 
-.sort-button,
+.sort-button-category,
+.sort-button-priority,
 .js-filter-input {
   background-color: #4caf50;
   border: none;
@@ -438,7 +444,8 @@ Animating title
   transition: background-color 0.3s;
 }
 
-.sort-button:hover,
+.sort-button-category:hover,
+.sort-button-priority:hover,
 .js-filter-input:hover {
   background-color: #45a049;
 }
@@ -534,7 +541,7 @@ Animating title
   }
 }
 
-@media screen and (max-width: 947px) {
+@media screen and (max-width: 1100px) {
   body {
     overflow: scroll;
     height: 100%; /*Added*/
@@ -661,7 +668,8 @@ Animating title
 
 /* For Add task counter */
 @media screen and (max-width: 611px) {
-  .sort-button,
+  .sort-button-category,
+  .sort-button-priority,
   .js-filter-input {
     padding-left: 10px;
     padding-right: 10px;
