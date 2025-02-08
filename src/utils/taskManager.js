@@ -1,37 +1,9 @@
-// const {checkIcon} = require('./UIManager')
 class TaskManager {
   constructor(taskList) {
-    // I actually dont think we need anything in the constructor... we are all getting the input from the selector right as the buttons are clicked... not before
-    // this.nameInput = nameInput;
-    // this.dateInput = dateInput;
-    // this.timeInput = timeInput;
-    // this.categoryInput = categoryInput;
-    // this.priorityInput = priorityInput;
-    // this.completedInput = completedInput;
-
     this.taskList = taskList;
     this.isEditing = false;
     this.editIndex = null;
-
-    // TaskManager.setDefaultDateTime();
   }
-
-  // ORIGINAL FUNCTIONS PORTED OVER
-
-  // Honestly... this should be in the manager - it sets the date and time for the initial load in
-  // static setDefaultDateTime() {
-  //   const inputDateElement = document.querySelector('.js-date-input');
-  //   const inputTimeElement = document.querySelector('.js-time-input');
-
-  //   const now = new Date();
-  //   const date = now.toISOString().split('T')[0];
-  //   const time = now.toTimeString().split(' ')[0].slice(0, 5);
-
-  //   inputDateElement.value = date;
-  //   inputDateElement.min = date; // Set the min attribute to today's date
-  //   inputTimeElement.value = time;
-  //   inputTimeElement.min = time; // Set the min attribute to current time
-  // }
 
   static editTask(task) {
     let inputNameElement = document.querySelector('.js-name-input');
@@ -49,7 +21,6 @@ class TaskManager {
 
     // Set editing mode and the index of the task being edited
     this.isEditing = true;
-    // this.editIndex = index;
 
     // Enable cancel option
     const cancelEditBtn = document.querySelector(".js-cancel-button");
@@ -101,7 +72,6 @@ class TaskManager {
     inputTimeElement.value = '';
     inputCategoryElement.value = '';
     inputPriorityElement.value = '';
-    // this.setDefaultDateTime();
   }
 
   static getIsEditing() {

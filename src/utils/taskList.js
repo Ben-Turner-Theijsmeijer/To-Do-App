@@ -65,18 +65,6 @@ class TaskList {
       return;
     }
 
-    // Check that date is not in past
-    // if (date < inputDateElement.min) {
-    //   alert('Please select the current date or a future date.');
-    //   return;
-    // }
-
-    // // Check that time is not in past
-    // if (time < inputTimeElement.min && date === inputDateElement.min) {
-    //   alert('Please select a future time.');
-    //   return;
-    // }
-
     // I don't really like this if... but I'm too tired to rewrite it 
     if (TaskManager.getIsEditing()) {
       // Update the existing task
@@ -110,7 +98,6 @@ class TaskList {
     localStorage.setItem('taskList', JSON.stringify(this.taskList));
 
     // Reset the inputs
-    // FIX ME
     TaskManager.clearInputs();
 
     // Update the displayed list
@@ -171,7 +158,7 @@ class TaskList {
     document.querySelectorAll('.js-edit-button').forEach((button) => {
       button.addEventListener('click', (event) => {
         this.index = event.currentTarget.getAttribute('data-index');
-        TaskManager.editTask(this.taskList[this.index]); //idk if this will work
+        TaskManager.editTask(this.taskList[this.index]);
       });
     });
 

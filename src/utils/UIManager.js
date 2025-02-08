@@ -94,21 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Hide edit cancel action button on page load
   const cancelEditBtn = document.querySelector('.js-cancel-button');
   cancelEditBtn.style.display = 'none';
-
-  // I hope this is okay here, looks like the spot for it
-  // Need to make sure this can be accessed in TaskList (addTask) & TaskManager (cancelEditToDo)
-
-  // Add icon - for add action
-  // const addIcon = document.createElement('span');
-  // addIcon.setAttribute('id', 'addIcon');
-  // addIcon.classList.add('fa-solid', 'fa-add');
-  // console.log("Test:" + addIcon);
-  // console.log("HELLOO")
-
-  // Check icon - for update action
-  // const checkIcon = document.createElement('span');
-  // checkIcon.setAttribute('id', 'checkIcon')
-  // checkIcon.classList.add('fa-solid', 'fa-check');
 });
 
 // Add year in the footer(CopyRight Notice)
