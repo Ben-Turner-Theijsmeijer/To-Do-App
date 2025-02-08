@@ -8,8 +8,8 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  overflow: hidden;
-  height: 100vh;
+  overflow-y: scroll;
+  height: 100%;
   background: linear-gradient(to bottom, #6b46c1, #9f7aea, #f687b3);
 }
 why-need-link {
@@ -484,9 +484,7 @@ Animating title
 }
 
 .js-add-html {
-  overflow-y: scroll;
   scroll-behavior: smooth;
-  height: 30vh;
 }
 
 .js-add-html::-webkit-scrollbar {
@@ -518,7 +516,6 @@ Animating title
 .js-add-html-tasks {
   border: 1px black solid;
   height: fit-content;
-  max-height: 22vh; /*Added*/
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Londrina+Outline&display=swap');
@@ -564,10 +561,6 @@ Animating title
   .js-add-grid,
   .js-add-html {
     grid-template-columns: 1fr;
-  }
-
-  .js-add-html-tasks {
-    max-height: 35vh; /*Added*/
   }
 
   .js-add-button {
