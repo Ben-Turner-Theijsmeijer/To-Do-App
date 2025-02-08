@@ -11,6 +11,26 @@ class TaskList {
     this.filterManager = filterManager;
     
     this.updateTaskList('');
+
+     // Ensure time input behavior is set on page load
+     this.setupDateChangeListeners();
+  }
+
+  setupDateChangeListeners() {
+    const inputDateElement = document.querySelector('.js-date-input');
+    const inputTimeElement = document.querySelector('.js-time-input');
+
+    if (inputDateElement && inputTimeElement) {
+      // Initially disable the time input if no date is present
+      inputTimeElement.disabled = !inputDateElement.value;
+      inputTimeElement.classList.toggle('disabled', !inputDateElement.value);
+
+      // Add event listener to enable time input when a date is entered
+      inputDateElement.addEventListener('input', () => {
+        inputTimeElement.disabled = !inputDateElement.value;
+        inputTimeElement.classList.toggle('disabled', !inputDateElement.value);
+      });
+    }
   }
 
   updateTaskList(sortCriteria) {
@@ -42,6 +62,9 @@ class TaskList {
 
     // Call the task counter update function
     this.updateTaskCounter();
+
+    // Reapply date change listeners after updating the list
+    this.setupDateChangeListeners();
   }
 
   addTask() {
@@ -60,7 +83,7 @@ class TaskList {
     // Validation checks
     if (!name) {
       alert(
-        'Please fill in all fields: task, date, time, category, and priority.'
+        'Please enter a task name.'
       );
       return;
     }
