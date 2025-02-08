@@ -13,27 +13,27 @@ class TaskManager {
     this.isEditing = false;
     this.editIndex = null;
 
-    TaskManager.setDefaultDateTime();
+    // TaskManager.setDefaultDateTime();
   }
 
   // ORIGINAL FUNCTIONS PORTED OVER
 
   // Honestly... this should be in the manager - it sets the date and time for the initial load in
-  static setDefaultDateTime() {
-    const inputDateElement = document.querySelector('.js-date-input');
-    const inputTimeElement = document.querySelector('.js-time-input');
+  // static setDefaultDateTime() {
+  //   const inputDateElement = document.querySelector('.js-date-input');
+  //   const inputTimeElement = document.querySelector('.js-time-input');
 
-    const now = new Date();
-    const date = now.toISOString().split('T')[0];
-    const time = now.toTimeString().split(' ')[0].slice(0, 5);
+  //   const now = new Date();
+  //   const date = now.toISOString().split('T')[0];
+  //   const time = now.toTimeString().split(' ')[0].slice(0, 5);
 
-    inputDateElement.value = date;
-    inputDateElement.min = date; // Set the min attribute to today's date
-    inputTimeElement.value = time;
-    inputTimeElement.min = time; // Set the min attribute to current time
-  }
+  //   inputDateElement.value = date;
+  //   inputDateElement.min = date; // Set the min attribute to today's date
+  //   inputTimeElement.value = time;
+  //   inputTimeElement.min = time; // Set the min attribute to current time
+  // }
 
-  static editTodo(task) {
+  static editTask(task) {
     let inputNameElement = document.querySelector('.js-name-input');
     let inputDateElement = document.querySelector('.js-date-input');
     let inputTimeElement = document.querySelector('.js-time-input');
@@ -47,7 +47,7 @@ class TaskManager {
     inputCategoryElement.value = task.category;
     inputPriorityElement.value = task.priority;
 
-    // Set editing mode and the index of the todo being edited
+    // Set editing mode and the index of the task being edited
     this.isEditing = true;
     // this.editIndex = index;
 
@@ -69,7 +69,7 @@ class TaskManager {
     // updateTaskCounter();
   }
 
-  cancelEditTodo() {
+  cancelEditTask() {
     this.isEditing = false; // Reset edit mode
     this.editIndex = null; // might not use this anymore
 
@@ -106,7 +106,7 @@ class TaskManager {
     inputTimeElement.value = '';
     inputCategoryElement.value = '';
     inputPriorityElement.value = '';
-    this.setDefaultDateTime();
+    // this.setDefaultDateTime();
   }
 
   static getIsEditing() {

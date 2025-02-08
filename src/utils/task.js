@@ -29,16 +29,17 @@ class Task {
 
   // eslint-disable-next-line no-unused-vars
 
-  static toggleComplete(task, todoList) {
+  static toggleComplete(task, taskList) {
     task.completed = !task.completed;
     if (task.completed) {
       Task.successNotification();
     }
-    // have this line in updateTodoList
-    // localStorage.setItem('todoList', JSON.stringify(todoList));
-    todoList.updateTodoList('');
-    todoList.updateTaskCounter();
+    // have this line in updateTaskList
+    // localStorage.setItem('taskList', JSON.stringify(taskList));
+    taskList.updateTaskList('');
+    taskList.updateTaskCounter();
   }
+
 }
 
 export default Task;

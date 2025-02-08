@@ -10,25 +10,25 @@ class UIManager {
     document.querySelector('.js-add-button').addEventListener('click', () => {
       // for now... TaskManager just manages the list, but Task lists creates the task I guess
       // we need to create subclasses for TaskCreator and TaskEditor, if we are still doing that
-      this.taskList.addTodo();
+      this.taskList.addTask();
     });
     // Add event listeners to buttons
     document
       .querySelector('.js-cancel-button')
-      .addEventListener('click', () => this.taskManager.cancelEditTodo());
+      .addEventListener('click', () => this.taskManager.cancelEditTask());
 
     // Add event listeners for sorting buttons
     document
       .querySelector('.sort-button-category')
-      .addEventListener('click', () => this.taskList.updateTodoList('category'));
+      .addEventListener('click', () => this.taskList.updateTaskList('category'));
     document
       .querySelector('.sort-button-priority')
-      .addEventListener('click', () => this.taskList.updateTodoList('priority'));
+      .addEventListener('click', () => this.taskList.updateTaskList('priority'));
 
     // Add event listener for filter button
     document
       .querySelector('.js-filter-input')
-      .addEventListener('change', () => this.taskList.updateTodoList(''));
+      .addEventListener('change', () => this.taskList.updateTaskList(''));
 
     document.querySelector('.js-name-input').addEventListener('input', (e) => {
       let input = e.target.value;
@@ -60,7 +60,17 @@ class UIManager {
       if (!timeCheck) {
         e.target.showPicker();
         timeCheck = true;
-      } else {
+        
+        //Setting date to today if time is clicked while date is empty
+        const inputDateElement = document.querySelector('.js-date-input');
+        if (!inputDateElement.value){
+          const now = new Date();
+          const date = now.toISOString().split('T')[0];console.log(inputDateElement.value);
+          inputDateElement.value = date; 
+        }
+
+      } 
+      else {
         timeCheck = false;
       }
     });
@@ -86,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
   cancelEditBtn.style.display = 'none';
 
   // I hope this is okay here, looks like the spot for it
-  // Need to make sure this can be accessed in TaskList (addTodo) & TaskManager (cancelEditToDo)
+  // Need to make sure this can be accessed in TaskList (addTask) & TaskManager (cancelEditToDo)
 
   // Add icon - for add action
   // const addIcon = document.createElement('span');

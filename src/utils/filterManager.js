@@ -4,7 +4,7 @@ class FilterManager {
   }
 
   // Filters the to do list based on the selected filter method
-  filterTodos(unfilteredTasks) {
+  filterTasks(unfilteredTasks) {
     let filteredTasks = unfilteredTasks;
     const filterElement = document.querySelector('.js-filter-input');
     this.filterMethod = filterElement.value;

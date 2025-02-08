@@ -3,38 +3,38 @@ import Task from "./task.js";
 
 class TaskList {
   constructor(sortManager, filterManager) {
-    this.todoList = JSON.parse(localStorage.getItem('todoList')) || [];
-    this.todoListhtml = '';
+    this.taskList = JSON.parse(localStorage.getItem('taskList')) || [];
+    this.taskListhtml = '';
     this.index = null;
 
     this.sortManager = sortManager;
     this.filterManager = filterManager;
     
-    this.updateTodoList('');
+    this.updateTaskList('');
   }
 
-  updateTodoList(sortCriteria) {
-    // filter and sort todoList based on the current criteria
-    let filteredTodos = this.filterManager.filterTodos(this.todoList);
-    let sortedtTodos = this.sortManager.sortTodos(filteredTodos, sortCriteria);
+  updateTaskList(sortCriteria) {
+    // filter and sort taskList based on the current criteria
+    let filteredTasks = this.filterManager.filterTasks(this.taskList);
+    let sortedTasks = this.sortManager.sortTasks(filteredTasks, sortCriteria);
 
     const addElement = document.querySelector('.js-add-html');
-    this.todoListhtml = ''; //probably not needed // (Ben) Is needed otherwise it will just append a new copy to the end of the html instead of starting fresh
+    this.taskListhtml = ''; //probably not needed // (Ben) Is needed otherwise it will just append a new copy to the end of the html instead of starting fresh
     // (Emily) Oh truee nice catch Ben
 
-    for (let i = 0; i < sortedtTodos.length; i++) {
-      const todo = sortedtTodos[i];
-      this.todoListhtml += `
-        <div class="small-container ${todo.completed ? 'completed' : ''}">
-          <input type="checkbox" class="js-complete-checkbox" data-index="${i}" ${todo.completed ? 'checked' : ''}>
+    for (let i = 0; i < sortedTasks.length; i++) {
+      const task = sortedTasks[i];
+      this.taskListhtml += `
+        <div class="small-container ${task.completed ? 'completed' : ''}">
+          <input type="checkbox" class="js-complete-checkbox" data-index="${i}" ${task.completed ? 'checked' : ''}>
           <div class="task-info">
-            <span class="task-name">${todo.name}</span>
-            <span class="category-tag">${todo.category}</span>
-            <span class="priority-tag priority-${todo.priority}">${todo.priority}</span>
+            <span class="task-name">${task.name}</span>
+            <span class="category-tag">${task.category}</span>
+            <span class="priority-tag priority-${task.priority}">${task.priority}</span>
           </div>
         </div>
-        <div class="small-container">${todo.date}</div>
-        <div class="small-container">${todo.time}</div>
+        <div class="small-container">${task.date}</div>
+        <div class="small-container">${task.time}</div>
         <button class="js-delete-button" data-index="${i}">
         <i class="fa-solid fa-trash"></i>
         </button>
@@ -44,23 +44,23 @@ class TaskList {
     }
 
     // Show or hide the task container based on the presence of tasks
-    if (sortedtTodos.length === 0) {
+    if (sortedTasks.length === 0) {
       addElement.style.display = 'none'; // Hide if no tasks
     } else {
       addElement.style.display = 'grid'; // Show if tasks exist
-      addElement.innerHTML = this.todoListhtml;
+      addElement.innerHTML = this.taskListhtml;
     }
 
     console.log(window.innerWidth);
 
-    // add event listeners for new todo list html elements
+    // add event listeners for new task list html elements
     this.addListeners();
 
     // Call the task counter update function
     this.updateTaskCounter();
   }
 
-  addTodo() {
+  addTask() {
     const inputNameElement = document.querySelector('.js-name-input');
     const inputDateElement = document.querySelector('.js-date-input');
     const inputTimeElement = document.querySelector('.js-time-input');
@@ -74,7 +74,7 @@ class TaskList {
     let priority = inputPriorityElement.value;
 
     // Validation checks
-    if (!name || !date || !time || !category || !priority) {
+    if (!name) {
       alert(
         'Please fill in all fields: task, date, time, category, and priority.'
       );
@@ -82,21 +82,21 @@ class TaskList {
     }
 
     // Check that date is not in past
-    if (date < inputDateElement.min) {
-      alert('Please select the current date or a future date.');
-      return;
-    }
+    // if (date < inputDateElement.min) {
+    //   alert('Please select the current date or a future date.');
+    //   return;
+    // }
 
-    // Check that time is not in past
-    if (time < inputTimeElement.min && date === inputDateElement.min) {
-      alert('Please select a future time.');
-      return;
-    }
+    // // Check that time is not in past
+    // if (time < inputTimeElement.min && date === inputDateElement.min) {
+    //   alert('Please select a future time.');
+    //   return;
+    // }
 
     // I don't really like this if... but I'm too tired to rewrite it 
     if (TaskManager.getIsEditing()) {
-      // Update the existing todo
-      this.todoList[this.index].updateTask({name, date, time, category, priority, 
+      // Update the existing task
+      this.taskList[this.index].updateTask({name, date, time, category, priority, 
         completed: false}); 
 
       TaskManager.setIsEditing();
@@ -116,34 +116,34 @@ class TaskList {
       const cancelEditBtn = document.querySelector('.js-cancel-button');
       cancelEditBtn.style.display = 'none';
     } else {
-      // Add a new todo
+      // Add a new task
       const newTask = new Task(name, date, time, category, priority, false);
-      this.todoList.push(newTask); 
-      // this.todoList.push({ name, date, time, category, priority, completed: false });
+      this.taskList.push(newTask); 
+      // this.taskList.push({ name, date, time, category, priority, completed: false });
     }
 
     // Save to localStorage
-    localStorage.setItem('todoList', JSON.stringify(this.todoList));
+    localStorage.setItem('taskList', JSON.stringify(this.taskList));
 
     // Reset the inputs
     // FIX ME
     TaskManager.clearInputs();
 
     // Update the displayed list
-    this.updateTodoList('');
+    this.updateTaskList('');
     this.updateTaskCounter();
   }
 
-  deleteTodo(index) {
-    // Remove the specific todo from the list
-    this.todoList.splice(index, 1);
-    localStorage.setItem('todoList', JSON.stringify(this.todoList));
-    this.updateTodoList('');
+  deleteTask(index) {
+    // Remove the specific task from the list
+    this.taskList.splice(index, 1);
+    localStorage.setItem('taskList', JSON.stringify(this.taskList));
+    this.updateTaskList('');
     this.updateTaskCounter();
   }
 
   updateTaskCounter() {
-    const totalTasks = this.todoList.length;
+    const totalTasks = this.taskList.length;
 
     // Select the element where the task counter is displayed
     const taskCounterButton = document.querySelector('.task-counter-button');
@@ -159,22 +159,22 @@ class TaskList {
     document.querySelectorAll('.js-delete-button').forEach((button) => {
       button.addEventListener('click', (event) => {
         this.index = event.currentTarget.getAttribute('data-index');
-        this.deleteTodo(this.index);
+        this.deleteTask(this.index);
       });
     });
 
     document.querySelectorAll('.js-edit-button').forEach((button) => {
       button.addEventListener('click', (event) => {
         this.index = event.currentTarget.getAttribute('data-index');
-        TaskManager.editTodo(this.todoList[this.index]); //idk if this will work
+        TaskManager.editTask(this.taskList[this.index]); //idk if this will work
       });
     });
 
     document.querySelectorAll('.js-complete-checkbox').forEach(checkbox => {
       checkbox.addEventListener('change', (event) => {
-        this.index = event.target.dataset.index;  // Get the todo index
-        console.log(this.todoList);
-        Task.toggleComplete(this.todoList[this.index], this);  // Call the method from TaskList
+        this.index = event.target.dataset.index;  // Get the task index
+        console.log(this.taskList);
+        Task.toggleComplete(this.taskList[this.index], this);  // Call the method from TaskList
       });
     });
   }

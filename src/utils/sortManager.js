@@ -6,7 +6,7 @@ class SortManager {
   }
 
   // sorts the passed list of tasks based on the set priority or category
-  sortTodos(unsortedTasks, sortBy) {
+  sortTasks(unsortedTasks, sortBy) {
     // set to either ascending or descending sort order
     if (sortBy === 'priority') {
       this.currentSortOrder = this.currentSortOrder === 'asc' ? 'desc' : 'asc';

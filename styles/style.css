@@ -104,7 +104,7 @@ why-need-link {
 }
 .container {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1100px;
   padding: 20px;
   box-sizing: border-box;
   margin-bottom: 170px;
@@ -542,7 +542,7 @@ Animating title
   }
 }
 
-@media screen and (max-width: 947px) {
+@media screen and (max-width: 1100px) {
   body {
     overflow: scroll;
     height: 100%; /*Added*/
