@@ -48,7 +48,8 @@ body {
 
 .toggle-heading {
   font-weight: bolder;
-  color: #4caf50;
+  /* color: #4caf50; */
+  color: #66d46a;
   margin-bottom: 10px;
 }
 

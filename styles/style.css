@@ -9,7 +9,8 @@ body {
   font-family: 'Poppins', sans-serif;
   overflow-y: scroll;
   height: 100%;
-  background: linear-gradient(to bottom, #6b46c1, #9f7aea, #f687b3);
+  /* background: linear-gradient(to bottom, #6b46c1, #9f7aea, #f687b3); */
+  background-color: #435ec7;
 }
 
 why-need-link {
@@ -30,8 +31,10 @@ why-need-link {
 .header {
   width: 100%;
   height: 12vh;
-  background-color: #4caf50;
-  color: white;
+  background-color: #66d46a;
+  /* 4caf50 */
+  /* 2C632D */
+  color: black;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -94,7 +97,8 @@ why-need-link {
 }
 
 .link a:hover {
-  background-color: rgb(228, 227, 227);
+  /* background-color: rgb(228, 227, 227); */
+  background-color: #e2e2e2;
   transition: all 300ms linear;
 }
 
@@ -192,8 +196,9 @@ h1 {
 
 .js-add-button,
 .js-cancel-button {
-  background-color: green;
-  color: white;
+  /* background-color: green; */
+  background-color: #66d46a;
+  color: black;
   border: none;
   font-weight: bold;
   cursor: pointer;
@@ -204,7 +209,8 @@ h1 {
 }
 
 .js-add-button:hover {
-  background-color: darkgreen;
+  /* background-color: darkgreen; */
+  background-color: #2C632D;
 }
 
 .js-cancel-button {
@@ -309,12 +315,12 @@ h1 {
 }
 
 .js-edit-button {
-  background-color: skyblue;
+  background-color: #00bfff;
   color: white;
 }
 
 .js-edit-button:hover {
-  background-color: deepskyblue;
+  background-color: #0788b3;
 }
 
 .js-add-button img,
@@ -433,9 +439,9 @@ Animating title
 .sort-button-category,
 .sort-button-priority,
 .js-filter-input {
-  background-color: #4caf50;
+  background-color: #66d46a;
   border: none;
-  color: white;
+  color: black;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -450,13 +456,13 @@ Animating title
 .sort-button-category:hover,
 .sort-button-priority:hover,
 .js-filter-input:hover {
-  background-color: #45a049;
+  background-color: #66d46a;
 }
 
 .task-counter-button {
-  background-color: #4caf50;
+  background-color: #66d46a;
   border: none;
-  color: white;
+  color: black;
   padding: 10px 20px;
   text-align: center;
   display: inline-block;
@@ -471,15 +477,15 @@ Animating title
 }
 
 .task-counter-button:hover {
-  background-color: #45a049;
+  background-color: #66d46a;
   /* Same hover effect as sort button */
 }
 
 .js-filter-input {
   font-size: 15px;
   padding: 10px 15px;
-  background-color: #4caf50;
-  color: white;
+  background-color: #66d46a;
+  color: black;
 }
 
 .completed {
