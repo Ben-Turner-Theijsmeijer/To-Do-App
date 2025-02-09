@@ -12,8 +12,59 @@ class TaskList {
     
     this.updateTaskList('');
 
-     // Ensure time input behavior is set on page load
-     this.setupDateChangeListeners();
+    // Ensure time input behavior is set on page load
+    this.setupDateChangeListeners();
+    
+    //set up the csv upload option
+    this.setupFileUploadListener();
+  }
+
+  setupFileUploadListener() {
+    const uploadButton = document.getElementById("uploadTasksButton");
+    const fileInput = document.getElementById("taskFileInput");
+
+    if (uploadButton && fileInput) {
+      uploadButton.addEventListener("click", () => fileInput.click());
+
+      fileInput.addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        if (file) {
+          this.importTasksFromCSV(file);
+        }
+      });
+    }
+  }
+
+  importTasksFromCSV(file) {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const text = event.target.result;
+      const lines = text.split("\n").map((line) => line.trim()).filter(line => line);
+
+      lines.forEach((line) => {
+        const [name, date, time, category, priority] = line.split(",").map(item => item.trim());
+
+        // Ensure the task has at least a name before adding
+        if (name) {
+          const newTask = new Task(
+            name,
+            date || "",  // Allow empty date
+            time || "",  // Allow empty time
+            category || "",  // Allow empty category
+            priority || "",  // Allow empty priority
+            false
+          );
+
+          this.taskList.push(newTask);
+        }
+      });
+
+      localStorage.setItem("taskList", JSON.stringify(this.taskList));
+      this.updateTaskList("");
+      this.updateTaskCounter();
+    };
+
+    reader.readAsText(file);
   }
 
   setupDateChangeListeners() {
