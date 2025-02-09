@@ -3,7 +3,14 @@ import Task from "./task.js";
 
 class TaskList {
   constructor(sortManager, filterManager) {
-    this.taskList = JSON.parse(localStorage.getItem('taskList')) || [];
+    this.taskListData = JSON.parse(localStorage.getItem('taskList')) || [];
+    
+    this.taskList = []
+    // Turning saved json into task objects
+    this.taskListData.forEach( (savedTask) => {
+      this.taskList.push(new Task(savedTask.name, savedTask.date, savedTask.time, savedTask.category, savedTask.priority, savedTask.completed))
+    });
+
     this.taskListhtml = '';
     this.index = null;
 
@@ -35,10 +42,9 @@ class TaskList {
       addElement.innerHTML = this.taskListhtml;
     }
 
-    console.log(window.innerWidth);
 
     // add event listeners for new task list html elements
-    this.addListeners();
+    this.addListeners(sortedTasks);
 
     // Call the task counter update function
     this.updateTaskCounter();
@@ -68,10 +74,9 @@ class TaskList {
     // I don't really like this if... but I'm too tired to rewrite it 
     if (TaskManager.getIsEditing()) {
       // Update the existing task
-      this.taskList[this.index].updateTask({name, date, time, category, priority, 
-        completed: false}); 
+      this.taskList[this.index].updateTask({name, date, time, category, priority, completed: false}); 
 
-      TaskManager.setIsEditing();
+      TaskManager.setIsEditing(false);
       this.index = null;
 
       // Change the button back to 'Add'
@@ -105,12 +110,19 @@ class TaskList {
     this.updateTaskCounter();
   }
 
-  deleteTask(index) {
-    // Remove the specific task from the list
-    this.taskList.splice(index, 1);
-    localStorage.setItem('taskList', JSON.stringify(this.taskList));
-    this.updateTaskList('');
-    this.updateTaskCounter();
+  deleteTask(taskToDelete) {
+
+    // Finding the task to remove and removing it from the main list
+    for (var i = 0; i < this.taskList.length; i++) {
+      if (this.taskList[i].isEqual(taskToDelete) ){
+        this.taskList.splice(i, 1);
+        localStorage.setItem('taskList', JSON.stringify(this.taskList));
+        this.updateTaskList('');
+        this.updateTaskCounter();
+        return;
+      }
+    }
+
   }
 
   updateTaskCounter() {
@@ -147,26 +159,25 @@ class TaskList {
   }
 
   // Add event listeners for delete, edit, and complete buttons
-  addListeners() {
+  addListeners(tasksToDisplay) {
     document.querySelectorAll('.js-delete-button').forEach((button) => {
       button.addEventListener('click', (event) => {
         this.index = event.currentTarget.getAttribute('data-index');
-        this.deleteTask(this.index);
+        this.deleteTask(tasksToDisplay[this.index]);
       });
     });
 
     document.querySelectorAll('.js-edit-button').forEach((button) => {
       button.addEventListener('click', (event) => {
         this.index = event.currentTarget.getAttribute('data-index');
-        TaskManager.editTask(this.taskList[this.index]);
+        TaskManager.editTask(tasksToDisplay[this.index]);
       });
     });
 
     document.querySelectorAll('.js-complete-checkbox').forEach(checkbox => {
       checkbox.addEventListener('change', (event) => {
         this.index = event.target.dataset.index;  // Get the task index
-        console.log(this.taskList);
-        Task.toggleComplete(this.taskList[this.index], this);  // Call the method from TaskList
+        Task.toggleComplete(tasksToDisplay[this.index], this);  // Call the method from TaskList
       });
     });
   }

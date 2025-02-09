@@ -78,8 +78,8 @@ class TaskManager {
     return this.isEditing;
   }
 
-  static setIsEditing() {
-    this.isEditing = false;
+  static setIsEditing(status) {
+    this.isEditing = status;
   }
 }
 
