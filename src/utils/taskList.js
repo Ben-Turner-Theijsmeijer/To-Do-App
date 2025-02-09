@@ -17,15 +17,24 @@ class TaskList {
     
     //set up the csv upload option
     this.setupFileUploadListener();
+
+    //set up the csv export option
+    this.setupExportButtonListener();
   }
 
+  /**
+     * Sets up the file upload button to allow users to import tasks from a CSV file.
+     * When the "Upload Tasks" button is clicked, it triggers a file input field.
+     */
   setupFileUploadListener() {
     const uploadButton = document.getElementById("uploadTasksButton");
     const fileInput = document.getElementById("taskFileInput");
 
     if (uploadButton && fileInput) {
+      // Open file dialog when the button is clicked
       uploadButton.addEventListener("click", () => fileInput.click());
 
+      // Process the selected file
       fileInput.addEventListener("change", (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -35,37 +44,104 @@ class TaskList {
     }
   }
 
+  /**
+   * Sets up the export button to allow users to download their tasks as a CSV file.
+   * When clicked, it calls the function to format and generate the CSV file.
+   */
+  setupExportButtonListener() {
+    const exportButton = document.getElementById("exportTasksButton");
+
+    if (exportButton) {
+      exportButton.addEventListener("click", () => this.exportTasksToCSV());
+    }
+  }
+
+  /**
+   * Exports the current task list as a CSV file and prompts the user to download it.
+   * - The CSV includes headers: TaskName, Date, Time, Category, Priority
+   * - Dates are formatted as YYYY-MM-DD
+   * - Time is in 24-hour format (if provided)
+   * - Category and priority are converted to lowercase
+   */
+  exportTasksToCSV() {
+    if (this.taskList.length === 0) {
+      alert("No tasks to export.");
+      return;
+    }
+
+    // CSV Header Row
+    let csvContent = "TaskName,Date,Time,Category,Priority\n";
+
+    // Loop through all tasks and format their data
+    this.taskList.forEach((task) => {
+      const taskName = task.name.trim(); // Task name is required
+      const date = task.date ? task.date.trim() : ""; // Default to empty if missing
+      const time = task.time ? task.time.trim() : ""; // Default to empty if missing
+      const category = task.category ? task.category.trim().toLowerCase() : ""; // Lowercase
+      const priority = task.priority ? task.priority.trim().toLowerCase() : ""; // Lowercase
+
+      // Append the task to CSV content
+      csvContent += `${taskName},${date},${time},${category},${priority}\n`;
+    });
+
+    // Create a downloadable CSV file
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "tasks.csv"; // Name of the exported file
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  /**
+   * Imports tasks from a CSV file uploaded by the user.
+   * - Reads the file as text, splits it by lines
+   * - Skips the first line if it contains the headers
+   * - Extracts task properties: TaskName, Date, Time, Category, Priority
+   * - Adds only tasks with a name (other fields can be blank)
+   * - Saves tasks to localStorage and updates the UI
+   *
+   * @param {File} file - The CSV file selected by the user
+   */
   importTasksFromCSV(file) {
     const reader = new FileReader();
     reader.onload = (event) => {
       const text = event.target.result;
-      const lines = text.split("\n").map((line) => line.trim()).filter(line => line);
+      let lines = text.split("\n").map((line) => line.trim()).filter(line => line);
 
+      // Check if the first line contains the expected headers, and skip it
+      if (lines[0].toLowerCase().startsWith("taskname,date,time,category,priority")) {
+        lines.shift(); // Remove the first line (headers)
+      }
+
+      // Process each remaining line as a task
       lines.forEach((line) => {
         const [name, date, time, category, priority] = line.split(",").map(item => item.trim());
 
-        // Ensure the task has at least a name before adding
-        if (name) {
+        if (name) { // Only add tasks with a name
           const newTask = new Task(
             name,
-            date || "",  // Allow empty date
-            time || "",  // Allow empty time
-            category || "",  // Allow empty category
-            priority || "",  // Allow empty priority
-            false
+            date || "", // Default empty if missing
+            time || "", // Default empty if missing
+            category || "", // Default empty if missing
+            priority || "", // Default empty if missing
+            false // Task is not completed by default
           );
 
           this.taskList.push(newTask);
         }
       });
 
+      // Save updated tasks and refresh UI
       localStorage.setItem("taskList", JSON.stringify(this.taskList));
       this.updateTaskList("");
       this.updateTaskCounter();
     };
 
-    reader.readAsText(file);
+    reader.readAsText(file); // Read the file as text
   }
+
 
   setupDateChangeListeners() {
     const inputDateElement = document.querySelector('.js-date-input');
