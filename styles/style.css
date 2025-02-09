@@ -427,6 +427,12 @@ Animating title
   margin-bottom: 10px;
 }
 
+.upload-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
 .sort-filter-container {
   display: flex;
   gap: 10px;
@@ -435,6 +441,8 @@ Animating title
 
 .sort-button-category,
 .sort-button-priority,
+.upload-button,
+.export-button,
 .js-filter-input {
   background-color: #4caf50;
   border: none;
