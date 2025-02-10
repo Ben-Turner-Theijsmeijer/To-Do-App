@@ -39,69 +39,48 @@
     <!-- Task counter: amount is how many are visible -->
     <button class="task-counter-button">Tasks: 0</button>
 
-        <input type="date" class="js-date-input" min="" />
-        <input type="time" class="js-time-input" disabled>
-        <select class="js-category-input">
-          <option value="">Select Category</option>
-          <option value="work">Work</option>
-          <option value="personal">Personal</option>
-          <option value="shopping">Shopping</option>
-          <option value="other">Other</option>
-        </select>
-        <select class="js-priority-input">
-          <option value="">Select Priority</option>
-          <option value="high">High</option>
-          <option value="medium">Medium</option>
-          <option value="low">Low</option>
-        </select>
-        <div class="js-actions-wrapper">
-          <button class="js-add-button" title="Add tasks">
-            <span class="fa-solid fa-add"></span> Add Task
-          </button>
-          <button class="js-cancel-button" title="Cancel">
-            <span class="fa-solid fa-times"></span> Cancel
-          </button>
-        </div>
-        <div id="js-success-notification" style="display: none">
-          <p>Task completed 🎉</p>
-        </div>
-      </div>
-
-
-      <!-- export and uploads tasks in a list to/from a csv -->
-      <div class="upload-container">
-        <input type="file" id="taskFileInput" accept=".csv" style="display: none;">
-        <button id="uploadTasksButton" class ="upload-button">
-          <i class="fa-solid fa-upload"></i> Upload Tasks
+    <div id="add-task" class="js-add-grid">
+      <input type="text" placeholder="Add a new task here...." class="js-name-input">
+      <input type="date" class="js-date-input" min="" />
+      <input type="time" class="js-time-input" disabled>
+      <select class="js-category-input">
+        <option value="">Select Category</option>
+        <option value="work">Work</option>
+        <option value="personal">Personal</option>
+        <option value="shopping">Shopping</option>
+        <option value="other">Other</option>
+      </select>
+      <select class="js-priority-input">
+        <option value="">Select Priority</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+      <div class="js-actions-wrapper">
+        <button class="js-add-button" title="Add tasks">
+          <span class="fa-solid fa-add"></span> Add Task
         </button>
-        <button id="exportTasksButton" class ="export-button">
-          <i class="fa-solid fa-download"></i> Export Tasks
+        <button class="js-cancel-button" title="Cancel">
+          <span class="fa-solid fa-times"></span> Cancel
         </button>
       </div>
+    </div>
 
-      <!-- Sorting and task counter section -->
-      <div class="sort-buttons">
-        <div class="sort-filter-container">
-          <button class="sort-button-category">
-            Sort by Category
-          </button>
-          <button class="sort-button-priority">
-            Sort by Priority
-          </button>
-          <select class="js-filter-input">
-            <option value="all">All</option>
-            <option value="pending">Pending</option>
-            <option value="completed">Completed</option>
-          </select>
-        </div>
+    <div id="js-success-notification" style="display: none">
+      <p>Task completed 🎉</p>
+    </div>
 
-        <!-- Task Counter Button in the same row as other buttons -->
-        <button class="task-counter-button">Tasks: 0</button>
-      </div>
 
-      <div class="task-list display">
-        <div class="js-add-html js-add-grid js-add-html-tasks"></div>
-      </div>
+
+    <!-- export and uploads tasks in a list to/from a csv -->
+    <div class="upload-container">
+      <input type="file" id="taskFileInput" accept=".csv" style="display: none;">
+      <button id="uploadTasksButton" class="upload-button">
+        <i class="fa-solid fa-upload"></i> Upload Tasks
+      </button>
+      <button id="exportTasksButton" class="export-button">
+        <i class="fa-solid fa-download"></i> Export Tasks
+      </button>
     </div>
 
     <!-- Sorting and task counter section -->
@@ -119,6 +98,9 @@
           <option value="completed">Completed</option>
         </select>
       </div>
+
+      <!-- Task Counter Button in the same row as other buttons -->
+      <button class="task-counter-button">Tasks: 0</button>
     </div>
 
     <div class="task-list display">
