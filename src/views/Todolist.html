@@ -33,6 +33,7 @@
       </ul>
     </div>
   </header>
+
   <div class="container">
     <h1 class="subtitle">Todo-List</h1>
 
@@ -42,7 +43,7 @@
     <div id="add-task" class="js-add-grid">
       <input type="text" placeholder="Add a new task here...." class="js-name-input">
       <input type="date" class="js-date-input" min="" />
-      <input type="time" class="js-time-input" disabled>
+      <input type="time" class="js-time-input" />
       <select class="js-category-input">
         <option value="">Select Category</option>
         <option value="work">Work</option>
@@ -69,9 +70,7 @@
     <div id="js-success-notification" style="display: none">
       <p>Task completed 🎉</p>
     </div>
-
-
-
+    
     <!-- export and uploads tasks in a list to/from a csv -->
     <div class="upload-container">
       <input type="file" id="taskFileInput" accept=".csv" style="display: none;">
@@ -92,17 +91,37 @@
         <button class="sort-button-priority">
           Sort by Priority
         </button>
-        <select class="js-filter-input">
+
+        <label style="line-height: 46px; color: white;" for="filter-completion">Filter Complete: </label>
+        <select class="js-filter-input filter-completion">
           <option value="all">All</option>
           <option value="pending">Pending</option>
           <option value="completed">Completed</option>
         </select>
+        
+        <label style="line-height: 46px; color: white;" for="filter-category">Filter Category: </label>
+        <select class="js-filter-input filter-category">
+          <option value="all">All</option>
+          <option value="work">Work</option>
+          <option value="personal">Personal</option>
+          <option value="shopping">Shopping</option>
+          <option value="other">Other</option>
+        </select>  
+        
+        <label style="line-height: 46px; color: white;" for="filter-priority">Filter Priority: </label>
+        <select class="js-filter-input filter-priority">
+          <option value="all">All</option>
+          <option value="high">High</option>
+          <option value="medium">Med</option>
+          <option value="low">Low</option>
+        </select>  
       </div>
     </div>
 
     <div class="task-list display">
       <div class="js-add-html js-add-grid js-add-html-tasks"></div>
     </div>
+     
   </div>
 
   <footer class="footer">

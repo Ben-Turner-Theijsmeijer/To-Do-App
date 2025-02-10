@@ -26,9 +26,13 @@ class UIManager {
       .addEventListener('click', () => this.taskList.updateTaskList('priority'));
 
     // Add event listener for filter button
-    document
-      .querySelector('.js-filter-input')
-      .addEventListener('change', () => this.taskList.updateTaskList(''));
+    // document
+    //   .querySelector('.js-filter-input')
+    //   .addEventListener('change', () => this.taskList.updateTaskList(''));
+
+    document.querySelectorAll('.js-filter-input').forEach((button) => {
+      button.addEventListener('change', () => this.taskList.updateTaskList(''));
+    });
 
     document.querySelector('.js-name-input').addEventListener('input', (e) => {
       let input = e.target.value;
