@@ -73,8 +73,21 @@ class TaskList {
 
     // I don't really like this if... but I'm too tired to rewrite it 
     if (TaskManager.getIsEditing()) {
+      var taskBeingEdited = TaskManager.getTaskBeingEdited();
+      var foundTaskIndex = null;
+      
+      for (var i = 0; i < this.taskList.length; i++) {
+        if (this.taskList[i].isEqual(taskBeingEdited) ){
+          foundTaskIndex = i
+        }
+      }
+
+      if (foundTaskIndex == null){
+        console.log("error in editing task: no original task found");
+      }
       // Update the existing task
-      this.taskList[this.index].updateTask({name, date, time, category, priority, completed: false}); 
+      
+      this.taskList[foundTaskIndex].updateTask({name, date, time, category, priority, completed: false}); 
 
       TaskManager.setIsEditing(false);
       this.index = null;

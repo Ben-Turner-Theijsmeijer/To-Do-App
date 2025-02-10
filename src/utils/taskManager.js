@@ -3,9 +3,11 @@ class TaskManager {
     this.taskList = taskList;
     this.isEditing = false;
     this.editIndex = null;
+    this.taskBeingEdited = null;
   }
 
   static editTask(task) {
+    this.taskBeingEdited = task;
     let inputNameElement = document.querySelector('.js-name-input');
     let inputDateElement = document.querySelector('.js-date-input');
     let inputTimeElement = document.querySelector('.js-time-input');
@@ -57,6 +59,10 @@ class TaskManager {
     const addIcon = document.createElement("span");
     addIcon.classList.add("fa-solid", "fa-add");
     addButton.prepend(addIcon);
+  }
+
+  static getTaskBeingEdited() {
+    return this.taskBeingEdited;
   }
 
   static clearInputs() {
