@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Londrina+Outline&display=swap');
 
 * {
   margin: 0;
@@ -8,10 +7,12 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  overflow: hidden;
-  height: 100vh;
-  background: linear-gradient(to bottom, #6b46c1, #9f7aea, #f687b3);
+  overflow-y: scroll;
+  height: 100%;
+  /* background: linear-gradient(to bottom, #6b46c1, #9f7aea, #f687b3); */
+  background-color: #435ec7;
 }
+
 why-need-link {
   position: absolute;
   top: 10px;
@@ -30,8 +31,10 @@ why-need-link {
 .header {
   width: 100%;
   height: 12vh;
-  background-color: #4caf50;
-  color: white;
+  background-color: #66d46a;
+  /* 4caf50 */
+  /* 2C632D */
+  color: black;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -94,7 +97,7 @@ why-need-link {
 }
 
 .link a:hover {
-  background-color: rgb(228, 227, 227);
+  background-color: #e2e2e2;
   transition: all 300ms linear;
 }
 
@@ -102,26 +105,28 @@ why-need-link {
   font-size: 1rem;
   align-self: center;
 }
+
 .container {
   width: 100%;
   max-width: 1100px;
   padding: 20px;
   box-sizing: border-box;
-  margin-bottom: 170px;
+  /* margin-bottom: 170px; */
   margin-left: auto;
   margin-right: auto;
-  padding-top: 0; /*Added*/
+  padding-top: 0;
+  /*Added*/
 }
 
 .subtitle {
-  font-family: 'Londrina Outline', cursive;
   font-size: 4rem;
   color: #ff6f61;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
   text-align: center;
   margin: 20px 0;
   animation: fadeIn 1s ease-in-out;
-  margin-top: 0; /*Added*/
+  margin-top: 0;
+  /*Added*/
 }
 
 @keyframes fadeIn {
@@ -129,6 +134,7 @@ why-need-link {
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -142,6 +148,12 @@ h1 {
   text-shadow: 2px 2px 4px #000;
 }
 
+.js-time-input:disabled {
+  background-color: #e0e0e0; /* Light gray background */
+  color: #888; /* Dim text color */
+  cursor: not-allowed; /* Show "not allowed" cursor */
+}
+
 .js-name-input,
 .js-date-input,
 .js-time-input,
@@ -150,7 +162,8 @@ h1 {
 .js-add-button,
 .js-cancel-button {
   font-size: 15px;
-  padding: 10px 7px; /*Added*/
+  padding: 10px 7px;
+  /*Added*/
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #fff;
@@ -174,7 +187,8 @@ h1 {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 0.813rem; /*Added*/
+  margin-bottom: 0.813rem;
+  /*Added*/
 }
 
 .js-actions-wrapper {
@@ -187,8 +201,8 @@ h1 {
 
 .js-add-button,
 .js-cancel-button {
-  background-color: green;
-  color: white;
+  background-color: #66d46a;
+  color: black;
   border: none;
   font-weight: bold;
   cursor: pointer;
@@ -199,7 +213,7 @@ h1 {
 }
 
 .js-add-button:hover {
-  background-color: darkgreen;
+  background-color: #2C632D;
 }
 
 .js-cancel-button {
@@ -304,12 +318,12 @@ h1 {
 }
 
 .js-edit-button {
-  background-color: skyblue;
+  background-color: #00bfff;
   color: white;
 }
 
 .js-edit-button:hover {
-  background-color: deepskyblue;
+  background-color: #0788b3;
 }
 
 .js-add-button img,
@@ -326,16 +340,16 @@ h1 {
 /* Footer Styling */
 footer {
   background-color: transparent;
-  color: white;
+  color: black;
   text-align: center;
   padding: 20px 0;
-  position: fixed;
   width: 100%;
   bottom: 0;
   font-size: 1rem;
   display: flex;
   justify-content: space-around;
-  padding-bottom: 10px; /*Added*/
+  padding-bottom: 10px;
+  /*Added*/
 }
 
 footer p {
@@ -366,14 +380,12 @@ footer p {
 }
 
 .social-media .insta:hover {
-  background: linear-gradient(
-    45deg,
-    #feda75,
-    #fa7e1e,
-    #d62976,
-    #962fbf,
-    #4f5bd5
-  );
+  background: linear-gradient(45deg,
+      #feda75,
+      #fa7e1e,
+      #d62976,
+      #962fbf,
+      #4f5bd5);
   color: white;
 }
 
@@ -408,14 +420,19 @@ Animating title
 .subtitle {
   text-align: center;
   color: #f6ac62;
-  font-family: 'Open sans', sans-serif;
-  font-family: cursive;
   font-size: 5rem;
-  padding: 5px 16px; /*Added*/
+  padding: 5px 16px;
+  /*Added*/
   text-shadow: #000000 3px 4px 10px;
 }
 
 .sort-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.upload-container {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
@@ -429,10 +446,12 @@ Animating title
 
 .sort-button-category,
 .sort-button-priority,
+.upload-button,
+.export-button,
 .js-filter-input {
-  background-color: #4caf50;
+  background-color: #66d46a;
   border: none;
-  color: white;
+  color: black;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -447,18 +466,18 @@ Animating title
 .sort-button-category:hover,
 .sort-button-priority:hover,
 .js-filter-input:hover {
-  background-color: #45a049;
+  background-color: #66d46a;
 }
 
 .task-counter-button {
-  background-color: #4caf50;
+  background-color: #66d46a;
   border: none;
-  color: white;
+  color: black;
   padding: 10px 20px;
   text-align: center;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
+  margin: 10px;
   cursor: pointer;
   border-radius: 5px;
   transition: background-color 0.3s;
@@ -468,14 +487,15 @@ Animating title
 }
 
 .task-counter-button:hover {
-  background-color: #45a049; /* Same hover effect as sort button */
+  background-color: #66d46a;
+  /* Same hover effect as sort button */
 }
 
 .js-filter-input {
   font-size: 15px;
   padding: 10px 15px;
-  background-color: #4caf50;
-  color: white;
+  background-color: #66d46a;
+  color: black;
 }
 
 .completed {
@@ -484,13 +504,12 @@ Animating title
 }
 
 .js-add-html {
-  overflow-y: scroll;
   scroll-behavior: smooth;
-  height: 30vh;
 }
 
 .js-add-html::-webkit-scrollbar {
-  width: 10px; /* Width of the scrollbar */
+  width: 10px;
+  /* Width of the scrollbar */
 }
 
 .js-add-html::-webkit-scrollbar-thumb {
@@ -502,6 +521,7 @@ Animating title
   background-color: black;
   border-radius: 5px;
 }
+
 #js-success-notification {
   position: absolute;
   border-radius: 5px;
@@ -515,15 +535,16 @@ Animating title
   bottom: 10%;
   color: #d4edda;
 }
+
 .js-add-html-tasks {
   border: 1px black solid;
   height: fit-content;
-  max-height: 22vh; /*Added*/
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Londrina+Outline&display=swap');
 
 @keyframes bounce {
+
   0%,
   20%,
   50%,
@@ -544,7 +565,8 @@ Animating title
 @media screen and (max-width: 1100px) {
   body {
     overflow: scroll;
-    height: 100%; /*Added*/
+    height: 100%;
+    /*Added*/
   }
 
   .container {
@@ -564,10 +586,6 @@ Animating title
   .js-add-grid,
   .js-add-html {
     grid-template-columns: 1fr;
-  }
-
-  .js-add-html-tasks {
-    max-height: 35vh; /*Added*/
   }
 
   .js-add-button {
@@ -607,6 +625,7 @@ Animating title
   .subtitle {
     font-size: 2rem;
   }
+
   .sort-filter-container {
     justify-content: center;
   }
@@ -668,16 +687,19 @@ Animating title
 
 /* For Add task counter */
 @media screen and (max-width: 611px) {
+
   .sort-button-category,
   .sort-button-priority,
   .js-filter-input {
     padding-left: 10px;
     padding-right: 10px;
   }
+
   .task-counter-button {
     width: 200px;
   }
 }
+
 @media screen and (max-width: 420px) {
   .container {
     margin-top: 10px;
