@@ -148,6 +148,12 @@ h1 {
   text-shadow: 2px 2px 4px #000;
 }
 
+.js-time-input:disabled {
+  background-color: #e0e0e0; /* Light gray background */
+  color: #888; /* Dim text color */
+  cursor: not-allowed; /* Show "not allowed" cursor */
+}
+
 .js-name-input,
 .js-date-input,
 .js-time-input,
@@ -426,6 +432,12 @@ Animating title
   margin-bottom: 10px;
 }
 
+.upload-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
 .sort-filter-container {
   display: flex;
   gap: 10px;
@@ -434,6 +446,8 @@ Animating title
 
 .sort-button-category,
 .sort-button-priority,
+.upload-button,
+.export-button,
 .js-filter-input {
   background-color: #66d46a;
   border: none;
