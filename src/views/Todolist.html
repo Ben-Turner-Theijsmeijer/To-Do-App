@@ -33,82 +33,44 @@
       </ul>
     </div>
   </header>
+
   <div class="container">
     <h1 class="subtitle">Todo-List</h1>
 
     <!-- Task counter: amount is how many are visible -->
     <button class="task-counter-button">Tasks: 0</button>
 
-        <input type="date" class="js-date-input" min="" />
-        <input type="time" class="js-time-input" />
-        <select class="js-category-input">
-          <option value="">Select Category</option>
-          <option value="work">Work</option>
-          <option value="personal">Personal</option>
-          <option value="shopping">Shopping</option>
-          <option value="other">Other</option>
-        </select>
-        <select class="js-priority-input">
-          <option value="">Select Priority</option>
-          <option value="high">High</option>
-          <option value="medium">Medium</option>
-          <option value="low">Low</option>
-        </select>
-        <div class="js-actions-wrapper">
-          <button class="js-add-button" title="Add tasks">
-            <span class="fa-solid fa-add"></span> Add Task
-          </button>
-          <button class="js-cancel-button" title="Cancel">
-            <span class="fa-solid fa-times"></span> Cancel
-          </button>
-        </div>
-        <div id="js-success-notification" style="display: none">
-          <p>Task completed 🎉</p>
-        </div>
-      </div>
-
-      <!-- Sorting and task counter section -->
-      <div class="sort-buttons">
-        <div class="sort-filter-container">
-          <button class="sort-button-category">
-            Sort by Category
-          </button>
-          <button class="sort-button-priority">
-            Sort by Priority
-          </button>
-
-          <label style="line-height: 46px; color: white;" for="filter-completion">Filter Completion: </label>
-          <select class="js-filter-input filter-completion">
-            <option value="all">all</option>
-            <option value="pending">Pending</option>
-            <option value="completed">Completed</option>
-          </select>
-          
-          <label style="line-height: 46px; color: white;" for="filter-category">Filter Category: </label>
-          <select class="js-filter-input filter-category">
-            <option value="all">all</option>
-            <option value="work">Work</option>
-            <option value="personal">Personal</option>
-            <option value="shopping">Shopping</option>
-            <option value="other">Other</option>
-          </select>          
-        </div>
-
-        <!-- Task Counter Button in the same row as other buttons -->
-        <button class="task-counter-button">Tasks: 0</button>
-      </div>
-
-      <div class="task-list display">
-        <div class="js-add-html js-add-grid js-add-html-tasks"></div>
+    <div id="add-task" class="js-add-grid">
+      <input type="text" placeholder="Add a new task here...." class="js-name-input">
+      <input type="date" class="js-date-input" min="" />
+      <input type="time" class="js-time-input" />
+      <select class="js-category-input">
+        <option value="">Select Category</option>
+        <option value="work">Work</option>
+        <option value="personal">Personal</option>
+        <option value="shopping">Shopping</option>
+        <option value="other">Other</option>
+      </select>
+      <select class="js-priority-input">
+        <option value="">Select Priority</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+      <div class="js-actions-wrapper">
+        <button class="js-add-button" title="Add tasks">
+          <span class="fa-solid fa-add"></span> Add Task
+        </button>
+        <button class="js-cancel-button" title="Cancel">
+          <span class="fa-solid fa-times"></span> Cancel
+        </button>
       </div>
     </div>
 
     <div id="js-success-notification" style="display: none">
       <p>Task completed 🎉</p>
     </div>
-
-
-
+    
     <!-- export and uploads tasks in a list to/from a csv -->
     <div class="upload-container">
       <input type="file" id="taskFileInput" accept=".csv" style="display: none;">
@@ -129,17 +91,37 @@
         <button class="sort-button-priority">
           Sort by Priority
         </button>
-        <select class="js-filter-input">
+
+        <label style="line-height: 46px; color: white;" for="filter-completion">Filter Complete: </label>
+        <select class="js-filter-input filter-completion">
           <option value="all">All</option>
           <option value="pending">Pending</option>
           <option value="completed">Completed</option>
         </select>
+        
+        <label style="line-height: 46px; color: white;" for="filter-category">Filter Category: </label>
+        <select class="js-filter-input filter-category">
+          <option value="all">All</option>
+          <option value="work">Work</option>
+          <option value="personal">Personal</option>
+          <option value="shopping">Shopping</option>
+          <option value="other">Other</option>
+        </select>  
+        
+        <label style="line-height: 46px; color: white;" for="filter-priority">Filter Priority: </label>
+        <select class="js-filter-input filter-priority">
+          <option value="all">All</option>
+          <option value="high">High</option>
+          <option value="medium">Med</option>
+          <option value="low">Low</option>
+        </select>  
       </div>
     </div>
 
     <div class="task-list display">
       <div class="js-add-html js-add-grid js-add-html-tasks"></div>
     </div>
+     
   </div>
 
   <footer class="footer">
