@@ -11,32 +11,78 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+      /* Navbar Styles */
+      .custom-navbar {
+        background-color: #222; /* Dark Grey */
+        color: white;
+        padding: 15px 40px; /* Added horizontal padding */
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+      }
+  
+      .navbar-brand {
+        text-decoration: none;
+        color: white;
+        font-size: 22px;
+        font-weight: bold;
+        display: flex;
+        flex-direction: column;
+        text-align: center; /* Center-align the text */
+        line-height: 1.2;
+        transition: transform 0.2s ease-in-out;
+      }
+  
+      .navbar-brand:hover {
+        transform: scale(1.05); /* Slight zoom on hover */
+      }
+  
+      .navbar-brand span {
+        font-size: 14px;
+        font-weight: normal;
+        opacity: 0.8;
+        margin-top: 5px; /* Adds space between the title and the quote */
+      }
+  
+      .nav-link {
+        text-decoration: none;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 8px; /* Space between icon and text */
+        transition: opacity 0.2s ease-in-out;
+      }
+  
+      .nav-link:hover {
+        text-decoration: underline;
+        opacity: 0.8; /* Fade effect on hover */
+      }
+  
+      /* Centering "Plan Your Day" under the navbar title */
+      .navbar-brand span {
+        margin-top: 8px; /* Space between title and tagline */
+      }
+    </style>
 </head>
 
+
 <body class="">
-  <!-- Header -->
-  <header class="header">
-    <div class="logo-container">
-      <div class="logo">
-        <i class="fa-solid fa-clipboard-list"></i>
-      </div>
-      <div class="quote">
-        <p class="p1">ToDo-List</p>
-        <p class="p2">Plan Your Day</p>
-      </div>
-    </div>
-    <div class="navlinks-container">
-      <ul class="flex space-x-4 navlinks">
-        <li><a href="src/views/error.html" class="hover:text-white">Error</a></li>
-        <li>
-          <a href="src/views/imp.html" class="hover:text-white">Why We need this?</a>
-        </li>
-        <li>
-          <a href="src/views/Todolist.html" class="hover:text-white">ToDo List</a>
-        </li>
-      </ul>
-    </div>
-  </header>
+
+  <!-- Custom Navbar -->
+  <nav class="custom-navbar">
+    <a class="navbar-brand" href="../../index.html">
+      <i class="fa-solid fa-book"></i> ToDo-List
+      <span>"Plan Your Day"</span>
+    </a>
+    <a class="nav-link" href="src/views/Todolist.html">
+      <i class="fa-solid fa-list-check"></i> To-Do Manager
+    </a>
+  </nav>
 
   <!-- Main Block -->
   <!-- class="flex justify-center items-center h-screen bg-gradient-to-b from-purple-700 via-purple-500 to-pink-400"> -->
