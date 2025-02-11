@@ -21,6 +21,9 @@ class TaskManager {
     inputCategoryElement.value = task.category;
     inputPriorityElement.value = task.priority;
 
+    // Enable the time input field if it was previously disabled
+    inputTimeElement.disabled = false;  // Enable the time input
+
     // Set editing mode and the index of the task being edited
     this.isEditing = true;
 
