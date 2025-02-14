@@ -270,3 +270,80 @@ body {
   text-align: center;
 }
 
+/* Light Mode (Default) */
+:root {
+  --primary-bg: #fafafe;
+  --primary-text: #333;
+  --secondary-bg: #fff;
+  --navbar-bg: #333;
+  --navbar-text: #ffffff;
+  --footer-bg: #333;
+  --footer-text: #ffffff;
+  --button-bg: #3498db;
+  --button-hover: #007bff;
+  --task-text: #000; /* Task details black in light mode */
+}
+
+/* Dark Mode */
+.dark-mode {
+  --primary-bg: #1e1e1e;
+  --primary-text: #a8b5ff;
+  --secondary-bg: #333;
+  --navbar-bg: #000;
+  --navbar-text: #f0f0f0;
+  --footer-bg: #000;
+  --footer-text: #f0f0f0;
+  --button-bg: #444;
+  --button-hover: #555;
+  --task-text: #000000; /* Task details white in dark mode */
+}
+
+/* Apply styles */
+body {
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+}
+
+.navbar-custom {
+  background-color: var(--navbar-bg);
+}
+
+.navbar-brand, .nav-link {
+  color: var(--navbar-text) !important;
+}
+
+.footer {
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
+}
+
+/* Task details text color */
+.task-info,
+.task-name,
+.category-tag,
+.priority-tag {
+  color: var(--task-text);
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+  position: fixed;
+  bottom: 80px; /* Moves it above the footer */
+  right: 20px;
+  z-index: 1000;
+}
+
+.dark-mode-toggle button {
+  background-color: var(--button-bg);
+  color: var(--primary-text);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.dark-mode-toggle button:hover {
+  background-color: var(--button-hover);
+}
+
