@@ -46,8 +46,22 @@
   <div class="container">
     <h1 class="subtitle text-center mt-4">To-Do List</h1>
 
-    <!-- Task Counter -->
-    <button class="task-counter-button btn btn-primary">Tasks: 0</button>
+    <!-- Task Counter and Buttons Container -->
+    <div class="d-flex justify-content-between align-items-center my-3">
+      <!-- Task Counter -->
+      <button class="task-counter-button btn btn-primary">Tasks: 0</button>
+
+      <!-- Export and Upload Tasks -->
+      <div>
+        <input type="file" id="taskFileInput" accept=".csv" style="display: none;">
+        <button id="uploadTasksButton" class="upload-button btn btn-secondary">
+          <i class="fa-solid fa-upload"></i> Upload Tasks
+        </button>
+        <button id="exportTasksButton" class="export-button btn btn-primary">
+          <i class="fa-solid fa-download"></i> Export Tasks
+        </button>
+      </div>
+    </div>
 
     <!-- Task Input Section -->
     <div id="add-task" class="js-add-grid">
@@ -80,17 +94,6 @@
     <!-- Task Completed Notification -->
     <div id="js-success-notification" class="alert alert-success text-center" style="display: none">
       <p>Task completed 🎉</p>
-    </div>
-
-    <!-- Export and Upload Tasks -->
-    <div class="upload-container text-center my-3">
-      <input type="file" id="taskFileInput" accept=".csv" style="display: none;">
-      <button id="uploadTasksButton" class="upload-button btn btn-secondary">
-        <i class="fa-solid fa-upload"></i> Upload Tasks
-      </button>
-      <button id="exportTasksButton" class="export-button btn btn-primary">
-        <i class="fa-solid fa-download"></i> Export Tasks
-      </button>
     </div>
 
     <!-- Sorting and Filtering Section -->
@@ -135,7 +138,7 @@
   <footer class="footer">
     <div class="container"></div>
       <p>
-        &copy; <span class="year"></span> Made with &#10084; by Sara, Emily, Ben, Jen, Jeremy.
+        &copy; <span class="year"></span> Made with &#10084; by Ansh Grover. All rights reserved.
       </p>
   </div>
   </footer>
