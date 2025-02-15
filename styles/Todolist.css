@@ -282,12 +282,17 @@ body {
   --button-bg: #3498db;
   --button-hover: #007bff;
   --task-text: #000; /* Task details black in light mode */
+  --sort-button-bg: transparent;
+  --sort-button-text: #007bff;
+  --sort-button-border: #007bff;
+  --sort-button-hover-bg: #007bff;
+  --sort-button-hover-text: #fff;
 }
 
 /* Dark Mode */
 .dark-mode {
   --primary-bg: #1e1e1e;
-  --primary-text: #a8b5ff;
+  --primary-text: #75c0f2;
   --secondary-bg: #333;
   --navbar-bg: #000;
   --navbar-text: #f0f0f0;
@@ -296,12 +301,18 @@ body {
   --button-bg: #444;
   --button-hover: #555;
   --task-text: #000000; /* Task details white in dark mode */
+  --sort-button-bg: #007bff;
+  --sort-button-text: #ffffff;
+  --sort-button-border: #007bff;
+  --sort-button-hover-bg: #0056b3;
+  --sort-button-hover-text: #ffffff;
 }
 
 /* Apply styles */
 body {
   background-color: var(--primary-bg);
   color: var(--primary-text);
+  font-weight: bolder;
 }
 
 .navbar-custom {
@@ -325,6 +336,21 @@ body {
   color: var(--task-text);
 }
 
+/* Sort Buttons */
+.sort-button-category,
+.sort-button-priority {
+  background-color: var(--sort-button-bg);
+  color: var(--sort-button-text);
+  border-color: var(--sort-button-border);
+}
+
+.sort-button-category:hover,
+.sort-button-priority:hover {
+  background-color: var(--sort-button-hover-bg);
+  color: var(--sort-button-hover-text);
+}
+
+
 /* Dark Mode Toggle */
 .dark-mode-toggle {
   position: fixed;
@@ -336,6 +362,7 @@ body {
 .dark-mode-toggle button {
   background-color: var(--button-bg);
   color: var(--primary-text);
+  font-weight: bolder;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
