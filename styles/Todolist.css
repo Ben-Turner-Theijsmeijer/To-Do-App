@@ -291,12 +291,12 @@ body {
 
 /* Dark Mode */
 .dark-mode {
-  --primary-bg: #1e1e1e;
+  --primary-bg: #252525;
   --primary-text: #fefefe;
-  --secondary-bg: #424242;
-  --navbar-bg: #000;
+  --secondary-bg: #8c8c8c;
+  --navbar-bg: #161616;
   --navbar-text: #f0f0f0;
-  --footer-bg: #000;
+  --footer-bg: #161616;
   --footer-text: #f0f0f0;
   --button-bg: #007bff;
   --button-hover: #555;
@@ -353,13 +353,13 @@ body {
 }
 
 .dark-mode .small-container {
-  background-color: #2E2E2E !important;
+  background-color: #5f5f5f;
   color: #ffffff;
   border: 1px solid #555;
 }
 
 .dark-mode .js-add-html {
-  background-color: #2E2E2E !important;
+  background-color: var(--secondary-bg);
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
@@ -375,10 +375,9 @@ body {
 }
 
 .dark-mode-toggle {
-  position: fixed;
-  bottom: 100px; /* Adjust height above the footer */
-  right: 20px;
-  z-index: 1000;
+  display: flex;
+  padding: 20px;
+  justify-content: right;
 }
 
 #darkModeBtn {
