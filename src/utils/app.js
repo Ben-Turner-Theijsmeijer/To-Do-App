@@ -18,3 +18,6 @@ class App {
 
 // As soon as DOM loads, call App class
 document.addEventListener("DOMContentLoaded", () => new App());
+
+
+

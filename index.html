@@ -2,115 +2,101 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>To-Do List App</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="/styles/style.css" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    crossorigin="anonymous" referrerpolicy="no-referrer">
 
-    <style>
-      /* Navbar Styles */
-      .custom-navbar {
-        background-color: #222; /* Dark Grey */
-        color: white;
-        padding: 15px 40px; /* Added horizontal padding */
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-      }
-  
-      .navbar-brand {
-        text-decoration: none;
-        color: white;
-        font-size: 22px;
-        font-weight: bold;
-        display: flex;
-        flex-direction: column;
-        text-align: center; /* Center-align the text */
-        line-height: 1.2;
-        transition: transform 0.2s ease-in-out;
-      }
-  
-      .navbar-brand:hover {
-        transform: scale(1.05); /* Slight zoom on hover */
-      }
-  
-      .navbar-brand span {
-        font-size: 14px;
-        font-weight: normal;
-        opacity: 0.8;
-        margin-top: 5px; /* Adds space between the title and the quote */
-      }
-  
-      .nav-link {
-        text-decoration: none;
-        color: white;
-        font-size: 18px;
-        font-weight: bold;
-        display: flex;
-        align-items: center;
-        gap: 8px; /* Space between icon and text */
-        transition: opacity 0.2s ease-in-out;
-      }
-  
-      .nav-link:hover {
-        text-decoration: underline;
-        opacity: 0.8; /* Fade effect on hover */
-      }
-  
-      /* Centering "Plan Your Day" under the navbar title */
-      .navbar-brand span {
-        margin-top: 8px; /* Space between title and tagline */
-      }
-    </style>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles/index.css">
 </head>
 
+<body>
 
-<body class="">
-
-  <!-- Custom Navbar -->
-  <nav class="custom-navbar">
-    <a class="navbar-brand" href="../../index.html">
-      <i class="fa-solid fa-book"></i> ToDo-List
-      <span>"Plan Your Day"</span>
-    </a>
-    <a class="nav-link" href="src/views/Todolist.html">
-      <i class="fa-solid fa-list-check"></i> To-Do Manager
-    </a>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container">
+      <a class="navbar-brand" href="#">ToDo-List</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">
+              <i class="fa-solid fa-house"></i> Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="src/views/Todolist.html">
+              <i class="fa-solid fa-list-check"></i> To Do Manager
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
   </nav>
 
-  <!-- Main Block -->
-  <!-- class="flex justify-center items-center h-screen bg-gradient-to-b from-purple-700 via-purple-500 to-pink-400"> -->
-  <section class="flex justify-center items-center h-screen">
-    <div class="container mx-auto px-4 text-center text-white">
-      <h1 class="text-4xl md:text-6xl font-bold">
-        Organize Your Life with this easy-to-use app
-      </h1>
-      <p class="mt-4 text-lg md:text-2xl">
-        Manage tasks effortlessly and boost your productivity. Stay on top of
-        everything with our intuitive To-Do List.
-      </p>
-      <a href="src/views/Todolist.html"
-        class="mt-8 inline-block bg-white font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-gray-200" 
-        style="color: black;">
-        Start
-      </a>
+  <!-- Hero Section -->
+  <section class="container hero-section">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <h1 class="fw-bold">Stay Organized, Stay Productive</h1>
+        <p class="mt-3">Manage your tasks effortlessly with our intuitive To-Do List. Keep track of your schedule and never miss a deadline.</p>
+        <a href="src/views/Todolist.html" class="btn btn-primary mt-3">Get Started</a>
+        <a href="#" class="btn btn-outline-secondary mt-3 ms-2">Calendar View</a>
+      </div>
+      <div class="col-md-6 text-center">
+        <img src="src/media/heroimg.png" alt="To-Do App Illustration" class="hero-image">
+      </div>
     </div>
   </section>
 
+  <!-- Features Section -->
+  <section class="container feature-icons">
+    <div class="row">
+      <div class="col-md-4">
+        <i class="fa-solid fa-check-circle"></i>
+        <p>Task Management</p>
+      </div>
+      <div class="col-md-4">
+        <i class="fa-solid fa-calendar-alt"></i>
+        <p>Schedule Reminders</p>
+      </div>
+      <div class="col-md-4">
+        <i class="fa-solid fa-chart-line"></i>
+        <p>Track Progress</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dark Mode Toggle -->
+  <div class="dark-mode-toggle">
+    <button id="darkModeBtn">
+      <i class="fa-solid fa-moon"></i> Dark Mode
+    </button>
+  </div>
+
   <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-6">
-    <div class="container mx-auto px-4 text-center">
-      <p>
-        &copy; 2024 Made with &#10084; by Ansh Grover. All rights reserved.
-      </p>
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Made with &#10084; by Ansh Grover. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Dark Mode Toggle Script -->
+  <script src="index.js"></script>
+
 </body>
 
 </html>
