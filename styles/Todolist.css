@@ -13,11 +13,12 @@ html, body {
 
 body {
   font-family: 'Poppins', sans-serif;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   height: 100%;
   background-color: #fafafe;
   color: #333;
 }
+
 
 .container {
   flex: 1; /* Pushes the footer down */
@@ -144,7 +145,6 @@ body {
 }
 
 .task-name {
-  font-weight: bold;
   overflow: auto;
   max-height: 40px;
 }
@@ -292,15 +292,15 @@ body {
 /* Dark Mode */
 .dark-mode {
   --primary-bg: #1e1e1e;
-  --primary-text: #75c0f2;
-  --secondary-bg: #333;
+  --primary-text: #fefefe;
+  --secondary-bg: #424242;
   --navbar-bg: #000;
   --navbar-text: #f0f0f0;
   --footer-bg: #000;
   --footer-text: #f0f0f0;
-  --button-bg: #444;
+  --button-bg: #007bff;
   --button-hover: #555;
-  --task-text: #000000; /* Task details white in dark mode */
+  --task-text: #ffffff; /* Task details white in dark mode */
   --sort-button-bg: #007bff;
   --sort-button-text: #ffffff;
   --sort-button-border: #007bff;
@@ -312,14 +312,15 @@ body {
 body {
   background-color: var(--primary-bg);
   color: var(--primary-text);
-  font-weight: bolder;
+
 }
 
-.navbar-custom {
+.dark-mode .navbar-custom {
   background-color: var(--navbar-bg);
 }
 
-.navbar-brand, .nav-link {
+.dark-mode .navbar-brand, 
+.dark-mode .nav-link {
   color: var(--navbar-text) !important;
 }
 
@@ -328,11 +329,12 @@ body {
   color: var(--footer-text);
 }
 
-/* Task details text color */
-.task-info,
-.task-name,
-.category-tag,
-.priority-tag {
+.dark-mode .js-add-grid {
+  background-color: var(--secondary-bg);
+}
+
+.dark-mode .task-info,
+.dark-mode .task-name {
   color: var(--task-text);
 }
 
@@ -350,27 +352,52 @@ body {
   color: var(--sort-button-hover-text);
 }
 
+.dark-mode .small-container {
+  background-color: #2E2E2E !important;
+  color: #ffffff;
+  border: 1px solid #555;
+}
 
-/* Dark Mode Toggle */
+.dark-mode .js-add-html {
+  background-color: #2E2E2E !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .js-add-button,
+.dark-mode .js-edit-button {
+  background-color: var(--button-bg);
+  color: var(--primary-text);
+}
+
+.dark-mode .js-add-button:hover,
+.dark-mode .js-edit-button:hover {
+  background-color: var(--button-hover);
+}
+
 .dark-mode-toggle {
   position: fixed;
-  bottom: 80px; /* Moves it above the footer */
+  bottom: 100px; /* Adjust height above the footer */
   right: 20px;
   z-index: 1000;
 }
 
-.dark-mode-toggle button {
-  background-color: var(--button-bg);
-  color: var(--primary-text);
-  font-weight: bolder;
+#darkModeBtn {
+  background-color: #333;
+  color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 15px;
+  font-size: 14px;
   border-radius: 5px;
   cursor: pointer;
-  margin-bottom: 1rem;
+  transition: background-color 0.3s ease;
 }
 
-.dark-mode-toggle button:hover {
-  background-color: var(--button-hover);
+#darkModeBtn:hover {
+  background-color: #444;
+}
+
+.dark-mode #darkModeBtn {
+  background-color: #ffffff;
+  color: #222;
 }
 
