@@ -129,7 +129,7 @@ body {
   margin: 0 auto;
   font-size: 1.2em;
   display: grid;
-  grid-template-columns: 6fr 3fr 1fr 1fr;
+  grid-template-columns: 6fr 1fr 1fr;
   gap: 10px;
   background-color: var(--secondary-bg);
   border: 1px grey solid;
@@ -142,7 +142,9 @@ body {
 .task:hover {
   width: 82%;
   font-size: 1.3rem;
+  cursor: pointer; 
 }
+
 
 .small-container {
   height: 85%;
@@ -150,7 +152,7 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 10px 15px;
+  padding: 7px 15px;
   border-radius: 10px;
   background-color: #ffffff;
   /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); */
@@ -164,6 +166,8 @@ body {
 .date-section {
   justify-content: flex-end;
   font-weight: 400;
+  width: 100%;
+  font-size: 0.8em;
   /* border-radius: 0px; */
   /* height: 90%; */
   /* border-right: 1px #000 solid;
@@ -173,7 +177,7 @@ body {
 .task-info {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0px 10px;
   flex-wrap: wrap;
   justify-content: flex-start;
 }

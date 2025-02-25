@@ -304,25 +304,27 @@ class TaskList {
   createTaskHTML(task, referenceNumber) {
     var date_text = task.time? task.date + ", " +  task.time : task.date; 
     return `
-      <div class="task">
+      <div class="task" data-index="${referenceNumber}">
         <div class="small-container ${task.completed ? 'completed' : ''}">
           <input type="checkbox" class="js-complete-checkbox" data-index="${referenceNumber}" ${task.completed ? 'checked' : ''}>
           <div class="task-info">
             <span class="task-name">${task.name}</span>
             <span class="category-tag">${task.category}</span>
             <span class="priority-tag priority-${task.priority}">${task.priority}</span>
+            <div class="date-section">${date_text}</div>
           </div>
         </div>
-        <div class="small-container date-section">${date_text}</div>
+        
         <button class="js-delete-button" data-index="${referenceNumber}">
-          <i class="fa-solid fa-trash"></i>
+        <i class="fa-solid fa-trash"></i>
         </button>
         <button class="js-edit-button" data-index="${referenceNumber}">
-          <i class="fa-solid fa-pen"></i>
+        <i class="fa-solid fa-pen"></i>
         </button>
-      </div>`;
-  }
-
+        </div>`;
+      }
+      
+      // <div class="small-container date-section">${date_text}</div>
   // Add event listeners for delete, edit, and complete buttons
   addListeners(tasksToDisplay) {
     document.querySelectorAll('.js-delete-button').forEach((button) => {
@@ -331,9 +333,11 @@ class TaskList {
         this.deleteTask(tasksToDisplay[this.index]);
       });
     });
-
-    document.querySelectorAll('.js-edit-button').forEach((button) => {
+    
+    document.querySelectorAll('.task').forEach((button) => {
       button.addEventListener('click', (event) => {
+        console.log(event);
+        console.log(button);
         this.index = event.currentTarget.getAttribute('data-index');
         TaskManager.editTask(tasksToDisplay[this.index]);
       });
