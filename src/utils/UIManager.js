@@ -20,14 +20,17 @@ class UIManager {
     // Add event listeners for sorting buttons
     document
       .querySelector("#sort-button-category")
-      .addEventListener("click", () => {
-        this.taskList.updateTaskList("category");
-      });
+      .addEventListener("click", () =>
+        this.taskList.updateTaskList("category")
+      );
     document
       .querySelector("#sort-button-priority")
       .addEventListener("click", () =>
         this.taskList.updateTaskList("priority")
       );
+    document
+      .querySelector("#sort-button-date")
+      .addEventListener("click", () => this.taskList.updateTaskList("date"));
 
     // Add event listener for filter button
     // document
