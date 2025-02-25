@@ -65,17 +65,16 @@ body {
   cursor: not-allowed; /* Show "not allowed" cursor */
 }
 
-
 .js-add-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
-  gap: 10px;
   row-gap: 1rem;
   background-color: rgba(255, 255, 255, 0.9);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 0.813rem;
+  column-gap: 10px;
   /*Added*/
 }
 
@@ -113,27 +112,58 @@ body {
 }
 
 .js-add-html {
+  /* margin: 0 auto 0.813rem auto; */
   display: grid;
   align-items: center;
-  grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+  row-gap: 0.8rem;
+  /* background-color: rgba(255, 255, 255, 0.9); */
+  padding: 20px;
+  /* border-radius: 8px; */
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+  /* border: 1px black solid; */
+  height: fit-content;
+}
+
+.task {
+  width: 86%;
+  margin: 0 auto;
+  font-size: 1.2em;
+  display: grid;
+  grid-template-columns: 6fr 3fr 1fr 1fr;
   gap: 10px;
+  background-color: var(--secondary-bg);
+  border: 2px grey solid;
+  border-radius: 30px;
+  box-shadow: 2px 2px 3px 0px rgb(0 0 0 / 20%);
+  transition: all 0.3s ease;
+}
+
+.task:hover {
+  width: 87%;
+  font-size: 1.3rem;
 }
 
 .small-container {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   padding: 10px 15px;
-  border-radius: 5px;
+  border-radius: 30px;
   background-color: #fff;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  text-align: left;
+  /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); */
+  font-weight: 600;
   min-height: 45px;
-  max-height: 90px;
   height: auto;
   box-sizing: border-box;
   gap: 0.7rem;
+  transition: background-color 0.3s ease;
+}
+
+.date-section {
+  justify-content: flex-end;
+  font-weight: 400;
+  border-radius: 0px;
 }
 
 .task-info {
@@ -146,7 +176,7 @@ body {
 
 .task-name {
   overflow: auto;
-  max-height: 40px;
+  /* max-height: 40px; */
 }
 
 .category-tag,
@@ -184,7 +214,7 @@ body {
   font-size: 15px;
   font-weight: bold;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 30px;
   padding: 10px 15px;
   display: flex;
   align-items: center;
@@ -192,7 +222,7 @@ body {
   transition: background-color 0.3s ease;
   width: 100%;
   justify-content: center;
-  height: 46px;
+  height: auto;
 }
 
 .js-delete-button {
@@ -224,25 +254,6 @@ body {
   margin-right: 5px;
 }
 
-.js-add-html {
-  scroll-behavior: smooth;
-}
-
-.js-add-html::-webkit-scrollbar {
-  width: 10px;
-  /* Width of the scrollbar */
-}
-
-.js-add-html::-webkit-scrollbar-thumb {
-  background-color: rgb(136, 132, 132);
-  border-radius: 7px;
-}
-
-.js-add-html::-webkit-scrollbar-track {
-  background-color: black;
-  border-radius: 5px;
-}
-
 #js-success-notification {
   position: absolute;
   border-radius: 5px;
@@ -255,11 +266,6 @@ body {
   left: 2%;
   bottom: 10%;
   color: #d4edda;
-}
-
-.js-add-html-tasks {
-  border: 1px black solid;
-  height: fit-content;
 }
 
 /* Footer */
@@ -329,7 +335,7 @@ body {
   color: var(--footer-text);
 }
 
-.dark-mode .js-add-grid {
+.dark-mode .js-add-grid{
   background-color: var(--secondary-bg);
 }
 
@@ -353,14 +359,14 @@ body {
 }
 
 .dark-mode .small-container {
-  background-color: #5f5f5f;
+  background-color: var(--secondary-bg);
   color: #ffffff;
-  border: 1px solid #555;
+  /* border: 1px solid #555; */
 }
 
 .dark-mode .js-add-html {
-  background-color: var(--secondary-bg);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  background-color: var(--primary-bg);
+  /* box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); */
 }
 
 .dark-mode .js-add-button,

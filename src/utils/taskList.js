@@ -302,7 +302,9 @@ class TaskList {
 
   // Create the HTML element to represent a task visually
   createTaskHTML(task, referenceNumber) {
+    var date_text = task.time? task.date + ", " +  task.time : task.date; 
     return `
+      <div class="task">
         <div class="small-container ${task.completed ? 'completed' : ''}">
           <input type="checkbox" class="js-complete-checkbox" data-index="${referenceNumber}" ${task.completed ? 'checked' : ''}>
           <div class="task-info">
@@ -311,14 +313,14 @@ class TaskList {
             <span class="priority-tag priority-${task.priority}">${task.priority}</span>
           </div>
         </div>
-        <div class="small-container">${task.date}</div>
-        <div class="small-container">${task.time}</div>
+        <div class="small-container date-section">${date_text}</div>
         <button class="js-delete-button" data-index="${referenceNumber}">
-        <i class="fa-solid fa-trash"></i>
+          <i class="fa-solid fa-trash"></i>
         </button>
         <button class="js-edit-button" data-index="${referenceNumber}">
-        <i class="fa-solid fa-pen"></i>
-        </button>`;
+          <i class="fa-solid fa-pen"></i>
+        </button>
+      </div>`;
   }
 
   // Add event listeners for delete, edit, and complete buttons
