@@ -340,15 +340,15 @@ body {
 }
 
 /* Sort Buttons */
-.sort-button-category,
-.sort-button-priority {
+#sort-button-category,
+#sort-button-priority {
   background-color: var(--sort-button-bg);
   color: var(--sort-button-text);
   border-color: var(--sort-button-border);
 }
 
-.sort-button-category:hover,
-.sort-button-priority:hover {
+#sort-button-category:hover,
+#sort-button-priority:hover {
   background-color: var(--sort-button-hover-bg);
   color: var(--sort-button-hover-text);
 }

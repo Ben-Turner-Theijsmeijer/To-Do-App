@@ -11,9 +11,25 @@ class SortManager {
     if (sortBy === "priority") {
       this.currentPrioritySortOrder =
         this.currentPrioritySortOrder === "asc" ? "desc" : "asc";
+      // update asc/desc icon
+      const sortBtn = document.getElementById("sort-priority-order");
+      sortBtn.classList = "";
+      if (this.currentPrioritySortOrder == "asc") {
+        sortBtn.classList.add("fa-solid", "fa-arrow-down");
+      } else {
+        sortBtn.classList.add("fa-solid", "fa-arrow-up");
+      }
     } else if (sortBy === "category") {
       this.currentCategorySortOrder =
         this.currentCategorySortOrder === "asc" ? "desc" : "asc";
+      // update asc/desc icon
+      const sortBtn = document.getElementById("sort-category-order");
+      sortBtn.classList = "";
+      if (this.currentCategorySortOrder == "asc") {
+        sortBtn.classList.add("fa-solid", "fa-arrow-down");
+      } else {
+        sortBtn.classList.add("fa-solid", "fa-arrow-up");
+      }
     }
 
     // check if the sort criteria changed before setting it

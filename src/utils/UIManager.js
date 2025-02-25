@@ -19,12 +19,12 @@ class UIManager {
 
     // Add event listeners for sorting buttons
     document
-      .querySelector(".sort-button-category")
-      .addEventListener("click", () =>
-        this.taskList.updateTaskList("category")
-      );
+      .querySelector("#sort-button-category")
+      .addEventListener("click", () => {
+        this.taskList.updateTaskList("category");
+      });
     document
-      .querySelector(".sort-button-priority")
+      .querySelector("#sort-button-priority")
       .addEventListener("click", () =>
         this.taskList.updateTaskList("priority")
       );
