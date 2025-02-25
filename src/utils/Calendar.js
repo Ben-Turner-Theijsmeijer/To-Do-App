@@ -23,9 +23,11 @@ class Calendar {
 
     getTaskList() {
         const storedTasks = JSON.parse(localStorage.getItem('taskList')) || [];
+        console.log(storedTasks);
         return storedTasks.map(taskData => 
             new Task(taskData.name, taskData.date, taskData.time, taskData.category, taskData.priority, taskData.completed)
         );
+
     }
 
     initDarkMode() {
@@ -75,7 +77,7 @@ class Calendar {
     }
 
     renderCalendar() {
-        console.log("Rendering Calendar", this.viewMode, this.currentDate);
+        this.taskList = this.getTaskList(); // Ensure updated task list
         this.calendarEl.innerHTML = "";
         this.currentDateEl.textContent = this.currentDate.toLocaleDateString("en-US", {
             month: "long",
@@ -108,7 +110,6 @@ class Calendar {
     }
 
     createCalendarGrid(startDate, endDate) {
-        console.log("Generating grid from:", startDate, "to:", endDate);
         const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
         let table = document.createElement("table");
         table.className = "table table-bordered calendar-table";
@@ -130,7 +131,6 @@ class Calendar {
         while (dateIterator <= endDate) {
             let cell = document.createElement("td");
             cell.classList.add("calendar-cell");
-            
             if (dateIterator.getMonth() === this.currentDate.getMonth()) {
                 cell.textContent = dateIterator.getDate();
                 if (dateIterator.toDateString() === new Date().toDateString()) {
@@ -140,7 +140,6 @@ class Calendar {
             } else {
                 cell.classList.add("empty");
             }
-            
             row.appendChild(cell);
             if (dateIterator.getDay() === 6) {
                 tbody.appendChild(row);
@@ -148,29 +147,35 @@ class Calendar {
             }
             dateIterator.setDate(dateIterator.getDate() + 1);
         }
-
         tbody.appendChild(row);
         table.appendChild(tbody);
         this.calendarEl.appendChild(table);
     }
 
-
     addTasksToCell(cell, date) {
-        const tasksForDate = this.taskList.filter(task => task.date === date.toISOString().split('T')[0]);
+        const dateString = date.toISOString().split('T')[0];
+        const tasksForDate = this.taskList.filter(task => task.date === dateString);
+    
+        console.log(`Adding tasks for ${dateString}:`, tasksForDate);
+    
         if (tasksForDate.length > 0) {
             let taskContainer = document.createElement("div");
             taskContainer.classList.add("task-container");
-            
+    
             tasksForDate.forEach(task => {
-                let taskEl = document.createElement("div");
-                taskEl.classList.add("task-item");
-                taskEl.textContent = task.name.length > 10 ? task.name.substring(0, 10) + "..." : task.name;
-                taskEl.title = task.name; 
-                taskContainer.appendChild(taskEl);
+                let dot = document.createElement("span");
+                dot.classList.add("task-dot");
+                dot.title = task.name;
+                dot.onclick = () => alert(task.name);
+                taskContainer.appendChild(dot);
             });
+    
+            console.log("Appending taskContainer to cell:", cell, taskContainer);
             cell.appendChild(taskContainer);
+        } else {
+            console.log("No tasks found for this date.");
         }
-    }
+    }    
 }
 
 document.addEventListener("DOMContentLoaded", () => new Calendar());

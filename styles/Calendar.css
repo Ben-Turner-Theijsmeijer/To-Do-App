@@ -5,6 +5,23 @@
   padding: 0;
 }
 
+.task-container {
+    display: flex;
+    gap: 4px; /* Adds space between dots */
+    flex-wrap: wrap; /* Allows dots to wrap if there are too many */
+    justify-content: center; /* Centers the dots in the cell */
+}
+
+.task-dot {
+    width: 8px; /* Adjust size */
+    height: 8px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 50%; /* Makes the dots circular */
+    display: inline-block;
+    cursor: pointer; /* Optional: Changes cursor to indicate it's clickable */
+}
+
+
 html, body {
   height: 100%;
   display: flex;
@@ -271,6 +288,10 @@ body.dark-mode #currentDate {
     color: #ffffff;  /* White text color for the month and year title */
     font-size: 1.5rem;  /* Slightly larger text for the title */
     font-weight: bold;
+}
+
+body.dark-mode .task-dot {
+    background-color: white;
 }
 
 
