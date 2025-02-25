@@ -150,32 +150,29 @@ class Calendar {
         tbody.appendChild(row);
         table.appendChild(tbody);
         this.calendarEl.appendChild(table);
-    }
-
-    addTasksToCell(cell, date) {
-        const dateString = date.toISOString().split('T')[0];
-        const tasksForDate = this.taskList.filter(task => task.date === dateString);
+    } 
     
-        console.log(`Adding tasks for ${dateString}:`, tasksForDate);
+    addTasksToCell(cell, date) {
+        const tasksForDate = this.taskList.filter(task => task.date === date.toISOString().split('T')[0]);
     
         if (tasksForDate.length > 0) {
             let taskContainer = document.createElement("div");
             taskContainer.classList.add("task-container");
     
             tasksForDate.forEach(task => {
-                let dot = document.createElement("span");
-                dot.classList.add("task-dot");
-                dot.title = task.name;
-                dot.onclick = () => alert(task.name);
-                taskContainer.appendChild(dot);
+                let taskLabel = document.createElement("div");
+                taskLabel.classList.add("task-label");
+                taskLabel.textContent = task.name.length > 10 ? task.name.slice(0, 10) + "..." : task.name;
+                taskLabel.title = task.name; // Full task name on hover
+                taskLabel.onclick = () => alert(task.name); // Optional: Click to show full task name
+    
+                taskContainer.appendChild(taskLabel);
             });
     
-            console.log("Appending taskContainer to cell:", cell, taskContainer);
             cell.appendChild(taskContainer);
-        } else {
-            console.log("No tasks found for this date.");
         }
-    }    
+    }
+    
 }
 
 document.addEventListener("DOMContentLoaded", () => new Calendar());

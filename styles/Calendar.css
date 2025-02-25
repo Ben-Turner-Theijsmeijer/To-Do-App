@@ -7,19 +7,25 @@
 
 .task-container {
     display: flex;
-    gap: 4px; /* Adds space between dots */
-    flex-wrap: wrap; /* Allows dots to wrap if there are too many */
-    justify-content: center; /* Centers the dots in the cell */
+    flex-direction: column; /* Stack tasks vertically */
+    gap: 2px; /* Small spacing between tasks */
+    overflow: hidden; /* Prevents overflow issues */
 }
 
-.task-dot {
-    width: 8px; /* Adjust size */
-    height: 8px;
-    background-color: rgb(0, 0, 0);
-    border-radius: 50%; /* Makes the dots circular */
-    display: inline-block;
-    cursor: pointer; /* Optional: Changes cursor to indicate it's clickable */
+.task-label {
+    background-color: #00b7ff; /* Light blue, adjust as needed */
+    color: black; /* Text color */
+    font-size: 10px; /* Small text */
+    font-weight: bold;
+    padding: 2px 4px;
+    border-radius: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Truncates long text with "..." */
+    max-width: 100%; /* Prevents labels from overflowing */
+    cursor: pointer; /* Indicates interactivity */
 }
+
 
 
 html, body {
@@ -104,8 +110,7 @@ body {
 
 /* Calendar Container */
 .container {
-    width: 90%;
-    max-width: 1000px;
+    width: 100%;
     margin: auto;
     padding: 20px;
 }
@@ -166,6 +171,8 @@ h2 {
     width: 100%;
     border-collapse: separate;
     border-spacing: 8px;
+    table-layout: fixed; /* Ensures all columns have equal width */
+    width: 100%; /* Makes sure it spans the available space */
 }
 
 th {
