@@ -173,6 +173,7 @@ h2 {
     border-spacing: 8px;
     table-layout: fixed; /* Ensures all columns have equal width */
     width: 100%; /* Makes sure it spans the available space */
+
 }
 
 th {
@@ -189,7 +190,8 @@ td {
     padding: 15px;
     font-size: 16px;
     border-radius: 15px;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+    border: 2px solid #444; /* Darker and thicker border */
     transition: transform 0.2s ease-in-out, background-color 0.3s ease;
 }
 
@@ -209,6 +211,13 @@ td:hover {
     color: white !important;
     font-weight: bold;
     border-radius: 10px;
+}
+
+/* Change task background to white if inside today's cell */
+.today .task-label {
+    background-color: white !important;
+    color: black !important;
+    font-weight: bold;
 }
 
 /* General dark mode styles for the body */
@@ -295,10 +304,6 @@ body.dark-mode #currentDate {
     color: #ffffff;  /* White text color for the month and year title */
     font-size: 1.5rem;  /* Slightly larger text for the title */
     font-weight: bold;
-}
-
-body.dark-mode .task-dot {
-    background-color: white;
 }
 
 
