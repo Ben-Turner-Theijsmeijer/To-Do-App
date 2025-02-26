@@ -142,7 +142,7 @@ class TaskList {
 
       // Save updated tasks and refresh UI
       localStorage.setItem("taskList", JSON.stringify(this.taskList));
-      this.updateTaskList("");
+      this.updateTaskList('');
       this.updateTaskCounter();
     };
 

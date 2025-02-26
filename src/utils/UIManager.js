@@ -100,6 +100,12 @@ class UIManager {
           x.style.display = "none";
         }
       });
+
+      // add function to search bar
+      document.querySelector("#search").addEventListener("input", e => {
+        const searchTerm = e.target.value.toLowerCase();
+        this.taskList.filterManager.searchTasks(searchTerm);
+      })
   }
 }
 

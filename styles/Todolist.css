@@ -407,3 +407,8 @@ body {
   flex-direction: row;
   justify-content: space-between;
 }
+
+/* Search Bar Styling */
+.hide {
+  display: none;
+}
