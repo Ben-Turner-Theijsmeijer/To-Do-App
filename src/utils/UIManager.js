@@ -101,11 +101,22 @@ class UIManager {
         }
       });
 
+    // add function to filter reset button
+    document.querySelector("#reset-filters").addEventListener("click", () => {
+      var select = document.querySelector(".filter-completion");
+      select.selectedIndex = 0;
+      select = document.querySelector(".filter-category");
+      select.selectedIndex = 0;
+      select = document.querySelector(".filter-priority");
+      select.selectedIndex = 0;
+      this.taskList.updateTaskList('');
+    });
+
       // add function to search bar
       document.querySelector("#search").addEventListener("input", e => {
         const searchTerm = e.target.value.toLowerCase();
         this.taskList.filterManager.searchTasks(searchTerm);
-      })
+      });
   }
 }
 
