@@ -5,6 +5,29 @@
   padding: 0;
 }
 
+.task-container {
+    display: flex;
+    flex-direction: column; /* Stack tasks vertically */
+    gap: 2px; /* Small spacing between tasks */
+    overflow: hidden; /* Prevents overflow issues */
+}
+
+.task-label {
+    background-color: #00b7ff; /* Light blue, adjust as needed */
+    color: black; /* Text color */
+    font-size: 10px; /* Small text */
+    font-weight: bold;
+    padding: 2px 4px;
+    border-radius: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Truncates long text with "..." */
+    max-width: 100%; /* Prevents labels from overflowing */
+    cursor: pointer; /* Indicates interactivity */
+}
+
+
+
 html, body {
   height: 100%;
   display: flex;
@@ -87,8 +110,7 @@ body {
 
 /* Calendar Container */
 .container {
-    width: 90%;
-    max-width: 1000px;
+    width: 100%;
     margin: auto;
     padding: 20px;
 }
@@ -149,6 +171,9 @@ h2 {
     width: 100%;
     border-collapse: separate;
     border-spacing: 8px;
+    table-layout: fixed; /* Ensures all columns have equal width */
+    width: 100%; /* Makes sure it spans the available space */
+
 }
 
 th {
@@ -165,7 +190,8 @@ td {
     padding: 15px;
     font-size: 16px;
     border-radius: 15px;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+    border: 2px solid #444; /* Darker and thicker border */
     transition: transform 0.2s ease-in-out, background-color 0.3s ease;
 }
 
@@ -185,6 +211,13 @@ td:hover {
     color: white !important;
     font-weight: bold;
     border-radius: 10px;
+}
+
+/* Change task background to white if inside today's cell */
+.today .task-label {
+    background-color: white !important;
+    color: black !important;
+    font-weight: bold;
 }
 
 /* General dark mode styles for the body */
