@@ -76,10 +76,14 @@ class SortManager {
           ? a.category.localeCompare(b.category)
           : b.category.localeCompare(a.category);
       } else if (this.SortMethod === "priority") {
-        const priorityOrder = { high: 0, medium: 1, low: 2 };
+        const priorityOrder = { high: 0, medium: 1, low: 2, none: 3 };
+        let aPriorityOrder =
+          a.priority === "" ? priorityOrder["none"] : priorityOrder[a.priority];
+        let bPriorityOrder =
+          b.priority === "" ? priorityOrder["none"] : priorityOrder[b.priority];
         return this.currentPrioritySortOrder === "asc"
-          ? priorityOrder[a.priority] - priorityOrder[b.priority]
-          : priorityOrder[b.priority] - priorityOrder[a.priority];
+          ? aPriorityOrder - bPriorityOrder
+          : bPriorityOrder - aPriorityOrder;
       }
     });
 
