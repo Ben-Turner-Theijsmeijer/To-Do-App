@@ -7,37 +7,44 @@ class UIManager {
   }
 
   setupEventListeners() {
-    document.querySelector('.js-add-button').addEventListener('click', () => {
+    document.querySelector(".js-add-button").addEventListener("click", () => {
       // for now... TaskManager just manages the list, but Task lists creates the task I guess
       // we need to create subclasses for TaskCreator and TaskEditor, if we are still doing that
       this.taskList.addTask();
     });
     // Add event listeners to buttons
     document
-      .querySelector('.js-cancel-button')
-      .addEventListener('click', () => this.taskManager.cancelEditTask());
+      .querySelector(".js-cancel-button")
+      .addEventListener("click", () => this.taskManager.cancelEditTask());
 
     // Add event listeners for sorting buttons
     document
-      .querySelector('.sort-button-category')
-      .addEventListener('click', () => this.taskList.updateTaskList('category'));
+      .querySelector("#sort-button-category")
+      .addEventListener("click", () =>
+        this.taskList.updateTaskList("category")
+      );
     document
-      .querySelector('.sort-button-priority')
-      .addEventListener('click', () => this.taskList.updateTaskList('priority'));
+      .querySelector("#sort-button-priority")
+      .addEventListener("click", () =>
+        this.taskList.updateTaskList("priority")
+      );
+    document
+      .querySelector("#sort-button-date")
+      .addEventListener("click", () => this.taskList.updateTaskList("date"));
 
     // Add event listener for filter button
     // document
     //   .querySelector('.js-filter-input')
     //   .addEventListener('change', () => this.taskList.updateTaskList(''));
 
-    document.querySelectorAll('.js-filter-input').forEach((button) => {
-      button.addEventListener('change', () => this.taskList.updateTaskList(''));
+    document.querySelectorAll(".js-filter-input").forEach(button => {
+      button.addEventListener("change", () => this.taskList.updateTaskList(""));
     });
 
-    document.querySelector('.js-name-input').addEventListener('input', (e) => {
+    document.querySelector(".js-name-input").addEventListener("input", e => {
       let input = e.target.value;
       if (input.length === 120) {
-        alert('max character limits exceeded');
+        alert("max character limits exceeded");
       }
     });
 
@@ -45,7 +52,7 @@ class UIManager {
     let dateCheck = false;
     let timeCheck = false;
 
-    document.querySelector('.js-date-input').addEventListener('click', (e) => {
+    document.querySelector(".js-date-input").addEventListener("click", e => {
       e.preventDefault();
       if (!dateCheck) {
         e.target.showPicker();
@@ -55,53 +62,81 @@ class UIManager {
       }
     });
 
-    document.querySelector('.js-date-input').addEventListener('blur', () => {
+    document.querySelector(".js-date-input").addEventListener("blur", () => {
       dateCheck = false;
     });
 
-    document.querySelector('.js-time-input').addEventListener('click', (e) => {
+    document.querySelector(".js-time-input").addEventListener("click", e => {
       e.preventDefault();
       if (!timeCheck) {
         e.target.showPicker();
         timeCheck = true;
-        
-        //Setting date to today if time is clicked while date is empty
-        const inputDateElement = document.querySelector('.js-date-input');
-        if (!inputDateElement.value){
-          const now = new Date();
-          const date = now.toISOString().split('T')[0];console.log(inputDateElement.value);
-          inputDateElement.value = date; 
-        }
 
-      } 
-      else {
+        //Setting date to today if time is clicked while date is empty
+        const inputDateElement = document.querySelector(".js-date-input");
+        if (!inputDateElement.value) {
+          const now = new Date();
+          const date = now.toISOString().split("T")[0];
+          console.log(inputDateElement.value);
+          inputDateElement.value = date;
+        }
+      } else {
         timeCheck = false;
       }
     });
 
-    document.querySelector('.js-time-input').addEventListener('blur', () => {
+    document.querySelector(".js-time-input").addEventListener("blur", () => {
       timeCheck = false;
     });
 
-  }
+    // add function to open Filter Menu
+    document
+      .querySelector("#open-filters-btn")
+      .addEventListener("click", () => {
+        var btn = document.getElementById("open-filters-btn");
+        var x = document.getElementById("filter-menu");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+          btn.innerHTML = "Close Filters";
+        } else {
+          x.style.display = "none";
+          btn.innerHTML = "Open Filters";
+        }
+      });
 
+    // add function to filter reset button
+    document.querySelector("#reset-filters").addEventListener("click", () => {
+      var select = document.querySelector(".filter-completion");
+      select.selectedIndex = 0;
+      select = document.querySelector(".filter-category");
+      select.selectedIndex = 0;
+      select = document.querySelector(".filter-priority");
+      select.selectedIndex = 0;
+      this.taskList.updateTaskList('');
+    });
+
+      // add function to search bar
+      document.querySelector("#search").addEventListener("input", e => {
+        const searchTerm = e.target.value.toLowerCase();
+        this.taskList.filterManager.searchTasks(searchTerm);
+      });
+  }
 }
 
 // I think we need another setup() that deals with setting up html
 // Note: add this to app class as html setup
-document.addEventListener('DOMContentLoaded', () => {
-
+document.addEventListener("DOMContentLoaded", () => {
   // Set focus on the name input field
-  const inputNameElement = document.querySelector('.js-name-input');
+  const inputNameElement = document.querySelector(".js-name-input");
   inputNameElement.focus();
 
   // Hide edit cancel action button on page load
-  const cancelEditBtn = document.querySelector('.js-cancel-button');
-  cancelEditBtn.style.display = 'none';
+  const cancelEditBtn = document.querySelector(".js-cancel-button");
+  cancelEditBtn.style.display = "none";
 });
 
 // Add year in the footer(CopyRight Notice)
-let year = document.querySelector('.year');
+let year = document.querySelector(".year");
 year.innerText = new Date().getFullYear();
 
 export default UIManager;
