@@ -1,5 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
 
+/* Light Mode (Default) */
+:root {
+  --primary-bg: #fafafe;
+  --primary-text: #333;
+  --secondary-bg: #fff;
+  --navbar-bg: #333;
+  --navbar-text: #ffffff;
+  --footer-bg: #333;
+  --footer-text: #ffffff;
+  --button-bg: #3498db;
+  --button-hover: #007bff;
+  --task-text: #000; /* Task details black in light mode */
+  --sort-button-bg: transparent;
+  --sort-button-text: #007bff;
+  --sort-button-border: #007bff;
+  --sort-button-hover-bg: #007bff;
+  --sort-button-hover-text: #fff;
+  --border-color: #757575;
+  --shadow-color: #d9d9d9;
+}
+
+/* Dark Mode */
+.dark-mode {
+  --primary-bg: #252525;
+  --primary-text: #fefefe;
+  --secondary-bg: #8c8c8c;
+  --navbar-bg: #161616;
+  --navbar-text: #f0f0f0;
+  --footer-bg: #161616;
+  --footer-text: #f0f0f0;
+  --button-bg: #007bff;
+  --button-hover: #555;
+  --task-text: #ffffff; /* Task details white in dark mode */
+  --sort-button-bg: #007bff;
+  --sort-button-text: #ffffff;
+  --sort-button-border: #007bff;
+  --sort-button-hover-bg: #0056b3;
+  --sort-button-hover-text: #ffffff;
+  --border-color: #000000;
+  --shadow-color: #000000;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -88,8 +130,8 @@ body {
 
 .js-add-button,
 .js-cancel-button {
-  background-color: #00bfff;
-  color: black;
+  background-color: var(--button-bg);
+  color: var(--navbar-text);
   border: none;
   font-weight: bold;
   cursor: pointer;
@@ -100,7 +142,8 @@ body {
 }
 
 .js-add-button:hover {
-  background-color: #2C632D;
+  background-color: var(--button-hover);
+  /* background-color: #2C632D; */
 }
 
 .js-cancel-button {
@@ -132,9 +175,9 @@ body {
   grid-template-columns: 6fr 1fr 1fr;
   gap: 10px;
   background-color: var(--secondary-bg);
-  border: 1px grey solid;
+  border: 1px var(--border-color) solid;
   border-radius: 10px;
-  box-shadow: 2px 2px 3px 0px rgb(0 0 0 / 20%);
+  box-shadow: 2px 2px 3px 0px var(--shadow-color);
   transition: all 0.3s ease;
   align-items: center;
 }
@@ -142,7 +185,6 @@ body {
 .task:hover {
   width: 82%;
   font-size: 1.3rem;
-  cursor: pointer; 
 }
 
 
@@ -234,6 +276,10 @@ body {
 
 }
 
+.js-complete-checkbox{
+  cursor: pointer;
+}
+
 .js-delete-button {
   background-color: red;
   color: white;
@@ -285,43 +331,6 @@ body {
   text-align: center;
 }
 
-/* Light Mode (Default) */
-:root {
-  --primary-bg: #fafafe;
-  --primary-text: #333;
-  --secondary-bg: #fff;
-  --navbar-bg: #333;
-  --navbar-text: #ffffff;
-  --footer-bg: #333;
-  --footer-text: #ffffff;
-  --button-bg: #3498db;
-  --button-hover: #007bff;
-  --task-text: #000; /* Task details black in light mode */
-  --sort-button-bg: transparent;
-  --sort-button-text: #007bff;
-  --sort-button-border: #007bff;
-  --sort-button-hover-bg: #007bff;
-  --sort-button-hover-text: #fff;
-}
-
-/* Dark Mode */
-.dark-mode {
-  --primary-bg: #252525;
-  --primary-text: #fefefe;
-  --secondary-bg: #8c8c8c;
-  --navbar-bg: #161616;
-  --navbar-text: #f0f0f0;
-  --footer-bg: #161616;
-  --footer-text: #f0f0f0;
-  --button-bg: #007bff;
-  --button-hover: #555;
-  --task-text: #ffffff; /* Task details white in dark mode */
-  --sort-button-bg: #007bff;
-  --sort-button-text: #ffffff;
-  --sort-button-border: #007bff;
-  --sort-button-hover-bg: #0056b3;
-  --sort-button-hover-text: #ffffff;
-}
 
 /* Apply styles */
 body {

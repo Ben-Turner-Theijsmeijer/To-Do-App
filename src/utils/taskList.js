@@ -334,7 +334,7 @@ class TaskList {
       });
     });
     
-    document.querySelectorAll('.task').forEach((button) => {
+    document.querySelectorAll('.js-edit-button').forEach((button) => {
       button.addEventListener('click', (event) => {
         console.log(event);
         console.log(button);
