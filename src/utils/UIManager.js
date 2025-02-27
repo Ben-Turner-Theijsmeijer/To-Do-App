@@ -93,11 +93,14 @@ class UIManager {
     document
       .querySelector("#open-filters-btn")
       .addEventListener("click", () => {
+        var btn = document.getElementById("open-filters-btn");
         var x = document.getElementById("filter-menu");
         if (x.style.display === "none") {
           x.style.display = "block";
+          btn.innerHTML = "Close Filters";
         } else {
           x.style.display = "none";
+          btn.innerHTML = "Open Filters";
         }
       });
 
