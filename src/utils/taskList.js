@@ -13,6 +13,7 @@ class TaskList {
 
     this.taskListhtml = '';
     this.index = null;
+    this.taskEditingIndex = null;
 
     this.sortManager = sortManager;
     this.filterManager = filterManager;
@@ -303,14 +304,49 @@ class TaskList {
   // Create the HTML element to represent a task visually
   createTaskHTML(task, referenceNumber) {
     var date_text = task.time? task.date + ", " +  task.time : task.date; 
+
+    if (task.getIsEditing()){
+      console.log("hello")
+      return `
+      <div class="task" data-index="${referenceNumber}">
+        <div class="task-info">
+          <input type="text" class="js-edit-name" value="${task.name}"></input>
+          <input type="date" class="js-edit-date" value="${task.date}"></input>
+          <input type="time" class="js-edit-time" value="${task.time}"></input>
+          <select class="js-edit-category">
+          ${task.category ? `<option value"" selected disabled hidden>${task.category}</option>` : ``}
+            <option value="">None</option>
+            <option value="Work">Work</option>
+            <option value="Personal">Personal</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Other">Other</option>
+          </select>
+          <select class="js-edit-priority">
+          ${task.priority ? `<option value"" selected disabled hidden>${task.priority}</option>` : ``}
+            <option value="">None</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </div>
+        
+        <button class="js-cancel-edit-button" data-index="${referenceNumber}">
+          <i class="fa-solid fa-xmark"></i> Cancel
+        </button>
+        <button class="js-save-edit-button" data-index="${referenceNumber}">
+        <i class="fa-solid fa-check"></i> Update
+        </button>
+        </div>`;
+    }
+
     return `
       <div class="task" data-index="${referenceNumber}">
         <div class="small-container ${task.completed ? 'completed' : ''}">
           <input type="checkbox" class="js-complete-checkbox" data-index="${referenceNumber}" ${task.completed ? 'checked' : ''}>
           <div class="task-info">
             <span class="task-name">${task.name}</span>
-            <span class="category-tag">${task.category}</span>
-            <span class="priority-tag priority-${task.priority}">${task.priority}</span>
+            ${task.category ? `<span class="category-tag">${task.category}</span>` : ''}
+            ${task.priority ? `<span class="priority-tag priority-${task.priority}">${task.priority}</span>` : ''}
             <div class="date-section">${date_text}</div>
           </div>
         </div>
@@ -322,8 +358,32 @@ class TaskList {
         <i class="fa-solid fa-pen"></i>
         </button>
         </div>`;
-      }
+  }
       
+
+  editTask(task){
+    task.setIsEditing(true);
+    this.updateTaskList("");
+  }
+
+  saveEditTask(task){
+    let editNameElement = document.querySelector('.js-edit-name');
+    let editDateElement = document.querySelector('.js-edit-date');
+    let editTimeElement = document.querySelector('.js-edit-time');
+    let editCategoryElement = document.querySelector('.js-edit-category');
+    let editPriorityElement = document.querySelector('.js-edit-priority');
+
+    let name = editNameElement.value;
+    let date = editDateElement.value;
+    let time = editTimeElement.value;
+    let category = editCategoryElement.value;
+    let priority = editPriorityElement.value;
+    
+    // console.log(editNameElement.value);
+
+    task.updateTask({name, date, time, category, priority, completed: false});
+    // console.log(task);
+  }
       // <div class="small-container date-section">${date_text}</div>
   // Add event listeners for delete, edit, and complete buttons
   addListeners(tasksToDisplay) {
@@ -338,10 +398,45 @@ class TaskList {
       button.addEventListener('click', (event) => {
         console.log(event);
         console.log(button);
+
         this.index = event.currentTarget.getAttribute('data-index');
-        TaskManager.editTask(tasksToDisplay[this.index]);
+
+        // If edit task is clicked while another task is being edited -> the previously edited task stops being edited.
+        if (this.taskEditingIndex != null){
+          tasksToDisplay[this.taskEditingIndex].setIsEditing(false);
+          this.updateTaskList("");
+
+        } 
+        this.taskEditingIndex = this.index;
+
+        this.editTask(tasksToDisplay[this.index]);
+        // TaskManager.editTask(tasksToDisplay[this.index]);
       });
     });
+    
+    var cancelEditElement = document.querySelector('.js-cancel-edit-button');
+    if (cancelEditElement){
+      cancelEditElement.addEventListener('click', (event) => {
+
+        this.index = event.currentTarget.getAttribute('data-index');
+        // this.taskEditingIndex = null;
+
+        tasksToDisplay[this.index].setIsEditing(false);
+        this.updateTaskList("");
+      });
+    }
+
+    var editElement = document.querySelector('.js-save-edit-button');
+    if (editElement){
+      editElement.addEventListener('click', (event) => {
+        this.index = event.currentTarget.getAttribute('data-index');
+        this.saveEditTask(tasksToDisplay[this.index]);
+        // this.taskEditingIndex = null;
+
+        tasksToDisplay[this.index].setIsEditing(false);
+        this.updateTaskList("");
+      });
+    }
 
     document.querySelectorAll('.js-complete-checkbox').forEach(checkbox => {
       checkbox.addEventListener('change', (event) => {

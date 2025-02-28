@@ -6,6 +6,7 @@ class Task {
     this.category = category;
     this.priority = priority;
     this.completed = completed;
+    this.isEditing = false;
   }
 
   // Single responsibility: Task updates itself
@@ -45,6 +46,14 @@ class Task {
     // localStorage.setItem('taskList', JSON.stringify(taskList));
     taskList.updateTaskList('');
     taskList.updateTaskCounter();
+  }
+
+  setIsEditing(edit){
+    this.isEditing = edit;
+  }
+
+  getIsEditing(){
+    return this.isEditing;
   }
 
 }

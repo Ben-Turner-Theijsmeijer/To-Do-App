@@ -276,6 +276,11 @@ body {
 
 }
 
+.js-edit-name {
+  width: 30%;
+
+}
+
 .js-complete-checkbox{
   cursor: pointer;
 }

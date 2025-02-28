@@ -13,6 +13,7 @@ class UIManager {
       this.taskList.addTask();
     });
     // Add event listeners to buttons
+    // Delete their code
     document
       .querySelector('.js-cancel-button')
       .addEventListener('click', () => this.taskManager.cancelEditTask());
