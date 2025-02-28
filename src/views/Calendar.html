@@ -68,7 +68,16 @@
   </div>
 
   <!-- Task Details Popup -->
-  <div class="popup container-cal mt-4" id="taskDetails">
+  <div class="popup container-cal mt-4" id="taskDetails" style="display: none;">
+    <p class="task-name" id="taskDetailsNameAndStatus"></p>
+    <div class="task-info">
+      <span class="category-tag" id="taskDetailsCategory"></span>
+      <span class="priority-tag" id="taskDetailsPriority"></span>
+    </div>
+    <p id="taskDetailsDateTime"></p>
+    <button class="btn btn-primary" id="taskDetailsCloseBtn" onclick="document.getElementById('taskDetails').style.display = 'none'">
+      Close
+    </button>
   </div>
 
   <!-- Dark Mode Toggle -->
