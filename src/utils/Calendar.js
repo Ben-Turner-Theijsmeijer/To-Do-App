@@ -171,7 +171,61 @@ class Calendar {
   }
 
   popupTaskDetails(task) {
-    alert(task.name);
+    // containing element
+    var taskDetailsPopup = document.getElementById("taskDetails");
+    taskDetailsPopup.innerHTML = "";
+    taskDetailsPopup.style.display = "block";
+    // name
+    let name = document.createElement("p");
+    name.classList.add("task-name");
+    name.innerText = task.name;
+    // completed
+    let completed = document.createElement("span");
+    completed.innerText = task.completed ? " (Complete)" : "";
+    name.appendChild(completed);
+    // date and time
+    let dateTime = document.createElement("p");
+    let date = document.createElement("span");
+    date.innerText = task.date;
+    let space = document.createElement("span");
+    space.innerText = ", ";
+    let time = document.createElement("span");
+    time.innerText = task.time;
+    dateTime.appendChild(date);
+    dateTime.appendChild(space);
+    dateTime.appendChild(time);
+    // category
+    let category = document.createElement("span");
+    category.classList.add("category-tag");
+    category.innerText = task.category;
+    // priority
+    let priority = document.createElement("span");
+    priority.classList.add("priority-tag");
+    priority.classList.add(`priority-${task.priority}`);
+    priority.classList.add("priority-tag");
+    priority.innerText = task.priority;
+    // combine category and priority
+    let catPri = document.createElement("div");
+    catPri.classList.add("task-info");
+    catPri.appendChild(category);
+    catPri.appendChild(priority);
+    // close btn
+    let closeBtn = document.createElement("button");
+    closeBtn.classList.add("btn");
+    closeBtn.classList.add("btn-primary");
+    closeBtn.addEventListener(
+      "click",
+      () => (taskDetailsPopup.style.display = "none")
+    );
+    closeBtn.innerText = "Close";
+    // add task details to containing element
+    taskDetailsPopup.appendChild(name);
+    taskDetailsPopup.appendChild(catPri);
+    taskDetailsPopup.appendChild(dateTime);
+    // add close button
+    taskDetailsPopup.appendChild(closeBtn);
+    // popup.appendChild(taskDetails);
+    // alert(task.name);
   }
 
   addTasksToCell(cell, date) {
