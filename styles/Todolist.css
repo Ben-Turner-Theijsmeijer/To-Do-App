@@ -129,7 +129,7 @@ body {
 }
 
 .js-add-button,
-.js-cancel-button {
+.js-cancel-edit-button {
   background-color: var(--button-bg);
   color: var(--navbar-text);
   border: none;
@@ -146,11 +146,11 @@ body {
   /* background-color: #2C632D; */
 }
 
-.js-cancel-button {
+.js-cancel-edit-button {
   background-color: #ff0000;
 }
 
-.js-cancel-button:hover {
+.js-cancel-edit-button:hover {
   background-color: #8b0000;
 }
 
@@ -227,6 +227,7 @@ body {
 .task-name {
   overflow: auto;
   /* max-height: 40px; */
+  overflow-wrap: anywhere;
 }
 
 .category-tag,
@@ -310,7 +311,7 @@ body {
 }
 
 .js-add-button span,
-.js-cancel-button span {
+.js-cancel-edit-button span {
   margin-right: 5px;
 }
 

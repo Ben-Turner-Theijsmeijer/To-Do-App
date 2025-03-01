@@ -68,7 +68,7 @@
 
      <!-- Task Input Section -->
       <div id="add-task" class="js-add-grid">
-        <input type="text" placeholder="Add a new task here..." class="js-name-input form-control">
+        <input type="text" placeholder="Add a new task here..." class="js-name-input form-control" maxlength="120">
         <input type="date" class="js-date-input form-control" min="">
         <input type="time" class="js-time-input form-control">
         <select class="js-category-input form-select">
@@ -89,9 +89,6 @@
         <div class="js-actions-wrapper">
           <button class="js-add-button btn btn-success">
             <i class="fa-solid fa-plus"></i> Add Task
-          </button>
-          <button class="js-cancel-button btn btn-danger">
-            <i class="fa-solid fa-xmark"></i> Cancel
           </button>
         </div>
       </div>

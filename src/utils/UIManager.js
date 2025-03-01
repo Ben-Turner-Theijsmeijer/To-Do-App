@@ -1,6 +1,5 @@
 class UIManager {
-  constructor(taskManager, taskList) {
-    this.taskManager = taskManager;
+  constructor(taskList) {
     this.taskList = taskList;
 
     this.setupEventListeners();
@@ -8,38 +7,34 @@ class UIManager {
 
   setupEventListeners() {
     document.querySelector('.js-add-button').addEventListener('click', () => {
-      // for now... TaskManager just manages the list, but Task lists creates the task I guess
       // we need to create subclasses for TaskCreator and TaskEditor, if we are still doing that
       this.taskList.addTask();
     });
-    // Add event listeners to buttons
-    // Delete their code
-    document
-      .querySelector('.js-cancel-button')
-      .addEventListener('click', () => this.taskManager.cancelEditTask());
 
     // Add event listeners for sorting buttons
-    document
-      .querySelector('.sort-button-category')
-      .addEventListener('click', () => this.taskList.updateTaskList('category'));
-    document
-      .querySelector('.sort-button-priority')
-      .addEventListener('click', () => this.taskList.updateTaskList('priority'));
+    document.querySelector('.sort-button-category').addEventListener('click', () => {
+      //Quit editing task if sort is clicked
+      this.taskList.setEditingTaskIndex(null);
 
-    // Add event listener for filter button
-    // document
-    //   .querySelector('.js-filter-input')
-    //   .addEventListener('change', () => this.taskList.updateTaskList(''));
-
-    document.querySelectorAll('.js-filter-input').forEach((button) => {
-      button.addEventListener('change', () => this.taskList.updateTaskList(''));
+      this.taskList.updateTaskList('category')
     });
 
-    document.querySelector('.js-name-input').addEventListener('input', (e) => {
-      let input = e.target.value;
-      if (input.length === 120) {
-        alert('max character limits exceeded');
-      }
+    document.querySelector('.sort-button-priority').addEventListener('click', () => {
+      //Quit editing task if sort is clicked
+      this.taskList.setEditingTaskIndex(null);
+
+      this.taskList.updateTaskList('priority')
+    });
+
+    document.querySelectorAll('.js-filter-input').forEach((button) => {
+      
+      button.addEventListener('change', () => {
+        //Quit editing task if filter is changed
+        this.taskList.setEditingTaskIndex(null);
+
+        this.taskList.updateTaskList('')
+      });
+
     });
 
     // Piece of code that exists all on its own
@@ -96,9 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const inputNameElement = document.querySelector('.js-name-input');
   inputNameElement.focus();
 
-  // Hide edit cancel action button on page load
-  const cancelEditBtn = document.querySelector('.js-cancel-button');
-  cancelEditBtn.style.display = 'none';
+
 });
 
 // Add year in the footer(CopyRight Notice)
