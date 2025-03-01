@@ -8,8 +8,7 @@ class UIManager {
 
   setupEventListeners() {
     document.querySelector(".js-add-button").addEventListener("click", () => {
-      // for now... TaskManager just manages the list, but Task lists creates the task I guess
-      // we need to create subclasses for TaskCreator and TaskEditor, if we are still doing that
+      // for now... TaskManager manages the list, but Task lists creates the tasks
       this.taskList.addTask();
     });
     // Add event listeners to buttons
@@ -32,15 +31,12 @@ class UIManager {
       .querySelector("#sort-button-date")
       .addEventListener("click", () => this.taskList.updateTaskList("date"));
 
-    // Add event listener for filter button
-    // document
-    //   .querySelector('.js-filter-input')
-    //   .addEventListener('change', () => this.taskList.updateTaskList(''));
-
+    // add event listeners for the filter buttons
     document.querySelectorAll(".js-filter-input").forEach(button => {
       button.addEventListener("change", () => this.taskList.updateTaskList(""));
     });
 
+    // add event listeners inputting task information
     document.querySelector(".js-name-input").addEventListener("input", e => {
       let input = e.target.value;
       if (input.length === 120) {
@@ -112,14 +108,20 @@ class UIManager {
       select.selectedIndex = 0;
       select = document.querySelector(".filter-priority");
       select.selectedIndex = 0;
-      this.taskList.updateTaskList('');
+      this.taskList.updateTaskList("");
     });
 
-      // add function to search bar
-      document.querySelector("#search").addEventListener("input", e => {
-        const searchTerm = e.target.value.toLowerCase();
-        this.taskList.filterManager.searchTasks(searchTerm);
-      });
+    // add function to search bar
+    document.querySelector("#search").addEventListener("input", e => {
+      const searchTerm = e.target.value.toLowerCase();
+      this.taskList.filterManager.searchTasks(searchTerm);
+    });
+
+    // add function to 24 hour format toggle
+    document.querySelector("#switch24Hour").addEventListener("change", () => { 
+      localStorage.setItem('timeFormat24Hr', document.querySelector("#switch24Hour").checked);   
+      this.taskList.updateTaskList("");  
+    });
   }
 }
 
@@ -133,7 +135,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // Hide edit cancel action button on page load
   const cancelEditBtn = document.querySelector(".js-cancel-button");
   cancelEditBtn.style.display = "none";
+
+  const switch24Hour = document.querySelector("#switch24Hour");
+  const savedTimeFormat = localStorage.getItem('timeFormat24Hr');
+  if (savedTimeFormat !== null) {
+    console.log("time format 24 hours = " + savedTimeFormat)
+    switch24Hour.checked = (savedTimeFormat === 'true');
+  }
 });
+
 
 // Add year in the footer(CopyRight Notice)
 let year = document.querySelector(".year");

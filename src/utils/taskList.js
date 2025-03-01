@@ -302,7 +302,8 @@ class TaskList {
 
   // Create the HTML element to represent a task visually
   createTaskHTML(task, referenceNumber) {
-    return `
+    const savedTimeFormat = localStorage.getItem('timeFormat24Hr');
+    var taskHTML = `
         <div class="small-container ${task.completed ? 'completed' : ''}">
           <input type="checkbox" class="js-complete-checkbox" data-index="${referenceNumber}" ${task.completed ? 'checked' : ''}>
           <div class="task-info">
@@ -311,14 +312,29 @@ class TaskList {
             <span class="priority-tag priority-${task.priority}">${task.priority}</span>
           </div>
         </div>
-        <div class="small-container">${task.date}</div>
-        <div class="small-container">${task.time}</div>
-        <button class="js-delete-button" data-index="${referenceNumber}">
+        <div class="small-container">${task.date}</div>`;
+        
+    if (savedTimeFormat === 'true' || !task.time) { // 24 hour format
+      taskHTML += `
+        <div class="small-container">${task.time}</div>`;
+    }
+    else { // 12 hour format
+      const [hours, minutes] = task.time.split(':').map(Number); // Split and convert to numbers
+      const period = hours >= 12 ? 'PM' : 'AM'; // Determine AM or PM
+      const hours12 = hours % 12 || 12;
+      taskHTML += `
+        <div class="small-container">${hours12}:${minutes.toString().padStart(2, '0')} ${period}</div>`;
+    }
+
+    taskHTML += `
+      <button class="js-delete-button" data-index="${referenceNumber}">
         <i class="fa-solid fa-trash"></i>
         </button>
         <button class="js-edit-button" data-index="${referenceNumber}">
         <i class="fa-solid fa-pen"></i>
         </button>`;
+
+    return taskHTML;
   }
 
   // Add event listeners for delete, edit, and complete buttons
@@ -341,6 +357,7 @@ class TaskList {
       checkbox.addEventListener('change', (event) => {
         this.index = event.target.dataset.index;  // Get the task index
         Task.toggleComplete(tasksToDisplay[this.index], this);  // Call the method from TaskList
+        localStorage.setItem('taskList', JSON.stringify(this.taskList));
       });
     });
   }
