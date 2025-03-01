@@ -185,14 +185,22 @@ class Calendar {
     const dateStr = task.date != "" ? task.date : "";
     const timeStr = task.time != "" ? ", " + task.time : "";
     dateTime.innerText = dateStr + timeStr;
-    // category
-    const category = document.getElementById("taskDetailsCategory");
-    category.innerText = task.category;
-    // priority
-    const priority = document.getElementById("taskDetailsPriority");
-    priority.classList = "priority-tag";
-    priority.classList.add(`priority-${task.priority}`);
-    priority.innerText = task.priority;
+    // category and priority
+    const catPri = document.getElementById("categoryAndPriority");
+    categoryAndPriority.innerHTML = "";
+    if (task.category != "") {
+      const category = document.createElement("span");
+      category.classList.add("category-tag");
+      category.innerText = task.category;
+      categoryAndPriority.appendChild(category);
+    }
+    if (task.priority != "") {
+      const priority = document.createElement("span");
+      priority.classList.add("priority-tag");
+      priority.classList.add(`priority-${task.priority}`);
+      priority.innerText = task.priority;
+      categoryAndPriority.appendChild(priority);
+    }
   }
 
   addTasksToCell(cell, date) {

@@ -253,12 +253,12 @@ td:hover {
     color: var(--task-text);
 }
 
-.task-info {
+#categoryAndPriority {
     display: flex;
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: space-evenly;
 }
 
 .category-tag,
