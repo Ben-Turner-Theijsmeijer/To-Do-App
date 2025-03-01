@@ -314,10 +314,11 @@ class TaskList {
         </div>
         <div class="small-container">${task.date}</div>`;
         
-    if (savedTimeFormat === 'true') { // 24 hour format
+    if (savedTimeFormat === 'true' || !task.time) { // 24 hour format
       taskHTML += `
         <div class="small-container">${task.time}</div>`;
-    } else { // 12 hour format
+    }
+    else { // 12 hour format
       const [hours, minutes] = task.time.split(':').map(Number); // Split and convert to numbers
       const period = hours >= 12 ? 'PM' : 'AM'; // Determine AM or PM
       const hours12 = hours % 12 || 12;
