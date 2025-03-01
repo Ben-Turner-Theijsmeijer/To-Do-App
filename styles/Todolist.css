@@ -182,11 +182,18 @@ body {
   align-items: center;
 }
 
+.task-edit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 20px;
+  justify-content: center;
+}
+
 .task:hover {
   width: 82%;
   font-size: 1.3rem;
 }
-
 
 .small-container {
   height: 85%;
@@ -197,7 +204,6 @@ body {
   padding: 7px 15px;
   border-radius: 10px;
   background-color: #ffffff;
-  /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); */
   font-weight: 600;
   min-height: 45px;
   box-sizing: border-box;
@@ -210,10 +216,6 @@ body {
   font-weight: 400;
   width: 100%;
   font-size: 0.8em;
-  /* border-radius: 0px; */
-  /* height: 90%; */
-  /* border-right: 1px #000 solid;
-  border-left: 1px #000 solid; */
 }
 
 .task-info {
@@ -224,9 +226,43 @@ body {
   justify-content: flex-start;
 }
 
+.task-edit-fields{
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.js-edit-name{
+  min-width: 200px;
+  max-width: 80%;
+  field-sizing: content;
+}
+/* .js-edit-category{
+  width: 15%;
+}
+.js-edit-priority{
+  width: 15%;
+}
+.js-edit-date{
+  width: 15%;
+}
+.js-edit-time{
+  width: 15%;
+} */
+
+.task-edit-buttons{
+  display: flex;
+  gap: 25px;
+}
+.js-cancel-edit-button{
+  padding: 3px 10px;
+}
+.js-save-edit-button{
+  padding: 3px 10px;
+}
+
 .task-name {
   overflow: auto;
-  /* max-height: 40px; */
   overflow-wrap: anywhere;
 }
 
@@ -274,11 +310,6 @@ body {
   justify-content: center;
   height: 80%;
   width: 90%;
-
-}
-
-.js-edit-name {
-  width: 30%;
 
 }
 

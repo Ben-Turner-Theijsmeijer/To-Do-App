@@ -268,11 +268,10 @@ class TaskList {
     if (referenceNumber == this.taskEditingIndex){
       console.log("Editing" + referenceNumber)
       return `
-      <div class="task" data-index="${referenceNumber}">
-        <div class="task-info">
+      <div class="task task-edit" data-index="${referenceNumber}">
+
+        <div class="task-edit-fields">
           <input type="text" class="js-edit-name" value="${task.name}" maxlength="120"></input>
-          <input type="date" class="js-edit-date" value="${task.date}"></input>
-          <input type="time" class="js-edit-time" value="${task.time}"></input>
           <select class="js-edit-category">
           ${task.category ? `<option value"" selected disabled hidden>${task.category}</option>` : ``}
             <option value="">None</option>
@@ -288,19 +287,25 @@ class TaskList {
             <option value="medium">Medium</option>
             <option value="low">Low</option>
           </select>
+          <input type="date" class="js-edit-date" value="${task.date}"></input>
+          <input type="time" class="js-edit-time" value="${task.time}"></input>
         </div>
         
-        <button class="js-cancel-edit-button" data-index="${referenceNumber}">
-          <i class="fa-solid fa-xmark"></i> Cancel
-        </button>
-        <button class="js-save-edit-button" data-index="${referenceNumber}">
-        <i class="fa-solid fa-check"></i> Update
-        </button>
-        </div>`;
+        <div class="task-edit-buttons">
+          <button class="js-cancel-edit-button" data-index="${referenceNumber}">
+            <i class="fa-solid fa-xmark"></i> Cancel
+          </button>
+          <button class="js-save-edit-button" data-index="${referenceNumber}">
+          <i class="fa-solid fa-check"></i> Update
+          </button>
+        </div>
+
+      </div>`;
     }
 
     return `
       <div class="task" data-index="${referenceNumber}">
+        
         <div class="small-container ${task.completed ? 'completed' : ''}">
           <input type="checkbox" class="js-complete-checkbox" data-index="${referenceNumber}" ${task.completed ? 'checked' : ''}>
           <div class="task-info">
@@ -317,11 +322,11 @@ class TaskList {
         <button class="js-edit-button" data-index="${referenceNumber}">
         <i class="fa-solid fa-pen"></i>
         </button>
-        </div>`;
+
+      </div>`;
   }
 
   setEditingTaskIndex(index){
-    console.log("FILTER APPLIED, EDITINGSTOPPED");
     this.taskEditingIndex = index;
   }
 
@@ -355,6 +360,13 @@ class TaskList {
         this.index = event.currentTarget.getAttribute('data-index');
         this.taskEditingIndex = this.index;
         this.updateTaskList("");
+
+        //Bringing cursor to end of title
+        var editName = document.querySelector('.js-edit-name');
+        editName.focus();
+        var name = editName.value; 
+        editName.value = '';
+        editName.value = name;
       });
     });
     
@@ -383,7 +395,9 @@ class TaskList {
         Task.toggleComplete(tasksToDisplay[this.index], this);  // Call the method from TaskList
       });
     });
+
   }
+
 }
 
 export default TaskList;
