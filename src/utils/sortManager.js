@@ -1,93 +1,79 @@
 class SortManager {
   constructor() {
-    this.SortMethod = ""; //Default sort method
+    this.SortMethod = ""; // Default sort method
     this.currentPrioritySortOrder = "asc"; // Default sort order for priority
     this.currentCategorySortOrder = "asc"; // Default sort order for category
     this.currentDateSortOrder = "asc"; // Default sort order for date
   }
 
-  // sorts the passed list of tasks based on the set priority or category
+  // Reset all sort icons to default (both arrows)
+  resetSortIcons() {
+    const sortIcons = {
+      priority: document.getElementById("sort-priority-order"),
+      category: document.getElementById("sort-category-order"),
+      date: document.getElementById("sort-date-order"),
+    };
+
+    Object.values(sortIcons).forEach((icon) => {
+      if (icon) {
+        icon.classList = "";
+        icon.classList.add("fa-solid", "fa-arrows-up-down");
+      }
+    });
+  }
+
+  // Sort the passed list of tasks based on the set priority, category, or date
   sortTasks(unsortedTasks, sortBy) {
-    // set to either ascending or descending sort order
+    if (!["priority", "category", "date"].includes(sortBy)) return unsortedTasks;
+
+    // Reset all icons before updating the selected one
+    this.resetSortIcons();
+
+    let sortBtn;
+    let sortOrder;
+
     if (sortBy === "priority") {
-      // change sort order
       this.currentPrioritySortOrder =
         this.currentPrioritySortOrder === "asc" ? "desc" : "asc";
-      // update asc/desc icon
-      const sortBtn = document.getElementById("sort-priority-order");
-      sortBtn.classList = "";
-      if (this.currentPrioritySortOrder === "asc") {
-        sortBtn.classList.add("fa-solid", "fa-arrow-down");
-      } else {
-        sortBtn.classList.add("fa-solid", "fa-arrow-up");
-      }
+      sortBtn = document.getElementById("sort-priority-order");
+      sortOrder = this.currentPrioritySortOrder;
     } else if (sortBy === "category") {
-      // change sort order
       this.currentCategorySortOrder =
         this.currentCategorySortOrder === "asc" ? "desc" : "asc";
-      // update asc/desc icon
-      const sortBtn = document.getElementById("sort-category-order");
-      sortBtn.classList = "";
-      if (this.currentCategorySortOrder == "asc") {
-        sortBtn.classList.add("fa-solid", "fa-arrow-down");
-      } else {
-        sortBtn.classList.add("fa-solid", "fa-arrow-up");
-      }
+      sortBtn = document.getElementById("sort-category-order");
+      sortOrder = this.currentCategorySortOrder;
     } else if (sortBy === "date") {
-      // change sort order
       this.currentDateSortOrder =
         this.currentDateSortOrder === "asc" ? "desc" : "asc";
-      // update asc/desc icon
-      const sortBtn = document.getElementById("sort-date-order");
-      sortBtn.classList = "";
-      if (this.currentDateSortOrder === "asc") {
-        sortBtn.classList.add("fa-solid", "fa-arrow-down");
-      } else {
-        sortBtn.classList.add("fa-solid", "fa-arrow-up");
-      }
+      sortBtn = document.getElementById("sort-date-order");
+      sortOrder = this.currentDateSortOrder;
     }
 
-    // check if the sort criteria changed before setting it
-    if (sortBy !== "") this.SortMethod = sortBy;
+    // Update selected button's icon
+    if (sortBtn) {
+      sortBtn.classList = "";
+      sortBtn.classList.add("fa-solid", sortOrder === "asc" ? "fa-arrow-down" : "fa-arrow-up");
+    }
 
-    // sort the list either ascending or descending based on sort criteria
-    let sortedTasks = unsortedTasks;
-    sortedTasks.sort((a, b) => {
+    this.SortMethod = sortBy;
+
+    // Sort logic
+    return unsortedTasks.sort((a, b) => {
       if (this.SortMethod === "date") {
-        let dateA = new Date();
-        let dateB = new Date();
-        if (a.date == "" || b.date == "") {
-          // if either date null, skip setting date
-        } else if (a.time == "" || b.time == "") {
-          // if either time null, only compare date
-          dateA = new Date(a.date + " 00:00");
-          dateB = new Date(b.date + " 00:00");
-        } else {
-          // else compare date and time
-          dateA = new Date(a.date + " " + a.time);
-          dateB = new Date(b.date + " " + b.time);
-        }
-        // return asc/desc sort order
-        return this.currentDateSortOrder === "asc"
-          ? dateA - dateB
-          : dateB - dateA;
+        let dateA = a.date ? new Date(`${a.date} ${a.time || "00:00"}`) : new Date();
+        let dateB = b.date ? new Date(`${b.date} ${b.time || "00:00"}`) : new Date();
+        return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
       } else if (this.SortMethod === "category") {
-        return this.currentCategorySortOrder === "asc"
+        return sortOrder === "asc"
           ? a.category.localeCompare(b.category)
           : b.category.localeCompare(a.category);
       } else if (this.SortMethod === "priority") {
         const priorityOrder = { high: 0, medium: 1, low: 2, none: 3 };
-        let aPriorityOrder =
-          a.priority === "" ? priorityOrder["none"] : priorityOrder[a.priority];
-        let bPriorityOrder =
-          b.priority === "" ? priorityOrder["none"] : priorityOrder[b.priority];
-        return this.currentPrioritySortOrder === "asc"
-          ? aPriorityOrder - bPriorityOrder
-          : bPriorityOrder - aPriorityOrder;
+        let aPriority = priorityOrder[a.priority] ?? priorityOrder["none"];
+        let bPriority = priorityOrder[b.priority] ?? priorityOrder["none"];
+        return sortOrder === "asc" ? aPriority - bPriority : bPriority - aPriority;
       }
     });
-
-    return sortedTasks;
   }
 }
 
