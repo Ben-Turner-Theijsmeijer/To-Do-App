@@ -1,4 +1,6 @@
-/* Default Light Mode */
+/* ========================= */
+/*         Light Mode        */
+/* ========================= */
 body {
   background-color: #ffffff;
   color: #333;
@@ -19,7 +21,8 @@ body {
   font-weight: 500;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link:focus {
   color: #007bff !important;
 }
 
@@ -58,7 +61,9 @@ body {
   text-align: center;
 }
 
-/* Dark Mode */
+/* ========================= */
+/*         Dark Mode         */
+/* ========================= */
 .dark-mode {
   background-color: #1e1e1e;
   color: #ffffff;
@@ -72,7 +77,8 @@ body {
   color: #ffffff !important;
 }
 
-.dark-mode .nav-link:hover {
+.dark-mode .nav-link:hover,
+.dark-mode .nav-link:focus {
   color: #66b2ff !important;
 }
 
@@ -84,11 +90,23 @@ body {
   color: #66b2ff;
 }
 
+/* Dark mode version of High Contrast button */
+.dark-mode #highContrastModeBtn {
+  background-color: #ffffff;
+  color: #222;
+}
+
+.dark-mode #highContrastModeBtn:hover,
+.dark-mode #highContrastModeBtn:focus {
+  background-color: #ffffff;
+  color: #222;
+}
+
 /* Dark Mode Toggle Button */
 .dark-mode-toggle {
-  position: absolute;
-  bottom: 10px;
-  right: 20px;
+  display: flex;
+  padding: 5px 20px;
+  justify-content: right;
 }
 
 #darkModeBtn {
@@ -102,11 +120,118 @@ body {
   transition: background-color 0.3s ease;
 }
 
-#darkModeBtn:hover {
+#darkModeBtn:hover,
+#darkModeBtn:focus {
   background-color: #444;
 }
 
 .dark-mode #darkModeBtn {
   background-color: #ffffff;
   color: #222;
+}
+
+/* ========================= */
+/*    High Contrast Mode     */
+/* ========================= */
+.high-contrast-mode {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.high-contrast-mode .navbar-custom {
+  background-color: #161616;
+}
+
+.high-contrast-mode .nav-link {
+  color: #ffffff !important;
+  border: 1px solid #00ffff
+}
+
+.high-contrast-mode .nav-link:hover,
+.high-contrast-mode .nav-link:focus {
+  color: #66b2ff !important;
+}
+
+.high-contrast-mode .footer {
+  background-color: #161616;;
+}
+
+.high-contrast-mode .feature-icons i {
+  color: #0800ff;
+}
+
+/* high contrast Primary buttons */
+.high-contrast-mode .btn-primary {
+  background-color: #0055ff;
+  color: #ffffff;
+  border: 1px solid #fff000;
+}
+
+.high-contrast-mode .btn-primary:hover,
+.high-contrast-mode .btn-primary:focus {
+  background-color: #000000;
+  color: #ffffff;
+  border: 1px solid #fff000;
+}
+
+/* high contrast Secondary Button */
+.high-contrast-mode .btn-outline-secondary {
+  border: 1px solid #ffffff;
+  color: #ffffff;
+}
+
+.high-contrast-mode .btn-outline-secondary:hover,
+.high-contrast-mode .btn-outline-secondary:focus {
+  border: 2px solid #ff5900;
+  color: #ffffff;
+}
+
+/* High Contrast version of Dark mode button */
+.high-contrast-mode #darkModeBtn {
+  background-color: #121212;
+  color: #ffffff;
+  border: 2px solid #00ffff;
+}
+
+.high-contrast-mode #darkModeBtn:hover,
+.high-contrast-mode #darkModeBtn:focus {
+  background-color: #444;
+  border: 2px solid #ff5900;
+}
+
+/* High Contrast Mode Toggle Button */
+.high-contrast-mode-toggle {
+  display: flex;
+  padding: 5px 20px;
+  justify-content: right;
+}
+
+#highContrastModeBtn {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#highContrastModeBtn:hover,
+#highContrastModeBtn:focus {
+  background-color: #444;
+  color: white;
+}
+
+.high-contrast-mode #highContrastModeBtn {
+  background-color: #121212;
+  color: #ffffff;
+  border: 2px solid #00ffff;
+}
+
+.high-contrast-mode #highContrastModeBtn:hover,
+.high-contrast-mode #highContrastModeBtn:focus {
+  background-color: #444;
+  color: #ffffff;
+  border: 2px solid #ff5900;
 }
