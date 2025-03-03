@@ -5,7 +5,6 @@ import UIManager from './UIManager.js';
 
 class App {
   constructor () {
-
     this.sortManager = new SortManager();
     this.filterManager = new FilterManager();
     this.taskList = new TaskList(this.sortManager, this.filterManager);

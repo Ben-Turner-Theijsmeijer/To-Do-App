@@ -14,19 +14,22 @@ class UIManager {
     document.querySelector('#sort-button-category').addEventListener('click', () => {
       //Quit editing task if sort is clicked
       this.taskList.setEditingTaskIndex(null);
-      this.taskList.updateTaskList('category')
+      this.taskList.sortTaskList("category");
+      this.taskList.updateAndDisplayTaskList() //sort
     });
 
     document.querySelector('#sort-button-priority').addEventListener('click', () => {
       //Quit editing task if sort is clicked
       this.taskList.setEditingTaskIndex(null);
-      this.taskList.updateTaskList('priority')
+      this.taskList.sortTaskList("priority");
+      this.taskList.updateAndDisplayTaskList() //sort
     });
     
     document.querySelector("#sort-button-date").addEventListener("click", () => {
       //Quit editing task if sort is clicked
       this.taskList.setEditingTaskIndex(null);
-      this.taskList.updateTaskList("date");
+      this.taskList.sortTaskList("date");
+      this.taskList.updateAndDisplayTaskList(); //sort
     });
 
     document.querySelectorAll('.js-filter-input').forEach((button) => {
@@ -35,7 +38,7 @@ class UIManager {
         //Quit editing task if filter is changed
         this.taskList.setEditingTaskIndex(null);
 
-        this.taskList.updateTaskList('')
+        this.taskList.updateAndDisplayTaskList()
       });
 
     });
@@ -102,19 +105,21 @@ class UIManager {
       select.selectedIndex = 0;
       select = document.querySelector(".filter-priority");
       select.selectedIndex = 0;
-      this.taskList.updateTaskList("");
+      this.taskList.updateAndDisplayTaskList();
     });
 
     // add function to search bar
-    document.querySelector("#search").addEventListener("input", e => {
-      const searchTerm = e.target.value.toLowerCase();
-      this.taskList.filterManager.searchTasks(searchTerm);
+    var searchBar = document.querySelector("#search");
+    searchBar.addEventListener("input", e => {
+      const searchTerm = searchBar.value.toLowerCase();
+      this.taskList.filterManager.setSearchFilter(searchTerm);
+      this.taskList.updateAndDisplayTaskList();
     });
 
     // add function to 24 hour format toggle
     document.querySelector("#switch24Hour").addEventListener("change", () => { 
       localStorage.setItem('timeFormat24Hr', document.querySelector("#switch24Hour").checked);   
-      this.taskList.updateTaskList("");  
+      this.taskList.updateAndDisplayTaskList();  
     });
   }
 }

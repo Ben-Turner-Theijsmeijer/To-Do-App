@@ -17,7 +17,7 @@ class TaskList {
     this.sortManager = sortManager;
     this.filterManager = filterManager;
     
-    this.updateTaskList('');
+    this.updateAndDisplayTaskList();
 
     // Ensure time input behavior is set on page load
     this.setupDateChangeListeners();
@@ -141,7 +141,7 @@ class TaskList {
       });
 
       // Save updated tasks and refresh UI
-      this.updateTaskList("");
+      this.updateAndDisplayTaskList();
     };
 
     reader.readAsText(file); // Read the file as text
@@ -165,22 +165,28 @@ class TaskList {
     }
   }
 
-  updateTaskList(sortCriteria) {
+  sortTaskList(sortCriteria){
+    let sortedTasks = this.sortManager.sortTasks(this.taskList, sortCriteria);
+    this.taskList = sortedTasks;
+    return this.taskList;
+  }
+
+  updateAndDisplayTaskList() {
     // filter and sort taskList based on the current criteria
     let filteredTasks = this.filterManager.filterTasks(this.taskList);
-    let sortedTasks = this.sortManager.sortTasks(filteredTasks, sortCriteria);
+    // let sortedTasks = this.sortManager.sortTasks(filteredTasks, sortCriteria);
 
     const addElement = document.querySelector('.js-add-html');
     this.taskListhtml = '';
 
     // generate all task HTML
-    for (let i = 0; i < sortedTasks.length; i++) {
-      const task = sortedTasks[i];
+    for (let i = 0; i < filteredTasks.length; i++) {
+      const task = filteredTasks[i];
       this.taskListhtml += this.createTaskHTML(task, i);
     }
 
     // Show or hide the task container based on the presence of tasks
-    if (sortedTasks.length === 0) {
+    if (filteredTasks.length === 0) {
       addElement.style.display = 'none'; // Hide if no tasks
     } else {
       addElement.style.display = 'grid'; // Show if tasks exist
@@ -188,7 +194,7 @@ class TaskList {
     }
 
     // add event listeners for new task list html elements
-    this.addListeners(sortedTasks);
+    this.addListeners(filteredTasks);
 
     // Call the task counter update function
     this.updateTaskCounter();
@@ -233,7 +239,7 @@ class TaskList {
     inputPriorityElement.value = '';
 
     // Update the displayed list
-    this.updateTaskList('');
+    this.updateAndDisplayTaskList();
   }
 
   deleteTask(taskToDelete) {
@@ -242,7 +248,7 @@ class TaskList {
     for (var i = 0; i < this.taskList.length; i++) {
       if (this.taskList[i].isEqual(taskToDelete) ){
         this.taskList.splice(i, 1);
-        this.updateTaskList('');
+        this.updateAndDisplayTaskList();
         return;
       }
     }
@@ -376,7 +382,7 @@ class TaskList {
       button.addEventListener('click', (event) => {
         this.index = event.currentTarget.getAttribute('data-index');
         this.taskEditingIndex = this.index;
-        this.updateTaskList("");
+        this.updateAndDisplayTaskList();
 
         //Bringing cursor to end of title
         var editName = document.querySelector('.js-edit-name');
@@ -392,7 +398,7 @@ class TaskList {
       cancelEditElement.addEventListener('click', (event) => {
         this.index = event.currentTarget.getAttribute('data-index');
         this.taskEditingIndex = null;
-        this.updateTaskList("");
+        this.updateAndDisplayTaskList();
       });
     }
 
@@ -402,7 +408,7 @@ class TaskList {
         this.index = event.currentTarget.getAttribute('data-index');
         this.saveEditTask(tasksToDisplay[this.index]);
         this.taskEditingIndex = null;
-        this.updateTaskList("");
+        this.updateAndDisplayTaskList();
       });
     }
 
