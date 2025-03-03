@@ -9,7 +9,7 @@ class Task {
   }
 
   // Single responsibility: Task updates itself
-  updateTask({name, date, time, category, priority, completed}){
+  updateTask(name, date, time, category, priority, completed){
     this.name = name;
     this.date = date;
     this.time = time;

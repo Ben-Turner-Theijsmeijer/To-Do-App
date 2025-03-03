@@ -226,11 +226,11 @@ class TaskList {
     this.taskList.push(newTask);     
 
     // Reset the inputs
-    name = '';
-    date = '';
-    time = '';
-    category = '';
-    priority = '';
+    inputNameElement.value = '';
+    inputDateElement.value = '';
+    inputTimeElement.value = '';
+    inputCategoryElement.value = '';
+    inputPriorityElement.value = '';
 
     // Update the displayed list
     this.updateTaskList('');
@@ -273,7 +273,7 @@ class TaskList {
         <div class="task-edit-fields">
           <input type="text" class="js-edit-name" value="${task.name}" maxlength="120"></input>
           <select class="js-edit-category">
-          ${task.category ? `<option value"" selected disabled hidden>${task.category}</option>` : ``}
+          ${task.category ? `<option value="${task.category}" selected disabled hidden>${task.category}</option>` : `<option value="" selected disabled hidden>Category</option>`}
             <option value="">None</option>
             <option value="Work">Work</option>
             <option value="Personal">Personal</option>
@@ -281,12 +281,13 @@ class TaskList {
             <option value="Other">Other</option>
           </select>
           <select class="js-edit-priority">
-          ${task.priority ? `<option value"" selected disabled hidden>${task.priority}</option>` : ``}
+          ${task.priority ? `<option value="${task.priority}" selected disabled hidden>${task.priority}</option>` : `<option value="" selected disabled hidden>Priority</option>`}
             <option value="">None</option>
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
           </select>
+          <div class="break"></div>
           <input type="date" class="js-edit-date" value="${task.date}"></input>
           <input type="time" class="js-edit-time" value="${task.time}"></input>
         </div>
@@ -342,8 +343,11 @@ class TaskList {
     let time = editTimeElement.value;
     let category = editCategoryElement.value;
     let priority = editPriorityElement.value;
+    let complete = task.completed;
+
+    console.log(name, date, time, category, priority, complete)
     
-    task.updateTask({name, date, time, category, priority, completed: false});
+    task.updateTask(name, date, time, category, priority, complete);
   }
 
   // Add event listeners for delete, edit, and complete buttons
