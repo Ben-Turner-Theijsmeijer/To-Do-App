@@ -41,7 +41,7 @@ class Task {
     if (task.completed) {
       Task.successNotification();
     }
-    taskList.updateTaskList('');
+    taskList.updateAndDisplayTaskList();
     taskList.updateTaskCounter();
   }
 
