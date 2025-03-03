@@ -68,7 +68,7 @@ class SortManager {
           ? a.category.localeCompare(b.category)
           : b.category.localeCompare(a.category);
       } else if (this.SortMethod === "priority") {
-        const priorityOrder = { high: 0, medium: 1, low: 2, none: 3 };
+        const priorityOrder = { High: 0, Medium: 1, Low: 2, none: 3 };
         let aPriority = priorityOrder[a.priority] ?? priorityOrder["none"];
         let bPriority = priorityOrder[b.priority] ?? priorityOrder["none"];
         return sortOrder === "asc" ? aPriority - bPriority : bPriority - aPriority;

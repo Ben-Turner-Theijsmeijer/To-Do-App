@@ -1,4 +1,3 @@
-import TaskManager from "./taskManager.js";
 import Task from "./task.js";
 
 class TaskList {
@@ -13,6 +12,7 @@ class TaskList {
 
     this.taskListhtml = '';
     this.index = null;
+    this.taskEditingIndex = null;
 
     this.sortManager = sortManager;
     this.filterManager = filterManager;
@@ -141,9 +141,7 @@ class TaskList {
       });
 
       // Save updated tasks and refresh UI
-      localStorage.setItem("taskList", JSON.stringify(this.taskList));
-      this.updateTaskList('');
-      this.updateTaskCounter();
+      this.updateTaskList("");
     };
 
     reader.readAsText(file); // Read the file as text
@@ -189,7 +187,6 @@ class TaskList {
       addElement.innerHTML = this.taskListhtml;
     }
 
-
     // add event listeners for new task list html elements
     this.addListeners(sortedTasks);
 
@@ -198,6 +195,9 @@ class TaskList {
 
     // Reapply date change listeners after updating the list
     this.setupDateChangeListeners();
+
+    //Saving updated tasklist to localStorage
+    localStorage.setItem('taskList', JSON.stringify(this.taskList));
   }
 
   addTask() {
@@ -221,56 +221,19 @@ class TaskList {
       return;
     }
 
-    // I don't really like this if... but I'm too tired to rewrite it 
-    if (TaskManager.getIsEditing()) {
-      var taskBeingEdited = TaskManager.getTaskBeingEdited();
-      var foundTaskIndex = null;
-      
-      for (var i = 0; i < this.taskList.length; i++) {
-        if (this.taskList[i].isEqual(taskBeingEdited) ){
-          foundTaskIndex = i
-        }
-      }
-
-      if (foundTaskIndex == null){
-        console.log("error in editing task: no original task found");
-      }
-      // Update the existing task
-      
-      this.taskList[foundTaskIndex].updateTask({name, date, time, category, priority, completed: false}); 
-
-      TaskManager.setIsEditing(false);
-      this.index = null;
-
-      // Change the button back to 'Add'
-      const addButton = document.querySelector('.js-add-button');
-      addButton.innerHTML = ' Add Task';
-      addButton.title = 'Add';
-
-      // add plus icon
-      const addIcon = document.createElement('span');
-      addIcon.classList.add('fa-solid', 'fa-add');
-      addButton.prepend(addIcon);
-
-      // Hide cancel button
-      const cancelEditBtn = document.querySelector('.js-cancel-button');
-      cancelEditBtn.style.display = 'none';
-    } else {
-      // Add a new task
-      const newTask = new Task(name, date, time, category, priority, false);
-      this.taskList.push(newTask); 
-      // this.taskList.push({ name, date, time, category, priority, completed: false });
-    }
-
-    // Save to localStorage
-    localStorage.setItem('taskList', JSON.stringify(this.taskList));
+    // Add a new task
+    const newTask = new Task(name, date, time, category, priority, false);
+    this.taskList.push(newTask);     
 
     // Reset the inputs
-    TaskManager.clearInputs();
+    inputNameElement.value = '';
+    inputDateElement.value = '';
+    inputTimeElement.value = '';
+    inputCategoryElement.value = '';
+    inputPriorityElement.value = '';
 
     // Update the displayed list
     this.updateTaskList('');
-    this.updateTaskCounter();
   }
 
   deleteTask(taskToDelete) {
@@ -279,9 +242,7 @@ class TaskList {
     for (var i = 0; i < this.taskList.length; i++) {
       if (this.taskList[i].isEqual(taskToDelete) ){
         this.taskList.splice(i, 1);
-        localStorage.setItem('taskList', JSON.stringify(this.taskList));
         this.updateTaskList('');
-        this.updateTaskCounter();
         return;
       }
     }
@@ -292,49 +253,114 @@ class TaskList {
     const totalTasks = this.taskList.length;
 
     // Select the element where the task counter is displayed
-    const taskCounterButton = document.querySelector('.task-counter-button');
+    const taskCounterButton = document.querySelector('.task-counter');
 
     // Update the text of the task counter button
     if (taskCounterButton) {
-      taskCounterButton.innerText = `Tasks: ${totalTasks}`;
+      taskCounterButton.innerText = `Total tasks: ${totalTasks}`;
     }
   }
 
   // Create the HTML element to represent a task visually
   createTaskHTML(task, referenceNumber) {
+    
     const savedTimeFormat = localStorage.getItem('timeFormat24Hr');
-    var taskHTML = `
-        <div class="small-container ${task.completed ? 'completed' : ''}">
-          <input type="checkbox" class="js-complete-checkbox" data-index="${referenceNumber}" ${task.completed ? 'checked' : ''}>
-          <div class="task-info">
-            <span class="task-name">${task.name}</span>
-            <span class="category-tag">${task.category}</span>
-            <span class="priority-tag priority-${task.priority}">${task.priority}</span>
-          </div>
-        </div>
-        <div class="small-container">${task.date}</div>`;
-        
+    var timeString = "";
+    
     if (savedTimeFormat === 'true' || !task.time) { // 24 hour format
-      taskHTML += `
-        <div class="small-container">${task.time}</div>`;
+      timeString = `${task.time}`;
     }
     else { // 12 hour format
       const [hours, minutes] = task.time.split(':').map(Number); // Split and convert to numbers
       const period = hours >= 12 ? 'PM' : 'AM'; // Determine AM or PM
       const hours12 = hours % 12 || 12;
-      taskHTML += `
-        <div class="small-container">${hours12}:${minutes.toString().padStart(2, '0')} ${period}</div>`;
+      timeString = `${hours12}:${minutes.toString().padStart(2, '0')} ${period}`;
     }
 
-    taskHTML += `
-      <button class="js-delete-button" data-index="${referenceNumber}">
+    var date_text = task.time? task.date + ", " +  timeString : task.date; 
+
+    if (referenceNumber == this.taskEditingIndex){
+      console.log("Editing" + referenceNumber)
+      return `
+      <div class="task task-edit" data-index="${referenceNumber}">
+
+        <div class="task-edit-fields">
+          <input type="text" class="js-edit-name" value="${task.name}" maxlength="120"></input>
+          <select class="js-edit-category">
+          ${task.category ? `<option value="${task.category}" selected disabled hidden>${task.category}</option>` : `<option value="" selected disabled hidden>Category</option>`}
+            <option value="">None</option>
+            <option value="Work">Work</option>
+            <option value="Personal">Personal</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Other">Other</option>
+          </select>
+          <select class="js-edit-priority">
+          ${task.priority ? `<option value="${task.priority}" selected disabled hidden>${task.priority}</option>` : `<option value="" selected disabled hidden>Priority</option>`}
+            <option value="">None</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+          <div class="break"></div>
+          <input type="date" class="js-edit-date" value="${task.date}"></input>
+          <input type="time" class="js-edit-time" value="${task.time}"></input>
+        </div>
+        
+        <div class="task-edit-buttons">
+          <button class="js-cancel-edit-button" data-index="${referenceNumber}">
+            <i class="fa-solid fa-xmark"></i> Cancel
+          </button>
+          <button class="js-save-edit-button" data-index="${referenceNumber}">
+          <i class="fa-solid fa-check"></i> Update
+          </button>
+        </div>
+
+      </div>`;
+    }
+
+    return `
+      <div class="task" data-index="${referenceNumber}">
+        
+        <div class="small-container ${task.completed ? 'completed' : ''}">
+          <input type="checkbox" class="js-complete-checkbox" data-index="${referenceNumber}" ${task.completed ? 'checked' : ''}>
+          <div class="task-info">
+            <span class="task-name">${task.name}</span>
+            ${task.category ? `<span class="category-tag">${task.category}</span>` : ''}
+            ${task.priority ? `<span class="priority-tag priority-${task.priority}">${task.priority}</span>` : ''}
+            <div class="date-section">${date_text}</div>
+          </div>
+        </div>
+        <button class="js-delete-button" data-index="${referenceNumber}">
         <i class="fa-solid fa-trash"></i>
         </button>
         <button class="js-edit-button" data-index="${referenceNumber}">
         <i class="fa-solid fa-pen"></i>
-        </button>`;
+        </button>
 
-    return taskHTML;
+      </div>`;
+  }
+
+  setEditingTaskIndex(index){
+    this.taskEditingIndex = index;
+  }
+
+  saveEditTask(task){
+    let editNameElement = document.querySelector('.js-edit-name');
+    let editDateElement = document.querySelector('.js-edit-date');
+    let editTimeElement = document.querySelector('.js-edit-time');
+    let editCategoryElement = document.querySelector('.js-edit-category');
+    let editPriorityElement = document.querySelector('.js-edit-priority');
+
+    let name = editNameElement.value;
+    let date = editDateElement.value;
+    let time = editTimeElement.value;
+    let category = editCategoryElement.value;
+    let priority = editPriorityElement.value;
+    let complete = task.completed;
+
+    console.log(name, date, time, category, priority, complete)
+    
+    task.updateTask(name, date, time, category, priority, complete);
   }
 
   // Add event listeners for delete, edit, and complete buttons
@@ -345,13 +371,40 @@ class TaskList {
         this.deleteTask(tasksToDisplay[this.index]);
       });
     });
-
+    
     document.querySelectorAll('.js-edit-button').forEach((button) => {
       button.addEventListener('click', (event) => {
         this.index = event.currentTarget.getAttribute('data-index');
-        TaskManager.editTask(tasksToDisplay[this.index]);
+        this.taskEditingIndex = this.index;
+        this.updateTaskList("");
+
+        //Bringing cursor to end of title
+        var editName = document.querySelector('.js-edit-name');
+        editName.focus();
+        var name = editName.value; 
+        editName.value = '';
+        editName.value = name;
       });
     });
+    
+    var cancelEditElement = document.querySelector('.js-cancel-edit-button');
+    if (cancelEditElement){
+      cancelEditElement.addEventListener('click', (event) => {
+        this.index = event.currentTarget.getAttribute('data-index');
+        this.taskEditingIndex = null;
+        this.updateTaskList("");
+      });
+    }
+
+    var saveEditElement = document.querySelector('.js-save-edit-button');
+    if (saveEditElement){
+      saveEditElement.addEventListener('click', (event) => {
+        this.index = event.currentTarget.getAttribute('data-index');
+        this.saveEditTask(tasksToDisplay[this.index]);
+        this.taskEditingIndex = null;
+        this.updateTaskList("");
+      });
+    }
 
     document.querySelectorAll('.js-complete-checkbox').forEach(checkbox => {
       checkbox.addEventListener('change', (event) => {
@@ -360,7 +413,9 @@ class TaskList {
         localStorage.setItem('taskList', JSON.stringify(this.taskList));
       });
     });
+
   }
+
 }
 
 export default TaskList;

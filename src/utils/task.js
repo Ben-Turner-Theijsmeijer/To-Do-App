@@ -9,7 +9,7 @@ class Task {
   }
 
   // Single responsibility: Task updates itself
-  updateTask({name, date, time, category, priority, completed}){
+  updateTask(name, date, time, category, priority, completed){
     this.name = name;
     this.date = date;
     this.time = time;
@@ -41,8 +41,6 @@ class Task {
     if (task.completed) {
       Task.successNotification();
     }
-    // have this line in updateTaskList
-    // localStorage.setItem('taskList', JSON.stringify(taskList));
     taskList.updateTaskList('');
     taskList.updateTaskCounter();
   }

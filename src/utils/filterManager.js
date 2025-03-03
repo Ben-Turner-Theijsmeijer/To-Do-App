@@ -12,7 +12,7 @@ class FilterManager {
     //Filtering for completion
     const filterCompletionElement = document.querySelector('.filter-completion');
     this.filterCompletion = filterCompletionElement.value;
-    if (this.filterCompletion === 'pending') {
+    if (this.filterCompletion === 'ongoing') {
       filteredTasks =  filteredTasks.filter(task => !task.completed);
     } else if (this.filterCompletion === 'completed') {
       filteredTasks = filteredTasks.filter(task => task.completed);

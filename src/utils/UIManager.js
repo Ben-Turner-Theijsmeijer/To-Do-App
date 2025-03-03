@@ -1,6 +1,5 @@
 class UIManager {
-  constructor(taskManager, taskList) {
-    this.taskManager = taskManager;
+  constructor(taskList) {
     this.taskList = taskList;
 
     this.setupEventListeners();
@@ -8,40 +7,37 @@ class UIManager {
 
   setupEventListeners() {
     document.querySelector(".js-add-button").addEventListener("click", () => {
-      // for now... TaskManager manages the list, but Task lists creates the tasks
       this.taskList.addTask();
     });
-    // Add event listeners to buttons
-    document
-      .querySelector(".js-cancel-button")
-      .addEventListener("click", () => this.taskManager.cancelEditTask());
 
     // Add event listeners for sorting buttons
-    document
-      .querySelector("#sort-button-category")
-      .addEventListener("click", () =>
-        this.taskList.updateTaskList("category")
-      );
-    document
-      .querySelector("#sort-button-priority")
-      .addEventListener("click", () =>
-        this.taskList.updateTaskList("priority")
-      );
-    document
-      .querySelector("#sort-button-date")
-      .addEventListener("click", () => this.taskList.updateTaskList("date"));
-
-    // add event listeners for the filter buttons
-    document.querySelectorAll(".js-filter-input").forEach(button => {
-      button.addEventListener("change", () => this.taskList.updateTaskList(""));
+    document.querySelector('#sort-button-category').addEventListener('click', () => {
+      //Quit editing task if sort is clicked
+      this.taskList.setEditingTaskIndex(null);
+      this.taskList.updateTaskList('category')
     });
 
-    // add event listeners inputting task information
-    document.querySelector(".js-name-input").addEventListener("input", e => {
-      let input = e.target.value;
-      if (input.length === 120) {
-        alert("max character limits exceeded");
-      }
+    document.querySelector('#sort-button-priority').addEventListener('click', () => {
+      //Quit editing task if sort is clicked
+      this.taskList.setEditingTaskIndex(null);
+      this.taskList.updateTaskList('priority')
+    });
+    
+    document.querySelector("#sort-button-date").addEventListener("click", () => {
+      //Quit editing task if sort is clicked
+      this.taskList.setEditingTaskIndex(null);
+      this.taskList.updateTaskList("date");
+    });
+
+    document.querySelectorAll('.js-filter-input').forEach((button) => {
+      
+      button.addEventListener('change', () => {
+        //Quit editing task if filter is changed
+        this.taskList.setEditingTaskIndex(null);
+
+        this.taskList.updateTaskList('')
+      });
+
     });
 
     // Piece of code that exists all on its own
@@ -86,9 +82,7 @@ class UIManager {
     });
 
     // add function to open Filter Menu
-    document
-      .querySelector("#open-filters-btn")
-      .addEventListener("click", () => {
+    document.querySelector("#open-filters-btn").addEventListener("click", () => {
         var btn = document.getElementById("open-filters-btn");
         var x = document.getElementById("filter-menu");
         if (x.style.display === "none") {
@@ -131,11 +125,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Set focus on the name input field
   const inputNameElement = document.querySelector(".js-name-input");
   inputNameElement.focus();
-
-  // Hide edit cancel action button on page load
-  const cancelEditBtn = document.querySelector(".js-cancel-button");
-  cancelEditBtn.style.display = "none";
-
   const switch24Hour = document.querySelector("#switch24Hour");
   const savedTimeFormat = localStorage.getItem('timeFormat24Hr');
   if (savedTimeFormat !== null) {
