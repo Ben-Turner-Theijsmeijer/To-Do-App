@@ -109,9 +109,11 @@ class UIManager {
     });
 
     // add function to search bar
-    document.querySelector("#search").addEventListener("input", e => {
-      const searchTerm = e.target.value.toLowerCase();
-      this.taskList.filterManager.searchTasks(searchTerm);
+    var searchBar = document.querySelector("#search");
+    searchBar.addEventListener("input", e => {
+      const searchTerm = searchBar.value.toLowerCase();
+      this.taskList.filterManager.setSearchFilter(searchTerm);
+      this.taskList.updateAndDisplayTaskList();
     });
 
     // add function to 24 hour format toggle
