@@ -298,6 +298,10 @@ body {
   cursor: pointer;
 }
 
+.completed {
+  text-decoration: line-through;
+}
+
 .js-delete-button {
   background-color: red;
   color: white;

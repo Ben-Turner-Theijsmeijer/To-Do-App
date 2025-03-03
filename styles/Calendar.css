@@ -275,17 +275,17 @@ td:hover {
     color: #333;
 }
 
-.priority-high {
+.priority-High {
     background-color: #ffcccb;
     color: #d8000c;
 }
 
-.priority-medium {
+.priority-Medium {
     background-color: #feefb3;
     color: #9f6000;
 }
 
-.priority-low {
+.priority-Low {
     background-color: #d4edda;
     color: #155724;
 }
