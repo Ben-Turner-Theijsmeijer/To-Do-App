@@ -90,44 +90,11 @@ body {
   color: #66b2ff;
 }
 
-/* Dark mode version of High Contrast button */
-.dark-mode #highContrastModeBtn {
-  background-color: #ffffff;
-  color: #222;
-}
-
-.dark-mode #highContrastModeBtn:hover,
-.dark-mode #highContrastModeBtn:focus {
-  background-color: #ffffff;
-  color: #222;
-}
-
 /* Dark Mode Toggle Button */
 .dark-mode-toggle {
   display: flex;
   padding: 5px 20px;
   justify-content: right;
-}
-
-#darkModeBtn {
-  background-color: #333;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  font-size: 14px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-#darkModeBtn:hover,
-#darkModeBtn:focus {
-  background-color: #444;
-}
-
-.dark-mode #darkModeBtn {
-  background-color: #ffffff;
-  color: #222;
 }
 
 /* ========================= */
@@ -153,7 +120,8 @@ body {
 }
 
 .high-contrast-mode .footer {
-  background-color: #161616;;
+  background-color: #161616;
+  ;
 }
 
 .high-contrast-mode .feature-icons i {
@@ -186,27 +154,19 @@ body {
   color: #ffffff;
 }
 
-/* High Contrast version of Dark mode button */
-.high-contrast-mode #darkModeBtn {
-  background-color: #121212;
-  color: #ffffff;
-  border: 2px solid #00ffff;
-}
-
-.high-contrast-mode #darkModeBtn:hover,
-.high-contrast-mode #darkModeBtn:focus {
-  background-color: #444;
-  border: 2px solid #ff5900;
-}
-
-/* High Contrast Mode Toggle Button */
-.high-contrast-mode-toggle {
+/* Themes */
+#themes-selection-div {
   display: flex;
   padding: 5px 20px;
   justify-content: right;
 }
 
-#highContrastModeBtn {
+#themesSelectionLabel {
+  display: none
+}
+
+#themesSelection,
+#themesSelection option {
   background-color: #333;
   color: white;
   border: none;
@@ -217,21 +177,15 @@ body {
   transition: background-color 0.3s ease;
 }
 
-#highContrastModeBtn:hover,
-#highContrastModeBtn:focus {
-  background-color: #444;
-  color: white;
-}
-
-.high-contrast-mode #highContrastModeBtn {
+.high-contrast-mode #themesSelection,
+.high-contrast-mode #themesSelection option {
   background-color: #121212;
   color: #ffffff;
-  border: 2px solid #00ffff;
+  border: 2px solid var(--primary-border);
 }
 
-.high-contrast-mode #highContrastModeBtn:hover,
-.high-contrast-mode #highContrastModeBtn:focus {
-  background-color: #444;
-  color: #ffffff;
-  border: 2px solid #ff5900;
+.dark-mode #themesSelection,
+.dark-mode #themesSelection option {
+  background-color: #ffffff;
+  color: #222;
 }

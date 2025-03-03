@@ -3,7 +3,7 @@ import Task from "./task.js";
 class Calendar {
   constructor() {
     this.body = document.body;
-    this.darkModeBtn = document.getElementById("darkModeBtn");
+    this.themeSelection = document.getElementById("themesSelection");
     this.calendarEl = document.getElementById("calendar");
     this.currentDateEl = document.getElementById("currentDate");
     this.prevBtn = document.getElementById("prevBtn");
@@ -40,23 +40,13 @@ class Calendar {
   initDarkMode() {
     if (localStorage.getItem("darkMode") === "enabled") {
       this.body.classList.add("dark-mode");
-      this.darkModeBtn.innerHTML = '<i class="fa-solid fa-sun"></i> Light Mode';
-    }
-  }
-
-  toggleDarkMode() {
-    this.body.classList.toggle("dark-mode");
-    if (this.body.classList.contains("dark-mode")) {
-      localStorage.setItem("darkMode", "enabled");
-      this.darkModeBtn.innerHTML = '<i class="fa-solid fa-sun"></i> Light Mode';
-    } else {
-      localStorage.setItem("darkMode", "disabled");
-      this.darkModeBtn.innerHTML = '<i class="fa-solid fa-moon"></i> Dark Mode';
+      this.themeSelection.value = 'dark';
+      this.themeSelection.innerHTML = 'Dark Mode'
     }
   }
 
   addEventListeners() {
-    this.darkModeBtn.addEventListener("click", () => this.toggleDarkMode());
+    // this.darkModeBtn.addEventListener("click", () => this.toggleDarkMode());
     this.prevBtn.addEventListener("click", () => this.changeDate(-1));
     this.nextBtn.addEventListener("click", () => this.changeDate(1));
     this.todayBtn.addEventListener("click", () => this.goToToday());
