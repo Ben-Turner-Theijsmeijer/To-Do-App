@@ -22,7 +22,8 @@ body {
 
 
 .container {
-  flex: 1; /* Pushes the footer down */
+  flex: 1;
+  /* Pushes the footer down */
 }
 
 .navbar-custom {
@@ -61,9 +62,12 @@ body {
 
 
 .js-time-input:disabled {
-  background-color: #e0e0e0; /* Light gray background */
-  color: #888; /* Dim text color */
-  cursor: not-allowed; /* Show "not allowed" cursor */
+  background-color: #e0e0e0;
+  /* Light gray background */
+  color: #888;
+  /* Dim text color */
+  cursor: not-allowed;
+  /* Show "not allowed" cursor */
 }
 
 
@@ -282,7 +286,8 @@ body {
   --footer-text: #ffffff;
   --button-bg: #3498db;
   --button-hover: #007bff;
-  --task-text: #000; /* Task details black in light mode */
+  --task-text: #000;
+  /* Task details black in light mode */
   --sort-button-bg: transparent;
   --sort-button-text: #007bff;
   --sort-button-border: #007bff;
@@ -303,7 +308,8 @@ body {
   --footer-text: #f0f0f0;
   --button-bg: #007bff;
   --button-hover: #555;
-  --task-text: #ffffff; /* Task details white in dark mode */
+  --task-text: #ffffff;
+  /* Task details white in dark mode */
   --sort-button-bg: #007bff;
   --sort-button-text: #ffffff;
   --sort-button-border: #007bff;
@@ -389,42 +395,10 @@ body {
   background-color: var(--button-hover);
 }
 
-.dark-mode #highContrastModeBtn {
-  background-color: #ffffff;
-  color: #222;
-}
-
-.dark-mode #highContrastModeBtn:hover,
-.dark-mode #highContrastModeBtn:focus {
-  background-color: #ffffff;
-  color: #222;
-}
-
 .dark-mode-toggle {
   display: flex;
   padding: 5px 20px;
   justify-content: right;
-}
-
-#darkModeBtn {
-  background-color: #333;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  font-size: 14px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-#darkModeBtn:hover,
-#darkModeBtn:focus {
-  background-color: #444;
-}
-
-.dark-mode #darkModeBtn {
-  background-color: #ffffff;
-  color: #222;
 }
 
 /* ========================= */
@@ -443,7 +417,8 @@ body {
   --button-border: #fff000;
   --secondary-button-bg: #000;
   --secondary-button-border: #ffffff;
-  --task-text: #ffffff; /* Task details white in dark mode */
+  --task-text: #ffffff;
+  /* Task details white in dark mode */
   --sort-button-bg: #0055ff;
   --sort-button-text: #ffffff;
   --sort-button-border: #fff700;
@@ -498,7 +473,7 @@ body {
   color: var(--primary-text);
   background-color: var(--primary-bg);
   border: 2px solid var(--primary-border);
-  
+
 }
 
 /* Primary buttons */
@@ -587,56 +562,6 @@ body {
   border: 2px solid var(--button-border);
 }
 
-/* Dark mode button */
-.high-contrast-mode #darkModeBtn {
-  background-color: #121212;
-  color: #ffffff;
-  border: 2px solid var(--primary-border);
-}
-
-.high-contrast-mode #darkModeBtn:hover,
-.high-contrast-mode #darkModeBtn:focus {
-  background-color: #444;
-  border: 2px solid var(--hover-border);
-}
-
-/* high contrast mode button */
-.high-contrast-mode-toggle {
-  display: flex;
-  padding: 5px 20px;
-  justify-content: right;
-}
-
-#highContrastModeBtn {
-  background-color: #333;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  font-size: 14px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-#highContrastModeBtn:hover,
-#highContrastModeBtn:focus {
-  background-color: #444;
-  color: white;
-}
-
-.high-contrast-mode #highContrastModeBtn {
-  background-color: #121212;
-  color: #ffffff;
-  border: 2px solid var(--primary-border);
-}
-
-.high-contrast-mode #highContrastModeBtn:hover,
-.high-contrast-mode #highContrastModeBtn:focus {
-  background-color: #444;
-  color: #ffffff;
-  border: 2px solid var(--hover-border);
-}
-
 /* Filter Menu Styling */
 #sort-and-filter {
   display: flex;
@@ -663,4 +588,40 @@ body {
 
 .form-check-input:checked:focus {
   box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+/* Themes */
+#themes-selection-div {
+  display: flex;
+  padding: 5px 20px;
+  justify-content: right;
+}
+
+#themesSelectionLabel {
+  display: none
+}
+
+#themesSelection,
+#themesSelection option {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.high-contrast-mode #themesSelection,
+.high-contrast-mode #themesSelection option {
+  background-color: #121212;
+  color: #ffffff;
+  border: 2px solid var(--primary-border);
+}
+
+.dark-mode #themesSelection,
+.dark-mode #themesSelection option {
+  background-color: #ffffff;
+  color: #222;
 }

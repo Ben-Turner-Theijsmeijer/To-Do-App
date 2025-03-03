@@ -81,26 +81,6 @@ body {
     justify-content: right;
 }
 
-#darkModeBtn {
-    background-color: #333;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#darkModeBtn:hover {
-    background-color: #444;
-}
-
-.dark-mode #darkModeBtn {
-    background-color: #ffffff;
-    color: #222;
-}
-
 /*calendar*/
 /* General Styling */
 body {
@@ -373,4 +353,40 @@ body.dark-mode #currentDate {
     color: #ffffff;  /* White text color for the month and year title */
     font-size: 1.5rem;  /* Slightly larger text for the title */
     font-weight: bold;
+}
+
+/* Themes */
+#themes-selection-div {
+    display: flex;
+    padding: 5px 20px;
+    justify-content: right;
+}
+
+#themesSelectionLabel {
+    display: none
+}
+
+#themesSelection,
+#themesSelection option {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.high-contrast-mode #themesSelection,
+.high-contrast-mode #themesSelection option {
+    background-color: #121212;
+    color: #ffffff;
+    border: 2px solid var(--primary-border);
+}
+
+.dark-mode #themesSelection,
+.dark-mode #themesSelection option {
+    background-color: #ffffff;
+    color: #222;
 }
