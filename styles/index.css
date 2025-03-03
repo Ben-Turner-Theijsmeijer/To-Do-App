@@ -79,7 +79,7 @@ body {
 
 .dark-mode .nav-link:hover,
 .dark-mode .nav-link:focus {
-  color: #66b2ff !important;
+  color: #007bff !important;
 }
 
 .dark-mode .footer {
@@ -88,13 +88,6 @@ body {
 
 .dark-mode .feature-icons i {
   color: #66b2ff;
-}
-
-/* Dark Mode Toggle Button */
-.dark-mode-toggle {
-  display: flex;
-  padding: 5px 20px;
-  justify-content: right;
 }
 
 /* ========================= */
@@ -116,7 +109,7 @@ body {
 
 .high-contrast-mode .nav-link:hover,
 .high-contrast-mode .nav-link:focus {
-  color: #66b2ff !important;
+  color: #007bff !important;
 }
 
 .high-contrast-mode .footer {
@@ -154,7 +147,9 @@ body {
   color: #ffffff;
 }
 
-/* Themes */
+/* ========================= */
+/*          Themes           */
+/* ========================= */
 #themes-selection-div {
   display: flex;
   padding: 5px 20px;
@@ -181,7 +176,12 @@ body {
 .high-contrast-mode #themesSelection option {
   background-color: #121212;
   color: #ffffff;
-  border: 2px solid var(--primary-border);
+  border: 2px solid #00ffff;;
+}
+
+.high-contrast-mode #themesSelection:hover,
+.high-contrast-mode #themesSelection:focus {
+  border: 2px solid #ff5900;
 }
 
 .dark-mode #themesSelection,

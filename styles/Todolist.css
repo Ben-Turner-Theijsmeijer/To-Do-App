@@ -335,7 +335,7 @@ body {
 
 .dark-mode .nav-link:hover,
 .dark-mode .nav-link:focus {
-  color: #66b2ff !important;
+  color: #007bff !important;
 }
 
 .footer {
@@ -395,12 +395,6 @@ body {
   background-color: var(--button-hover);
 }
 
-.dark-mode-toggle {
-  display: flex;
-  padding: 5px 20px;
-  justify-content: right;
-}
-
 /* ========================= */
 /*    High Contrast Mode     */
 /* ========================= */
@@ -418,7 +412,7 @@ body {
   --secondary-button-bg: #000;
   --secondary-button-border: #ffffff;
   --task-text: #ffffff;
-  /* Task details white in dark mode */
+  /* Task details white in high contrast mode */
   --sort-button-bg: #0055ff;
   --sort-button-text: #ffffff;
   --sort-button-border: #fff700;
@@ -441,7 +435,7 @@ body {
 
 .high-contrast-mode .nav-link:hover,
 .high-contrast-mode .nav-link:focus {
-  color: #66b2ff !important;
+  color: #007bff !important;
 }
 
 .high-contrast-mode .js-add-grid {
@@ -562,6 +556,17 @@ body {
   border: 2px solid var(--button-border);
 }
 
+.high-contrast-mode .js-filter-input {
+  background-color: var(--primary-bg);
+  color: #ffffff;
+  border: 1px solid var(--button-border);
+}
+
+.high-contrast-mode .js-filter-input:hover,
+.high-contrast-mode .js-filter-input:focus {
+  border: 2px solid var(--hover-border);
+}
+
 /* Filter Menu Styling */
 #sort-and-filter {
   display: flex;
@@ -590,7 +595,9 @@ body {
   box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
 }
 
-/* Themes */
+/* ========================= */
+/*          Themes           */
+/* ========================= */
 #themes-selection-div {
   display: flex;
   padding: 5px 20px;
@@ -615,9 +622,14 @@ body {
 
 .high-contrast-mode #themesSelection,
 .high-contrast-mode #themesSelection option {
-  background-color: #121212;
+  background-color: var(--secondary-bg);
   color: #ffffff;
   border: 2px solid var(--primary-border);
+}
+
+.high-contrast-mode #themesSelection:hover,
+.high-contrast-mode #themesSelection:focus {
+  border: 2px solid var(--hover-border);
 }
 
 .dark-mode #themesSelection,
