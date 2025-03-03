@@ -34,6 +34,18 @@ class FilterManager {
     
     return filteredTasks;
   }
+
+  // Filter the tasks based on the string entered in the search bar 
+  searchTasks (searchTerm) {
+    const taskList = document.querySelectorAll('.task');
+    taskList.forEach(task => {
+      const taskName = task.querySelector('.task-name');
+      const name = taskName.textContent;
+      console.log(name);
+      
+      // Hide and show elements based on matching the search term
+  });
+  }
 }
 
 export default FilterManager;

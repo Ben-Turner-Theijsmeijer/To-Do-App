@@ -6,24 +6,27 @@ class UIManager {
   }
 
   setupEventListeners() {
-    document.querySelector('.js-add-button').addEventListener('click', () => {
-      // we need to create subclasses for TaskCreator and TaskEditor, if we are still doing that
+    document.querySelector(".js-add-button").addEventListener("click", () => {
       this.taskList.addTask();
     });
 
     // Add event listeners for sorting buttons
-    document.querySelector('.sort-button-category').addEventListener('click', () => {
+    document.querySelector('#sort-button-category').addEventListener('click', () => {
       //Quit editing task if sort is clicked
       this.taskList.setEditingTaskIndex(null);
-
       this.taskList.updateTaskList('category')
     });
 
-    document.querySelector('.sort-button-priority').addEventListener('click', () => {
+    document.querySelector('#sort-button-priority').addEventListener('click', () => {
       //Quit editing task if sort is clicked
       this.taskList.setEditingTaskIndex(null);
-
       this.taskList.updateTaskList('priority')
+    });
+    
+    document.querySelector("#sort-button-date").addEventListener("click", () => {
+      //Quit editing task if sort is clicked
+      this.taskList.setEditingTaskIndex(null);
+      this.taskList.updateTaskList("date");
     });
 
     document.querySelectorAll('.js-filter-input').forEach((button) => {
@@ -41,7 +44,7 @@ class UIManager {
     let dateCheck = false;
     let timeCheck = false;
 
-    document.querySelector('.js-date-input').addEventListener('click', (e) => {
+    document.querySelector(".js-date-input").addEventListener("click", e => {
       e.preventDefault();
       if (!dateCheck) {
         e.target.showPicker();
@@ -51,51 +54,88 @@ class UIManager {
       }
     });
 
-    document.querySelector('.js-date-input').addEventListener('blur', () => {
+    document.querySelector(".js-date-input").addEventListener("blur", () => {
       dateCheck = false;
     });
 
-    document.querySelector('.js-time-input').addEventListener('click', (e) => {
+    document.querySelector(".js-time-input").addEventListener("click", e => {
       e.preventDefault();
       if (!timeCheck) {
         e.target.showPicker();
         timeCheck = true;
-        
-        //Setting date to today if time is clicked while date is empty
-        const inputDateElement = document.querySelector('.js-date-input');
-        if (!inputDateElement.value){
-          const now = new Date();
-          const date = now.toISOString().split('T')[0];console.log(inputDateElement.value);
-          inputDateElement.value = date; 
-        }
 
-      } 
-      else {
+        //Setting date to today if time is clicked while date is empty
+        const inputDateElement = document.querySelector(".js-date-input");
+        if (!inputDateElement.value) {
+          const now = new Date();
+          const date = now.toISOString().split("T")[0];
+          console.log(inputDateElement.value);
+          inputDateElement.value = date;
+        }
+      } else {
         timeCheck = false;
       }
     });
 
-    document.querySelector('.js-time-input').addEventListener('blur', () => {
+    document.querySelector(".js-time-input").addEventListener("blur", () => {
       timeCheck = false;
     });
 
-  }
+    // add function to open Filter Menu
+    document.querySelector("#open-filters-btn").addEventListener("click", () => {
+        var btn = document.getElementById("open-filters-btn");
+        var x = document.getElementById("filter-menu");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+          btn.innerHTML = "Close Filters";
+        } else {
+          x.style.display = "none";
+          btn.innerHTML = "Open Filters";
+        }
+      });
 
+    // add function to filter reset button
+    document.querySelector("#reset-filters").addEventListener("click", () => {
+      var select = document.querySelector(".filter-completion");
+      select.selectedIndex = 0;
+      select = document.querySelector(".filter-category");
+      select.selectedIndex = 0;
+      select = document.querySelector(".filter-priority");
+      select.selectedIndex = 0;
+      this.taskList.updateTaskList("");
+    });
+
+    // add function to search bar
+    document.querySelector("#search").addEventListener("input", e => {
+      const searchTerm = e.target.value.toLowerCase();
+      this.taskList.filterManager.searchTasks(searchTerm);
+    });
+
+    // add function to 24 hour format toggle
+    document.querySelector("#switch24Hour").addEventListener("change", () => { 
+      localStorage.setItem('timeFormat24Hr', document.querySelector("#switch24Hour").checked);   
+      this.taskList.updateTaskList("");  
+    });
+  }
 }
 
 // I think we need another setup() that deals with setting up html
 // Note: add this to app class as html setup
-document.addEventListener('DOMContentLoaded', () => {
-
+document.addEventListener("DOMContentLoaded", () => {
   // Set focus on the name input field
-  const inputNameElement = document.querySelector('.js-name-input');
+  const inputNameElement = document.querySelector(".js-name-input");
   inputNameElement.focus();
-
-
+  const switch24Hour = document.querySelector("#switch24Hour");
+  const savedTimeFormat = localStorage.getItem('timeFormat24Hr');
+  if (savedTimeFormat !== null) {
+    console.log("time format 24 hours = " + savedTimeFormat)
+    switch24Hour.checked = (savedTimeFormat === 'true');
+  }
 });
 
+
 // Add year in the footer(CopyRight Notice)
-let year = document.querySelector('.year');
+let year = document.querySelector(".year");
 year.innerText = new Date().getFullYear();
 
 export default UIManager;

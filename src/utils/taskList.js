@@ -253,17 +253,31 @@ class TaskList {
     const totalTasks = this.taskList.length;
 
     // Select the element where the task counter is displayed
-    const taskCounterButton = document.querySelector('.task-counter-button');
+    const taskCounterButton = document.querySelector('.task-counter');
 
     // Update the text of the task counter button
     if (taskCounterButton) {
-      taskCounterButton.innerText = `Tasks: ${totalTasks}`;
+      taskCounterButton.innerText = `Total tasks: ${totalTasks}`;
     }
   }
 
   // Create the HTML element to represent a task visually
   createTaskHTML(task, referenceNumber) {
-    var date_text = task.time? task.date + ", " +  task.time : task.date; 
+    
+    const savedTimeFormat = localStorage.getItem('timeFormat24Hr');
+    var timeString = "";
+    
+    if (savedTimeFormat === 'true' || !task.time) { // 24 hour format
+      timeString = `${task.time}`;
+    }
+    else { // 12 hour format
+      const [hours, minutes] = task.time.split(':').map(Number); // Split and convert to numbers
+      const period = hours >= 12 ? 'PM' : 'AM'; // Determine AM or PM
+      const hours12 = hours % 12 || 12;
+      timeString = `${hours12}:${minutes.toString().padStart(2, '0')} ${period}`;
+    }
+
+    var date_text = task.time? task.date + ", " +  timeString : task.date; 
 
     if (referenceNumber == this.taskEditingIndex){
       console.log("Editing" + referenceNumber)
@@ -316,7 +330,6 @@ class TaskList {
             <div class="date-section">${date_text}</div>
           </div>
         </div>
-        
         <button class="js-delete-button" data-index="${referenceNumber}">
         <i class="fa-solid fa-trash"></i>
         </button>
@@ -397,6 +410,7 @@ class TaskList {
       checkbox.addEventListener('change', (event) => {
         this.index = event.target.dataset.index;  // Get the task index
         Task.toggleComplete(tasksToDisplay[this.index], this);  // Call the method from TaskList
+        localStorage.setItem('taskList', JSON.stringify(this.taskList));
       });
     });
 

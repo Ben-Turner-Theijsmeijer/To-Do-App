@@ -1,174 +1,231 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const darkModeBtn = document.getElementById("darkModeBtn");
-    const body = document.body;
+import Task from "./task.js";
 
-    // Check for saved preference in localStorage
+class Calendar {
+  constructor() {
+    this.body = document.body;
+    this.darkModeBtn = document.getElementById("darkModeBtn");
+    this.calendarEl = document.getElementById("calendar");
+    this.currentDateEl = document.getElementById("currentDate");
+    this.prevBtn = document.getElementById("prevBtn");
+    this.nextBtn = document.getElementById("nextBtn");
+    this.todayBtn = document.getElementById("todayBtn");
+    this.monthViewBtn = document.getElementById("monthViewBtn");
+    this.weekViewBtn = document.getElementById("weekViewBtn");
+
+    this.viewMode = "month";
+    this.currentDate = new Date();
+    this.taskList = this.getTaskList();
+
+    this.initDarkMode();
+    this.addEventListeners();
+    this.renderCalendar();
+  }
+
+  getTaskList() {
+    const storedTasks = JSON.parse(localStorage.getItem("taskList")) || [];
+    console.log(storedTasks);
+    return storedTasks.map(
+      taskData =>
+        new Task(
+          taskData.name,
+          taskData.date,
+          taskData.time,
+          taskData.category,
+          taskData.priority,
+          taskData.completed
+        )
+    );
+  }
+
+  initDarkMode() {
     if (localStorage.getItem("darkMode") === "enabled") {
-      body.classList.add("dark-mode");
-      darkModeBtn.innerHTML = '<i class="fa-solid fa-sun"></i> Light Mode';
+      this.body.classList.add("dark-mode");
+      this.darkModeBtn.innerHTML = '<i class="fa-solid fa-sun"></i> Light Mode';
     }
+  }
 
-    // Toggle dark mode
-    darkModeBtn.addEventListener("click", function () {
-      body.classList.toggle("dark-mode");
+  toggleDarkMode() {
+    this.body.classList.toggle("dark-mode");
+    if (this.body.classList.contains("dark-mode")) {
+      localStorage.setItem("darkMode", "enabled");
+      this.darkModeBtn.innerHTML = '<i class="fa-solid fa-sun"></i> Light Mode';
+    } else {
+      localStorage.setItem("darkMode", "disabled");
+      this.darkModeBtn.innerHTML = '<i class="fa-solid fa-moon"></i> Dark Mode';
+    }
+  }
 
-      if (body.classList.contains("dark-mode")) {
-        localStorage.setItem("darkMode", "enabled");
-        darkModeBtn.innerHTML = '<i class="fa-solid fa-sun"></i> Light Mode';
-      } else {
-        localStorage.setItem("darkMode", "disabled");
-        darkModeBtn.innerHTML = '<i class="fa-solid fa-moon"></i> Dark Mode';
+  addEventListeners() {
+    this.darkModeBtn.addEventListener("click", () => this.toggleDarkMode());
+    this.prevBtn.addEventListener("click", () => this.changeDate(-1));
+    this.nextBtn.addEventListener("click", () => this.changeDate(1));
+    this.todayBtn.addEventListener("click", () => this.goToToday());
+    this.monthViewBtn.addEventListener("click", () => this.setView("month"));
+    this.weekViewBtn.addEventListener("click", () => this.setView("week"));
+  }
+
+  changeDate(offset) {
+    if (this.viewMode === "month") {
+      this.currentDate.setMonth(this.currentDate.getMonth() + offset);
+    } else {
+      this.currentDate.setDate(this.currentDate.getDate() + offset * 7);
+    }
+    this.renderCalendar();
+  }
+
+  goToToday() {
+    this.currentDate = new Date();
+    this.renderCalendar();
+  }
+
+  setView(view) {
+    this.viewMode = view;
+    this.renderCalendar();
+  }
+
+  renderCalendar() {
+    this.taskList = this.getTaskList(); // Ensure updated task list
+    this.calendarEl.innerHTML = "";
+    this.currentDateEl.textContent = this.currentDate.toLocaleDateString(
+      "en-US",
+      {
+        month: "long",
+        year: "numeric"
       }
+    );
+
+    if (this.viewMode === "month") {
+      this.renderMonthView();
+    } else {
+      this.renderWeekView();
+    }
+  }
+
+  renderMonthView() {
+    let firstDay = new Date(
+      this.currentDate.getFullYear(),
+      this.currentDate.getMonth(),
+      1
+    );
+    let lastDay = new Date(
+      this.currentDate.getFullYear(),
+      this.currentDate.getMonth() + 1,
+      0
+    );
+    let startDate = new Date(firstDay);
+    startDate.setDate(startDate.getDate() - firstDay.getDay());
+    let endDate = new Date(lastDay);
+    endDate.setDate(endDate.getDate() + (6 - lastDay.getDay()));
+    this.createCalendarGrid(startDate, endDate);
+  }
+
+  renderWeekView() {
+    let startOfWeek = new Date(this.currentDate);
+    startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
+    let endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(endOfWeek.getDate() + 6);
+    this.createCalendarGrid(startOfWeek, endOfWeek);
+  }
+
+  createCalendarGrid(startDate, endDate) {
+    const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    let table = document.createElement("table");
+    table.className = "table table-bordered calendar-table";
+
+    let thead = document.createElement("thead");
+    let headerRow = document.createElement("tr");
+    daysOfWeek.forEach(day => {
+      let th = document.createElement("th");
+      th.textContent = day;
+      headerRow.appendChild(th);
     });
-});
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
 
-document.addEventListener("DOMContentLoaded", function () {
-    const calendarEl = document.getElementById("calendar");
-    const currentDateEl = document.getElementById("currentDate");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
-    const todayBtn = document.getElementById("todayBtn");
-    const monthViewBtn = document.getElementById("monthViewBtn");
-    const weekViewBtn = document.getElementById("weekViewBtn");
+    let tbody = document.createElement("tbody");
+    let row = document.createElement("tr");
+    let dateIterator = new Date(startDate);
 
-    let viewMode = "month"; // Default view
-    let currentDate = new Date();
-
-    function renderCalendar() {
-        console.log("Rendering Calendar", viewMode, currentDate);
-
-        calendarEl.innerHTML = ""; // Clear existing content
-        currentDateEl.textContent = currentDate.toLocaleDateString("en-US", {
-            month: "long",
-            year: "numeric",
-        });
-
-        if (viewMode === "month") {
-            renderMonthView();
-        } else {
-            renderWeekView();
+    while (dateIterator <= endDate) {
+      let cell = document.createElement("td");
+      cell.classList.add("calendar-cell");
+      if (dateIterator.getMonth() === this.currentDate.getMonth()) {
+        cell.textContent = dateIterator.getDate();
+        if (dateIterator.toDateString() === new Date().toDateString()) {
+          cell.classList.add("today");
         }
-    }
-
-    function renderMonthView() {
-        let firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-        let lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
-        let startDate = new Date(firstDay);
-        startDate.setDate(startDate.getDate() - firstDay.getDay()); // Adjust to start from Sunday
-
-        let endDate = new Date(lastDay);
-        endDate.setDate(endDate.getDate() + (6 - lastDay.getDay())); // Extend to Saturday
-
-        createCalendarGrid(startDate, endDate);
-    }
-
-    function renderWeekView() {
-        let startOfWeek = new Date(currentDate);
-        startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay()); // Get Sunday
-
-        let endOfWeek = new Date(startOfWeek);
-        endOfWeek.setDate(endOfWeek.getDate() + 6); // Get Saturday
-
-        createCalendarGrid(startOfWeek, endOfWeek);
-    }
-
-    function createCalendarGrid(startDate, endDate) {
-        console.log("Generating grid from:", startDate, "to:", endDate);
-        const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-        let table = document.createElement("table");
-        table.className = "table table-bordered calendar-table";
-
-        let thead = document.createElement("thead");
-        let headerRow = document.createElement("tr");
-
-        daysOfWeek.forEach(day => {
-            let th = document.createElement("th");
-            th.textContent = day;
-            headerRow.appendChild(th);
-        });
-
-        thead.appendChild(headerRow);
-        table.appendChild(thead);
-
-        let tbody = document.createElement("tbody");
-        let row = document.createElement("tr");
-        let dateIterator = new Date(startDate);
-
-        // Loop through each day in the calendar grid
-        while (dateIterator <= endDate) {
-            let cell = document.createElement("td");
-
-            // Check if the current date is within the current month
-            if (dateIterator.getMonth() === currentDate.getMonth()) {
-                cell.textContent = dateIterator.getDate();
-
-                // Highlight today's date
-                if (dateIterator.toDateString() === new Date().toDateString()) {
-                    cell.classList.add("today");
-                }
-            } else {
-                // Leave the cell empty if it's outside the current month
-                cell.classList.add("empty");
-            }
-
-            row.appendChild(cell);
-
-            // Move to next row if the current day is Saturday
-            if (dateIterator.getDay() === 6) {
-                tbody.appendChild(row);
-                row = document.createElement("tr");
-            }
-
-            // Move to the next day
-            dateIterator.setDate(dateIterator.getDate() + 1);
-        }
-
-        // Append the last row
+        this.addTasksToCell(cell, dateIterator);
+      } else {
+        cell.classList.add("empty");
+      }
+      row.appendChild(cell);
+      if (dateIterator.getDay() === 6) {
         tbody.appendChild(row);
-        table.appendChild(tbody);
-        calendarEl.appendChild(table);
+        row = document.createElement("tr");
+      }
+      dateIterator.setDate(dateIterator.getDate() + 1);
     }
+    tbody.appendChild(row);
+    table.appendChild(tbody);
+    this.calendarEl.appendChild(table);
+  }
 
-    prevBtn.addEventListener("click", function () {
-        if (viewMode === "month") {
-            currentDate.setMonth(currentDate.getMonth() - 1);
-        } else {
-            currentDate.setDate(currentDate.getDate() - 7);
-        }
-        renderCalendar();
-    });
+  popupTaskDetails(task) {
+    // containing element
+    const taskDetailsPopup = document.getElementById("taskDetails");
+    taskDetailsPopup.style.display = "block";
+    // name & completion status
+    const nameAndIsComplete = document.getElementById(
+      "taskDetailsNameAndStatus"
+    );
+    const completionStatus = task.completed ? " (Complete)" : "";
+    nameAndIsComplete.innerText = task.name + completionStatus;
+    // date and time
+    const dateTime = document.getElementById("taskDetailsDateTime");
+    const dateStr = task.date != "" ? task.date : "";
+    const timeStr = task.time != "" ? ", " + task.time : "";
+    dateTime.innerText = dateStr + timeStr;
+    // category and priority
+    const catPri = document.getElementById("categoryAndPriority");
+    categoryAndPriority.innerHTML = "";
+    if (task.category != "") {
+      const category = document.createElement("span");
+      category.classList.add("category-tag");
+      category.innerText = task.category;
+      categoryAndPriority.appendChild(category);
+    }
+    if (task.priority != "") {
+      const priority = document.createElement("span");
+      priority.classList.add("priority-tag");
+      priority.classList.add(`priority-${task.priority}`);
+      priority.innerText = task.priority;
+      categoryAndPriority.appendChild(priority);
+    }
+  }
 
-    nextBtn.addEventListener("click", function () {
-        if (viewMode === "month") {
-            currentDate.setMonth(currentDate.getMonth() + 1);
-        } else {
-            currentDate.setDate(currentDate.getDate() + 7);
-        }
-        renderCalendar();
-    });
+  addTasksToCell(cell, date) {
+    const tasksForDate = this.taskList.filter(
+      task => task.date === date.toISOString().split("T")[0]
+    );
 
-    todayBtn.addEventListener("click", function () {
-        currentDate = new Date();
-        renderCalendar();
-    });
+    if (tasksForDate.length > 0) {
+      let taskContainer = document.createElement("div");
+      taskContainer.classList.add("task-container");
 
-    monthViewBtn.addEventListener("click", function () {
-        viewMode = "month";
-        monthViewBtn.classList.add("btn-primary");
-        monthViewBtn.classList.remove("btn-outline-primary");
-        weekViewBtn.classList.remove("btn-primary");
-        weekViewBtn.classList.add("btn-outline-primary");
-        renderCalendar();
-    });
+      tasksForDate.forEach(task => {
+        let taskLabel = document.createElement("div");
+        taskLabel.classList.add("task-label");
+        taskLabel.textContent =
+          task.name.length > 10 ? task.name.slice(0, 10) + "..." : task.name;
+        taskLabel.title = task.name; // Full task name on hover
+        taskLabel.onclick = () => this.popupTaskDetails(task); // Optional: Click to show full task name
 
-    weekViewBtn.addEventListener("click", function () {
-        viewMode = "week";
-        weekViewBtn.classList.add("btn-primary");
-        weekViewBtn.classList.remove("btn-outline-primary");
-        monthViewBtn.classList.remove("btn-primary");
-        monthViewBtn.classList.add("btn-outline-primary");
-        renderCalendar();
-    });
+        taskContainer.appendChild(taskLabel);
+      });
 
-    renderCalendar();
-});
+      cell.appendChild(taskContainer);
+    }
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => new Calendar());

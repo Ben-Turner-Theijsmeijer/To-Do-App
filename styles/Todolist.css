@@ -51,7 +51,8 @@
   padding: 0;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -107,6 +108,12 @@ body {
 
 
 /* Add task area */
+.task-counter{
+  font-weight: 600;
+  color: rgb(94, 94, 94);
+  margin-bottom: 0;
+}
+
 .js-add-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
@@ -444,7 +451,7 @@ body {
   background-color: var(--navbar-bg);
 }
 
-.dark-mode .navbar-brand, 
+.dark-mode .navbar-brand,
 .dark-mode .nav-link {
   color: var(--navbar-text) !important;
 }
@@ -456,6 +463,22 @@ body {
 .dark-mode .task-info,
 .dark-mode .task-name {
   color: var(--task-text);
+}
+
+/* Sort Buttons */
+#sort-button-category,
+#sort-button-priority,
+#sort-button-date {
+  background-color: var(--button-color-secondary);
+  color: var(--button-text-color-secondary);
+  border-color: var(--button-border-color-secondary);
+}
+
+#sort-button-category:hover,
+#sort-button-priority:hover,
+#sort-button-date:hover {
+  background-color: var(--button-hover-color-secondary);
+  color: var(--button-hover-text-color-secondary);
 }
 
 .dark-mode .small-container {
@@ -504,4 +527,33 @@ body {
 .dark-mode #darkModeBtn {
   background-color: #ffffff;
   color: #222;
+}
+
+/* Filter Menu Styling */
+#sort-and-filter {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  justify-self: center;
+  margin-top: 2.5em;
+  gap: 65px
+}
+
+/* Search Bar Styling */
+.hide {
+  display: none;
+}
+
+/* 24 hour toggle styling */
+.form-check {
+  width: 78%;
+  justify-self: center;
+}
+.form-check-input:checked {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.form-check-input:checked:focus {
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
 }
