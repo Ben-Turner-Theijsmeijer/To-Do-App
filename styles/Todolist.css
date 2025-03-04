@@ -110,7 +110,7 @@ body {
 /* Add task area */
 .task-counter{
   font-weight: 600;
-  color: rgb(94, 94, 94);
+  color: var(--primary-text);
   margin-bottom: 0;
 }
 
@@ -416,11 +416,23 @@ body {
   background-color: #858585;
 }
 
+.dark-mode .js-cancel-edit-button{
+  color: var(--button-text-color);
+  background-color: #4f4f4f;
+}
+
+
 .js-cancel-edit-button:hover ,
 .js-cancel-edit-button:focus-visible {
   color: var(--button-text-color);
   background-color: #3b3b3b;
 }
+.dark-mode .js-cancel-edit-button:hover,
+.dark-mode .js-cancel-edit-button:focus-visible{
+  color: var(--button-text-color);
+  background-color: #272727;
+}
+
 
 .js-save-edit-button{
   background-color: var(--button-color);
@@ -481,7 +493,8 @@ body {
 /* Sort Buttons */
 #sort-button-category,
 #sort-button-priority,
-#sort-button-date {
+#sort-button-date,
+#open-filters-btn {
   background-color: var(--button-color-secondary);
   color: var(--button-text-color-secondary);
   border-color: var(--button-border-color-secondary);
@@ -489,7 +502,8 @@ body {
 
 #sort-button-category:hover,
 #sort-button-priority:hover,
-#sort-button-date:hover {
+#sort-button-date:hover,
+#open-filters-btn:hover {
   background-color: var(--button-hover-color-secondary);
   color: var(--button-hover-text-color-secondary);
 }
@@ -513,7 +527,7 @@ body {
 
 .dark-mode .js-add-button:hover,
 .dark-mode .js-edit-button:hover {
-  background-color: var(--button-hover);
+  background-color: var(--button-hover-color);
 }
 
 .dark-mode-toggle {

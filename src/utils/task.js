@@ -99,7 +99,7 @@ class Task {
       taskList.taskList.push(new Task(task.name, newDate, task.time, task.category, task.priority, false, task.recurring))
     }
 
-    taskList.updateTaskList('');
+    taskList.updateAndDisplayTaskList();
     taskList.updateTaskCounter();
   }
 

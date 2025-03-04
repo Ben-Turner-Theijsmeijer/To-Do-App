@@ -3,6 +3,7 @@ class FilterManager {
     this.filterCompletion = 'all';
     this.filterCategory = 'all';
     this.filterPriority = 'all';
+    this.filterString = '';
   }
 
   // Filters the to do list based on the selected filter method
@@ -31,20 +32,18 @@ class FilterManager {
     if (this.filterPriority != 'All' && this.filterPriority != 'all'){
       filteredTasks = filteredTasks.filter(task => this.filterPriority == task.priority);
     }
+
+    //Filtering for Name
+    if (this.filterString != ''){
+      filteredTasks = filteredTasks.filter( task => task.name.toLowerCase().includes(this.filterString) )
+    }
     
     return filteredTasks;
   }
 
   // Filter the tasks based on the string entered in the search bar 
-  searchTasks (searchTerm) {
-    const taskList = document.querySelectorAll('.task');
-    taskList.forEach(task => {
-      const taskName = task.querySelector('.task-name');
-      const name = taskName.textContent;
-      console.log(name);
-      
-      // Hide and show elements based on matching the search term
-  });
+  setSearchFilter (searchTerm) {
+    this.filterString = searchTerm.toLowerCase();
   }
 }
 
