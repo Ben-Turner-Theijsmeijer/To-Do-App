@@ -727,6 +727,7 @@ body {
 
 .high-contrast-mode .js-delete-button:hover,
 .high-contrast-mode .js-delete-button:focus-visible {
+  background-color: var(--button-hover-color);
   border: 2px solid var(--button-border-color);
 }
 

@@ -2,7 +2,9 @@ document.addEventListener("DOMContentLoaded", function() {
   const themeDropdown = document.getElementById("themesSelection");
   const body = document.body;
 
-  themeDropdown.value = localStorage.getItem("theme");
+  if(localStorage.getItem("theme")){
+    themeDropdown.value = localStorage.getItem("theme");
+  }
  
   if (localStorage.getItem("theme") === "dark") {
     body.classList.add("dark-mode");
