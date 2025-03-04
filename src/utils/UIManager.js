@@ -117,19 +117,22 @@ class UIManager {
     });
 
     // add function to 24 hour format toggle
-    document.querySelector("#switch24Hour").addEventListener("change", () => { 
-      localStorage.setItem('timeFormat24Hr', document.querySelector("#switch24Hour").checked);   
+    document.querySelector("#switch24Hour").addEventListener("change", () => {
+      localStorage.setItem('timeFormat24Hr', document.querySelector("#switch24Hour").checked);  
       this.taskList.updateAndDisplayTaskList();  
     });
+
   }
 }
 
 // I think we need another setup() that deals with setting up html
-// Note: add this to app class as html setup
+// Note: add this to app class as html setup (I think its good here - Em!)
 document.addEventListener("DOMContentLoaded", () => {
   // Set focus on the name input field
   const inputNameElement = document.querySelector(".js-name-input");
   inputNameElement.focus();
+
+  // Set up switch position
   const switch24Hour = document.querySelector("#switch24Hour");
   const savedTimeFormat = localStorage.getItem('timeFormat24Hr');
   if (savedTimeFormat !== null) {

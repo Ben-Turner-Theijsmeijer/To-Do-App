@@ -148,7 +148,7 @@ body {
 
 .js-add-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 2.5fr 11rem 8rem 8rem 7.3rem 8rem 1fr;
   row-gap: 1rem;
   background-color: rgba(255, 255, 255, 0.9);
   padding: 20px;
@@ -156,6 +156,7 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 0.813rem;
   column-gap: 10px;
+  overflow: auto;
 }
 
 .js-actions-wrapper {
@@ -166,11 +167,13 @@ body {
   grid-column: auto;
 }
 
-.js-time-input:disabled {
+.js-time-input:disabled,
+.js-recurring-input:disabled {
   background-color: #e0e0e0; /* Light gray background */
   color: #888; /* Dim text color */
   cursor: not-allowed; /* Show "not allowed" cursor */
 }
+
 
 .js-add-button {
   background-color: var(--button-color);
@@ -293,7 +296,8 @@ body {
 }
 
 .category-tag,
-.priority-tag {
+.priority-tag,
+.recurring-tag {
   display: inline-block;
   padding: 1px 6px;
   border-radius: 3px;
@@ -304,6 +308,11 @@ body {
 .category-tag {
   background-color: #e0e0e0;
   color: #333;
+}
+
+.recurring-tag{
+  background-color: #add8e6;
+  color: #1f46a8;
 }
 
 .priority-High {
