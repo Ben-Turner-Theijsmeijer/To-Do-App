@@ -1,6 +1,5 @@
 class UIManager {
-  constructor(taskManager, taskList) {
-    this.taskManager = taskManager;
+  constructor(taskList) {
     this.taskList = taskList;
 
     this.setupEventListeners();
@@ -8,40 +7,40 @@ class UIManager {
 
   setupEventListeners() {
     document.querySelector(".js-add-button").addEventListener("click", () => {
-      // for now... TaskManager manages the list, but Task lists creates the tasks
       this.taskList.addTask();
     });
-    // Add event listeners to buttons
-    document
-      .querySelector(".js-cancel-button")
-      .addEventListener("click", () => this.taskManager.cancelEditTask());
 
     // Add event listeners for sorting buttons
-    document
-      .querySelector("#sort-button-category")
-      .addEventListener("click", () =>
-        this.taskList.updateTaskList("category")
-      );
-    document
-      .querySelector("#sort-button-priority")
-      .addEventListener("click", () =>
-        this.taskList.updateTaskList("priority")
-      );
-    document
-      .querySelector("#sort-button-date")
-      .addEventListener("click", () => this.taskList.updateTaskList("date"));
-
-    // add event listeners for the filter buttons
-    document.querySelectorAll(".js-filter-input").forEach(button => {
-      button.addEventListener("change", () => this.taskList.updateTaskList(""));
+    document.querySelector('#sort-button-category').addEventListener('click', () => {
+      //Quit editing task if sort is clicked
+      this.taskList.setEditingTaskIndex(null);
+      this.taskList.sortTaskList("category");
+      this.taskList.updateAndDisplayTaskList() //sort
     });
 
-    // add event listeners inputting task information
-    document.querySelector(".js-name-input").addEventListener("input", e => {
-      let input = e.target.value;
-      if (input.length === 120) {
-        alert("max character limits exceeded");
-      }
+    document.querySelector('#sort-button-priority').addEventListener('click', () => {
+      //Quit editing task if sort is clicked
+      this.taskList.setEditingTaskIndex(null);
+      this.taskList.sortTaskList("priority");
+      this.taskList.updateAndDisplayTaskList() //sort
+    });
+    
+    document.querySelector("#sort-button-date").addEventListener("click", () => {
+      //Quit editing task if sort is clicked
+      this.taskList.setEditingTaskIndex(null);
+      this.taskList.sortTaskList("date");
+      this.taskList.updateAndDisplayTaskList(); //sort
+    });
+
+    document.querySelectorAll('.js-filter-input').forEach((button) => {
+      
+      button.addEventListener('change', () => {
+        //Quit editing task if filter is changed
+        this.taskList.setEditingTaskIndex(null);
+
+        this.taskList.updateAndDisplayTaskList()
+      });
+
     });
 
     // Piece of code that exists all on its own
@@ -86,9 +85,7 @@ class UIManager {
     });
 
     // add function to open Filter Menu
-    document
-      .querySelector("#open-filters-btn")
-      .addEventListener("click", () => {
+    document.querySelector("#open-filters-btn").addEventListener("click", () => {
         var btn = document.getElementById("open-filters-btn");
         var x = document.getElementById("filter-menu");
         if (x.style.display === "none") {
@@ -108,19 +105,21 @@ class UIManager {
       select.selectedIndex = 0;
       select = document.querySelector(".filter-priority");
       select.selectedIndex = 0;
-      this.taskList.updateTaskList("");
+      this.taskList.updateAndDisplayTaskList();
     });
 
     // add function to search bar
-    document.querySelector("#search").addEventListener("input", e => {
-      const searchTerm = e.target.value.toLowerCase();
-      this.taskList.filterManager.searchTasks(searchTerm);
+    var searchBar = document.querySelector("#search");
+    searchBar.addEventListener("input", e => {
+      const searchTerm = searchBar.value.toLowerCase();
+      this.taskList.filterManager.setSearchFilter(searchTerm);
+      this.taskList.updateAndDisplayTaskList();
     });
 
     // add function to 24 hour format toggle
     document.querySelector("#switch24Hour").addEventListener("change", () => { 
       localStorage.setItem('timeFormat24Hr', document.querySelector("#switch24Hour").checked);   
-      this.taskList.updateTaskList("");  
+      this.taskList.updateAndDisplayTaskList();  
     });
   }
 }
@@ -131,11 +130,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Set focus on the name input field
   const inputNameElement = document.querySelector(".js-name-input");
   inputNameElement.focus();
-
-  // Hide edit cancel action button on page load
-  const cancelEditBtn = document.querySelector(".js-cancel-button");
-  cancelEditBtn.style.display = "none";
-
   const switch24Hour = document.querySelector("#switch24Hour");
   const savedTimeFormat = localStorage.getItem('timeFormat24Hr');
   if (savedTimeFormat !== null) {
