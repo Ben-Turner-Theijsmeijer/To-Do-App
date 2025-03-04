@@ -7,7 +7,7 @@ class TaskList {
     this.taskList = []
     // Turning saved json into task objects
     this.taskListData.forEach( (savedTask) => {
-      this.taskList.push(new Task(savedTask.name, savedTask.date, savedTask.time, savedTask.category, savedTask.priority, savedTask.completed))
+      this.taskList.push(new Task(savedTask.name, savedTask.date, savedTask.time, savedTask.category, savedTask.priority, savedTask.completed, savedTask.recurring))
     });
 
     this.taskListhtml = '';
@@ -77,18 +77,19 @@ class TaskList {
     }
 
     // CSV Header Row
-    let csvContent = "TaskName,Date,Time,Category,Priority\n";
+    let csvContent = "TaskName,Date,Time,Category,Priority,Recurring\n";
 
     // Loop through all tasks and format their data
     this.taskList.forEach((task) => {
       const taskName = task.name.trim(); // Task name is required
       const date = task.date ? task.date.trim() : ""; // Default to empty if missing
       const time = task.time ? task.time.trim() : ""; // Default to empty if missing
-      const category = task.category ? task.category.trim().toLowerCase() : ""; // Lowercase
-      const priority = task.priority ? task.priority.trim().toLowerCase() : ""; // Lowercase
+      const category = task.category ? task.category.trim() : ""; 
+      const priority = task.priority ? task.priority.trim() : ""; 
+      const recurring = task.recurring ? task.recurring : ""; 
 
       // Append the task to CSV content
-      csvContent += `${taskName},${date},${time},${category},${priority}\n`;
+      csvContent += `${taskName},${date},${time},${category},${priority},${recurring}\n`;
     });
 
     // Create a downloadable CSV file
@@ -124,7 +125,7 @@ class TaskList {
 
       // Process each remaining line as a task
       lines.forEach((line) => {
-        const [name, date, time, category, priority] = line.split(",").map(item => item.trim());
+        const [name, date, time, category, priority, recurring] = line.split(",").map(item => item.trim());
 
         if (name) { // Only add tasks with a name
           const newTask = new Task(
@@ -133,7 +134,8 @@ class TaskList {
             time || "", // Default empty if missing
             category || "", // Default empty if missing
             priority || "", // Default empty if missing
-            false // Task is not completed by default
+            false, // Task is not completed by default
+            recurring || ""
           );
 
           this.taskList.push(newTask);
@@ -151,16 +153,27 @@ class TaskList {
   setupDateChangeListeners() {
     const inputDateElement = document.querySelector('.js-date-input');
     const inputTimeElement = document.querySelector('.js-time-input');
+    const inputRecurringElement = document.querySelector('.js-recurring-input');
 
-    if (inputDateElement && inputTimeElement) {
-      // Initially disable the time input if no date is present
+    // console.log(inputRecurringElement.disabled);
+    
+
+    if (inputDateElement && inputTimeElement && inputRecurringElement) {
+      // Initially disable the all inputs if no date is present
       inputTimeElement.disabled = !inputDateElement.value;
       inputTimeElement.classList.toggle('disabled', !inputDateElement.value);
 
-      // Add event listener to enable time input when a date is entered
+      inputRecurringElement.disabled = !inputRecurringElement.value;
+      inputRecurringElement.classList.toggle('disabled', !inputRecurringElement.value);
+
+      // Add event listener to enable all input when a date is entered
       inputDateElement.addEventListener('input', () => {
+
         inputTimeElement.disabled = !inputDateElement.value;
         inputTimeElement.classList.toggle('disabled', !inputDateElement.value);
+
+        inputRecurringElement.disabled = !inputDateElement.value;
+        inputRecurringElement.classList.toggle('disabled', !inputDateElement.value);
       });
     }
   }
@@ -206,12 +219,14 @@ class TaskList {
     const inputTimeElement = document.querySelector('.js-time-input');
     const inputCategoryElement = document.querySelector('.js-category-input');
     const inputPriorityElement = document.querySelector('.js-priority-input');
+    const inputRecurringElement = document.querySelector('.js-recurring-input');
 
     let name = inputNameElement.value;
     let date = inputDateElement.value;
     let time = inputTimeElement.value;
     let category = inputCategoryElement.value;
     let priority = inputPriorityElement.value;
+    let recurring = inputRecurringElement.value;
 
     // Validation checks
     if (!name) {
@@ -222,7 +237,7 @@ class TaskList {
     }
 
     // Add a new task
-    const newTask = new Task(name, date, time, category, priority, false);
+    const newTask = new Task(name, date, time, category, priority, false, recurring);
     this.taskList.push(newTask);     
 
     // Reset the inputs
@@ -231,6 +246,7 @@ class TaskList {
     inputTimeElement.value = '';
     inputCategoryElement.value = '';
     inputPriorityElement.value = '';
+    inputRecurringElement.value = '';
 
     // Update the displayed list
     this.updateTaskList('');
@@ -263,22 +279,10 @@ class TaskList {
 
   // Create the HTML element to represent a task visually
   createTaskHTML(task, referenceNumber) {
-    
-    const savedTimeFormat = localStorage.getItem('timeFormat24Hr');
-    var timeString = "";
-    
-    if (savedTimeFormat === 'true' || !task.time) { // 24 hour format
-      timeString = `${task.time}`;
-    }
-    else { // 12 hour format
-      const [hours, minutes] = task.time.split(':').map(Number); // Split and convert to numbers
-      const period = hours >= 12 ? 'PM' : 'AM'; // Determine AM or PM
-      const hours12 = hours % 12 || 12;
-      timeString = `${hours12}:${minutes.toString().padStart(2, '0')} ${period}`;
-    }
 
-    var date_text = task.time? task.date + ", " +  timeString : task.date; 
+    task.updateTimeString();
 
+    // Set task UI to editing if index is being edited
     if (referenceNumber == this.taskEditingIndex){
       console.log("Editing" + referenceNumber)
       return `
@@ -318,6 +322,7 @@ class TaskList {
       </div>`;
     }
 
+    // Display task UI in task list
     return `
       <div class="task" data-index="${referenceNumber}">
         
@@ -327,7 +332,8 @@ class TaskList {
             <span class="task-name">${task.name}</span>
             ${task.category ? `<span class="category-tag">${task.category}</span>` : ''}
             ${task.priority ? `<span class="priority-tag priority-${task.priority}">${task.priority}</span>` : ''}
-            <div class="date-section">${date_text}</div>
+            ${task.recurring ? `<span class="recurring-tag">${task.recurring}</span>` : ''}
+            <div class="date-section">${task.dateText}</div>
           </div>
         </div>
         <button class="js-delete-button" data-index="${referenceNumber}">
@@ -338,6 +344,7 @@ class TaskList {
         </button>
 
       </div>`;
+
   }
 
   setEditingTaskIndex(index){
@@ -357,8 +364,6 @@ class TaskList {
     let category = editCategoryElement.value;
     let priority = editPriorityElement.value;
     let complete = task.completed;
-
-    console.log(name, date, time, category, priority, complete)
     
     task.updateTask(name, date, time, category, priority, complete);
   }
@@ -386,7 +391,15 @@ class TaskList {
         editName.value = name;
       });
     });
-    
+
+    document.querySelectorAll('.js-complete-checkbox').forEach(checkbox => {
+      checkbox.addEventListener('change', (event) => {
+        this.index = event.target.dataset.index;  // Get the task index
+        Task.toggleComplete(tasksToDisplay[this.index], this);  // Call the method from TaskList
+        localStorage.setItem('taskList', JSON.stringify(this.taskList));
+      });
+    });
+
     var cancelEditElement = document.querySelector('.js-cancel-edit-button');
     if (cancelEditElement){
       cancelEditElement.addEventListener('click', (event) => {
@@ -405,15 +418,6 @@ class TaskList {
         this.updateTaskList("");
       });
     }
-
-    document.querySelectorAll('.js-complete-checkbox').forEach(checkbox => {
-      checkbox.addEventListener('change', (event) => {
-        this.index = event.target.dataset.index;  // Get the task index
-        Task.toggleComplete(tasksToDisplay[this.index], this);  // Call the method from TaskList
-        localStorage.setItem('taskList', JSON.stringify(this.taskList));
-      });
-    });
-
   }
 
 }
