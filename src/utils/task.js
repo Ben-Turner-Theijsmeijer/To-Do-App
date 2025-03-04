@@ -94,7 +94,7 @@ class Task {
     }
 
     // Check if task has been updated before
-    if (!task.recurringUpdated){
+    if (!task.recurringUpdated && task.recurring){
       let newDate = task.updateRecurringTask();
       taskList.taskList.push(new Task(task.name, newDate, task.time, task.category, task.priority, false, task.recurring))
     }
