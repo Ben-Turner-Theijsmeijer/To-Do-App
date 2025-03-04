@@ -1,9 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
-/* Default Light Mode */
-/* body {
-  background-color: #ffffff;
-  color: #333;
-} */
+/* ========================= */
+/*        Light Mode         */
+/* ========================= */
 body {
   font-family: 'Poppins', sans-serif;
   /* overflow-y: scroll; */
@@ -31,7 +29,8 @@ body {
   font-weight: 500;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link:focus {
   color: #007bff !important;
 }
 
@@ -70,7 +69,9 @@ body {
   text-align: center;
 }
 
-/* Dark Mode */
+/* ========================= */
+/*         Dark Mode         */
+/* ========================= */
 .dark-mode {
   background-color: #1e1e1e;
   color: #ffffff;
@@ -84,8 +85,9 @@ body {
   color: #ffffff !important;
 }
 
-.dark-mode .nav-link:hover {
-  color: #66b2ff !important;
+.dark-mode .nav-link:hover,
+.dark-mode .nav-link:focus {
+  color: #007bff !important;
 }
 
 .dark-mode .footer {
@@ -96,14 +98,78 @@ body {
   color: #66b2ff;
 }
 
-/* Dark Mode Toggle Button */
-.dark-mode-toggle {
-  position: absolute;
-  bottom: 10px;
-  right: 20px;
+/* ========================= */
+/*    High Contrast Mode     */
+/* ========================= */
+.high-contrast-mode {
+  background-color: #000000;
+  color: #ffffff;
 }
 
-#darkModeBtn {
+.high-contrast-mode .navbar-custom {
+  background-color: #161616;
+}
+
+.high-contrast-mode .nav-link {
+  color: #ffffff !important;
+  border: 1px solid #00ffff
+}
+
+.high-contrast-mode .nav-link:hover,
+.high-contrast-mode .nav-link:focus {
+  color: #007bff !important;
+}
+
+.high-contrast-mode .footer {
+  background-color: #161616;
+  ;
+}
+
+.high-contrast-mode .feature-icons i {
+  color: #0800ff;
+}
+
+/* high contrast Primary buttons */
+.high-contrast-mode .btn-primary {
+  background-color: #0055ff;
+  color: #ffffff;
+  border: 1px solid #fff000;
+}
+
+.high-contrast-mode .btn-primary:hover,
+.high-contrast-mode .btn-primary:focus {
+  background-color: #000000;
+  color: #ffffff;
+  border: 1px solid #fff000;
+}
+
+/* high contrast Secondary Button */
+.high-contrast-mode .btn-outline-secondary {
+  border: 1px solid #ffffff;
+  color: #ffffff;
+}
+
+.high-contrast-mode .btn-outline-secondary:hover,
+.high-contrast-mode .btn-outline-secondary:focus {
+  border: 2px solid #ff5900;
+  color: #ffffff;
+}
+
+/* ========================= */
+/*          Themes           */
+/* ========================= */
+#themes-selection-div {
+  display: flex;
+  padding: 5px 20px;
+  justify-content: right;
+}
+
+#themesSelectionLabel {
+  display: none
+}
+
+#themesSelection,
+#themesSelection option {
   background-color: #333;
   color: white;
   border: none;
@@ -114,11 +180,20 @@ body {
   transition: background-color 0.3s ease;
 }
 
-#darkModeBtn:hover {
-  background-color: #444;
+.high-contrast-mode #themesSelection,
+.high-contrast-mode #themesSelection option {
+  background-color: #121212;
+  color: #ffffff;
+  border: 2px solid #00ffff;;
 }
 
-.dark-mode #darkModeBtn {
+.high-contrast-mode #themesSelection:hover,
+.high-contrast-mode #themesSelection:focus {
+  border: 2px solid #ff5900;
+}
+
+.dark-mode #themesSelection,
+.dark-mode #themesSelection option {
   background-color: #ffffff;
   color: #222;
 }

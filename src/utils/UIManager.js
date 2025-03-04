@@ -133,7 +133,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const switch24Hour = document.querySelector("#switch24Hour");
   const savedTimeFormat = localStorage.getItem('timeFormat24Hr');
   if (savedTimeFormat !== null) {
-    console.log("time format 24 hours = " + savedTimeFormat)
     switch24Hour.checked = (savedTimeFormat === 'true');
   }
 });

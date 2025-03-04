@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
 
+/* ========================= */
+/*       Theme Colours       */
+/* ========================= */
 /* Light Mode (Default) */
 :root {
   --primary-bg: #fafafe;
@@ -44,8 +47,36 @@
   --shadow-color: #000000;
 }
 
+/* High Contrast Mode */
+.high-contrast-mode {
+  --primary-bg: #000;
+  --primary-text: #ffffff;
+  --secondary-bg: #252525;
+  --navbar-bg: #161616;
+  --navbar-text: #ffffff;
+  --footer-bg: #161616;
+  --footer-text: #ffffff;
+  --task-text: #ffffff; /* Task details white in high contrast mode */
+  --button-color: #0055ff;
+  --button-text-color: #ffffff;
+  --button-hover-color: #000;
+  --button-border-color: #fff000;
+  --button-color-secondary: #000;
+  --button-text-color-secondary: #ffffff;
+  --button-border-color-secondary: #ffffff;
+  --button-hover-color-secondary: #000;
+  --button-hover-text-color-secondary: #ffffff;
+  --sort-button-hover-color: #ff9000;
+  --border-color: #00ffff;
+  --border-color-secondary: #40ff00;
+  --hover-border-color: #ff5900;
+  --shadow-color: #000000;
+}
 
-/* General styling */
+
+/* ========================= */
+/*      General Styling      */
+/* ========================= */
 * {
   margin: 0;
   padding: 0;
@@ -66,7 +97,8 @@ body {
 }
 
 .container {
-  flex: 1; /* Pushes the footer down */
+  flex: 1;
+  /* Pushes the footer down */
 }
 
 
@@ -156,6 +188,21 @@ body {
 
 .js-add-button:hover, .js-add-button:focus-visible {
   background-color: var(--button-hover-color);
+}
+
+/* Search Bar Styling */
+.hide {
+  display: none;
+}
+
+/* Filter Menu Styling */
+#sort-and-filter {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  justify-self: center;
+  margin-top: 2.5em;
+  gap: 65px
 }
 
 /* Sort Buttons */
@@ -439,7 +486,7 @@ body {
 
 /* Popup notification */
 #js-success-notification {
-  position: absolute;
+  position: fixed;
   border-radius: 5px;
   align-items: center;
   justify-content: center;
@@ -452,6 +499,22 @@ body {
   color: #d4edda;
 }
 
+/* 24 hour toggle styling */
+.form-check {
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.form-check-input:checked {
+  background-color: #28a745;
+  border-color: #28a745;
+  cursor: pointer;
+}
+
+.form-check-input:checked:focus-visible {
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
 
 /* Footer */
 .footer {
@@ -462,7 +525,9 @@ body {
 }
 
 
-/* Dark mode styling */
+/* ========================= */
+/*     Dark Mode Styling     */
+/* ========================= */
 .dark-mode .navbar-custom {
   background-color: var(--navbar-bg);
 }
@@ -470,6 +535,11 @@ body {
 .dark-mode .navbar-brand,
 .dark-mode .nav-link {
   color: var(--navbar-text) !important;
+}
+
+.dark-mode .nav-link:hover,
+.dark-mode .nav-link:focus-visible {
+  color: #007bff !important;
 }
 
 .dark-mode .js-add-grid{
@@ -494,7 +564,10 @@ body {
 #sort-button-category:hover,
 #sort-button-priority:hover,
 #sort-button-date:hover,
-#open-filters-btn:hover {
+#open-filters-btn:hover,
+#sort-button-category:focus-visible,
+#sort-button-priority:focus-visible,
+#sort-button-date:focus-visible {
   background-color: var(--button-hover-color-secondary);
   color: var(--button-hover-text-color-secondary);
 }
@@ -517,17 +590,229 @@ body {
 }
 
 .dark-mode .js-add-button:hover,
-.dark-mode .js-edit-button:hover {
+.dark-mode .js-edit-button:hover,
+.dark-mode .js-add-button:focus-visible,
+.dark-mode .js-edit-button:focus-visible {
   background-color: var(--button-hover-color);
 }
 
-.dark-mode-toggle {
+/* ========================= */
+/*   High Contrast Styling   */
+/* ========================= */
+.high-contrast-mode .navbar-custom {
+  background-color: var(--navbar-bg);
+}
+
+.high-contrast-mode .navbar-brand,
+.high-contrast-mode .nav-link {
+  color: var(--navbar-text) !important;
+  border: 1px solid var(--border-color);
+}
+
+.high-contrast-mode .nav-link:hover,
+.high-contrast-mode .nav-link:focus-visible {
+  color: #007bff !important;
+}
+
+.high-contrast-mode .js-add-grid {
+  background-color: var(--secondary-bg);
+  border: 2px solid var(--border-color);
+}
+
+.high-contrast-mode .task-info,
+.high-contrast-mode .task-name {
+  color: var(--task-text);
+}
+
+.high-contrast-mode .small-container {
+  background-color: var(--primary-bg);
+  color: #ffffff;
+  border: 1px solid var(--border-color-secondary);
+}
+
+.high-contrast-mode .js-add-html {
+  background-color: var(--primary-bg);
+}
+
+.high-contrast-mode .form-switch {
+  border: 1px solid var(--border-color-secondary);
+}
+
+.high-contrast-mode #js-success-notification {
+  color: var(--primary-text);
+  background-color: var(--primary-bg);
+  border: 2px solid var(--border-color);
+
+}
+
+/* Primary buttons */
+.high-contrast-mode .btn-primary {
+  background-color: var(--button-color);
+  color: var(--button-text-color);
+  border: 1px solid var(--button-border-color);
+}
+
+.high-contrast-mode .btn-primary:hover,
+.high-contrast-mode .btn-primary:focus-visible {
+  background-color: var(--button-hover-color);
+  color: var(--primary-text);
+  border: 1px solid var(--button-border-color);
+}
+
+.high-contrast-mode .btn-outline-primary:hover,
+.high-contrast-mode .btn-outline-primary:focus-visible {
+  border: 2px solid var(--button-border-color) !important;
+}
+
+/* Secondary Buttons */
+.high-contrast-mode .btn-secondary {
+  border: 1px solid var(--button-border-color-secondary);
+}
+
+.high-contrast-mode .btn-secondary:hover,
+.high-contrast-mode .btn-secondary:focus-visible {
+  border: 2px solid var(--hover-border-color);
+}
+
+.high-contrast-mode .btn-outline-secondary {
+  border: 1px solid var(--button-border-color-secondary);
+  color: var(--button-border-color-secondary);
+}
+
+.high-contrast-mode .btn-outline-secondary:hover,
+.high-contrast-mode .btn-outline-secondary:focus-visible {
+  border: 2px solid var(--hover-border-color);
+  color: var(--button-border-color-secondary);
+}
+
+/* Sort Buttons */
+.high-contrast-mode #sort-button-category,
+.high-contrast-mode #sort-button-priority,
+.high-contrast-mode #sort-button-date {
+  background-color: var(--button-color);
+  color: var(--button-text-color);
+  border-color: var(--button-border-color);
+}
+
+.high-contrast-mode #sort-button-category:hover,
+.high-contrast-mode #sort-button-priority:hover,
+.high-contrast-mode #sort-button-date:hover,
+.high-contrast-mode #sort-button-category:focus-visible,
+.high-contrast-mode #sort-button-priority:focus-visible,
+.high-contrast-mode #sort-button-date:focus-visible {
+  background-color: var(--sort-button-hover-color);
+  color: var(--button-hover-text-color-secondary);
+}
+
+/* add/edit buttons */
+.high-contrast-mode .js-add-button,
+.high-contrast-mode .js-edit-button {
+  background-color: var(--button-color);
+  color: var(--button-text-color);
+  border: 1px solid var(--button-border-color);
+}
+
+.high-contrast-mode .js-add-button:hover,
+.high-contrast-mode .js-edit-button:hover,
+.high-contrast-mode .js-add-button:focus-visible,
+.high-contrast-mode .js-edit-button:focus-visible {
+  background-color: var(--button-hover-color);
+  border: 2px solid var(--button-border-color);
+}
+
+/* delete buttons */
+.high-contrast-mode .js-delete-button {
+  border: 1px solid var(--button-border-color);
+}
+
+.high-contrast-mode .js-delete-button:hover,
+.high-contrast-mode .js-delete-button:focus-visible {
+  background-color: var(--button-hover-color);
+  border: 2px solid var(--button-border-color);
+}
+
+/* In Line Editing buttons */
+.high-contrast-mode .js-cancel-edit-button{
+  color: var(--button-text-color);
+  background-color: #000000;
+  border: 1px solid var(--button-border-color-secondary);
+}
+
+.high-contrast-mode .js-cancel-edit-button:hover,
+.high-contrast-mode .js-cancel-edit-button:focus-visible{
+  color: var(--button-text-color);
+  background-color: #272727;
+  border: 2px solid var(--hover-border-color);
+}
+
+.high-contrast-mode .js-save-edit-button{
+  background-color: var(--button-color);
+  color: var(--button-text-color);
+  border: 1px solid var(--button-border-color);
+}
+
+.high-contrast-mode .js-save-edit-button:hover, 
+.high-contrast-mode .js-save-edit:focus-visible {
+  background-color: var(--button-hover-color);
+  color: var(--button-text-color);
+  border: 2px solid var(--button-border-color);
+}
+
+.high-contrast-mode .js-edit-name{
+  background-color: var(--primary-bg);
+  color: #ffffff;
+  border: 1px solid var(--border-color-secondary);
+}
+
+.high-contrast-mode .js-edit-category,
+.high-contrast-mode .js-edit-priority,
+.high-contrast-mode .js-edit-date,
+.high-contrast-mode .js-edit-time {
+  background-color: var(--primary-bg);
+  color: #ffffff;
+  border: 1px solid var(--button-border-color);
+}
+
+.high-contrast-mode .js-edit-name:hover,
+.high-contrast-mode .js-edit-category:hover,
+.high-contrast-mode .js-edit-priority:hover,
+.high-contrast-mode .js-edit-date:hover,
+.high-contrast-mode .js-edit-time:hover,
+.high-contrast-mode .js-edit-name:focus-visible,
+.high-contrast-mode .js-edit-category:focus-visible,
+.high-contrast-mode .js-edit-priority:focus-visible,
+.high-contrast-mode .js-edit-date:focus-visible,
+.high-contrast-mode .js-edit-time:focus-visible {
+  border: 2px solid var(--hover-border-color);
+}
+
+
+.high-contrast-mode .js-filter-input {
+  background-color: var(--primary-bg);
+  color: #ffffff;
+  border: 1px solid var(--button-border-color);
+}
+
+.high-contrast-mode .js-filter-input:hover,
+.high-contrast-mode .js-filter-input:focus-visible {
+  border: 2px solid var(--hover-border-color);
+}
+
+/* ========================= */
+/*          Themes           */
+/* ========================= */
+#themes-selection-div {
   display: flex;
-  padding: 20px;
+  padding: 5px 20px;
   justify-content: right;
 }
 
-#darkModeBtn {
+#themesSelectionLabel {
+  display: none
+}
+
+#themesSelection,
+#themesSelection option {
   background-color: #333;
   color: white;
   border: none;
@@ -538,40 +823,20 @@ body {
   transition: background-color 0.3s ease;
 }
 
-#darkModeBtn:hover {
-  background-color: #444;
+.high-contrast-mode #themesSelection,
+.high-contrast-mode #themesSelection option {
+  background-color: var(--secondary-bg);
+  color: #ffffff;
+  border: 2px solid var(--border-color);
 }
 
-.dark-mode #darkModeBtn {
+.high-contrast-mode #themesSelection:hover,
+.high-contrast-mode #themesSelection:focus {
+  border: 2px solid var(--hover-border-color);
+}
+
+.dark-mode #themesSelection,
+.dark-mode #themesSelection option {
   background-color: #ffffff;
   color: #222;
-}
-
-/* Filter Menu Styling */
-#sort-and-filter {
-  display: flex;
-  flex-direction: row;
-  /* justify-content: space-between; */
-  justify-self: center;
-  margin-top: 2.5em;
-  gap: 65px
-}
-
-/* Search Bar Styling */
-.hide {
-  display: none;
-}
-
-/* 24 hour toggle styling */
-.form-check {
-  width: 78%;
-  justify-self: center;
-}
-.form-check-input:checked {
-  background-color: #28a745;
-  border-color: #28a745;
-}
-
-.form-check-input:checked:focus {
-  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
 }

@@ -75,32 +75,6 @@ body {
     text-align: center;
 }
 
-.dark-mode-toggle {
-    display: flex;
-    padding: 20px;
-    justify-content: right;
-}
-
-#darkModeBtn {
-    background-color: #333;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#darkModeBtn:hover {
-    background-color: #444;
-}
-
-.dark-mode #darkModeBtn {
-    background-color: #ffffff;
-    color: #222;
-}
-
 /*calendar*/
 /* General Styling */
 /* body {
@@ -290,8 +264,9 @@ td:hover {
     color: #155724;
 }
 
-/* General dark mode styles for the body */
-/* General dark mode styles for the body */
+/* ========================= */
+/*         Dark Mode         */
+/* ========================= */
 body.dark-mode {
     background-color: #121212;  /* Dark background for the body */
     color: #e0e0e0;  /* Light text color for readability */
@@ -322,55 +297,198 @@ body.dark-mode .calendar-table td {
     padding: 10px;
 }
 
-/* Highlight 'today' cell with a vibrant color */
-body.dark-mode .calendar-table td.today {
-    background-color: #ff9800;  /* Orange background for today's date */
-    color: #ffffff;  /* White text for contrast */
-    border-radius: 5px;
-}
-
 /* Empty cells (previous and next month's days) */
 body.dark-mode .calendar-table td.empty {
     background-color: #3a3a3a;  /* Dark grey background for empty cells */
 }
 
-/* Style for the dark mode toggle button */
-body.dark-mode .dark-mode-toggle button {
-    background-color: #444444;
-    color: #ffffff;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-}
-
-body.dark-mode .dark-mode-toggle button:hover {
-    background-color: #555555;
-}
-
-/* Adjust the calendar container background for dark mode */
-body.dark-mode #calendar {
-    background-color: #2a2a2a;  /* Dark grey background for the calendar div */
-
-    border-radius: 10px;  /* Rounded corners for a smooth look */
-}
-
 /* Dark mode navigation buttons */
-body.dark-mode #prevBtn, body.dark-mode #nextBtn, body.dark-mode #monthViewBtn, body.dark-mode #weekViewBtn {
+body.dark-mode #prevBtn, 
+body.dark-mode #nextBtn, 
+body.dark-mode #monthViewBtn, 
+body.dark-mode #weekViewBtn {
     background-color: #007bff;  /* Blue background for navigation buttons */
     color: #ffffff;  /* White text color */
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
-body.dark-mode #prevBtn:hover, body.dark-mode #nextBtn:hover, body.dark-mode #monthViewBtn:hover, body.dark-mode #weekViewBtn:hover {
+body.dark-mode #prevBtn:hover, 
+body.dark-mode #nextBtn:hover, 
+body.dark-mode #monthViewBtn:hover, 
+body.dark-mode #weekViewBtn:hover {
     background-color: #0056b3;  /* Darker blue when hovering over buttons */
 }
+
+/* High Contrast Secondary buttons */
+body.dark-mode .btn-secondary {
+    padding: 10px 20px;
+   }
 
 /* Dark mode month and year title */
 body.dark-mode #currentDate {
     color: #ffffff;  /* White text color for the month and year title */
-    font-size: 1.5rem;  /* Slightly larger text for the title */
+    font-size: 2rem;  /* Slightly larger text for the title */
     font-weight: bold;
+}
+
+/* ========================= */
+/*    High Contrast Mode     */
+/* ========================= */
+body.high-contrast-mode {
+    background-color: #000;
+    color: #ffffff;
+}
+
+/* High Contrast Navbar */
+body.high-contrast-mode .navbar-custom {
+    background-color: #161616;
+  }
+
+body.high-contrast-mode .navbar-brand,
+body.high-contrast-mode .nav-link {
+    border: 1px solid #00ffff;
+}
+
+/* High Contrast calendar styles */
+body.high-contrast-mode .container-cal {
+    background-color: #1b1b1b;
+    border: 2px solid #00ffff;
+}
+
+body.high-contrast-mode .calendar-table {
+    background-color: #0a0a0a;
+    color: #ffffff;
+    border: 2px solid #00ffff;
+}
+
+/* High Contrast table header */
+body.high-contrast-mode .calendar-table th {
+    background-color: #111111;
+    color: #ffffff;  
+    border: 2px solid #00ffff;
+}
+
+/* High Contrast calendar cells */
+body.high-contrast-mode .calendar-table td {
+    background-color: #141414;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #40ff00;
+}
+
+/* Highlight 'today' cell with a vibrant color */
+body.high-contrast-mode .calendar-table td.today {
+    background-color: #ff9800 !important; 
+    color: #ffffff !important;
+    border: 2px solid #ff5900;
+}
+
+/* Empty cells (previous and next month's days) */
+body.high-contrast-mode .calendar-table td.empty {
+    background-color: #0f0f0f;
+    border: 1px solid #ffffff;
+}
+
+/* Cell highlight on hover */
+body.high-contrast-mode .calendar-table td:hover,
+body.high-contrast-mode .calendar-table td.empty:hover {
+    transform: translateY(-3px);
+    background-color: #000000;
+    border: 2px solid #fff000;
+}
+
+/* High Contrast Primary buttons */
+body.high-contrast-mode .btn-primary, 
+body.high-contrast-mode #prevBtn,
+body.high-contrast-mode #nextBtn, 
+body.high-contrast-mode #weekViewBtn  {
+    background-color: #0055ff;  /* Blue background for navigation buttons */
+    color: #ffffff;  /* White text color */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 1px solid #fff000;
+}
+
+body.high-contrast-mode .btn-primary:hover,
+body.high-contrast-mode #prevBtn:hover,  
+body.high-contrast-mode #nextBtn:hover,  
+body.high-contrast-mode #weekViewBtn:hover {
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #fff000;
+}
+
+/* High Contrast Secondary buttons */
+body.high-contrast-mode .btn-secondary {
+    background-color: #141414;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #ffffff;
+}
+
+body.high-contrast-mode .btn-secondary:hover {
+    background-color: #222222;
+    color: #ffffff;
+    border: 1px solid #ff5900;
+}
+
+/* High Contrast month and year title */
+body.high-contrast-mode #currentDate {
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* High Contrast Footer */
+body.high-contrast-mode .footer {
+    background-color: #161616;
+    color: #ffffff;
+}
+
+/* ========================= */
+/*          Themes           */
+/* ========================= */
+#themes-selection-div {
+    display: flex;
+    padding: 5px 20px;
+    justify-content: right;
+}
+
+#themesSelectionLabel {
+    display: none
+}
+
+#themesSelection,
+#themesSelection option {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.high-contrast-mode #themesSelection,
+.high-contrast-mode #themesSelection option {
+    background-color: #121212;
+    color: #ffffff;
+    border: 2px solid #00ffff;
+}
+
+.high-contrast-mode #themesSelection:hover {
+  border: 2px solid #ff5900;
+}
+
+.dark-mode #themesSelection,
+.dark-mode #themesSelection option {
+    background-color: #ffffff;
+    color: #222;
 }

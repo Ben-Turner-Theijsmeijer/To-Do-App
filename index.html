@@ -49,7 +49,8 @@
     <div class="row align-items-center">
       <div class="col-md-6">
         <h1 class="fw-bold">Stay Organized, Stay Productive</h1>
-        <p class="mt-3">Manage your tasks effortlessly with our intuitive To-Do List. Keep track of your schedule and never miss a deadline.</p>
+        <p class="mt-3">Manage your tasks effortlessly with our intuitive To-Do List. Keep track of your schedule and
+          never miss a deadline.</p>
         <a href="src/views/Todolist.html" class="btn btn-primary mt-3">Get Started</a>
         <a href="src/views/Calendar.html" class="btn btn-outline-secondary mt-3 ms-2">Calendar View</a>
       </div>
@@ -77,11 +78,21 @@
     </div>
   </section>
 
-  <!-- Dark Mode Toggle -->
-  <div class="dark-mode-toggle">
-    <button id="darkModeBtn">
-      <i class="fa-solid fa-moon"></i> Dark Mode
-    </button>
+  <!-- Themes Dropdown -->
+  <div style="padding-bottom: 15px">
+    <div id="themes-selection-div">
+      <label for="themes-selection" id="themesSelectionLabel">Mode: </label>
+
+      <select name="themes" id="themesSelection">
+        <option value="light">Light Mode</option>
+        <option value="dark">
+          <i class="fa-solid fa-moon"></i> Dark Mode
+        </option>
+        <option value="high-contrast">
+          <i class="fa-solid fa-circle-half-stroke"></i> High Contrast Mode
+        </option>
+      </select>
+    </div>
   </div>
 
   <!-- Footer -->
@@ -95,7 +106,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- Dark Mode Toggle Script -->
-  <script src="index.js"></script>
+  <script src="/src/utils/themes.js"></script>
 
 </body>
 
