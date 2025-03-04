@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
 
+/* ========================= */
+/*       Theme Colours       */
+/* ========================= */
 /* Light Mode (Default) */
 :root {
   --primary-bg: #fafafe;
@@ -44,8 +47,36 @@
   --shadow-color: #000000;
 }
 
+/* High Contrast Mode */
+.high-contrast-mode {
+  --primary-bg: #000;
+  --primary-text: #ffffff;
+  --secondary-bg: #252525;
+  --navbar-bg: #161616;
+  --navbar-text: #ffffff;
+  --footer-bg: #161616;
+  --footer-text: #ffffff;
+  --task-text: #ffffff; /* Task details white in high contrast mode */
+  --button-color: #0055ff;
+  --button-text-color: #ffffff;
+  --button-hover-color: #000;
+  --button-border-color: #fff000;
+  --button-color-secondary: #000;
+  --button-text-color-secondary: #ffffff;
+  --button-border-color-secondary: #ffffff;
+  --button-hover-color-secondary: #000;
+  --button-hover-text-color-secondary: #ffffff;
+  --sort-button-hover-color: #ff9000;
+  --border-color: #00ffff;
+  --border-color-secondary: #40ff00;
+  --hover-border-color: #ff5900;
+  --shadow-color: #000000;
+}
 
-/* General styling */
+
+/* ========================= */
+/*      General Styling      */
+/* ========================= */
 * {
   margin: 0;
   padding: 0;
@@ -157,6 +188,21 @@ body {
 
 .js-add-button:hover, .js-add-button:focus-visible {
   background-color: var(--button-hover-color);
+}
+
+/* Search Bar Styling */
+.hide {
+  display: none;
+}
+
+/* Filter Menu Styling */
+#sort-and-filter {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  justify-self: center;
+  margin-top: 2.5em;
+  gap: 65px
 }
 
 /* Sort Buttons */
@@ -453,6 +499,22 @@ body {
   color: #d4edda;
 }
 
+/* 24 hour toggle styling */
+.form-check {
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.form-check-input:checked {
+  background-color: #28a745;
+  border-color: #28a745;
+  cursor: pointer;
+}
+
+.form-check-input:checked:focus-visible {
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
 
 /* Footer */
 .footer {
@@ -463,7 +525,9 @@ body {
 }
 
 
-/* Dark mode styling */
+/* ========================= */
+/*     Dark Mode Styling     */
+/* ========================= */
 .dark-mode .navbar-custom {
   background-color: var(--navbar-bg);
 }
@@ -474,7 +538,7 @@ body {
 }
 
 .dark-mode .nav-link:hover,
-.dark-mode .nav-link:focus {
+.dark-mode .nav-link:focus-visible {
   color: #007bff !important;
 }
 
@@ -501,9 +565,9 @@ body {
 #sort-button-priority:hover,
 #sort-button-date:hover,
 #open-filters-btn:hover,
-#sort-button-category:focus,
-#sort-button-priority:focus,
-#sort-button-date:focus {
+#sort-button-category:focus-visible,
+#sort-button-priority:focus-visible,
+#sort-button-date:focus-visible {
   background-color: var(--button-hover-color-secondary);
   color: var(--button-hover-text-color-secondary);
 }
@@ -527,39 +591,14 @@ body {
 
 .dark-mode .js-add-button:hover,
 .dark-mode .js-edit-button:hover,
-.dark-mode .js-add-button:focus,
-.dark-mode .js-edit-button:focus {
+.dark-mode .js-add-button:focus-visible,
+.dark-mode .js-edit-button:focus-visible {
   background-color: var(--button-hover-color);
 }
 
 /* ========================= */
-/*    High Contrast Mode     */
+/*   High Contrast Styling   */
 /* ========================= */
-.high-contrast-mode {
-  --primary-bg: #000;
-  --primary-text: #ffffff;
-  --secondary-bg: #2d2d2d;
-  --navbar-bg: #161616;
-  --navbar-text: #ffffff;
-  --footer-bg: #161616;
-  --footer-text: #ffffff;
-  --button-bg: #0055ff;
-  --button-hover: #000;
-  --button-border: #fff000;
-  --secondary-button-bg: #000;
-  --secondary-button-border: #ffffff;
-  --task-text: #ffffff;
-  /* Task details white in high contrast mode */
-  --sort-button-bg: #0055ff;
-  --sort-button-text: #ffffff;
-  --sort-button-border: #fff700;
-  --sort-button-hover-bg: #ff9000;
-  --sort-button-hover-text: #ffffff;
-  --primary-border: #00ffff;
-  --secondary-border: #40ff00;
-  --hover-border: #ff5900;
-}
-
 .high-contrast-mode .navbar-custom {
   background-color: var(--navbar-bg);
 }
@@ -567,17 +606,17 @@ body {
 .high-contrast-mode .navbar-brand,
 .high-contrast-mode .nav-link {
   color: var(--navbar-text) !important;
-  border: 1px solid var(--primary-border);
+  border: 1px solid var(--border-color);
 }
 
 .high-contrast-mode .nav-link:hover,
-.high-contrast-mode .nav-link:focus {
+.high-contrast-mode .nav-link:focus-visible {
   color: #007bff !important;
 }
 
 .high-contrast-mode .js-add-grid {
   background-color: var(--secondary-bg);
-  border: 2px solid var(--primary-border);
+  border: 2px solid var(--border-color);
 }
 
 .high-contrast-mode .task-info,
@@ -588,150 +627,174 @@ body {
 .high-contrast-mode .small-container {
   background-color: var(--primary-bg);
   color: #ffffff;
-  border: 1px solid var(--secondary-border);
+  border: 1px solid var(--border-color-secondary);
 }
 
 .high-contrast-mode .js-add-html {
-  background-color: var(--secondary-bg);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0);
+  background-color: var(--primary-bg);
 }
 
 .high-contrast-mode .form-switch {
-  border: 1px solid var(--secondary-border);
+  border: 1px solid var(--border-color-secondary);
 }
 
 .high-contrast-mode #js-success-notification {
   color: var(--primary-text);
   background-color: var(--primary-bg);
-  border: 2px solid var(--primary-border);
+  border: 2px solid var(--border-color);
 
 }
 
 /* Primary buttons */
 .high-contrast-mode .btn-primary {
-  background-color: var(--button-bg);
-  color: var(--primary-text);
-  border: 1px solid var(--button-border);
+  background-color: var(--button-color);
+  color: var(--button-text-color);
+  border: 1px solid var(--button-border-color);
 }
 
 .high-contrast-mode .btn-primary:hover,
-.high-contrast-mode .btn-primary:focus {
-  background-color: var(--button-hover);
+.high-contrast-mode .btn-primary:focus-visible {
+  background-color: var(--button-hover-color);
   color: var(--primary-text);
-  border: 1px solid var(--button-border);
+  border: 1px solid var(--button-border-color);
 }
 
 .high-contrast-mode .btn-outline-primary:hover,
-.high-contrast-mode .btn-outline-primary:focus {
-  border: 2px solid var(--button-border);
+.high-contrast-mode .btn-outline-primary:focus-visible {
+  border: 2px solid var(--button-border-color) !important;
 }
 
 /* Secondary Buttons */
 .high-contrast-mode .btn-secondary {
-  border: 1px solid var(--secondary-button-border);
+  border: 1px solid var(--button-border-color-secondary);
 }
 
 .high-contrast-mode .btn-secondary:hover,
-.high-contrast-mode .btn-secondary:focus {
-  border: 2px solid var(--hover-border);
+.high-contrast-mode .btn-secondary:focus-visible {
+  border: 2px solid var(--hover-border-color);
 }
 
 .high-contrast-mode .btn-outline-secondary {
-  border: 1px solid var(--secondary-button-border);
-  color: var(--secondary-button-border);
+  border: 1px solid var(--button-border-color-secondary);
+  color: var(--button-border-color-secondary);
 }
 
 .high-contrast-mode .btn-outline-secondary:hover,
-.high-contrast-mode .btn-outline-secondary:focus {
-  border: 2px solid var(--hover-border);
-  color: var(--secondary-button-border);
+.high-contrast-mode .btn-outline-secondary:focus-visible {
+  border: 2px solid var(--hover-border-color);
+  color: var(--button-border-color-secondary);
 }
 
 /* Sort Buttons */
 .high-contrast-mode #sort-button-category,
 .high-contrast-mode #sort-button-priority,
 .high-contrast-mode #sort-button-date {
-  background-color: var(--sort-button-bg);
-  color: var(--sort-button-text);
-  border-color: var(--sort-button-border);
+  background-color: var(--button-color);
+  color: var(--button-text-color);
+  border-color: var(--button-border-color);
 }
 
 .high-contrast-mode #sort-button-category:hover,
 .high-contrast-mode #sort-button-priority:hover,
 .high-contrast-mode #sort-button-date:hover,
-.high-contrast-mode #sort-button-category:focus,
-.high-contrast-mode #sort-button-priority:focus,
-.high-contrast-mode #sort-button-date:focus {
-  background-color: var(--sort-button-hover-bg);
-  color: var(--sort-button-hover-text);
-  border: 2px solid var(--hover-border);
+.high-contrast-mode #sort-button-category:focus-visible,
+.high-contrast-mode #sort-button-priority:focus-visible,
+.high-contrast-mode #sort-button-date:focus-visible {
+  background-color: var(--sort-button-hover-color);
+  color: var(--button-hover-text-color-secondary);
 }
 
 /* add/edit buttons */
 .high-contrast-mode .js-add-button,
 .high-contrast-mode .js-edit-button {
-  background-color: var(--button-bg);
-  color: var(--primary-text);
-  border: 1px solid var(--button-border);
+  background-color: var(--button-color);
+  color: var(--button-text-color);
+  border: 1px solid var(--button-border-color);
 }
 
 .high-contrast-mode .js-add-button:hover,
 .high-contrast-mode .js-edit-button:hover,
-.high-contrast-mode .js-add-button:focus,
-.high-contrast-mode .js-edit-button:focus {
-  background-color: var(--button-hover);
-  border: 2px solid var(--button-border);
+.high-contrast-mode .js-add-button:focus-visible,
+.high-contrast-mode .js-edit-button:focus-visible {
+  background-color: var(--button-hover-color);
+  border: 2px solid var(--button-border-color);
 }
 
 /* delete buttons */
 .high-contrast-mode .js-delete-button {
-  border: 1px solid var(--button-border);
+  border: 1px solid var(--button-border-color);
 }
 
 .high-contrast-mode .js-delete-button:hover,
-.high-contrast-mode .js-delete-button:focus {
-  border: 2px solid var(--button-border);
+.high-contrast-mode .js-delete-button:focus-visible {
+  border: 2px solid var(--button-border-color);
 }
+
+/* In Line Editing buttons */
+.high-contrast-mode .js-cancel-edit-button{
+  color: var(--button-text-color);
+  background-color: #000000;
+  border: 1px solid var(--button-border-color-secondary);
+}
+
+.high-contrast-mode .js-cancel-edit-button:hover,
+.high-contrast-mode .js-cancel-edit-button:focus-visible{
+  color: var(--button-text-color);
+  background-color: #272727;
+  border: 2px solid var(--hover-border-color);
+}
+
+.high-contrast-mode .js-save-edit-button{
+  background-color: var(--button-color);
+  color: var(--button-text-color);
+  border: 1px solid var(--button-border-color);
+}
+
+.high-contrast-mode .js-save-edit-button:hover, 
+.high-contrast-mode .js-save-edit:focus-visible {
+  background-color: var(--button-hover-color);
+  color: var(--button-text-color);
+  border: 2px solid var(--button-border-color);
+}
+
+.high-contrast-mode .js-edit-name{
+  background-color: var(--primary-bg);
+  color: #ffffff;
+  border: 1px solid var(--border-color-secondary);
+}
+
+.high-contrast-mode .js-edit-category,
+.high-contrast-mode .js-edit-priority,
+.high-contrast-mode .js-edit-date,
+.high-contrast-mode .js-edit-time {
+  background-color: var(--primary-bg);
+  color: #ffffff;
+  border: 1px solid var(--button-border-color);
+}
+
+.high-contrast-mode .js-edit-name:hover,
+.high-contrast-mode .js-edit-category:hover,
+.high-contrast-mode .js-edit-priority:hover,
+.high-contrast-mode .js-edit-date:hover,
+.high-contrast-mode .js-edit-time:hover,
+.high-contrast-mode .js-edit-name:focus-visible,
+.high-contrast-mode .js-edit-category:focus-visible,
+.high-contrast-mode .js-edit-priority:focus-visible,
+.high-contrast-mode .js-edit-date:focus-visible,
+.high-contrast-mode .js-edit-time:focus-visible {
+  border: 2px solid var(--hover-border-color);
+}
+
 
 .high-contrast-mode .js-filter-input {
   background-color: var(--primary-bg);
   color: #ffffff;
-  border: 1px solid var(--button-border);
+  border: 1px solid var(--button-border-color);
 }
 
 .high-contrast-mode .js-filter-input:hover,
-.high-contrast-mode .js-filter-input:focus {
-  border: 2px solid var(--hover-border);
-}
-
-/* Filter Menu Styling */
-#sort-and-filter {
-  display: flex;
-  flex-direction: row;
-  /* justify-content: space-between; */
-  justify-self: center;
-  margin-top: 2.5em;
-  gap: 65px
-}
-
-/* Search Bar Styling */
-.hide {
-  display: none;
-}
-
-/* 24 hour toggle styling */
-.form-check {
-  width: 78%;
-  justify-self: center;
-}
-.form-check-input:checked {
-  background-color: #28a745;
-  border-color: #28a745;
-  cursor: pointer;
-}
-
-.form-check-input:checked:focus {
-  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+.high-contrast-mode .js-filter-input:focus-visible {
+  border: 2px solid var(--hover-border-color);
 }
 
 /* ========================= */
@@ -763,12 +826,12 @@ body {
 .high-contrast-mode #themesSelection option {
   background-color: var(--secondary-bg);
   color: #ffffff;
-  border: 2px solid var(--primary-border);
+  border: 2px solid var(--border-color);
 }
 
 .high-contrast-mode #themesSelection:hover,
 .high-contrast-mode #themesSelection:focus {
-  border: 2px solid var(--hover-border);
+  border: 2px solid var(--hover-border-color);
 }
 
 .dark-mode #themesSelection,
