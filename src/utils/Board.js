@@ -39,6 +39,21 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
         `;
 
+        // Add the delete button (X) to each task
+        taskElement.innerHTML += `
+            <div class="delete-btn">
+                <i class="fa-solid fa-times"></i>
+            </div>
+        `;
+
+        // Add event listener to the delete button (X)
+        const deleteBtn = taskElement.querySelector('.delete-btn');
+        deleteBtn.addEventListener('click', () => {
+            deleteTaskFromLocalStorage(task);  // Delete task from local storage
+            taskElement.remove();  // Remove task from UI
+            updateTasksCount();  // Recalculate task count after deletion
+        });
+
         // Determine the correct task column and apply the correct class (e.g., upcoming-task, backlog-task, or complete-task)
         if (task.date === "") {
             taskElement.classList.add("backlog-task"); 
@@ -50,7 +65,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         return taskElement;
     };
-
 
     // Function to handle task dragging
     const drag = (event) => {
@@ -111,10 +125,17 @@ document.addEventListener("DOMContentLoaded", function() {
         header.innerHTML = `<span style="font-weight: bold; color: ${color};">${title} (<span style="color: ${color}">${taskCount} ${taskLabel}</span>)</span>`;
     };
 
+    // Function to delete the task from local storage
+    const deleteTaskFromLocalStorage = (taskToDelete) => {
+        const taskList = JSON.parse(localStorage.getItem("taskList")) || [];
+        const updatedTaskList = taskList.filter(task => task.name !== taskToDelete.name || task.date !== taskToDelete.date); // Assuming unique task based on name & date
+        localStorage.setItem("taskList", JSON.stringify(updatedTaskList));
+    };
+
     // Example of adding a new task (ensure task count updates after adding/removing tasks)
     const addTask = (task) => {
         const upcomingColumn = document.getElementById("upcoming");
-        upcomingColumn.appendChild(task);
+        upcomingColumn.appendChild(createTaskElement(task));  // Render task with delete button
         updateTasksCount();  // Recalculate task count after adding a new task
     };
 
@@ -126,7 +147,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Call `updateTasksCount` whenever the page or task list changes (like onload or after any task manipulation)
     document.addEventListener("DOMContentLoaded", updateTasksCount);
-
 
     loadTasksFromLocalStorage(); // Load tasks when the page is ready
 });
