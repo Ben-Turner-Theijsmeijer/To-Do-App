@@ -63,6 +63,78 @@ body {
 }
 
 /* ========================= */
+/*          Buttons          */
+/* ========================= */
+/* Primary Buttons */
+.btn-primary {
+  color: var(--button-text-color);
+  background-color: var(--button-color);
+  border: none;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background-color: var(--button-hover-color);
+}
+
+.btn-outline-primary {
+  color: var(--button-color);
+  background-color: var(--primary-bg);
+  border: 2px solid var(--button-border-color);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus-visible {
+  color: var(--button-text-color);
+  background-color: var(--button-color);
+  border: 2px solid var(--button-border-color);
+}
+
+/* ========================= */
+/*         Task Tags         */
+/* ========================= */
+.task-info,
+.task-name {
+    color: var(--task-text);
+}
+
+.category-tag,
+.priority-tag,
+.recurring-tag {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.category-tag {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.recurring-tag{
+  background-color: #add8e6;
+  color: #1f46a8;
+}
+
+.priority-High {
+  background-color: #ffcccb;
+  color: #d8000c;
+}
+
+.priority-Medium {
+  background-color: #feefb3;
+  color: #9f6000;
+}
+
+.priority-Low {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+/* ========================= */
 /*       Theme Colours       */
 /* ========================= */
 /* Light Mode (Default) */
@@ -74,14 +146,15 @@ body {
   --navbar-text: #ffffff;
   --footer-bg: #333;
   --footer-text: #ffffff;
-  --task-text: #000; /* Task details black in light mode */
+  --task-text: #161616; /* Task details black in light mode */
   --button-color: #38a3ea;
   --button-text-color: #ffffff;
-  --button-hover-color: #246a98;
+  --button-hover-color: #1e6ea3;
+  --button-border-color: #38a3ea;
   --button-color-secondary: transparent;
-  --button-text-color-secondary: #007bff;
-  --button-border-color-secondary: #007bff;
-  --button-hover-color-secondary: #007bff;
+  --button-text-color-secondary: #38a3ea;
+  --button-border-color-secondary: #38a3ea;
+  --button-hover-color-secondary: #38a3ea;
   --button-hover-text-color-secondary: #fff;
   --border-color: #757575;
   --shadow-color: #d9d9d9;
@@ -100,6 +173,7 @@ body {
   --button-color: #007bff;
   --button-text-color: #ffffff;
   --button-hover-color: #004997;
+  --button-border-color: #007bff;
   --button-color-secondary: #007bff;
   --button-text-color-secondary: #ffffff;
   --button-border-color-secondary: transparent;
@@ -123,7 +197,7 @@ body {
   --button-text-color: #ffffff;
   --button-hover-color: #000;
   --button-border-color: #fff000;
-  --button-color-secondary: #000;
+  --button-color-secondary: #141414;
   --button-text-color-secondary: #ffffff;
   --button-border-color-secondary: #ffffff;
   --button-hover-color-secondary: #000;
@@ -137,24 +211,11 @@ body {
 /* ========================= */
 /*         Dark Mode         */
 /* ========================= */
-.dark-mode .nav-link {
-  color: #ffffff !important;
-}
-
-.dark-mode .nav-link:hover,
-.dark-mode .nav-link:focus-visible {
-  color: #007bff !important;
-}
-
 /* Themes Selection Dropdown */
 .dark-mode #themesSelection,
 .dark-mode #themesSelection option {
   background-color: #ffffff;
   color: #222;
-}
-
-body.dark-mode .container-cal {
-  background-color: #444444;
 }
 
 /* ========================= */
@@ -168,16 +229,12 @@ body.dark-mode .container-cal {
 
 /* Primary buttons */
 .high-contrast-mode .btn-primary {
-  background-color: var(--button-color);
-  color: var(--button-text-color);
   border: 1px solid var(--button-border-color);
 }
 
 .high-contrast-mode .btn-primary:hover,
 .high-contrast-mode .btn-primary:focus-visible {
-  background-color: var(--button-hover-color);
-  color: var(--primary-text);
-  border: 1px solid var(--button-border-color);
+  border: 2px solid var(--button-border-color);
 }
 
 .high-contrast-mode .btn-outline-primary:hover,
@@ -193,6 +250,7 @@ body.dark-mode .container-cal {
 
 .high-contrast-mode .btn-secondary:hover,
 .high-contrast-mode .btn-secondary:focus-visible {
+  background-color: #222222;
   border: 2px solid var(--hover-border-color);
 }
 

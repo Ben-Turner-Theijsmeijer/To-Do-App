@@ -12,7 +12,7 @@
   --navbar-text: #ffffff;
   --footer-bg: #333;
   --footer-text: #ffffff;
-  --task-text: #000; /* Task details black in light mode */
+  --task-text: #161616; /* Task details black in light mode */
   --button-color: #38a3ea;
   --button-text-color: #ffffff;
   --button-hover-color: #246a98;
@@ -288,11 +288,13 @@ body {
   gap: 0px 10px;
   flex-wrap: wrap;
   justify-content: flex-start;
+  color: var(--task-text);
 }
 
 .task-name {
   overflow: auto;
   overflow-wrap: anywhere;
+  color: var(--task-text);
 }
 
 .category-tag,
@@ -555,11 +557,6 @@ body {
   background-color: var(--secondary-bg);
 }
 
-.dark-mode .task-info,
-.dark-mode .task-name {
-  color: var(--task-text);
-}
-
 /* Sort Buttons */
 #sort-button-category,
 #sort-button-priority,
@@ -626,11 +623,6 @@ body {
 .high-contrast-mode .js-add-grid {
   background-color: var(--secondary-bg);
   border: 2px solid var(--border-color);
-}
-
-.high-contrast-mode .task-info,
-.high-contrast-mode .task-name {
-  color: var(--task-text);
 }
 
 .high-contrast-mode .small-container {
