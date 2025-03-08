@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
+html,
+body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .task-container {
@@ -26,70 +28,7 @@
     cursor: pointer; /* Indicates interactivity */
 }
 
-
-
-html,
-body {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    /* overflow-y: scroll; */
-    height: 100%;
-    background-color: #fafafe;
-    color: #333;
-}
-
-
-.container {
-  flex: 1; /* Pushes the footer down */
-}
-
-.navbar-custom {
-    background-color: #333;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.navbar-brand {
-    font-weight: bold;
-    color: #ffffff !important;
-}
-
-.nav-link {
-    color: #ffffff !important;
-    font-weight: 500;
-}
-
-.nav-link:hover {
-    color: #007bff !important;
-}
-
-/* Footer */
-.footer {
-    background-color: #333;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-}
-
-/*calendar*/
-/* General Styling */
-/* body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f9fbff;
-    color: #333;
-} */
-
 /* Calendar Container */
-/* .container {
-    width: 100%;
-    margin: auto;
-    padding: 20px;
-}  */
-
 .container-cal {
     background: white;
     padding: 25px;
@@ -117,28 +56,6 @@ h2 {
     font-size: 16px;
     border-radius: 10px;
     transition: 0.3s ease-in-out;
-}
-
-.btn-primary {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
-}
-
-.btn-outline-primary {
-    color: #007bff;
-    border: 2px solid #007bff;
-    background: white;
-}
-
-.btn-outline-primary:hover {
-    background-color: #007bff;
-    color: white;
 }
 
 /* Calendar Table */
@@ -179,7 +96,6 @@ td:hover {
     background-color: #f0f0f0; /* Or any other subtle color */
 }
 
-
 /* Today's date styling */
 .today {
     background-color: #007bff !important;
@@ -199,7 +115,6 @@ td:hover {
 .popup {
     background-color: cadetblue;
     max-width: fit-content;
-
     display: none;
     /* Initially hidden */
     position: fixed;
@@ -222,11 +137,6 @@ td:hover {
     font-weight: bold;
 }
 
-.dark-mode .task-info,
-.dark-mode .task-name {
-    color: var(--task-text);
-}
-
 #categoryAndPriority {
     display: flex;
     align-items: center;
@@ -235,43 +145,9 @@ td:hover {
     justify-content: space-evenly;
 }
 
-.category-tag,
-.priority-tag {
-    display: inline-block;
-    padding: 1px 6px;
-    border-radius: 3px;
-    font-size: 10px;
-    font-weight: bold;
-}
-
-.category-tag {
-    background-color: #e0e0e0;
-    color: #333;
-}
-
-.priority-High {
-    background-color: #ffcccb;
-    color: #d8000c;
-}
-
-.priority-Medium {
-    background-color: #feefb3;
-    color: #9f6000;
-}
-
-.priority-Low {
-    background-color: #d4edda;
-    color: #155724;
-}
-
 /* ========================= */
 /*         Dark Mode         */
 /* ========================= */
-body.dark-mode {
-    background-color: #121212;  /* Dark background for the body */
-    color: #e0e0e0;  /* Light text color for readability */
-}
-
 body.dark-mode .container-cal {
     background-color: #444444;
 }
@@ -322,7 +198,6 @@ body.dark-mode #weekViewBtn:hover {
     background-color: #0056b3;  /* Darker blue when hovering over buttons */
 }
 
-/* High Contrast Secondary buttons */
 body.dark-mode .btn-secondary {
     padding: 10px 20px;
    }
@@ -337,21 +212,6 @@ body.dark-mode #currentDate {
 /* ========================= */
 /*    High Contrast Mode     */
 /* ========================= */
-body.high-contrast-mode {
-    background-color: #000;
-    color: #ffffff;
-}
-
-/* High Contrast Navbar */
-body.high-contrast-mode .navbar-custom {
-    background-color: #161616;
-  }
-
-body.high-contrast-mode .navbar-brand,
-body.high-contrast-mode .nav-link {
-    border: 1px solid #00ffff;
-}
-
 /* High Contrast calendar styles */
 body.high-contrast-mode .container-cal {
     background-color: #1b1b1b;
@@ -421,21 +281,12 @@ body.high-contrast-mode #nextBtn:hover,
 body.high-contrast-mode #weekViewBtn:hover {
     background-color: #000000;
     color: #ffffff;
-    border: 1px solid #fff000;
+    border: 2px solid #fff000;
 }
 
 /* High Contrast Secondary buttons */
 body.high-contrast-mode .btn-secondary {
-    background-color: #141414;
-    color: #ffffff;
     padding: 10px 20px;
-    border: 1px solid #ffffff;
-}
-
-body.high-contrast-mode .btn-secondary:hover {
-    background-color: #222222;
-    color: #ffffff;
-    border: 1px solid #ff5900;
 }
 
 /* High Contrast month and year title */
@@ -443,52 +294,4 @@ body.high-contrast-mode #currentDate {
     color: #ffffff;
     font-size: 2rem;
     font-weight: bold;
-}
-
-/* High Contrast Footer */
-body.high-contrast-mode .footer {
-    background-color: #161616;
-    color: #ffffff;
-}
-
-/* ========================= */
-/*          Themes           */
-/* ========================= */
-#themes-selection-div {
-    display: flex;
-    padding: 5px 20px;
-    justify-content: right;
-}
-
-#themesSelectionLabel {
-    display: none
-}
-
-#themesSelection,
-#themesSelection option {
-    background-color: #333;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.high-contrast-mode #themesSelection,
-.high-contrast-mode #themesSelection option {
-    background-color: #121212;
-    color: #ffffff;
-    border: 2px solid #00ffff;
-}
-
-.high-contrast-mode #themesSelection:hover {
-  border: 2px solid #ff5900;
-}
-
-.dark-mode #themesSelection,
-.dark-mode #themesSelection option {
-    background-color: #ffffff;
-    color: #222;
 }
