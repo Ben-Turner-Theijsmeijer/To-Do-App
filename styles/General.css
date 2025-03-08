@@ -11,9 +11,6 @@
 html,
 body {
   height: 100%;
-  /* Breaks index page */
-  /* display: flex;
-  flex-direction: column; */
 }
 
 body {
@@ -91,8 +88,14 @@ body {
   border: 2px solid var(--button-border-color);
 }
 
+/* Secondary Buttons */
+.btn-secondary {
+  background-color: var(--button-color-secondary);
+  border: none;
+}
+
 /* ========================= */
-/*         Task Tags         */
+/*        Task Styling       */
 /* ========================= */
 .task-info,
 .task-name {
@@ -114,7 +117,7 @@ body {
   color: #333;
 }
 
-.recurring-tag{
+.recurring-tag {
   background-color: #add8e6;
   color: #1f46a8;
 }
@@ -151,7 +154,7 @@ body {
   --button-text-color: #ffffff;
   --button-hover-color: #1e6ea3;
   --button-border-color: #38a3ea;
-  --button-color-secondary: transparent;
+  --button-color-secondary: #7f8c8d;
   --button-text-color-secondary: #38a3ea;
   --button-border-color-secondary: #38a3ea;
   --button-hover-color-secondary: #38a3ea;
@@ -174,7 +177,7 @@ body {
   --button-text-color: #ffffff;
   --button-hover-color: #004997;
   --button-border-color: #007bff;
-  --button-color-secondary: #007bff;
+  --button-color-secondary: #777f80;
   --button-text-color-secondary: #ffffff;
   --button-border-color-secondary: transparent;
   --button-hover-color-secondary: #0056b3;
@@ -197,7 +200,7 @@ body {
   --button-text-color: #ffffff;
   --button-hover-color: #000;
   --button-border-color: #fff000;
-  --button-color-secondary: #141414;
+  --button-color-secondary: #636a6b;
   --button-text-color-secondary: #ffffff;
   --button-border-color-secondary: #ffffff;
   --button-hover-color-secondary: #000;
@@ -237,6 +240,10 @@ body {
   border: 2px solid var(--button-border-color);
 }
 
+.high-contrast-mode .btn-outline-primary {
+  color: var(--button-text-color);
+}
+
 .high-contrast-mode .btn-outline-primary:hover,
 .high-contrast-mode .btn-outline-primary:focus-visible {
   border: 2px solid var(--button-border-color) !important;
@@ -261,6 +268,7 @@ body {
 
 .high-contrast-mode .btn-outline-secondary:hover,
 .high-contrast-mode .btn-outline-secondary:focus-visible {
+  background-color: #222222;
   border: 2px solid var(--hover-border-color);
 }
 
