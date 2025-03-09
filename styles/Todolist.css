@@ -1,95 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
-
-/* ========================= */
-/*       Theme Colours       */
-/* ========================= */
-/* Light Mode (Default) */
-:root {
-  --primary-bg: #fafafe;
-  --primary-text: #333;
-  --secondary-bg: #fff;
-  --navbar-bg: #333;
-  --navbar-text: #ffffff;
-  --footer-bg: #333;
-  --footer-text: #ffffff;
-  --task-text: #161616; /* Task details black in light mode */
-  --button-color: #38a3ea;
-  --button-text-color: #ffffff;
-  --button-hover-color: #246a98;
-  --button-color-secondary: #7f8c8d;
-  --button-text-color-secondary: #007bff;
-  --button-border-color-secondary: #007bff;
-  --button-hover-color-secondary: #007bff;
-  --button-hover-text-color-secondary: #fff;
-  --border-color: #757575;
-  --shadow-color: #d9d9d9;
-}
-
-/* Dark Mode */
-.dark-mode {
-  --primary-bg: #252525;
-  --primary-text: #fefefe;
-  --secondary-bg: #8c8c8c;
-  --navbar-bg: #161616;
-  --navbar-text: #f0f0f0;
-  --footer-bg: #161616;
-  --footer-text: #f0f0f0;
-  --task-text: #ffffff; /* Task details white in dark mode */
-  --button-color: #007bff;
-  --button-text-color: #ffffff;
-  --button-hover-color: #004997;
-  --button-color-secondary: #777f80;
-  --button-text-color-secondary: #ffffff;
-  --button-border-color-secondary: transparent;
-  --button-hover-color-secondary: #0056b3;
-  --button-hover-text-color-secondary: #ffffff;
-  --border-color: #000000;
-  --shadow-color: #000000;
-}
-
-/* High Contrast Mode */
-.high-contrast-mode {
-  --primary-bg: #000;
-  --primary-text: #ffffff;
-  --secondary-bg: #252525;
-  --navbar-bg: #161616;
-  --navbar-text: #ffffff;
-  --footer-bg: #161616;
-  --footer-text: #ffffff;
-  --task-text: #ffffff; /* Task details white in high contrast mode */
-  --button-color: #0055ff;
-  --button-text-color: #ffffff;
-  --button-hover-color: #000;
-  --button-border-color: #fff000;
-  --button-color-secondary: #636a6b;
-  --button-text-color-secondary: #ffffff;
-  --button-border-color-secondary: #ffffff;
-  --button-hover-color-secondary: #000;
-  --button-hover-text-color-secondary: #ffffff;
-  --sort-button-hover-color: #ff9000;
-  --border-color: #00ffff;
-  --border-color-secondary: #40ff00;
-  --hover-border-color: #ff5900;
-  --shadow-color: #000000;
-}
-
 /* ========================= */
 /*      General Styling      */
 /* ========================= */
-html,
-body {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Buttons */
-.btn {
-  border-radius: 5px;
-}
 
 /* Add task area */
-.task-counter{
+.task-counter {
   font-weight: 600;
   color: var(--primary-text);
   margin-bottom: 0;
@@ -118,9 +33,12 @@ body {
 
 .js-time-input:disabled,
 .js-recurring-input:disabled {
-  background-color: #e0e0e0; /* Light gray background */
-  color: #888; /* Dim text color */
-  cursor: not-allowed; /* Show "not allowed" cursor */
+  background-color: #e0e0e0;
+  /* Light gray background */
+  color: #888;
+  /* Dim text color */
+  cursor: not-allowed;
+  /* Show "not allowed" cursor */
 }
 
 .js-add-button {
@@ -155,11 +73,6 @@ body {
   transition: all 0.3s ease;
   transition: background-color 0s ease;
   background-color: var(--primary-bg);
-  /* margin: 0 auto 0.813rem auto; */
-  /* border: 1px black solid; */
-  /* border-radius: 8px; */
-  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-  /* background-color: rgba(255, 255, 255, 0.9); */
 }
 
 /* Single task styling */
@@ -175,11 +88,6 @@ body {
   box-shadow: 2px 2px 3px 0px var(--shadow-color);
   transition: all 0.3s ease;
   align-items: center;
-}
-
-.task:hover {
-  width: 81%;
-  font-size: 1.25rem;
 }
 
 .small-container {
@@ -215,7 +123,6 @@ body {
 }
 
 .task-name {
-  overflow: auto;
   overflow-wrap: anywhere;
 }
 
@@ -239,7 +146,7 @@ body {
   box-sizing: border-box;
 }
 
-.js-complete-checkbox{
+.js-complete-checkbox {
   cursor: pointer;
 }
 
@@ -252,7 +159,7 @@ body {
   color: white;
 }
 
-.js-delete-button:hover, 
+.js-delete-button:hover,
 .js-delete-button:focus-visible {
   background-color: darkred;
 }
@@ -262,8 +169,8 @@ body {
   color: var(--button-text-color);
 }
 
-.js-edit-button:hover, 
-.js-edit-button:focus-visible  {
+.js-edit-button:hover,
+.js-edit-button:focus-visible {
   background-color: var(--button-hover-color);
   color: var(--button-text-color);
 }
@@ -290,21 +197,21 @@ body {
   font-weight: 600;
 }
 
-.task-edit-fields{
+.task-edit-fields {
   display: flex;
   flex: 1 1 500px;
   gap: 10px 20px;
   flex-wrap: wrap;
 }
 
-.task-edit-fields > input, 
-.task-edit-fields > select{
+.task-edit-fields>input,
+.task-edit-fields>select {
   border: 1px var(--border-color) solid;
   border-radius: 5px;
   padding: 2px 5px;
 }
 
-.js-edit-name{
+.js-edit-name {
   min-width: 200px;
   max-width: 300px;
   font-weight: 600;
@@ -312,7 +219,7 @@ body {
   field-sizing: content;
 }
 
-.break{
+.break {
   flex-basis: 100%;
 }
 
@@ -325,7 +232,7 @@ body {
 .js-edit-time{
 } */
 
-.task-edit-buttons{
+.task-edit-buttons {
   font-size: 1.15rem;
   display: flex;
   gap: 20px;
@@ -334,7 +241,7 @@ body {
   color: var(--secondary-bg);
 }
 
-.task-edit-buttons > *{
+.task-edit-buttons>* {
   border-radius: 10px;
   padding: 10px 10px;
   transition: all 0.3s ease;
@@ -343,12 +250,12 @@ body {
   border: none;
 }
 
-.js-cancel-edit-button{
+.js-cancel-edit-button {
   color: var(--button-text-color);
   background-color: #858585;
 }
 
-.dark-mode .js-cancel-edit-button{
+.dark-mode .js-cancel-edit-button {
   background-color: #4f4f4f;
 }
 
@@ -356,18 +263,19 @@ body {
 .js-cancel-edit-button:focus-visible {
   background-color: #3b3b3b;
 }
+
 .dark-mode .js-cancel-edit-button:hover,
-.dark-mode .js-cancel-edit-button:focus-visible{
+.dark-mode .js-cancel-edit-button:focus-visible {
   background-color: #272727;
 }
 
 
-.js-save-edit-button{
+.js-save-edit-button {
   background-color: var(--button-color);
   color: var(--button-text-color);
 }
 
-.js-save-edit-button:hover, 
+.js-save-edit-button:hover,
 .js-save-edit:focus-visible {
   background-color: var(--button-hover-color);
   color: var(--button-text-color);
@@ -471,7 +379,7 @@ body {
   border: 1px solid var(--button-border-color);
 }
 
-.high-contrast-mode .js-save-edit-button:hover, 
+.high-contrast-mode .js-save-edit-button:hover,
 .high-contrast-mode .js-save-edit-button:focus-visible {
   border: 2px solid var(--button-border-color);
 }

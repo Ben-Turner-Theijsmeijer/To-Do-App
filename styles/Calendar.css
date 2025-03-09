@@ -132,7 +132,6 @@ td:hover {
 }
 
 .task-name {
-    overflow: auto;
     max-height: 40px;
     font-weight: bold;
 }

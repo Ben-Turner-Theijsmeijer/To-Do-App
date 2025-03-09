@@ -11,20 +11,21 @@
 html,
 body {
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 body {
   font-family: 'Poppins', sans-serif;
-  /* overflow-y: scroll; */
   height: 100%;
   background-color: var(--primary-bg);
   color: var(--primary-text);
 }
 
 .container {
-  flex: 1; /* Pushes the footer down */
+  /* Pushes the footer down */
+  flex: 1;
 }
-
 
 /* ========================= */
 /*        Navigation         */
@@ -99,7 +100,20 @@ body {
 /* ========================= */
 .task-info,
 .task-name {
-    color: var(--task-text);
+  color: var(--task-text);
+}
+
+.task-name {
+  overflow: auto;
+  max-height: 40px;
+  font-weight: bold;
+}
+
+/* Task Hover Effect */
+.task:hover {
+  transform: scale(1.03);
+  /* Lift effect */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .category-tag,
@@ -149,15 +163,20 @@ body {
   --navbar-text: #ffffff;
   --footer-bg: #333;
   --footer-text: #ffffff;
-  --task-text: #161616; /* Task details black in light mode */
+  /* Task details black in light mode */
+  --task-text: #161616;
   --button-color: #38a3ea;
   --button-text-color: #ffffff;
   --button-hover-color: #1e6ea3;
+  /* --button-hover-color: #246a98; */
   --button-border-color: #38a3ea;
   --button-color-secondary: #7f8c8d;
   --button-text-color-secondary: #38a3ea;
+  /* --button-text-color-secondary: #007bff; */
   --button-border-color-secondary: #38a3ea;
+  /* --button-border-color-secondary: #007bff; */
   --button-hover-color-secondary: #38a3ea;
+  /* --button-hover-color-secondary: #007bff; */
   --button-hover-text-color-secondary: #fff;
   --border-color: #757575;
   --shadow-color: #d9d9d9;
@@ -172,7 +191,8 @@ body {
   --navbar-text: #f0f0f0;
   --footer-bg: #161616;
   --footer-text: #f0f0f0;
-  --task-text: #ffffff; /* Task details white in dark mode */
+  /* Task details white in dark mode */
+  --task-text: #ffffff;
   --button-color: #007bff;
   --button-text-color: #ffffff;
   --button-hover-color: #004997;
@@ -195,7 +215,8 @@ body {
   --navbar-text: #ffffff;
   --footer-bg: #161616;
   --footer-text: #ffffff;
-  --task-text: #ffffff; /* Task details white in high contrast mode */
+  /* Task details white in high contrast mode */
+  --task-text: #ffffff;
   --button-color: #0055ff;
   --button-text-color: #ffffff;
   --button-hover-color: #000;
@@ -209,6 +230,8 @@ body {
   --border-color-secondary: #40ff00;
   --hover-border-color: #ff5900;
   --shadow-color: #000000;
+  /* For todo list */
+  --sort-button-hover-color: #ff9000;
 }
 
 /* ========================= */
