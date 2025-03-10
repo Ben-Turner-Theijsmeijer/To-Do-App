@@ -33,12 +33,12 @@
 
 .js-time-input:disabled,
 .js-recurring-input:disabled {
-  background-color: #e0e0e0;
   /* Light gray background */
-  color: #888;
+  background-color: #e0e0e0;
   /* Dim text color */
-  cursor: not-allowed;
+  color: #888;
   /* Show "not allowed" cursor */
+  cursor: not-allowed;
 }
 
 .js-add-button {
@@ -57,7 +57,6 @@
 #sort-and-filter {
   display: flex;
   flex-direction: row;
-  /* justify-content: space-between; */
   justify-self: center;
   margin-top: 2.5em;
   gap: 65px
@@ -156,7 +155,7 @@
 
 .js-delete-button {
   background-color: red;
-  color: white;
+  color: var(--button-text-color);
 }
 
 .js-delete-button:hover,
@@ -177,10 +176,7 @@
 
 .js-add-button img,
 .js-delete-button img,
-.js-edit-button img {
-  margin-right: 5px;
-}
-
+.js-edit-button img,
 .js-add-button span {
   margin-right: 5px;
 }
@@ -223,15 +219,6 @@
   flex-basis: 100%;
 }
 
-/* .js-edit-category{
-}
-.js-edit-priority{
-}
-.js-edit-date{
-}
-.js-edit-time{
-} */
-
 .task-edit-buttons {
   font-size: 1.15rem;
   display: flex;
@@ -255,20 +242,10 @@
   background-color: #858585;
 }
 
-.dark-mode .js-cancel-edit-button {
-  background-color: #4f4f4f;
-}
-
 .js-cancel-edit-button:hover,
 .js-cancel-edit-button:focus-visible {
   background-color: #3b3b3b;
 }
-
-.dark-mode .js-cancel-edit-button:hover,
-.dark-mode .js-cancel-edit-button:focus-visible {
-  background-color: #272727;
-}
-
 
 .js-save-edit-button {
   background-color: var(--button-color);
@@ -281,20 +258,18 @@
   color: var(--button-text-color);
 }
 
-
 /* Popup notification */
 #js-success-notification {
   position: fixed;
   border-radius: 5px;
   align-items: center;
   justify-content: center;
-  background-color: #46a34a;
-  width: 15%;
-  min-width: 200px;
-  height: 7%;
+  background-color: var(--button-color);
+  width: 10%;
+  height: 6%;
   left: 2%;
   bottom: 10%;
-  color: #d4edda;
+  color: var(--button-text-color);
 }
 
 /* 24 hour toggle styling */
@@ -304,9 +279,21 @@
 }
 
 .form-check-input:checked {
-  background-color: #28a745;
-  border-color: #28a745;
+  background-color: var(--button-color);
+  border-color: var(--button-color);
   cursor: pointer;
+}
+
+/* ========================= */
+/*     Dark Mode Styling     */
+/* ========================= */
+.dark-mode .js-cancel-edit-button {
+  background-color: #4f4f4f;
+}
+
+.dark-mode .js-cancel-edit-button:hover,
+.dark-mode .js-cancel-edit-button:focus-visible {
+  background-color: #272727;
 }
 
 /* ========================= */
@@ -318,9 +305,9 @@
 
 .high-contrast-mode .small-container {
   background-color: var(--primary-bg);
-  border: 1px solid var(--border-color-secondary);
 }
 
+.high-contrast-mode .small-container,
 .high-contrast-mode .form-switch {
   border: 1px solid var(--border-color-secondary);
 }
@@ -342,19 +329,15 @@
   color: var(--button-hover-text-color-secondary);
 }
 
-/* edit buttons */
-.high-contrast-mode .js-edit-button {
+/* edit & delete buttons */
+.high-contrast-mode .js-edit-button,
+.high-contrast-mode .js-delete-button {
   border: 1px solid var(--button-border-color);
 }
 
 .high-contrast-mode .js-edit-button:hover,
 .high-contrast-mode .js-edit-button:focus-visible {
   border: 2px solid var(--button-border-color);
-}
-
-/* delete buttons */
-.high-contrast-mode .js-delete-button {
-  border: 1px solid var(--button-border-color);
 }
 
 .high-contrast-mode .js-delete-button:hover,
@@ -365,13 +348,13 @@
 
 /* In Line Editing buttons */
 .high-contrast-mode .js-cancel-edit-button {
-  background-color: #000000;
+  background-color: var(--primary-bg);
   border: 1px solid var(--button-border-color-secondary);
 }
 
 .high-contrast-mode .js-cancel-edit-button:hover,
 .high-contrast-mode .js-cancel-edit-button:focus-visible {
-  background-color: #222222;
+  background-color: #222;
   border: 2px solid var(--hover-border-color);
 }
 
@@ -384,18 +367,25 @@
   border: 2px solid var(--button-border-color);
 }
 
-.high-contrast-mode .js-edit-name {
+.high-contrast-mode .js-edit-name,
+.high-contrast-mode .js-edit-category,
+.high-contrast-mode .js-edit-priority,
+.high-contrast-mode .js-edit-date,
+.high-contrast-mode .js-edit-time,
+.high-contrast-mode .js-filter-input {
   background-color: var(--primary-bg);
-  color: #ffffff;
+  color: var(--primary-text);
+}
+
+.high-contrast-mode .js-edit-name {
   border: 1px solid var(--border-color-secondary);
 }
 
 .high-contrast-mode .js-edit-category,
 .high-contrast-mode .js-edit-priority,
 .high-contrast-mode .js-edit-date,
-.high-contrast-mode .js-edit-time {
-  background-color: var(--primary-bg);
-  color: #ffffff;
+.high-contrast-mode .js-edit-time,
+.high-contrast-mode .js-filter-input {
   border: 1px solid var(--button-border-color);
 }
 
@@ -408,16 +398,7 @@
 .high-contrast-mode .js-edit-category:focus-visible,
 .high-contrast-mode .js-edit-priority:focus-visible,
 .high-contrast-mode .js-edit-date:focus-visible,
-.high-contrast-mode .js-edit-time:focus-visible {
-  border: 2px solid var(--hover-border-color);
-}
-
-.high-contrast-mode .js-filter-input {
-  background-color: var(--primary-bg);
-  color: #ffffff;
-  border: 1px solid var(--button-border-color);
-}
-
+.high-contrast-mode .js-edit-time:focus-visible,
 .high-contrast-mode .js-filter-input:hover,
 .high-contrast-mode .js-filter-input:focus-visible {
   border: 2px solid var(--hover-border-color);
