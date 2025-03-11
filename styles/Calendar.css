@@ -1,5 +1,78 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
 
+:root {
+    --calendar-header: #013874;
+    --calendar-primary-bg: #fff;
+    --calendar-table-bg: #fff;
+    --weekday-header-bg: #fff;
+    --task-bg-color: #00b7ff;
+    --task-text: #000;
+    --today-bg-color: #00b7ff;
+    --today-text: #fff;
+    --today-task-text: #000;
+    --today-task-bg: #fff;
+    --empty: #fefefe;
+    --day-bg: #fff;
+    --day-text: #000;
+    --day-hover-bg: #e0efff;
+    --weekday-header-border-a: 1px solid #333;
+    --weekday-header-border-b: 0px;
+    --cal-nav-bg: #fafafe;
+    --cal-nav-text: #38a3ea;
+    --cal-nav-border: 2px solid #38a3ea;
+    --cal-nav-hover: #ddd;
+    --cal-nav-hover-border: 2px solid;
+}
+
+.dark-mode {
+    --calendar-primary-bg: #444;
+    --calendar-table-bg: #333;
+    --calendar-table-text: #e0e0e0;
+    --calendar-table-border: 1px solid #444;
+    --weekday-header-bg: #444;
+    --day-bg: #2a2a2a;
+    --day-text: #e0e0e0;
+    --day-hover-bg: #333;
+    --task-bg-color: #38a3ea;
+    --task-text: #000;
+    --today-bg-color: #38a3ea;
+    --today-text: #fff;
+    --today-task-text: #000;
+    --today-task-bg: #fff;
+    --empty: #252525;
+    --cal-nav-bg: #007bff;
+    --cal-nav-text: #fefefe;
+    --cal-nav-border: none;
+    --cal-nav-hover: #0056b3;
+    --cal-nav-hover-border: 2px solid;
+}
+
+.high-contrast-mode {
+    --calendar-primary-bg: #1b1b1b;
+    --calendar-table-bg: #0a0a0a;
+    --calendar-border: 2px solid #00ffff;
+    --weekday-header-bg: #111;
+    --weekday-header-border-a: 2px solid #00ffff;
+    --weekday-header-border-b: 2px solid #00ffff;
+    --day-bg: #141414;
+    --day-text: #fff;
+    --day-border: 1px solid #40ff00;
+    --day-hover-bg: #000;
+    --day-hover-border: 2px solid #fff000;
+    --task-text: #000;
+    --today-bg-color: #ff9800;
+    --today-text: #fff;
+    --today-text: #fff;
+    --today-task-text: #000;
+    --today-task-bg: #fff;
+    --empty: #0f0f0f;
+    --cal-nav-bg: #0055ff;
+    --cal-nav-text: #fff;
+    --cal-nav-border: 2px solid #fff000;
+    --cal-nav-hover: #000;
+    --cal-nav-hover-border: 2px solid #fff000;
+}
+
 html,
 body {
     height: 100%;
@@ -9,9 +82,7 @@ body {
 
 .task-container {
     display: flex;
-    /* Stack tasks vertically */
     flex-direction: column;
-    /* Small spacing between tasks */
     gap: 2px;
     /* Prevents overflow issues */
     overflow: hidden;
@@ -19,9 +90,8 @@ body {
 
 .task-label {
     /* Light blue, adjust as needed */
-    background-color: var(--calendar-bg-color);
-    /* Text color */
-    color: black;
+    background-color: var(--task-bg-color);
+    color: var(--task-text);
     /* Small text */
     font-size: 10px;
     font-weight: bold;
@@ -39,11 +109,12 @@ body {
 
 /* Calendar Container */
 .container-cal {
-    background: var(--secondary-bg);
+    background-color: var(--calendar-primary-bg);
     padding: 25px;
     border-radius: 20px;
     box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
+    border: var(--calendar-border);
 }
 
 /* Calendar Header */
@@ -51,7 +122,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #013874;
+    color: var(--calendar-header);
     margin-bottom: 20px;
 }
 
@@ -76,52 +147,68 @@ h2 {
     table-layout: fixed;
     /* Makes sure it spans the available space */
     width: 100%;
-
+    background-color: var(--calendar-table-bg);
+    color: var(--calendar-table-text);
+    border: var(--calendar-table-border);
 }
 
 th {
-    background-color: var(--calendar-bg-color);
-    color: white;
+    background-color: var(--task-bg-color);
+    color: var(--calendar-primary-bg);
     padding: 12px;
     border-radius: 8px;
     font-size: 16px;
     text-transform: uppercase;
 }
 
-td {
-    background-color: white;
+.calendar-table th {
+    background-color: var(--weekday-header-bg);
+    color: var(--primary-text);
+    border-right: var(--weekday-header-border-a);
+    border-left: var(--weekday-header-border-a);
+    border-top: var(--weekday-header-border-b);
+    border-bottom: var(--weekday-header-border-b);
+}
+
+td,
+.calendar-table td {
+    color: var(--day-text);
+    background-color: var(--day-bg);
+    text-align: center;
     padding: 15px;
     font-size: 16px;
     border-radius: 15px;
     /* Stronger shadow */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    /* Darker and thicker border */
-    border: 2px solid #444;
     transition: transform 0.2s ease-in-out, background-color 0.3s ease;
 }
 
-td:hover {
-    transform: translateY(-3px);
-    background-color: #e0efff;
+/* Empty cells (previous and next month's days) */
+.empty,
+.calendar-table td.empty {
+    background-color: var(--empty);
 }
 
-.empty {
-    /* Or any other subtle color */
-    background-color: #f0f0f0;
+/* Cell highlight on hover */
+td:hover,
+.calendar-table td:hover,
+.calendar-table td.empty:hover {
+    transform: translateY(-3px);
+    background-color: var(--day-hover-bg);
 }
 
 /* Today's date styling */
 .today {
-    background-color: var(--calendar-bg-color) !important;
-    color: var(--calendar-text) !important;
+    background-color: var(--today-bg-color) !important;
+    color: var(--today-text) !important;
     font-weight: bold;
     border-radius: 10px;
 }
 
 /* Change task background to white if inside today's cell */
 .today .task-label {
-    background-color: var(--secondary-bg) !important;
-    color: black !important;
+    background-color: var(--today-task-bg) !important;
+    color: var(--today-task-text) !important;
     font-weight: bold;
 }
 
@@ -136,7 +223,7 @@ td:hover {
     top: 50%;
     /* Center the pop-up */
     transform: translate(-50%, -50%);
-    background-color: white;
+    background-color: var(--calendar-primary-bg);
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -147,6 +234,7 @@ td:hover {
 .task-name {
     max-height: 40px;
     font-weight: bold;
+    color: var(--primary-text);
 }
 
 #categoryAndPriority {
@@ -157,167 +245,56 @@ td:hover {
     justify-content: space-evenly;
 }
 
-/* ========================= */
-/*         Dark Mode         */
-/* ========================= */
-body.dark-mode .container-cal {
-    background-color: var(--calendar-primary-bg);
-}
-
-/* Dark mode calendar styles */
-body.dark-mode .calendar-table {
-    /* Dark grey background for the calendar div */
-    background-color: var(--calendar-table-bg);
-    /* Light text color for the calendar */
-    color: #e0e0e0;
-    /* Subtle border to separate the table */
-    border: 1px solid #444;
-}
-
-/* Dark mode table header */
-body.dark-mode .calendar-table th {
-    /* Darker grey for the header background */
-    background-color: var(--calendar-primary-bg);
-    /* White text for the header */
+/* Month and Year Title */
+#currentDate {
     color: var(--primary-text);
+    font-size: 2rem;
+    font-weight: bold;
 }
 
-/* Dark mode calendar cells */
-body.dark-mode .calendar-table td {
-    background-color: #2a2a2a;
-    /* Light text color for dates */
-    color: #e0e0e0;
-    text-align: center;
-    padding: 10px;
-}
-
-/* Empty cells (previous and next month's days) */
-body.dark-mode .calendar-table td.empty {
-    /* Dark grey background for empty cells */
-    background-color: var(--primary-bg);
-}
-
-/* Dark mode navigation buttons */
-body.dark-mode #prevBtn,
-body.dark-mode #nextBtn,
-body.dark-mode #monthViewBtn,
-body.dark-mode #weekViewBtn {
-    /* Blue background for navigation buttons */
-    background-color: var(--button-color);
-    /* White text color */
-    color: var(--primary-text);
-    border: none;
+/* Calendar Navigation Buttons */
+.btn-primary,
+#weekViewBtn,
+#todayBtn,
+#prevBtn,
+#nextBtn {
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 10px;
 }
 
-body.dark-mode #prevBtn:hover,
-body.dark-mode #nextBtn:hover,
-body.dark-mode #monthViewBtn:hover,
-body.dark-mode #weekViewBtn:hover {
-    /* Darker blue when hovering over buttons */
-    background-color: var(--button-hover-color-secondary);
+#weekViewBtn,
+#prevBtn,
+#nextBtn {
+    background-color: var(--cal-nav-bg);
+    color: var(--cal-nav-text);
+    border: var(--cal-nav-border);
 }
 
-body.dark-mode .btn-secondary {
-    padding: 10px 20px;
+#weekViewBtn:hover,
+#prevBtn:hover,
+#nextBtn:hover {
+    background-color: var(--cal-nav-hover);
+    border: var(--cal-nav-hover-border);
 }
 
-/* Dark mode month and year title */
-body.dark-mode #currentDate {
-    /* White text color for the month and year title */
-    color: var(--primary-text);
-    /* Slightly larger text for the title */
-    font-size: 2rem;
-    font-weight: bold;
-}
+/* ============================ */
+/* High Contrast Mode - Borders */
+/* ============================ */
 
-/* ========================= */
-/*    High Contrast Mode     */
-/* ========================= */
-/* High Contrast calendar styles */
-body.high-contrast-mode .container-cal {
-    background-color: #1b1b1b;
-    border: 2px solid var(--border-color);
-}
-
-body.high-contrast-mode .calendar-table {
-    background-color: #0a0a0a;
-    color: var(--primary-text);
-    border: 2px solid var(--border-color);
-}
-
-/* High Contrast table header */
-body.high-contrast-mode .calendar-table th {
-    background-color: #111;
-    color: var(--primary-text);
-    border: 2px solid var(--border-color);
-}
-
-/* High Contrast calendar cells */
 body.high-contrast-mode .calendar-table td {
-    background-color: #141414;
-    color: var(--primary-text);
-    text-align: center;
-    padding: 10px;
-    border: 1px solid var(--border-color-secondary);
+    border: var(--day-border);
 }
 
-/* Highlight 'today' cell with a vibrant color */
-body.high-contrast-mode .calendar-table td.today {
-    background-color: #ff9800 !important;
-    color: var(--primary-text) !important;
-    border: 2px solid var(--hover-border-color);
+body.high-contrast-mode .calendar-table td:hover,
+body.high-contrast-mode .calendar-table td.empty:hover {
+    border: var(--day-hover-border);
 }
 
-/* Empty cells (previous and next month's days) */
 body.high-contrast-mode .calendar-table td.empty {
-    background-color: #0f0f0f;
     border: 1px solid #fff;
 }
 
-/* Cell highlight on hover */
-body.high-contrast-mode .calendar-table td:hover,
-body.high-contrast-mode .calendar-table td.empty:hover {
-    transform: translateY(-3px);
-    background-color: var(--button-hover-color);
-    border: 2px solid var(--button-border-color);
-}
-
-/* High Contrast Primary buttons */
-body.high-contrast-mode .btn-primary,
-body.high-contrast-mode #prevBtn,
-body.high-contrast-mode #nextBtn,
-body.high-contrast-mode #weekViewBtn {
-    /* Blue background for navigation buttons */
-    background-color: var(--button-color);
-    /* White text color */
-    color: var(--button-text-color);
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 10px;
-    border: 1px solid var(--button-border-color);
-}
-
-body.high-contrast-mode .btn-primary:hover,
-body.high-contrast-mode #prevBtn:hover,
-body.high-contrast-mode #nextBtn:hover,
-body.high-contrast-mode #weekViewBtn:hover {
-    background-color: var(--button-hover-color);
-    color: var(--button-text-color);
-    border: 2px solid var(--button-border-color);
-}
-
-/* High Contrast Secondary buttons */
-body.high-contrast-mode .btn-secondary {
-    padding: 10px 20px;
-}
-
-/* High Contrast month and year title */
-body.high-contrast-mode #currentDate {
-    color: var(--primary-text);
-    font-size: 2rem;
-    font-weight: bold;
+body.high-contrast-mode .calendar-table td.today {
+    border: 2px solid var(--hover-border-color);
 }

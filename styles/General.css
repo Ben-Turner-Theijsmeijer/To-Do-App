@@ -180,9 +180,6 @@ body {
   --button-hover-text-color-secondary: #fff;
   --border-color: #757575;
   --shadow-color: #d9d9d9;
-  /* For Calendar View */
-  --calendar-bg-color: #00b7ff;
-  --calendar-text: #fff;
 }
 
 /* Dark Mode */
@@ -207,9 +204,6 @@ body {
   --button-hover-text-color-secondary: #fff;
   --border-color: #000;
   --shadow-color: #000;
-  /* For Calendar View */
-  --calendar-primary-bg: #444;
-  --calendar-table-bg: #333;
 }
 
 /* High Contrast Mode */
