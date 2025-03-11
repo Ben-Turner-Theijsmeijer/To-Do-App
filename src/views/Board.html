@@ -48,27 +48,46 @@
     </div>
   </nav>
 
-    <main class="container">
-        <h1 class="subtitle text-center mt-4">Board View</h1>
-        <section class="header">
-            <h4 id="backlog-header"></h4>
-            <h4 id="upcoming-header"></h4>
-            <h4 id="complete-header"></h4>
-        </section>
-        <section class="drag-drop-container">
-            <section class="col3" id="backlog" ondrop="drop(event)" ondragover="allowdrop(event)">
-                <p class="task backlog-task" id="task1" draggable="true" ondragstart="drag(event)">Task 1</p>
-                <p class="task backlog-task" id="task2" draggable="true" ondragstart="drag(event)">Task 2</p>
-            </section>
-            <section class="col3" id="upcoming" ondrop="drop(event)" ondragover="allowdrop(event)">
-                <p class="task upcoming-task" id="task3" draggable="true" ondragstart="drag(event)">Task 3</p>
-            </section>
-            <section class="col3" id="complete" ondrop="drop(event)" ondragover="allowdrop(event)">
-                <p class="task complete-task" id="task4" draggable="true" ondragstart="drag(event)">Task 4</p>
-                <p class="task complete-task" id="task5" draggable="true" ondragstart="drag(event)">Task 5</p>
-            </section>
-        </section>
-    </main>
+    <div class="container">
+        <div class="container">
+            <h1 class="subtitle text-center mt-4">Board View</h1>
+            <div class="header">
+                <h4 id="backlog-header">Backlog: No date</h4>
+                <h4 id="upcoming-header">Upcoming</h4>
+                <h4 id="complete-header">Complete</h4>
+            </div>
+        
+            <div class="drag-drop-container">
+                <!-- Columns where tasks will be dynamically injected -->
+                <div id="backlog" class="col3" ondrop="drop(event)" ondragover="allowdrop(event)">
+                    <div class="task-list display" id="backlog-list"></div>
+                    <!-- Add Task Button for Backlog Column -->
+                    <div class="add-task-btn">
+                        <a href="Todolist.html"><i class="fa-solid fa-plus"></i></a>
+                    </div>
+                </div>
+        
+                <div id="upcoming" class="col3" ondrop="drop(event)" ondragover="allowdrop(event)">
+                    <div class="task-list display" id="upcoming-list"></div>
+                    <!-- Add Task Button for Upcoming Column -->
+                    <div class="add-task-btn">
+                        <a href="Todolist.html"><i class="fa-solid fa-plus"></i></a>
+                    </div>
+                </div>
+        
+                <div id="complete" class="col3" ondrop="drop(event)" ondragover="allowdrop(event)">
+                    <div class="task-list display" id="complete-list"></div>
+                    <!-- Add Task Button for Complete Column -->
+                    <div class="add-task-btn">
+                        <a href="Todolist.html"><i class="fa-solid fa-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+
+
 
   <!-- Themes Dropdown -->
   <div style="padding-bottom: 15px; padding-top: 15px">
