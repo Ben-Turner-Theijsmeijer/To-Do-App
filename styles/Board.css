@@ -126,7 +126,7 @@
 
 /* Style the '+' icon button at the bottom-left of each column */
 /* Initially hide the add task button */
-.add-task-btn {
+.add-task-link {
     display: none;
     position: absolute;
     bottom: 10px;
@@ -134,26 +134,28 @@
 }
 
 /* Show the add task button when hovering over the column */
-.col3:hover .add-task-btn {
+.col3:hover .add-task-link {
     display: block;
 }
 
-.add-task-btn a {
+.add-task-link a {
     /* Remove underline from link */
     text-decoration: none;
     /* Inherit color from parent */
     color: inherit;
 }
 
-.add-task-btn i {
+.add-task-link i {
     /* Make it look clickable */
     cursor: pointer;
+    font-size: 18px;
 }
 
 /* Optional: Add a hover effect to the '+' button */
-.add-task-btn:hover i {
+.add-task-link:hover i {
     /* Darker blue when hovered */
     color: #0056b3;
+    font-size: 22px;
 }
 
 /* Task Colors */
