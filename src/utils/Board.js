@@ -1,3 +1,5 @@
+import Task from "./task.js";
+
 document.addEventListener("DOMContentLoaded", function() {
     // Function to toggle between light and dark mode
     document.getElementById("themesSelection").addEventListener("change", (event) => {
@@ -11,8 +13,9 @@ document.addEventListener("DOMContentLoaded", function() {
     // Function to load tasks from local storage
     const loadTasksFromLocalStorage = () => {
         const taskList = JSON.parse(localStorage.getItem("taskList")) || [];
+        let tasks = taskList.map(taskData => Object.assign(new Task(), taskData)); 
 
-        taskList.forEach(task => {
+        tasks.forEach(task => {
             const taskElement = createTaskElement(task);
             const targetColumn = document.getElementById(`${task.completed ? "complete" : task.date === "" ? "backlog" : "upcoming"}-list`);
             targetColumn.appendChild(taskElement);
@@ -31,10 +34,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Create the content for the task
         taskElement.innerHTML = `
-            <p><strong>${task.name}</strong>, ${task.date}</p> <!-- Name and Date -->
+            <div>
+                ${task.isOverdue()}
+                <strong>${task.name}</strong>, ${task.date}
+            </div> <!-- Name and Date -->
             <div class="task-details">
-                ${task.recurring ? `<span class="tag recurring ${task.recurring ? `recurring-${task.recurring}` : ""}">${task.recurring}</span>` : ""}
-                ${task.category ? `<span class="tag category ${task.category ? `category-${task.category}` : ""}">${task.category}</span>` : ""}
+                ${task.recurring ? `<span class="tag recurring ${task.recurring ? `recurring-tag` : ""}">${task.recurring}</span>` : ""}
+                ${task.category ? `<span class="tag category ${task.category ? `category-tag` : ""}">${task.category}</span>` : ""}
                 ${task.priority ? `<span class="tag priority ${task.priority ? `priority-${task.priority}` : ""}">${task.priority}</span>` : ""}
             </div>
         `;
