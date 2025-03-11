@@ -82,6 +82,37 @@ h4 {
     color: #D00000;   /* Slightly darker red when hovered */
 }
 
+/* Style the '+' icon button at the bottom-left of each column */
+/* Initially hide the add task button */
+.add-task-btn {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+
+/* Show the add task button when hovering over the column */
+.col3:hover .add-task-btn {
+    display: block;
+}
+
+
+.add-task-btn a {
+    text-decoration: none; /* Remove underline from link */
+    color: inherit;        /* Inherit color from parent */
+}
+
+.add-task-btn i {
+    cursor: pointer; /* Make it look clickable */
+}
+
+/* Optional: Add a hover effect to the '+' button */
+.add-task-btn:hover i {
+    color: #0056b3;   /* Darker blue when hovered */
+}
+
+
 /* Task Colors - Improved Contrast */
 .backlog-task {
     border: 3px solid #FFC107; /* Stronger border */
@@ -117,6 +148,9 @@ h4 {
     color: #28A745;
 }
 
+.dark-mode h1 {
+    color: white;
+}
 /* Dark Mode Styles */
 .dark-mode .col3 {
     background: #333333; /* Darker background for better contrast */

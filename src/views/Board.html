@@ -49,26 +49,45 @@
   </nav>
 
     <div class="container">
-        <h1 class="subtitle text-center mt-4">Board View</h1>
-        <div class="header">
-            <h4 id="backlog-header">Backlog: No date</h4>
-            <h4 id="upcoming-header">Upcoming</h4>
-            <h4 id="complete-header">Complete</h4>
+        <div class="container">
+            <h1 class="subtitle text-center mt-4">Board View</h1>
+            <div class="header">
+                <h4 id="backlog-header">Backlog: No date</h4>
+                <h4 id="upcoming-header">Upcoming</h4>
+                <h4 id="complete-header">Complete</h4>
+            </div>
+        
+            <div class="drag-drop-container">
+                <!-- Columns where tasks will be dynamically injected -->
+                <div id="backlog" class="col3" ondrop="drop(event)" ondragover="allowdrop(event)">
+                    <div class="task-list display" id="backlog-list"></div>
+                    <!-- Add Task Button for Backlog Column -->
+                    <div class="add-task-btn">
+                        <a href="Todolist.html"><i class="fa-solid fa-plus"></i></a>
+                    </div>
+                </div>
+        
+                <div id="upcoming" class="col3" ondrop="drop(event)" ondragover="allowdrop(event)">
+                    <div class="task-list display" id="upcoming-list"></div>
+                    <!-- Add Task Button for Upcoming Column -->
+                    <div class="add-task-btn">
+                        <a href="Todolist.html"><i class="fa-solid fa-plus"></i></a>
+                    </div>
+                </div>
+        
+                <div id="complete" class="col3" ondrop="drop(event)" ondragover="allowdrop(event)">
+                    <div class="task-list display" id="complete-list"></div>
+                    <!-- Add Task Button for Complete Column -->
+                    <div class="add-task-btn">
+                        <a href="Todolist.html"><i class="fa-solid fa-plus"></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
+        
 
-        <div class="drag-drop-container">
-            <!-- Columns where tasks will be dynamically injected -->
-            <div id="backlog" class="col3" ondrop="drop(event)" ondragover="allowdrop(event)">
-                <div class="task-list display" id="backlog-list"></div>
-            </div>
-            <div id="upcoming" class="col3" ondrop="drop(event)" ondragover="allowdrop(event)">
-                <div class="task-list display" id="upcoming-list"></div>
-            </div>
-            <div id="complete" class="col3" ondrop="drop(event)" ondragover="allowdrop(event)">
-                <div class="task-list display" id="complete-list"></div>
-            </div>
-        </div>
-    </div>
+
+
 
   <!-- Themes Dropdown -->
   <div style="padding-bottom: 15px; padding-top: 15px">
