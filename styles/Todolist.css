@@ -57,7 +57,7 @@
 
 .js-add-grid {
   display: grid;
-  grid-template-columns: 2.5fr 11rem 8rem 8rem 7.3rem 8rem 1fr;
+  grid-template-columns: 2.5fr 11rem 8rem 8rem 8rem 7.3rem 1fr;
   row-gap: 1rem;
   background-color: var(--secondary-bg);
   padding: 20px;

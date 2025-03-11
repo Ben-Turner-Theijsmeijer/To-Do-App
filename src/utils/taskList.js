@@ -313,7 +313,14 @@ class TaskList {
           </select>
           <div class="break"></div>
           <input type="date" class="js-edit-date" value="${task.date}"></input>
-          <input type="time" class="js-edit-time" value="${task.time}"></input>
+          <input type="time" class="js-edit-time" style="width: 125px" value="${task.time}"></input>
+          <select class="js-edit-recurring">
+          ${task.recurring ? `<option value="${task.recurring}" selected disabled hidden>${task.recurring}</option>` : `<option value="" selected disabled hidden>Recurring</option>`}
+            <option value="">None</option>
+            <option value="Daily">Daily</option>
+            <option value="Weekly">Weekly</option>
+            <option value="Monthly">Monthly</option>
+          </select>
         </div>
         
         <div class="task-edit-buttons">
@@ -336,9 +343,9 @@ class TaskList {
           <input type="checkbox" class="js-complete-checkbox" data-index="${referenceNumber}" ${task.completed ? 'checked' : ''}>
           <div class="task-info">
             <span class="task-name">${task.name}</span>
+            ${task.recurring ? `<span class="recurring-tag">${task.recurring}</span>` : ''}
             ${task.category ? `<span class="category-tag">${task.category}</span>` : ''}
             ${task.priority ? `<span class="priority-tag priority-${task.priority}">${task.priority}</span>` : ''}
-            ${task.recurring ? `<span class="recurring-tag">${task.recurring}</span>` : ''}
             <div class="date-section">${task.dateText}</div>
           </div>
         </div>
@@ -363,6 +370,7 @@ class TaskList {
     let editTimeElement = document.querySelector('.js-edit-time');
     let editCategoryElement = document.querySelector('.js-edit-category');
     let editPriorityElement = document.querySelector('.js-edit-priority');
+    let editRecurringElement = document.querySelector('.js-edit-recurring');
 
     let name = editNameElement.value;
     let date = editDateElement.value;
@@ -370,8 +378,9 @@ class TaskList {
     let category = editCategoryElement.value;
     let priority = editPriorityElement.value;
     let complete = task.completed;
+    let recurring = editRecurringElement.value;
     
-    task.updateTask(name, date, time, category, priority, complete);
+    task.updateTask(name, date, time, category, priority, complete, recurring);
   }
 
   // Add event listeners for delete, edit, and complete buttons

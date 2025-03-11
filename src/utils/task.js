@@ -14,13 +14,14 @@ class Task {
   }
 
   // Single responsibility: Task updates itself
-  updateTask(name, date, time, category, priority, completed){
+  updateTask(name, date, time, category, priority, completed, recurring){
     this.name = name;
     this.date = date;
     this.time = time;
     this.category = category;
     this.priority = priority;
     this.completed = completed;
+    this.recurring = recurring;
   }
 
   updateTimeString(){

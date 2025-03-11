@@ -237,7 +237,7 @@ td:hover,
     color: var(--primary-text);
 }
 
-#categoryAndPriority {
+#calendarTaskTags {
     display: flex;
     align-items: center;
     gap: 10px;
