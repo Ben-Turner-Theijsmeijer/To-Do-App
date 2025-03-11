@@ -4,13 +4,15 @@
 /*      General Styling      */
 /* ========================= */
 :root {
-  --primary-edit-bg: #fafafe;
+  --primary-edit-bg: #fff;
   --primary-edit-text: #333;
   --button-hover-bg: #38a3ea;
   --button-hover-text: #fff;
   --input-border-hover: 2px solid #38a3ea;
   --cancel-edit-bg: #858585;
   --cancel-edit-hover: #3b3b3b;
+  --form-border: 1px solid #dee2e6;
+  --task-border: none;
 }
 
 .dark-mode {
@@ -21,6 +23,8 @@
   --button-hover-text: #fafafe;
   --cancel-edit-bg: #4f4f4f;
   --cancel-edit-hover: #272727;
+  --form-border: 1px solid #dee2e6;
+  --task-border: none;
 }
 
 .high-contrast-mode {
@@ -35,6 +39,7 @@
   --button-border-hover: 2px solid #fff000;
   --add-grid-border: 2px solid #00ffff;
   --form-border: 1px solid #40ff00;
+  --task-border: 1px solid #40ff00;
   --cancel-edit-border: 1px solid #38a3ea;
   --cancel-border-hover: 2px solid #ff5900;
   --sort-button-hover-color: #ff9000;
@@ -362,5 +367,5 @@
 
 .small-container,
 .form-switch {
-  border: var(--form-border);
+  border: var(--task-border);
 }
