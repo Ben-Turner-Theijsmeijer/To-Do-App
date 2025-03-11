@@ -116,14 +116,12 @@
 .delete-btn i {
     /* Icon size */
     font-size: 18px;
-    /* Red color for the "X" icon */
-    color: #FF0000;
+    color: var(--delete-bg);
 }
 
 /* Optional: Add a hover effect to the delete button */
 .delete-btn:hover i {
-    /* Slightly darker red when hovered */
-    color: #D00000;
+    color: var(--delete-border-hover);
 }
 
 /* Style the '+' icon button at the bottom-left of each column */

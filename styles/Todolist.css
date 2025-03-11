@@ -11,10 +11,6 @@
   --input-border-hover: 2px solid #38a3ea;
   --cancel-edit-bg: #858585;
   --cancel-edit-hover: #3b3b3b;
-  --delete-bg: red;
-  --delete-bg-hover: darkred;
-  --delete-border: red;
-  --delete-border-hover: red;
 }
 
 .dark-mode {
@@ -35,16 +31,13 @@
   --input-border-hover: 2px solid #ff5900;
   --cancel-edit-bg: #858585;
   --cancel-edit-hover: #3b3b3b;
-  --delete-bg: red;
-  --delete-bg-hover: #000;
-  --delete-border: #fff000;
-  --delete-border-hover: #ff5900;
   --button-border: 1px solid #fff000;
   --button-border-hover: 2px solid #fff000;
   --add-grid-border: 2px solid #00ffff;
   --form-border: 1px solid #40ff00;
   --cancel-edit-border: 1px solid #38a3ea;
   --cancel-border-hover: 2px solid #ff5900;
+  --sort-button-hover-color: #ff9000;
 }
 
 /* Add task area */
