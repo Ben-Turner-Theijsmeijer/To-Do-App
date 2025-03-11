@@ -28,6 +28,8 @@
   --delete-bg-hover: darkred;
   --delete-border: red;
   --delete-border-hover: darkred;
+  --overdue-date: red;
+  --due-date: #ff5900;
 }
 
 /* Dark Mode */
@@ -55,6 +57,8 @@
   --delete-bg-hover: darkred;
   --delete-border: red;
   --delete-border-hover: darkred;
+  --overdue-date: red;
+  --due-date: #ff5900;
 }
 
 /* High Contrast Mode */
@@ -84,6 +88,8 @@
   --delete-bg-hover: #000;
   --delete-border: #fff000;
   --delete-border-hover: #ff5900;
+  --overdue-date: red;
+  --due-date: #ff5900;
 }
 
 /* ========================= */
@@ -235,6 +241,46 @@ body {
 .priority-Low {
   background-color: #d4edda;
   color: #155724;
+}
+
+.overdue-tooltip{
+  display: inline-block;
+  width: auto;
+  cursor: pointer;
+  position: relative;
+}
+
+.overdue-tooltip:hover::after {
+  content: "Overdue";
+  position: absolute;
+  background: var(--overdue-date);
+  color: white;
+  font-size: 0.8em;
+  padding: 2px 5px;
+  border-radius: 3px;
+  top: -20px;
+  left: 0;
+  white-space: nowrap;
+}
+
+.due-tooltip {
+  display: inline-block;
+  width: auto;
+  cursor: pointer;
+  position: relative;
+}
+
+.due-tooltip:hover::after {
+  content: "Due Today";
+  position: absolute;
+  background: var(--due-date);
+  color: white;
+  font-size: 0.8em;
+  padding: 2px 5px;
+  border-radius: 3px;
+  top: -20px;
+  left: 0;
+  white-space: nowrap;
 }
 
 /* ========================= */

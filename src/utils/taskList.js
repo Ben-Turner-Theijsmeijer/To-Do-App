@@ -335,7 +335,6 @@ class TaskList {
       </div>`;
     }
 
-    // Display task UI in task list
     return `
       <div class="task" data-index="${referenceNumber}">
         
@@ -346,7 +345,10 @@ class TaskList {
             ${task.recurring ? `<span class="recurring-tag">${task.recurring}</span>` : ''}
             ${task.category ? `<span class="category-tag">${task.category}</span>` : ''}
             ${task.priority ? `<span class="priority-tag priority-${task.priority}">${task.priority}</span>` : ''}
-            <div class="date-section">${task.dateText}</div>
+            <div class="date-section">
+              ${task.isOverdue()}
+              <span>${task.dateText}</span>
+            </div>
           </div>
         </div>
         <button class="js-delete-button" data-index="${referenceNumber}">
