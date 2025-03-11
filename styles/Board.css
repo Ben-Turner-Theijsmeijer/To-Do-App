@@ -75,7 +75,7 @@
 /* Subtle Hover Effect */
 .col3:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px var(--task-shadow);
 }
 
 /* Task Styling */
@@ -93,31 +93,37 @@
     font-weight: 500;
     /* Subtle shadow for better visibility */
     box-shadow: 0px 3px 6px var(--task-shadow);
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Task Hover Effect */
+.task:hover {
+    transform: scale(1.03);
+    /* Lift effect */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .delete-btn {
-    position: absolute;
     /* Position the delete button absolutely within the task */
-    bottom: 10px;
+    position: absolute;
     /* Position 10px from the bottom */
-    right: 10px;
+    bottom: 10px;
     /* Position 10px from the right */
-    cursor: pointer;
+    right: 10px;
     /* Make it look clickable */
+    cursor: pointer;
 }
 
 .delete-btn i {
-    font-size: 18px;
     /* Icon size */
-    color: #FF0000;
+    font-size: 18px;
     /* Red color for the "X" icon */
+    color: #FF0000;
 }
 
 /* Optional: Add a hover effect to the delete button */
 .delete-btn:hover i {
-    color: #D00000;
     /* Slightly darker red when hovered */
+    color: #D00000;
 }
 
 /* Style the '+' icon button at the bottom-left of each column */
@@ -129,31 +135,28 @@
     left: 10px;
 }
 
-
 /* Show the add task button when hovering over the column */
 .col3:hover .add-task-btn {
     display: block;
 }
 
-
 .add-task-btn a {
-    text-decoration: none;
     /* Remove underline from link */
-    color: inherit;
+    text-decoration: none;
     /* Inherit color from parent */
+    color: inherit;
 }
 
 .add-task-btn i {
-    cursor: pointer;
     /* Make it look clickable */
+    cursor: pointer;
 }
 
 /* Optional: Add a hover effect to the '+' button */
 .add-task-btn:hover i {
-    color: #0056b3;
     /* Darker blue when hovered */
+    color: #0056b3;
 }
-
 
 /* Task Colors */
 .backlog-task {
@@ -161,39 +164,9 @@
     background-color: var(--no-date-bg);
 }
 
-#backlog-header span {
-    color: var(--no-date-primary);
-}
-
 .upcoming-task {
     border: 3px solid var(--upcoming-primary);
     background-color: var(--upcoming-bg);
-    border: 3px solid #007BFF;
-    /* Blue border */
-    background-color: rgba(0, 123, 255, 0.25);
-    /* Light blue fill */
-}
-
-.complete-task {
-    border: 3px solid #28A745;
-    background-color: rgba(40, 167, 69, 0.25);
-    /* Darker green fill */
-}
-
-/* Task Hover Effect */
-.task:hover {
-    transform: scale(1.03);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-    /* Lift effect */
-}
-
-/* Task Count Colors - Matching Borders */
-#backlog-header span {
-    color: #FFC107;
-}
-
-#upcoming-header span {
-    color: var(--upcoming-primary);
 }
 
 .complete-task {
@@ -201,41 +174,23 @@
     background-color: var(--complete-bg);
 }
 
+/* Task Count Colors - Matching Borders */
+#backlog-header span {
+    color: var(--no-date-primary);
+}
+
+#upcoming-header span {
+    color: var(--upcoming-primary);
+}
+
 #complete-header span {
-    /* color: #28A745; */
     color: var(--complete-primary);
 }
 
-.dark-mode h1 {
-    color: white;
-}
-
-/* Dark Mode Styles */
-.dark-mode .col3 {
-    background: #333333;
-    /* Darker background for better contrast */
-    border: 2px solid #444444;
-    /* Darker borders */
-}
-
-.dark-mode .task {
-    color: #e0e0e0;
-    /* Light text for tasks */
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
-    /* Slight shadow to make tasks stand out */
-}
-
-.dark-mode .header h4 {
-    color: #e0e0e0;
-    /* Light color for header */
-}
-
-.dark-mode select {
-    background-color: #444;
-    /* Dark background for dropdown */
-    color: white;
-    /* White text for dropdown */
-    border: 1px solid white;
+select {
+    background-color: var(--col3-border);
+    color: var(--primary-text);
+    border: 1px solid var(--primary-text);
 }
 
 /* General Task Styles */
@@ -251,51 +206,11 @@
     border-radius: 12px;
     font-size: 14px;
     text-transform: capitalize;
-}
-
-.tag.category {
     font-weight: bold;
-}
-
-.tag.priority {
-    font-weight: bold;
-}
-
-.tag.recurring {
-    font-weight: bold;
-}
-
-/* Task Priority Tag Colors */
-.priority-High {
-    background-color: #ffcccb;
-    color: #d8000c;
-}
-
-.priority-Medium {
-    background-color: #feefb3;
-    color: #9f6000;
-}
-
-.priority-Low {
-    background-color: #d4edda;
-    color: #155724;
-}
-
-/* Task Category Tag Color */
-.category-tag,
-.category-Work,
-.category-Other,
-.category-Personal,
-.category-Shopping {
-    background-color: #e0e0e0;
-    color: #333;
 }
 
 /* Recurring Tag Color */
-.recurring-tag,
-.recurring-Daily,
-.recurring-Weekly,
-.recurring-Monthly {
+.recurring-tag {
     background-color: #81b8ca;
     color: #1f3a81;
 }
