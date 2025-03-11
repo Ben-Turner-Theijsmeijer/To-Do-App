@@ -53,6 +53,7 @@ h4 {
 
 /* Task Styling */
 .task {
+    position: relative; /* Make task element a positioned container */
     margin: 15px;
     padding: 15px 20px;
     text-align: center;
@@ -61,8 +62,56 @@ h4 {
     cursor: grab;
     transition: all 0.2s ease-in-out;
     font-weight: 500;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for better visibility */
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
+
+.delete-btn {
+    position: absolute;  /* Position the delete button absolutely within the task */
+    bottom: 10px;        /* Position 10px from the bottom */
+    right: 10px;         /* Position 10px from the right */
+    cursor: pointer;     /* Make it look clickable */
+}
+
+.delete-btn i {
+    font-size: 18px; /* Icon size */
+    color: #FF0000;   /* Red color for the "X" icon */
+}
+
+/* Optional: Add a hover effect to the delete button */
+.delete-btn:hover i {
+    color: #D00000;   /* Slightly darker red when hovered */
+}
+
+/* Style the '+' icon button at the bottom-left of each column */
+/* Initially hide the add task button */
+.add-task-btn {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+
+/* Show the add task button when hovering over the column */
+.col3:hover .add-task-btn {
+    display: block;
+}
+
+
+.add-task-btn a {
+    text-decoration: none; /* Remove underline from link */
+    color: inherit;        /* Inherit color from parent */
+}
+
+.add-task-btn i {
+    cursor: pointer; /* Make it look clickable */
+}
+
+/* Optional: Add a hover effect to the '+' button */
+.add-task-btn:hover i {
+    color: #0056b3;   /* Darker blue when hovered */
+}
+
 
 /* Task Colors - Improved Contrast */
 .backlog-task {
@@ -71,8 +120,8 @@ h4 {
 }
 
 .upcoming-task {
-    border: 3px solid #007BFF;
-    background-color: rgba(0, 123, 255, 0.25); /* Darker blue fill */
+    border: 3px solid #007BFF; /* Blue border */
+    background-color: rgba(0, 123, 255, 0.25); /* Light blue fill */
 }
 
 .complete-task {
@@ -99,26 +148,10 @@ h4 {
     color: #28A745;
 }
 
-.dark-mode .backlog-task {
-    border: 3px solid #f4d03f; /* Softer yellow border */
-    background-color: rgba(244, 208, 63, 0.2); /* Soft yellow background */
-}
-
-.dark-mode .upcoming-task {
-    border: 3px solid #3498db; /* Softer blue border */
-    background-color: rgba(52, 152, 219, 0.2); /* Softer blue background */
-}
-
-.dark-mode .complete-task {
-    border: 3px solid #2ecc71; /* Softer green border */
-    background-color: rgba(46, 204, 113, 0.2); /* Softer green background */
-}
-
-/* Dark Mode Styles */
-.dark-mode .subtitle {
+.dark-mode h1 {
     color: white;
 }
-
+/* Dark Mode Styles */
 .dark-mode .col3 {
     background: #333333; /* Darker background for better contrast */
     border: 2px solid #444444; /* Darker borders */
@@ -129,15 +162,67 @@ h4 {
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3); /* Slight shadow to make tasks stand out */
 }
 
-/* Header in Dark Mode */
 .dark-mode .header h4 {
     color: #e0e0e0; /* Light color for header */
 }
 
-/* Dropdown Styling */
 .dark-mode select {
     background-color: #444; /* Dark background for dropdown */
     color: white; /* White text for dropdown */
     border: 1px solid white;
 }
 
+/* General Task Styles */
+.task-details {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.tag {
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
+.tag.category {
+    font-weight: bold;
+}
+
+.tag.priority {
+    font-weight: bold;
+}
+
+.tag.recurring {
+    font-weight: bold;
+}
+
+/* Task Priority Tag Colors */
+.priority-High {
+    background-color: #ffcccb;
+    color: #d8000c;
+}
+
+.priority-Medium {
+    background-color: #feefb3;
+    color: #9f6000;
+}
+
+.priority-Low {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+/* Task Category Tag Color */
+.category-tag, .category-Work, .category-Other, .category-Personal, .category-Shopping {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+/* Recurring Tag Color */
+.recurring-tag, .recurring-Daily, .recurring-Weekly, .recurring-Monthly {
+    background-color: #81b8ca;
+    color: #1f3a81;
+}
