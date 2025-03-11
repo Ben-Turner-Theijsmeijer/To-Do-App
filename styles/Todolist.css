@@ -1,95 +1,55 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
 
 /* ========================= */
-/*       Theme Colours       */
-/* ========================= */
-/* Light Mode (Default) */
-:root {
-  --primary-bg: #fafafe;
-  --primary-text: #333;
-  --secondary-bg: #fff;
-  --navbar-bg: #333;
-  --navbar-text: #ffffff;
-  --footer-bg: #333;
-  --footer-text: #ffffff;
-  --task-text: #161616; /* Task details black in light mode */
-  --button-color: #38a3ea;
-  --button-text-color: #ffffff;
-  --button-hover-color: #246a98;
-  --button-color-secondary: #7f8c8d;
-  --button-text-color-secondary: #007bff;
-  --button-border-color-secondary: #007bff;
-  --button-hover-color-secondary: #007bff;
-  --button-hover-text-color-secondary: #fff;
-  --border-color: #757575;
-  --shadow-color: #d9d9d9;
-}
-
-/* Dark Mode */
-.dark-mode {
-  --primary-bg: #252525;
-  --primary-text: #fefefe;
-  --secondary-bg: #8c8c8c;
-  --navbar-bg: #161616;
-  --navbar-text: #f0f0f0;
-  --footer-bg: #161616;
-  --footer-text: #f0f0f0;
-  --task-text: #ffffff; /* Task details white in dark mode */
-  --button-color: #007bff;
-  --button-text-color: #ffffff;
-  --button-hover-color: #004997;
-  --button-color-secondary: #777f80;
-  --button-text-color-secondary: #ffffff;
-  --button-border-color-secondary: transparent;
-  --button-hover-color-secondary: #0056b3;
-  --button-hover-text-color-secondary: #ffffff;
-  --border-color: #000000;
-  --shadow-color: #000000;
-}
-
-/* High Contrast Mode */
-.high-contrast-mode {
-  --primary-bg: #000;
-  --primary-text: #ffffff;
-  --secondary-bg: #252525;
-  --navbar-bg: #161616;
-  --navbar-text: #ffffff;
-  --footer-bg: #161616;
-  --footer-text: #ffffff;
-  --task-text: #ffffff; /* Task details white in high contrast mode */
-  --button-color: #0055ff;
-  --button-text-color: #ffffff;
-  --button-hover-color: #000;
-  --button-border-color: #fff000;
-  --button-color-secondary: #636a6b;
-  --button-text-color-secondary: #ffffff;
-  --button-border-color-secondary: #ffffff;
-  --button-hover-color-secondary: #000;
-  --button-hover-text-color-secondary: #ffffff;
-  --sort-button-hover-color: #ff9000;
-  --border-color: #00ffff;
-  --border-color-secondary: #40ff00;
-  --hover-border-color: #ff5900;
-  --shadow-color: #000000;
-}
-
-/* ========================= */
 /*      General Styling      */
 /* ========================= */
-html,
-body {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+:root {
+  --primary-edit-bg: #fff;
+  --primary-edit-text: #333;
+  --button-hover-bg: #38a3ea;
+  --button-hover-text: #fff;
+  --input-border-hover: 2px solid #38a3ea;
+  --cancel-edit-bg: #858585;
+  --cancel-edit-hover: #3b3b3b;
+  --cancel-edit-border: none;
+  --form-border: 1px solid #dee2e6;
+  --task-border: none;
 }
 
-/* Buttons */
-.btn {
-  border-radius: 5px;
+.dark-mode {
+  --primary-edit-bg: #fafafe;
+  --primary-edit-text: #333;
+  --button-hover-bg: #007bff;
+  --input-border-hover: 2px solid #007bff;
+  --button-hover-text: #fafafe;
+  --cancel-edit-bg: #4f4f4f;
+  --cancel-edit-hover: #272727;
+  --cancel-edit-border: none;
+  --cancel-border-hover: 2px solid #38a3ea;
+  --form-border: 1px solid #dee2e6;
+  --task-border: none;
+}
+
+.high-contrast-mode {
+  --primary-edit-bg: #000;
+  --primary-edit-text: #fafafe;
+  --button-hover-bg: #ff9000;
+  --button-hover-text: #fff;
+  --input-border-hover: 2px solid #ff5900;
+  --cancel-edit-bg: #858585;
+  --cancel-edit-hover: #3b3b3b;
+  --button-border: 1px solid #fff000;
+  --button-border-hover: 2px solid #fff000;
+  --add-grid-border: 2px solid #00ffff;
+  --form-border: 1px solid #40ff00;
+  --task-border: 1px solid #40ff00;
+  --cancel-edit-border: 1px solid #fff;
+  --cancel-border-hover: 2px solid #ff5900;
+  --sort-button-hover-color: #ff9000;
 }
 
 /* Add task area */
-.task-counter{
+.task-counter {
   font-weight: 600;
   color: var(--primary-text);
   margin-bottom: 0;
@@ -106,6 +66,7 @@ body {
   margin-bottom: 0.813rem;
   column-gap: 10px;
   overflow: auto;
+  border: var(--add-grid-border);
 }
 
 .js-actions-wrapper {
@@ -118,9 +79,12 @@ body {
 
 .js-time-input:disabled,
 .js-recurring-input:disabled {
-  background-color: #e0e0e0; /* Light gray background */
-  color: #888; /* Dim text color */
-  cursor: not-allowed; /* Show "not allowed" cursor */
+  /* Light gray background */
+  background-color: #e0e0e0;
+  /* Dim text color */
+  color: #888;
+  /* Show "not allowed" cursor */
+  cursor: not-allowed;
 }
 
 .js-add-button {
@@ -139,10 +103,16 @@ body {
 #sort-and-filter {
   display: flex;
   flex-direction: row;
-  /* justify-content: space-between; */
   justify-self: center;
   margin-top: 2.5em;
   gap: 65px
+}
+
+/* Sort Buttons */
+.btn-outline-primary:hover,
+.btn-outline-primary:focus-visible {
+  background-color: var(--button-hover-bg);
+  color: var(--button-hover-text);
 }
 
 /* Task list */
@@ -155,11 +125,6 @@ body {
   transition: all 0.3s ease;
   transition: background-color 0s ease;
   background-color: var(--primary-bg);
-  /* margin: 0 auto 0.813rem auto; */
-  /* border: 1px black solid; */
-  /* border-radius: 8px; */
-  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-  /* background-color: rgba(255, 255, 255, 0.9); */
 }
 
 /* Single task styling */
@@ -175,11 +140,6 @@ body {
   box-shadow: 2px 2px 3px 0px var(--shadow-color);
   transition: all 0.3s ease;
   align-items: center;
-}
-
-.task:hover {
-  width: 81%;
-  font-size: 1.25rem;
 }
 
 .small-container {
@@ -215,7 +175,6 @@ body {
 }
 
 .task-name {
-  overflow: auto;
   overflow-wrap: anywhere;
 }
 
@@ -237,9 +196,10 @@ body {
   justify-self: end;
   margin: 0 15px 0 0;
   box-sizing: border-box;
+  border: var(--button-border);
 }
 
-.js-complete-checkbox{
+.js-complete-checkbox {
   cursor: pointer;
 }
 
@@ -248,13 +208,13 @@ body {
 }
 
 .js-delete-button {
-  background-color: red;
-  color: white;
+  background-color: var(--delete-bg);
+  color: var(--button-text-color);
 }
 
-.js-delete-button:hover, 
+.js-delete-button:hover,
 .js-delete-button:focus-visible {
-  background-color: darkred;
+  background-color: var(--delete-bg-hover);
 }
 
 .js-edit-button {
@@ -262,23 +222,46 @@ body {
   color: var(--button-text-color);
 }
 
-.js-edit-button:hover, 
-.js-edit-button:focus-visible  {
+.js-edit-button:hover,
+.js-edit-button:focus-visible {
   background-color: var(--button-hover-color);
   color: var(--button-text-color);
+  border: var(--button-border-hover);
 }
 
 .js-add-button img,
 .js-delete-button img,
-.js-edit-button img {
-  margin-right: 5px;
-}
-
+.js-edit-button img,
 .js-add-button span {
   margin-right: 5px;
 }
 
 /* Task editing inline*/
+.js-edit-name,
+.js-edit-category,
+.js-edit-priority,
+.js-edit-date,
+.js-edit-time,
+.js-filter-input {
+  background-color: var(--primary-edit-bg);
+  color: var(--primary-edit-text);
+}
+
+.js-edit-name:hover,
+.js-edit-category:hover,
+.js-edit-priority:hover,
+.js-edit-date:hover,
+.js-edit-time:hover,
+.js-edit-name:focus-visible,
+.js-edit-category:focus-visible,
+.js-edit-priority:focus-visible,
+.js-edit-date:focus-visible,
+.js-edit-time:focus-visible,
+.js-filter-input:hover,
+.js-filter-input:focus-visible {
+  border: var(--input-border-hover);
+}
+
 .task-edit {
   width: 81%;
   font-size: 1.25rem;
@@ -290,42 +273,32 @@ body {
   font-weight: 600;
 }
 
-.task-edit-fields{
+.task-edit-fields {
   display: flex;
   flex: 1 1 500px;
   gap: 10px 20px;
   flex-wrap: wrap;
 }
 
-.task-edit-fields > input, 
-.task-edit-fields > select{
-  border: 1px var(--border-color) solid;
+.task-edit-fields>input,
+.task-edit-fields>select {
+  border: var(--form-border);
   border-radius: 5px;
   padding: 2px 5px;
 }
 
-.js-edit-name{
+.js-edit-name {
   min-width: 200px;
   max-width: 300px;
   font-weight: 600;
-  border: none;
-  field-sizing: content;
+  /* field-sizing: content; */
 }
 
-.break{
+.break {
   flex-basis: 100%;
 }
 
-/* .js-edit-category{
-}
-.js-edit-priority{
-}
-.js-edit-date{
-}
-.js-edit-time{
-} */
-
-.task-edit-buttons{
+.task-edit-buttons {
   font-size: 1.15rem;
   display: flex;
   gap: 20px;
@@ -334,7 +307,7 @@ body {
   color: var(--secondary-bg);
 }
 
-.task-edit-buttons > *{
+.task-edit-buttons>* {
   border-radius: 10px;
   padding: 10px 10px;
   transition: all 0.3s ease;
@@ -343,36 +316,30 @@ body {
   border: none;
 }
 
-.js-cancel-edit-button{
+.js-cancel-edit-button {
   color: var(--button-text-color);
-  background-color: #858585;
-}
-
-.dark-mode .js-cancel-edit-button{
-  background-color: #4f4f4f;
+  background-color: var(--cancel-edit-bg);
+  border: var(--cancel-edit-border);
 }
 
 .js-cancel-edit-button:hover,
 .js-cancel-edit-button:focus-visible {
-  background-color: #3b3b3b;
-}
-.dark-mode .js-cancel-edit-button:hover,
-.dark-mode .js-cancel-edit-button:focus-visible{
-  background-color: #272727;
+  background-color: var(--cancel-edit-hover);
+  border: var(--cancel-border-hover);
 }
 
-
-.js-save-edit-button{
+.js-save-edit-button {
   background-color: var(--button-color);
   color: var(--button-text-color);
+  border: var(--button-border);
 }
 
-.js-save-edit-button:hover, 
+.js-save-edit-button:hover,
 .js-save-edit:focus-visible {
   background-color: var(--button-hover-color);
   color: var(--button-text-color);
+  border: var(--button-border-hover);
 }
-
 
 /* Popup notification */
 #js-success-notification {
@@ -380,13 +347,13 @@ body {
   border-radius: 5px;
   align-items: center;
   justify-content: center;
-  background-color: #46a34a;
-  width: 15%;
-  min-width: 200px;
-  height: 7%;
+  background-color: var(--button-color);
+  width: 10%;
+  min-width: fit-content;
+  height: 6%;
   left: 2%;
   bottom: 10%;
-  color: #d4edda;
+  color: var(--button-text-color);
 }
 
 /* 24 hour toggle styling */
@@ -396,121 +363,12 @@ body {
 }
 
 .form-check-input:checked {
-  background-color: #28a745;
-  border-color: #28a745;
+  background-color: var(--button-color);
+  border-color: var(--button-color);
   cursor: pointer;
 }
 
-/* ========================= */
-/*   High Contrast Styling   */
-/* ========================= */
-.high-contrast-mode .js-add-grid {
-  border: 2px solid var(--border-color);
-}
-
-.high-contrast-mode .small-container {
-  background-color: var(--primary-bg);
-  border: 1px solid var(--border-color-secondary);
-}
-
-.high-contrast-mode .form-switch {
-  border: 1px solid var(--border-color-secondary);
-}
-
-.high-contrast-mode #js-success-notification {
-  color: var(--primary-text);
-  background-color: var(--primary-bg);
-  border: 2px solid var(--border-color);
-}
-
-/* Sort Buttons */
-.high-contrast-mode #sort-button-category:hover,
-.high-contrast-mode #sort-button-priority:hover,
-.high-contrast-mode #sort-button-date:hover,
-.high-contrast-mode #sort-button-category:focus-visible,
-.high-contrast-mode #sort-button-priority:focus-visible,
-.high-contrast-mode #sort-button-date:focus-visible {
-  background-color: var(--sort-button-hover-color);
-  color: var(--button-hover-text-color-secondary);
-}
-
-/* edit buttons */
-.high-contrast-mode .js-edit-button {
-  border: 1px solid var(--button-border-color);
-}
-
-.high-contrast-mode .js-edit-button:hover,
-.high-contrast-mode .js-edit-button:focus-visible {
-  border: 2px solid var(--button-border-color);
-}
-
-/* delete buttons */
-.high-contrast-mode .js-delete-button {
-  border: 1px solid var(--button-border-color);
-}
-
-.high-contrast-mode .js-delete-button:hover,
-.high-contrast-mode .js-delete-button:focus-visible {
-  background-color: var(--button-hover-color);
-  border: 2px solid var(--button-border-color);
-}
-
-/* In Line Editing buttons */
-.high-contrast-mode .js-cancel-edit-button {
-  background-color: #000000;
-  border: 1px solid var(--button-border-color-secondary);
-}
-
-.high-contrast-mode .js-cancel-edit-button:hover,
-.high-contrast-mode .js-cancel-edit-button:focus-visible {
-  background-color: #222222;
-  border: 2px solid var(--hover-border-color);
-}
-
-.high-contrast-mode .js-save-edit-button {
-  border: 1px solid var(--button-border-color);
-}
-
-.high-contrast-mode .js-save-edit-button:hover, 
-.high-contrast-mode .js-save-edit-button:focus-visible {
-  border: 2px solid var(--button-border-color);
-}
-
-.high-contrast-mode .js-edit-name {
-  background-color: var(--primary-bg);
-  color: #ffffff;
-  border: 1px solid var(--border-color-secondary);
-}
-
-.high-contrast-mode .js-edit-category,
-.high-contrast-mode .js-edit-priority,
-.high-contrast-mode .js-edit-date,
-.high-contrast-mode .js-edit-time {
-  background-color: var(--primary-bg);
-  color: #ffffff;
-  border: 1px solid var(--button-border-color);
-}
-
-.high-contrast-mode .js-edit-name:hover,
-.high-contrast-mode .js-edit-category:hover,
-.high-contrast-mode .js-edit-priority:hover,
-.high-contrast-mode .js-edit-date:hover,
-.high-contrast-mode .js-edit-time:hover,
-.high-contrast-mode .js-edit-name:focus-visible,
-.high-contrast-mode .js-edit-category:focus-visible,
-.high-contrast-mode .js-edit-priority:focus-visible,
-.high-contrast-mode .js-edit-date:focus-visible,
-.high-contrast-mode .js-edit-time:focus-visible {
-  border: 2px solid var(--hover-border-color);
-}
-
-.high-contrast-mode .js-filter-input {
-  background-color: var(--primary-bg);
-  color: #ffffff;
-  border: 1px solid var(--button-border-color);
-}
-
-.high-contrast-mode .js-filter-input:hover,
-.high-contrast-mode .js-filter-input:focus-visible {
-  border: 2px solid var(--hover-border-color);
+.small-container,
+.form-switch {
+  border: var(--task-border);
 }

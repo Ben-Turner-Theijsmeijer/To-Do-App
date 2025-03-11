@@ -1,13 +1,41 @@
-/* Title */
-h1 {
-    color: #212529;
-    font-size: 40px;
-    margin-bottom: 20px;
+/* Colours */
+:root {
+    --primary-text: #333;
+    --col3-bg: #f6f6f6;
+    --col3-border: #e0e0e0;
+    --task-shadow: rgba(0, 0, 0, 0.1);
+    --no-date-primary: #FFC107;
+    --no-date-bg: rgba(255, 193, 7, 0.3);
+    --upcoming-primary: #007bff;
+    --upcoming-bg: rgba(0, 123, 255, 0.25);
+    --complete-primary: #28A745;
+    --complete-bg: rgba(40, 167, 69, 0.25);
 }
 
-/* Container */
-.container {
-    width: 100%;
+.dark-mode {
+    --primary-text: #e0e0e0;
+    --col3-bg: #333;
+    --col3-border: #444;
+    --task-shadow: rgba(0, 0, 0, 0.3);
+    --no-date-primary: #f4d03f;
+    --no-date-bg: rgba(244, 208, 63, 0.2);
+    --upcoming-primary: #3498db;
+    --upcoming-bg: rgba(52, 152, 219, 0.2);
+    --complete-primary: #2ecc71;
+    --complete-bg: rgba(46, 204, 113, 0.2);
+}
+
+.high-contrast-mode {
+    --primary-text: #e0e0e0;
+    --col3-bg: #141414;
+    --col3-border: #40ff00;
+    --task-shadow: rgba(0, 0, 0, 0.3);
+    --no-date-primary: #FFC107;
+    --no-date-bg: rgba(255, 193, 7, 0.3);
+    --upcoming-primary: #007bff;
+    --upcoming-bg: rgba(0, 123, 255, 0.25);
+    --complete-primary: #2ecc71;
+    --complete-bg: rgba(46, 204, 113, 0.2);
 }
 
 /* Header */
@@ -17,13 +45,12 @@ h1 {
     padding: 10px 0;
 }
 
-h4 {
-    font-size: 22px;
-    width: 100%;
-    text-align: center;
-    color: #212529;
-    padding: 10px;
-    border-radius: 8px;
+.header h4 {
+    color: var(--primary-text);
+}
+
+.subtitle {
+    color: var(--primary-text);
 }
 
 /* Column Styling */
@@ -33,11 +60,11 @@ h4 {
 }
 
 .col3 {
-    background: linear-gradient(to bottom, #fcfcfc, #f2f2f2); /* Lighter gradient for better contrast */
+    background: var(--col3-bg);
     height: 65vh;
     width: 100%;
     margin: 15px;
-    border: 2px solid #E0E0E0;
+    border: 2px solid var(--col3-border);
     border-radius: 12px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
     overflow-y: auto;
@@ -48,12 +75,14 @@ h4 {
 /* Subtle Hover Effect */
 .col3:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px var(--task-shadow);
 }
 
 /* Task Styling */
 .task {
-    position: relative; /* Make task element a positioned container */
+    position: relative;
+    /* Make task element a positioned container */
+    color: var(--primary-text);
     margin: 15px;
     padding: 15px 20px;
     text-align: center;
@@ -62,114 +91,106 @@ h4 {
     cursor: grab;
     transition: all 0.2s ease-in-out;
     font-weight: 500;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for better visibility */
+    box-shadow: 0px 3px 6px var(--task-shadow);
+}
+
+/* Task Hover Effect */
+.task:hover {
+    transform: scale(1.03);
+    /* Lift effect */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .delete-btn {
-    position: absolute;  /* Position the delete button absolutely within the task */
-    bottom: 10px;        /* Position 10px from the bottom */
-    right: 10px;         /* Position 10px from the right */
-    cursor: pointer;     /* Make it look clickable */
+    /* Position the delete button absolutely within the task */
+    position: absolute;
+    /* Position 10px from the bottom */
+    bottom: 10px;
+    /* Position 10px from the right */
+    right: 10px;
+    /* Make it look clickable */
+    cursor: pointer;
 }
 
 .delete-btn i {
-    font-size: 18px; /* Icon size */
-    color: #FF0000;   /* Red color for the "X" icon */
+    /* Icon size */
+    font-size: 18px;
+    color: var(--delete-bg);
 }
 
 /* Optional: Add a hover effect to the delete button */
 .delete-btn:hover i {
-    color: #D00000;   /* Slightly darker red when hovered */
+    color: var(--delete-border-hover);
 }
 
 /* Style the '+' icon button at the bottom-left of each column */
 /* Initially hide the add task button */
-.add-task-btn {
+.add-task-link {
     display: none;
     position: absolute;
     bottom: 10px;
     left: 10px;
 }
 
-
 /* Show the add task button when hovering over the column */
-.col3:hover .add-task-btn {
+.col3:hover .add-task-link {
     display: block;
 }
 
-
-.add-task-btn a {
-    text-decoration: none; /* Remove underline from link */
-    color: inherit;        /* Inherit color from parent */
+.add-task-link a {
+    /* Remove underline from link */
+    text-decoration: none;
+    /* Inherit color from parent */
+    color: inherit;
 }
 
-.add-task-btn i {
-    cursor: pointer; /* Make it look clickable */
+.add-task-link i {
+    /* Make it look clickable */
+    cursor: pointer;
+    font-size: 18px;
 }
 
 /* Optional: Add a hover effect to the '+' button */
-.add-task-btn:hover i {
-    color: #0056b3;   /* Darker blue when hovered */
+.add-task-link:hover i {
+    /* Darker blue when hovered */
+    color: #0056b3;
+    font-size: 22px;
 }
 
-
-/* Task Colors - Improved Contrast */
+/* Task Colors */
 .backlog-task {
-    border: 3px solid #FFC107; /* Stronger border */
-    background-color: rgba(255, 193, 7, 0.3); /* Darker yellow fill */
+    border: 3px solid var(--no-date-primary);
+    background-color: var(--no-date-bg);
 }
 
 .upcoming-task {
-    border: 3px solid #007BFF; /* Blue border */
-    background-color: rgba(0, 123, 255, 0.25); /* Light blue fill */
+    border: 3px solid var(--upcoming-primary);
+    background-color: var(--upcoming-bg);
 }
 
 .complete-task {
-    border: 3px solid #28A745;
-    background-color: rgba(40, 167, 69, 0.25); /* Darker green fill */
-}
-
-/* Task Hover Effect */
-.task:hover {
-    transform: scale(1.03);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Lift effect */
+    border: 3px solid var(--complete-primary);
+    background-color: var(--complete-bg);
 }
 
 /* Task Count Colors - Matching Borders */
 #backlog-header span {
-    color: #FFC107;
+    color: var(--no-date-primary);
 }
 
 #upcoming-header span {
-    color: #007BFF;
+    color: var(--upcoming-primary);
 }
 
 #complete-header span {
-    color: #28A745;
+    color: var(--complete-primary);
 }
 
-.dark-mode h1 {
-    color: white;
-}
-/* Dark Mode Styles */
-.dark-mode .col3 {
-    background: #333333; /* Darker background for better contrast */
-    border: 2px solid #444444; /* Darker borders */
-}
-
-.dark-mode .task {
-    color: #e0e0e0; /* Light text for tasks */
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3); /* Slight shadow to make tasks stand out */
-}
-
-.dark-mode .header h4 {
-    color: #e0e0e0; /* Light color for header */
-}
-
-.dark-mode select {
-    background-color: #444; /* Dark background for dropdown */
-    color: white; /* White text for dropdown */
-    border: 1px solid white;
+select {
+    background-color: var(--col3-border);
+    color: var(--primary-text);
+    border: 1px solid var(--primary-text);
 }
 
 /* General Task Styles */
@@ -185,44 +206,11 @@ h4 {
     border-radius: 12px;
     font-size: 14px;
     text-transform: capitalize;
-}
-
-.tag.category {
     font-weight: bold;
-}
-
-.tag.priority {
-    font-weight: bold;
-}
-
-.tag.recurring {
-    font-weight: bold;
-}
-
-/* Task Priority Tag Colors */
-.priority-High {
-    background-color: #ffcccb;
-    color: #d8000c;
-}
-
-.priority-Medium {
-    background-color: #feefb3;
-    color: #9f6000;
-}
-
-.priority-Low {
-    background-color: #d4edda;
-    color: #155724;
-}
-
-/* Task Category Tag Color */
-.category-tag, .category-Work, .category-Other, .category-Personal, .category-Shopping {
-    background-color: #e0e0e0;
-    color: #333;
 }
 
 /* Recurring Tag Color */
-.recurring-tag, .recurring-Daily, .recurring-Weekly, .recurring-Monthly {
+.recurring-tag {
     background-color: #81b8ca;
     color: #1f3a81;
 }
