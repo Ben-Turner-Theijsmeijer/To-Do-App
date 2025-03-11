@@ -33,9 +33,9 @@ document.addEventListener("DOMContentLoaded", function() {
         taskElement.innerHTML = `
             <p><strong>${task.name}</strong>, ${task.date}</p> <!-- Name and Date -->
             <div class="task-details">
+                ${task.recurring ? `<span class="tag recurring ${task.recurring ? `recurring-${task.recurring}` : ""}">${task.recurring}</span>` : ""}
                 ${task.category ? `<span class="tag category ${task.category ? `category-${task.category}` : ""}">${task.category}</span>` : ""}
                 ${task.priority ? `<span class="tag priority ${task.priority ? `priority-${task.priority}` : ""}">${task.priority}</span>` : ""}
-                ${task.recurring ? `<span class="tag recurring ${task.recurring ? `recurring-${task.recurring}` : ""}">${task.recurring}</span>` : ""}
             </div>
         `;
 
