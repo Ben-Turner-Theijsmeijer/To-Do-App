@@ -11,6 +11,7 @@
   --input-border-hover: 2px solid #38a3ea;
   --cancel-edit-bg: #858585;
   --cancel-edit-hover: #3b3b3b;
+  --cancel-edit-border: none;
   --form-border: 1px solid #dee2e6;
   --task-border: none;
 }
@@ -23,6 +24,8 @@
   --button-hover-text: #fafafe;
   --cancel-edit-bg: #4f4f4f;
   --cancel-edit-hover: #272727;
+  --cancel-edit-border: none;
+  --cancel-border-hover: 2px solid #38a3ea;
   --form-border: 1px solid #dee2e6;
   --task-border: none;
 }
@@ -40,7 +43,7 @@
   --add-grid-border: 2px solid #00ffff;
   --form-border: 1px solid #40ff00;
   --task-border: 1px solid #40ff00;
-  --cancel-edit-border: 1px solid #38a3ea;
+  --cancel-edit-border: 1px solid #fff;
   --cancel-border-hover: 2px solid #ff5900;
   --sort-button-hover-color: #ff9000;
 }
