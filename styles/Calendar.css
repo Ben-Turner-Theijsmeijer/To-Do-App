@@ -137,7 +137,7 @@ td:hover {
     font-weight: bold;
 }
 
-#categoryAndPriority {
+#calendarTaskTags {
     display: flex;
     align-items: center;
     gap: 10px;

@@ -32,7 +32,8 @@ class Calendar {
           taskData.time,
           taskData.category,
           taskData.priority,
-          taskData.completed
+          taskData.completed,
+          taskData.recurring
         )
     );
   }
@@ -176,21 +177,29 @@ class Calendar {
     const timeStr = task.time != "" ? ", " + task.time : "";
     dateTime.innerText = dateStr + timeStr;
     // category and priority
-    const catPri = document.getElementById("categoryAndPriority");
-    categoryAndPriority.innerHTML = "";
+    const catPri = document.getElementById("calendarTaskTags");
+    calendarTaskTags.innerHTML = "";
+    if (task.recurring != "") {
+      console.log(task)
+      const recurring = document.createElement("span");
+      recurring.classList.add("recurring-tag");
+      recurring.innerText = task.recurring;
+      calendarTaskTags.appendChild(recurring);
+    }
     if (task.category != "") {
       const category = document.createElement("span");
       category.classList.add("category-tag");
       category.innerText = task.category;
-      categoryAndPriority.appendChild(category);
+      calendarTaskTags.appendChild(category);
     }
     if (task.priority != "") {
       const priority = document.createElement("span");
       priority.classList.add("priority-tag");
       priority.classList.add(`priority-${task.priority}`);
       priority.innerText = task.priority;
-      categoryAndPriority.appendChild(priority);
+      calendarTaskTags.appendChild(priority);
     }
+    
   }
 
   addTasksToCell(cell, date) {

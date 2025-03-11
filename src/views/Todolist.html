@@ -71,6 +71,13 @@
         <input type="text" placeholder="Add a new task here..." class="js-name-input form-control" maxlength="120">
         <input type="date" class="js-date-input form-control" min="">
         <input type="time" class="js-time-input form-control">
+        <select class="js-recurring-input form-select">
+          <option value="" selected disabled hidden>Recurring</option>
+          <option value="">None</option>
+          <option value="Daily">Daily</option>
+          <option value="Weekly">Weekly</option>
+          <option value="Monthly">Monthly</option>
+        </select>
         <select class="js-category-input form-select">
           <option value="" selected disabled hidden>Category</option>
           <option value="">None</option>
@@ -85,13 +92,6 @@
           <option value="High">High</option>
           <option value="Medium">Medium</option>
           <option value="Low">Low</option>
-        </select>
-        <select class="js-recurring-input form-select">
-          <option value="" selected disabled hidden>Recurring</option>
-          <option value="">None</option>
-          <option value="Daily">Daily</option>
-          <option value="Weekly">Weekly</option>
-          <option value="Monthly">Monthly</option>
         </select>
         <div class="js-actions-wrapper">
           <button class="js-add-button btn btn-primary">
