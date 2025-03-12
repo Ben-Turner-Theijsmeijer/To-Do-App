@@ -288,6 +288,9 @@ class TaskList {
 
     task.updateTimeString();
 
+    //Can only drag & drop if no tasks are begin edited
+    var draggableText = this.taskEditingIndex == null ? 'draggable="true"' : '';
+
     // Set task UI to editing if index is being edited
     if (referenceNumber == this.taskEditingIndex){
       console.log("Editing" + referenceNumber)
@@ -337,7 +340,7 @@ class TaskList {
 
     // Display task UI in task list
     return `
-      <div class="task" draggable="true" data-index="${referenceNumber}">
+      <div class="task" ${draggableText} data-index="${referenceNumber}">
         
         <div class="small-container ${task.completed ? 'completed' : ''}">
           <input type="checkbox" class="js-complete-checkbox" data-index="${referenceNumber}" ${task.completed ? 'checked' : ''}>
