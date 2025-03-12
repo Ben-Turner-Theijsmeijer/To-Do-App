@@ -335,6 +335,9 @@ class TaskList {
       </div>`;
     }
 
+    // This was added to fix a hover-over issue with the big date field
+    let missingTag = !task.recurring || !task.category || !task.priority;
+
     return `
       <div class="task" data-index="${referenceNumber}">
         
@@ -345,8 +348,12 @@ class TaskList {
             ${task.recurring ? `<span class="recurring-tag">${task.recurring}</span>` : ''}
             ${task.category ? `<span class="category-tag">${task.category}</span>` : ''}
             ${task.priority ? `<span class="priority-tag priority-${task.priority}">${task.priority}</span>` : ''}
-            <div class="date-section">
-              ${task.isOverdue()}
+            <span style= "width: 100%;"></span>
+            <div class="date-section ${task.isOverdue()} 
+            ${task.isOverdue() == 'overdue' ? 'overdue-tooltip' :''}
+            ${task.isOverdue() == 'due' ? 'due-tooltip' : ''}">
+              ${task.isOverdue() == 'overdue' ? `<span>⚠️</span>` : ''}
+              ${task.isOverdue() == 'due' ? `<span>🕓</span>` : ''}
               <span>${task.dateText}</span>
             </div>
           </div>

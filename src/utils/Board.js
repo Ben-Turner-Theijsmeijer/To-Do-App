@@ -34,8 +34,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Create the content for the task
         taskElement.innerHTML = `
-            <div>
-                ${task.isOverdue()}
+            <div ${task.isOverdue() == 'overdue' ? 'class="overdue-tooltip"' : ''}
+                ${task.isOverdue() == 'due' ? 'class="due-tooltip"' : ''}>
+                ${task.isOverdue() == 'overdue' ? `<span>⚠️</span>` : ''}
+                ${task.isOverdue() == 'due' ? `<span>🕓</span>` : ''}
                 <strong>${task.name}</strong>, ${task.date}
             </div> <!-- Name and Date -->
             <div class="task-details">

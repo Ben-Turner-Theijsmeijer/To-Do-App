@@ -81,10 +81,10 @@ class Task {
     let returnString = '';
 
     if (dateObj.toDateString() == currentDate.toDateString()){
-      returnString = '<span class="due-tooltip">🕓</span>';
+      returnString = 'due';
     }
     if (dateObj < currentDate){
-      returnString = '<span class="overdue-tooltip">⚠️</span>';
+      returnString = 'overdue';
     }
 
     return returnString;

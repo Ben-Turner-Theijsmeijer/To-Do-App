@@ -243,6 +243,10 @@ body {
   color: #155724;
 }
 
+.overdue {
+  color: var(--overdue-date);
+}
+
 .overdue-tooltip{
   display: inline-block;
   width: auto;
