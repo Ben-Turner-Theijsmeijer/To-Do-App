@@ -60,8 +60,8 @@ class SortManager {
     // Sort logic
     return unsortedTasks.sort((a, b) => {
       if (this.SortMethod === "date") {
-        let dateA = a.date ? new Date(`${a.date} ${a.time || "00:00"}`) : new Date();
-        let dateB = b.date ? new Date(`${b.date} ${b.time || "00:00"}`) : new Date();
+        let dateA = a.date ? new Date(`${a.date} ${a.time ? `${a.time}:59` : "23:59:59"}`) : new Date();
+        let dateB = b.date ? new Date(`${b.date} ${b.time ? `${b.time}:59` : "23:59:59"}`) : new Date();
         return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
       } else if (this.SortMethod === "category") {
         return sortOrder === "asc"
