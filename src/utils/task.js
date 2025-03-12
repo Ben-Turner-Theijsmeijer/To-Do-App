@@ -70,6 +70,26 @@ class Task {
     }
   }
 
+  isOverdue(){
+    // If the task is complete there will be no icons showing.
+    if (this.completed){
+      return '';
+    }
+
+    let currentDate = new Date();
+    let dateObj = new Date(`${this.date} ${this.time ? `${this.time}:59` : "23:59:59"}`);
+    let returnString = '';
+
+    if (dateObj.toDateString() == currentDate.toDateString()){
+      returnString = 'due';
+    }
+    if (dateObj < currentDate){
+      returnString = 'overdue';
+    }
+
+    return returnString;
+  }
+
   isEqual(task){
     if (this.name == task.name && this.date == task.date && this.time == task.time && this.category == task.category && this.priority == task.priority && this.completed == task.completed){
       return true;

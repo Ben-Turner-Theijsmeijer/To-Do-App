@@ -162,7 +162,7 @@
 .date-section {
   justify-content: flex-end;
   font-weight: 400;
-  width: 100%;
+  width: auto;
   font-size: 0.8em;
 }
 
