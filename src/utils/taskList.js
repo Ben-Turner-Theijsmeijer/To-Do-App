@@ -337,7 +337,7 @@ class TaskList {
 
     // Display task UI in task list
     return `
-      <div class="task" data-index="${referenceNumber}">
+      <div class="task" draggable="true" data-index="${referenceNumber}">
         
         <div class="small-container ${task.completed ? 'completed' : ''}">
           <input type="checkbox" class="js-complete-checkbox" data-index="${referenceNumber}" ${task.completed ? 'checked' : ''}>
@@ -381,6 +381,20 @@ class TaskList {
     let recurring = editRecurringElement.value;
     
     task.updateTask(name, date, time, category, priority, complete, recurring);
+  }
+
+  moveTaskInTasklist(startIndex, destinationIndex){
+    
+    console.log("MOVED TASK AT: " + startIndex + " to: " + destinationIndex);
+
+    //Removing item from list
+    var taskToMove = this.taskList.splice(startIndex, 1)[0];
+    console.log(taskToMove);
+
+    //Adding back item in new location
+    this.taskList.splice(destinationIndex, 0, taskToMove);
+    console.log(this.taskList);
+
   }
 
   // Add event listeners for delete, edit, and complete buttons
@@ -433,7 +447,46 @@ class TaskList {
         this.updateAndDisplayTaskList();
       });
     }
+
+    /******* Drag and drop listeners *******/
+    document.querySelectorAll('.task').forEach((task) => {
+      
+      task.addEventListener('dragstart', (event) => {
+        event.dataTransfer.setData("text/plain", event.target.getAttribute('data-index'));
+        event.dataTransfer.effectAllowed = "move";
+      });
+
+      task.addEventListener('drop', (event) => {
+        event.preventDefault();
+
+        //Retrieving indexes of drag and drop locations in displayed list
+        var draggedTaskIndex = event.dataTransfer.getData("text/plain");
+        var dragEndIndex = event.currentTarget.getAttribute('data-index');
+        if (draggedTaskIndex == dragEndIndex){
+          return;
+        }
+
+        //Finding the indexes in the actual list by checking equality for each task in displayed list (accounting for filters)
+        var draggedIndexInFullList = this.taskList.map( task => task.isEqual(tasksToDisplay[draggedTaskIndex]) ).indexOf(true) ;
+        var endIndexInFullList = this.taskList.map( task => task.isEqual(tasksToDisplay[dragEndIndex]) ).indexOf(true) ;
+
+        //Moving task to new location and displaying updated list order
+        this.moveTaskInTasklist(draggedIndexInFullList, endIndexInFullList);
+        this.updateAndDisplayTaskList(); 
+      });
+
+    });
+
+    var list = document.querySelector('.js-add-html');
+    if (list){
+        list.addEventListener('dragover', (event) => {
+          event.preventDefault();
+          event.dataTransfer.dropEffect = "move";
+        });
+    }
+
   }
+
 
 }
 
