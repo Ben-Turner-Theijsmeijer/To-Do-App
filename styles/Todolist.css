@@ -242,6 +242,7 @@
 .js-edit-priority,
 .js-edit-date,
 .js-edit-time,
+.js-edit-recurring,
 .js-filter-input {
   background-color: var(--primary-edit-bg);
   color: var(--primary-edit-text);
@@ -258,7 +259,9 @@
 .js-edit-date:focus-visible,
 .js-edit-time:focus-visible,
 .js-filter-input:hover,
-.js-filter-input:focus-visible {
+.js-filter-input:focus-visible,
+.js-edit-recurring:hover,
+.js-edit-recurring:focus-visible {
   border: var(--input-border-hover);
 }
 
@@ -335,7 +338,7 @@
 }
 
 .js-save-edit-button:hover,
-.js-save-edit:focus-visible {
+.js-save-edit-button:focus-visible {
   background-color: var(--button-hover-color);
   color: var(--button-text-color);
   border: var(--button-border-hover);
