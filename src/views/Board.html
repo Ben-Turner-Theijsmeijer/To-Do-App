@@ -53,6 +53,7 @@
       <div class="header">
           <h4 id="backlog-header">Backlog: No date</h4>
           <h4 id="upcoming-header">Upcoming</h4>
+          <h4 id="overdue-header">Overdue</h4>
           <h4 id="complete-header">Complete</h4>
       </div>
   
@@ -69,6 +70,14 @@
           <div id="upcoming" class="col3" ondrop="drop(event)" ondragover="allowdrop(event)">
               <div class="task-list display" id="upcoming-list"></div>
               <!-- Add Task Button for Upcoming Column -->
+              <div class="add-task-link">
+                  <a href="Todolist.html"><i class="fa-solid fa-plus"></i></a>
+              </div>
+          </div>
+
+          <div id="overdue" class="col3" ondrop="drop(event)" ondragover="allowdrop(event)">
+              <div class="task-list display" id="overdue-list"></div>
+              <!-- Add Task Button for Overdue Column -->
               <div class="add-task-link">
                   <a href="Todolist.html"><i class="fa-solid fa-plus"></i></a>
               </div>

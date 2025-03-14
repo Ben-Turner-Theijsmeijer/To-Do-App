@@ -8,6 +8,8 @@
     --no-date-bg: rgba(255, 193, 7, 0.3);
     --upcoming-primary: #007bff;
     --upcoming-bg: rgba(0, 123, 255, 0.25);
+    --overdue-primary: #ff0000;
+    --overdue-bg: rgba(255, 0, 0, 0.25);
     --complete-primary: #28A745;
     --complete-bg: rgba(40, 167, 69, 0.25);
 }
@@ -21,6 +23,8 @@
     --no-date-bg: rgba(244, 208, 63, 0.2);
     --upcoming-primary: #3498db;
     --upcoming-bg: rgba(52, 152, 219, 0.2);
+    --overdue-primary: #dd2222;
+    --overdue-bg: rgba(169, 0, 0, 0.25);
     --complete-primary: #2ecc71;
     --complete-bg: rgba(46, 204, 113, 0.2);
 }
@@ -34,6 +38,8 @@
     --no-date-bg: rgba(255, 193, 7, 0.3);
     --upcoming-primary: #007bff;
     --upcoming-bg: rgba(0, 123, 255, 0.25);
+    --overdue-primary: #ff0000;
+    --overdue-bg: rgba(255, 0, 0, 0.25);
     --complete-primary: #2ecc71;
     --complete-bg: rgba(46, 204, 113, 0.2);
 }
@@ -60,6 +66,7 @@
 }
 
 .col3 {
+    position: relative;
     background: var(--col3-bg);
     height: 65vh;
     width: 100%;
@@ -67,8 +74,7 @@
     border: 2px solid var(--col3-border);
     border-radius: 12px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
-    overflow-y: auto;
-    padding: 15px;
+    overflow-y: hidden;
     transition: all 0.3s ease-in-out;
 }
 
@@ -76,6 +82,14 @@
 .col3:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 16px var(--task-shadow);
+}
+
+.task-list {
+    position: inherit;
+    max-height: 65vh;
+    width: 100%;
+    padding: 15px;
+    overflow-y: auto; 
 }
 
 /* Task Styling */
@@ -169,6 +183,11 @@
     background-color: var(--upcoming-bg);
 }
 
+.overdue-task {
+    border: 3px solid var(--overdue-primary);
+    background-color: var(--overdue-bg);
+}
+
 .complete-task {
     border: 3px solid var(--complete-primary);
     background-color: var(--complete-bg);
@@ -181,6 +200,10 @@
 
 #upcoming-header span {
     color: var(--upcoming-primary);
+}
+
+#overdue-header span {
+    color: var(--overdue-primary);
 }
 
 #complete-header span {
