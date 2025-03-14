@@ -1,6 +1,7 @@
 class UIManager {
   constructor(taskList) {
     this.taskList = taskList;
+    this.sameDayCheck = false;
 
     this.setupEventListeners();
   }
@@ -57,17 +58,24 @@ class UIManager {
       }
     });
 
+    document.querySelector(".js-date-input").addEventListener("change", e => {
+      this.datePastCheck(e.target.value);
+      this.timePastCheck(document.querySelector(".js-time-input")?.value);
+    });
+
     document.querySelector(".js-date-input").addEventListener("blur", () => {
       dateCheck = false;
     });
 
+
+    // I tried getting rid of this because it seemed to be a check for if date was empty, but turns out it causes bugs - Emily
     document.querySelector(".js-time-input").addEventListener("click", e => {
       e.preventDefault();
       if (!timeCheck) {
         e.target.showPicker();
         timeCheck = true;
 
-        //Setting date to today if time is clicked while date is empty
+        //Setting date to today if time is clicked while date is empty 
         const inputDateElement = document.querySelector(".js-date-input");
         if (!inputDateElement.value) {
           const now = new Date();
@@ -82,6 +90,11 @@ class UIManager {
 
     document.querySelector(".js-time-input").addEventListener("blur", () => {
       timeCheck = false;
+    });
+
+    document.querySelector(".js-time-input").addEventListener("change", e => {
+      this.datePastCheck(document.querySelector(".js-date-input")?.value);
+      this.timePastCheck(e.target.value);
     });
 
     // add function to open Filter Menu
@@ -122,6 +135,49 @@ class UIManager {
       this.taskList.updateAndDisplayTaskList();  
     });
 
+  }
+
+  datePastCheck(date) {
+    if (date){
+      let currentDate = new Date();
+  
+      let [year, month, day] = date.split("-").map(Number);
+      let selectedDate = new Date(year, month - 1, day);
+    
+      currentDate.setHours(0, 0, 0, 0);
+      
+      if (selectedDate.getTime() < currentDate.getTime()){
+        document.getElementById("add-date-warn").style.visibility = "visible";
+      }
+      else {
+        document.getElementById("add-date-warn").style.visibility = "hidden";
+      }
+    
+      if (selectedDate.getTime() == currentDate.getTime()){
+        this.sameDayCheck = true;
+      }
+      else {
+        this.sameDayCheck = false;
+      }
+    }
+  }
+
+  timePastCheck(time) {
+    if (time){
+      let currentTime = new Date(); 
+      let specificTime = new Date();
+      let [hours, minutes] = time.split(":").map(num => parseInt(num));
+
+      specificTime.setHours(hours, minutes, 59, 0);
+
+      if ((specificTime.getTime() < currentTime.getTime()) && this.sameDayCheck) {
+        document.getElementById("add-time-warn").style.visibility = "visible";
+      }
+      else {
+        document.getElementById("add-time-warn").style.visibility = "hidden";
+      }
+    }
+    
   }
 }
 

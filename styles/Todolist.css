@@ -58,9 +58,11 @@
 .js-add-grid {
   display: grid;
   grid-template-columns: 2.5fr 11rem 8rem 8rem 8rem 7.3rem 1fr;
-  row-gap: 1rem;
+  /* row-gap: 1rem; */
   background-color: var(--secondary-bg);
-  padding: 20px;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 0.813rem;
@@ -164,6 +166,18 @@
   font-weight: 400;
   width: auto;
   font-size: 0.8em;
+}
+
+#add-date-warn {
+  font-size: small;
+  color: #ff5900;
+  visibility: hidden;
+}
+
+#add-time-warn {
+  font-size: small;
+  color: #ff5900;
+  visibility: hidden;
 }
 
 .task-info {
