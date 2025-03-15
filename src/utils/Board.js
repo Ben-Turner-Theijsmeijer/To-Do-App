@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 ${task.isOverdue() == 'due' ? 'class="due-tooltip"' : ''}>
                 ${task.isOverdue() == 'overdue' ? `<span>⚠️</span>` : ''}
                 ${task.isOverdue() == 'due' ? `<span>🕓</span>` : ''}
-                <strong>${task.name}</strong>, ${task.date}
+                <strong>${task.name}</strong> ${task.date == '' ? '' : ','} ${task.date}
             </div> <!-- Name and Date -->
             <div class="task-details">
                 ${task.recurring ? `<span class="tag recurring ${task.recurring ? `recurring-tag` : ""}">${task.recurring}</span>` : ""}
@@ -54,14 +54,16 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         // Determine the correct task column and apply the correct class (e.g., upcoming-task, backlog-task, overdue-task, or complete-task)
-        if (task.date === "") {
+        if (task.completed === true) {
+            taskElement.classList.add("complete-task");
+        }else if (task.date === "") {
             taskElement.classList.add("backlog-task"); 
         } else if (!task.complete && task.isOverdue() !== 'overdue') {
             taskElement.classList.add("upcoming-task"); // Make sure upcoming-task is used here
         } else if (!task.completed) {
             taskElement.classList.add("overdue-task"); 
         } else {
-            taskElement.classList.add("complete-task");
+            taskElement.classList.add("backlog-task");
         }
 
         return taskElement;
