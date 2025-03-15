@@ -251,6 +251,9 @@ class TaskList {
     inputPriorityElement.value = '';
     inputRecurringElement.value = '';
 
+    document.getElementById("add-date-warn").style.visibility = "hidden";
+    document.getElementById("add-time-warn").style.visibility = "hidden";
+
     // Update the displayed list
     this.updateAndDisplayTaskList();
   }
