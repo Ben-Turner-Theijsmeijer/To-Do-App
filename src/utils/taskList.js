@@ -1,4 +1,5 @@
 import Task from "./task.js";
+import UIManager from "./UIManager.js";
 
 class TaskList {
   constructor(sortManager, filterManager) {
@@ -324,6 +325,9 @@ class TaskList {
             <option value="Weekly">Weekly</option>
             <option value="Monthly">Monthly</option>
           </select>
+          <span style="width:100%;"></span>
+          <span id="edit-date-warn">Warning: Past date!</span>
+          <span id="edit-time-warn">Warning: Past time!</span>
         </div>
         
         <div class="task-edit-buttons">
@@ -457,6 +461,25 @@ class TaskList {
         this.saveEditTask(tasksToDisplay[this.index]);
         this.taskEditingIndex = null;
         this.updateAndDisplayTaskList();
+      });
+    }
+
+    /******* Date and Time Event Listeners *******/
+    var dateEditElement = document.querySelector('.js-edit-date');
+    if (dateEditElement){
+      dateEditElement.addEventListener('change', (event) => {
+        UIManager.datePastCheck(event.target.value, "edit-date-warn");
+        UIManager.timePastCheck(document.querySelector(".js-edit-time")?.value, "edit-time-warn");
+      
+      });
+    }
+
+    var timeEditElement = document.querySelector('.js-edit-time');
+    if (timeEditElement){
+      timeEditElement.addEventListener('change', (event) => {
+        UIManager.datePastCheck(document.querySelector(".js-edit-date")?.value, "edit-date-warn");
+        UIManager.timePastCheck(event.target.value, "edit-time-warn");
+      
       });
     }
 

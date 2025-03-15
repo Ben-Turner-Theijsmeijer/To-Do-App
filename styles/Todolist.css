@@ -180,6 +180,21 @@
   visibility: hidden;
 }
 
+#edit-date-warn {
+  font-size: small;
+  color: #ff5900;
+  margin-top: -8px;
+  visibility: hidden;
+}
+
+#edit-time-warn {
+  font-size: small;
+  color: #ff5900;
+  margin-top: -8px;
+  margin-left: 70px;
+  visibility: hidden;
+}
+
 .task-info {
   display: flex;
   align-items: center;
@@ -293,7 +308,7 @@
 .task-edit-fields {
   display: flex;
   flex: 1 1 500px;
-  gap: 10px 20px;
+  gap: 5px 20px;
   flex-wrap: wrap;
 }
 
