@@ -1,4 +1,5 @@
 import Task from "./task.js";
+import TaskList from "./taskList.js";
 
 class Calendar {
   constructor() {
@@ -19,6 +20,7 @@ class Calendar {
     this.initDarkMode();
     this.addEventListeners();
     this.renderCalendar();
+    this.addTasksWithNoDate();
   }
 
   getTaskList() {
@@ -41,8 +43,8 @@ class Calendar {
   initDarkMode() {
     if (localStorage.getItem("darkMode") === "enabled") {
       this.body.classList.add("dark-mode");
-      this.themeSelection.value = 'dark';
-      this.themeSelection.innerHTML = 'Dark Mode'
+      this.themeSelection.value = "dark";
+      this.themeSelection.innerHTML = "Dark Mode";
     }
   }
 
@@ -180,7 +182,7 @@ class Calendar {
     const catPri = document.getElementById("calendarTaskTags");
     calendarTaskTags.innerHTML = "";
     if (task.recurring != "") {
-      console.log(task)
+      console.log(task);
       const recurring = document.createElement("span");
       recurring.classList.add("recurring-tag");
       recurring.innerText = task.recurring;
@@ -199,7 +201,6 @@ class Calendar {
       priority.innerText = task.priority;
       calendarTaskTags.appendChild(priority);
     }
-    
   }
 
   addTasksToCell(cell, date) {
@@ -224,6 +225,47 @@ class Calendar {
 
       cell.appendChild(taskContainer);
     }
+  }
+
+  addTasksWithNoDate() {
+    const tasksWithoutDate = this.taskList.filter(task => task.date === "");
+    if (tasksWithoutDate.length > 0) {
+      // get parent container
+      const parent = document.getElementById("calendarAndDateless");
+      // container with list of tasks
+      const noDateContainer = document.createElement("div");
+      noDateContainer.classList = "container-cal mt-4";
+      noDateContainer.id = "noDateContainer";
+      // create subtitle?
+      const subtitle = document.createElement("h2");
+      subtitle.innerHTML = "No Due Date";
+      noDateContainer.appendChild(subtitle);
+      // render tasks
+      tasksWithoutDate.forEach(task => {
+        if (!task.completed) {
+          const el = this.createTaskWithoutDateDiv(task);
+          noDateContainer.appendChild(el);
+        }
+      });
+      // show on screen
+      parent.appendChild(noDateContainer);
+    }
+  }
+
+  createTaskWithoutDateDiv(task) {
+    const taskInfo = document.createElement("div");
+    taskInfo.classList = "task-info";
+
+    taskInfo.innerHTML = `<span class="task-name">${task.name}</span>
+            ${task.category
+              ? `<span class="category-tag">${task.category}</span>`
+              : ""}
+            ${task.priority
+              ? `<span class="priority-tag priority-${task.priority}">${task.priority}</span>`
+              : ""}
+            <span style= "width: 100%;"></span>`;
+
+    return taskInfo;
   }
 }
 

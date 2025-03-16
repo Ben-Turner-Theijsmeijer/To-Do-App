@@ -278,6 +278,28 @@ td:hover,
     border: var(--cal-nav-hover-border);
 }
 
+/* Tasks Without Dates */
+.task-info {
+    max-width: fit-content;
+    padding: 5px 10px 5px 10px;
+    /* margin: auto; */
+    margin-top: 5px;
+    font-size: 1.2em;
+    grid-template-columns: 6fr 1fr 1fr;
+    background-color: var(--secondary-bg);
+    border: 1px var(--border-color) solid;
+    border-radius: 10px;
+    box-shadow: 2px 2px 3px 0px var(--shadow-color);
+    transition: all 0.3s ease;
+    align-items: center;
+}
+
+#noDateContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 /* ============================ */
 /* High Contrast Mode - Borders */
 /* ============================ */
