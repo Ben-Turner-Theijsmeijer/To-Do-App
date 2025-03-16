@@ -253,18 +253,28 @@ class Calendar {
   }
 
   createTaskWithoutDateDiv(task) {
+    // container
     const taskInfo = document.createElement("div");
-    taskInfo.classList = "task-info";
-
-    taskInfo.innerHTML = `<span class="task-name">${task.name}</span>
-            ${task.category
-              ? `<span class="category-tag">${task.category}</span>`
-              : ""}
-            ${task.priority
-              ? `<span class="priority-tag priority-${task.priority}">${task.priority}</span>`
-              : ""}
-            <span style= "width: 100%;"></span>`;
-
+    taskInfo.classList = "task-without-due-date";
+    // name
+    const name = document.createElement("span");
+    name.classList = "task-name";
+    name.innerText = task.name;
+    taskInfo.appendChild(name);
+    // category
+    if (task.category != "") {
+      const category = document.createElement("span");
+      category.classList = "category-tag";
+      category.innerText = task.category;
+      taskInfo.appendChild(category);
+    }
+    // priority
+    if (task.priority != "") {
+      const priority = document.createElement("span");
+      priority.classList = `priority-tag priority-${task.priority}`;
+      priority.innerText = task.priority;
+      taskInfo.appendChild(priority);
+    }
     return taskInfo;
   }
 }
