@@ -55,6 +55,10 @@
   margin-bottom: 0;
 }
 
+.js-name-input {
+  min-width: 150px;
+}
+
 .js-add-grid {
   display: grid;
   grid-template-columns: 2.5fr 11rem 8rem 8rem 8rem 7.3rem 1fr;
@@ -140,6 +144,27 @@
   box-shadow: 2px 2px 3px 0px var(--shadow-color);
   transition: all 0.3s ease;
   align-items: center;
+}
+
+.dragging {
+  opacity: 0.1;
+}
+
+.task-holder {
+  justify-items: center;
+}
+
+/* .dragoverabove,
+.dragoverbelow {
+} */
+
+.dragoverabove::before {
+  content: "_";
+  margin: 0 auto;
+}
+
+.dragoverbelow::after {
+  content: "_";
 }
 
 .small-container {

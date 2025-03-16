@@ -250,7 +250,7 @@ body {
 .overdue-tooltip{
   display: inline-block;
   width: auto;
-  cursor: pointer;
+  /* cursor: pointer; not clickable, shouldn't be pointer*/
   position: relative;
 }
 
@@ -270,7 +270,7 @@ body {
 .due-tooltip {
   display: inline-block;
   width: auto;
-  cursor: pointer;
+  /* cursor: pointer; not clickable, shouldn't be pointer*/
   position: relative;
 }
 
