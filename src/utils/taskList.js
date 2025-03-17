@@ -154,10 +154,7 @@ class TaskList {
     const inputDateElement = document.querySelector('.js-date-input');
     const inputTimeElement = document.querySelector('.js-time-input');
     const inputRecurringElement = document.querySelector('.js-recurring-input');
-
-    // console.log(inputRecurringElement.disabled);
     
-
     if (inputDateElement && inputTimeElement && inputRecurringElement) {
       // Initially disable the all inputs if no date is present
       inputTimeElement.disabled = !inputDateElement.value;
@@ -253,6 +250,9 @@ class TaskList {
     inputCategoryElement.value = '';
     inputPriorityElement.value = '';
     inputRecurringElement.value = '';
+
+    document.getElementById("add-date-warn").style.visibility = "hidden";
+    document.getElementById("add-time-warn").style.visibility = "hidden";
 
     // Update the displayed list
     this.updateAndDisplayTaskList();
