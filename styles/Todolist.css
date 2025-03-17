@@ -146,26 +146,27 @@
   align-items: center;
 }
 
-.dragging {
-  opacity: 0.1;
+.task:hover {
+  width: 81%;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  cursor: move;
 }
 
-.task-holder {
-  justify-items: center;
-}
-
-/* .dragoverabove,
-.dragoverbelow {
+/* .task.dragging:hover {
+  width: 80%;
+  box-shadow: none;
 } */
 
-.dragoverabove::before {
-  content: "_";
-  margin: 0 auto;
+.task:active { 
+  width: 80%;
+  box-shadow: none;
 }
 
-.dragoverbelow::after {
-  content: "_";
+.dragging {
+  opacity: 0.3;
+  width: 80%;
 }
+
 
 .small-container {
   height: 85%;
@@ -226,6 +227,8 @@
 
 .js-complete-checkbox {
   cursor: pointer;
+  transform: scale(1.2);
+  margin: 0 4px 0 0;
 }
 
 .completed {
