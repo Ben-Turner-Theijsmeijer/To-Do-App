@@ -59,8 +59,8 @@ class UIManager {
     });
 
     document.querySelector(".js-date-input").addEventListener("change", e => {
-      this.datePastCheck(e.target.value);
-      this.timePastCheck(document.querySelector(".js-time-input")?.value);
+      UIManager.datePastCheck(e.target.value, "add-date-warn");
+      UIManager.timePastCheck(document.querySelector(".js-time-input")?.value, "add-time-warn");
     });
 
     document.querySelector(".js-date-input").addEventListener("blur", () => {
@@ -93,8 +93,8 @@ class UIManager {
     });
 
     document.querySelector(".js-time-input").addEventListener("change", e => {
-      this.datePastCheck(document.querySelector(".js-date-input")?.value);
-      this.timePastCheck(e.target.value);
+      UIManager.datePastCheck(document.querySelector(".js-date-input")?.value, "add-date-warn");
+      UIManager.timePastCheck(e.target.value, "add-time-warn");
     });
 
     // add function to open Filter Menu
@@ -137,7 +137,7 @@ class UIManager {
 
   }
 
-  datePastCheck(date) {
+  static datePastCheck(date, Id) {
     if (date){
       let currentDate = new Date();
   
@@ -147,10 +147,12 @@ class UIManager {
       currentDate.setHours(0, 0, 0, 0);
       
       if (selectedDate.getTime() < currentDate.getTime()){
-        document.getElementById("add-date-warn").style.visibility = "visible";
+        
+        document.getElementById(Id).style.visibility = "visible";
+        console.log(document.getElementById(Id).style.visibility);
       }
       else {
-        document.getElementById("add-date-warn").style.visibility = "hidden";
+        document.getElementById(Id).style.visibility = "hidden";
       }
     
       if (selectedDate.getTime() == currentDate.getTime()){
@@ -162,7 +164,7 @@ class UIManager {
     }
   }
 
-  timePastCheck(time) {
+  static timePastCheck(time, Id) {
     if (time){
       let currentTime = new Date(); 
       let specificTime = new Date();
@@ -171,10 +173,10 @@ class UIManager {
       specificTime.setHours(hours, minutes, 59, 0);
 
       if ((specificTime.getTime() < currentTime.getTime()) && this.sameDayCheck) {
-        document.getElementById("add-time-warn").style.visibility = "visible";
+        document.getElementById(Id).style.visibility = "visible";
       }
       else {
-        document.getElementById("add-time-warn").style.visibility = "hidden";
+        document.getElementById(Id).style.visibility = "hidden";
       }
     }
     
