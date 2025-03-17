@@ -161,8 +161,8 @@ class TaskList {
       inputTimeElement.disabled = !inputDateElement.value;
       inputTimeElement.classList.toggle('disabled', !inputDateElement.value);
 
-      inputRecurringElement.disabled = !inputRecurringElement.value;
-      inputRecurringElement.classList.toggle('disabled', !inputRecurringElement.value);
+      inputRecurringElement.disabled = !inputDateElement.value;
+      inputRecurringElement.classList.toggle('disabled', !inputDateElement.value);
 
       // Add event listener to enable all input when a date is entered
       inputDateElement.addEventListener('input', () => {
