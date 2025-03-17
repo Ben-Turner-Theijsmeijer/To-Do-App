@@ -172,6 +172,14 @@ class TaskList {
 
         inputRecurringElement.disabled = !inputDateElement.value;
         inputRecurringElement.classList.toggle('disabled', !inputDateElement.value);
+
+        // reset date dependant varibles when date gets cleared
+        if (!inputDateElement.value) {
+          inputTimeElement.value = '';
+          inputRecurringElement.value = '';
+          document.getElementById("add-date-warn").style.visibility = "hidden";
+          document.getElementById("add-time-warn").style.visibility = "hidden";
+        }
       });
     }
   }
@@ -395,7 +403,14 @@ class TaskList {
     let priority = editPriorityElement.value;
     let complete = task.completed;
     let recurring = editRecurringElement.value;
-    
+
+    // check that a date is set before allowing a time and recurring status to be set
+    const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+    if (!datePattern.test(editDateElement.value)) {
+      time = '';
+      recurring = '';
+    }
+
     task.updateTask(name, date, time, category, priority, complete, recurring);
   }
 
@@ -413,7 +428,7 @@ class TaskList {
 
   }
 
-  // Add event listeners for delete, edit, and complete buttons
+  // Add event listeners for dynamic page elements
   addListeners(tasksToDisplay) {
     document.querySelectorAll('.js-delete-button').forEach((button) => {
       button.addEventListener('click', (event) => {
@@ -434,6 +449,19 @@ class TaskList {
         var name = editName.value; 
         editName.value = '';
         editName.value = name;
+
+        // disable editing of time and recurring if no selected date
+        let dateEditElement = document.querySelector('.js-edit-date');
+        let timeEditElement = document.querySelector('.js-edit-time');
+        let recurringEditElement = document.querySelector('.js-edit-recurring');
+
+        if (!dateEditElement.value) {
+          timeEditElement.disabled = !dateEditElement.value;
+          timeEditElement.classList.toggle('disabled', !dateEditElement.value);
+    
+          recurringEditElement.disabled = !dateEditElement.value;
+          recurringEditElement.classList.toggle('disabled', !dateEditElement.value);
+        }
       });
     });
 
@@ -480,6 +508,26 @@ class TaskList {
         UIManager.datePastCheck(document.querySelector(".js-edit-date")?.value, "edit-date-warn");
         UIManager.timePastCheck(event.target.value, "edit-time-warn");
       
+      });
+    }
+
+    // remove and disable time and recurring status fields on date clear
+    var recurringEditElement = document.querySelector('.js-edit-recurring');
+    if (dateEditElement){
+      dateEditElement.addEventListener('input', () => {
+        timeEditElement.disabled = !dateEditElement.value;
+        timeEditElement.classList.toggle('disabled', !dateEditElement.value);
+
+        recurringEditElement.disabled = !dateEditElement.value;
+        recurringEditElement.classList.toggle('disabled', !dateEditElement.value);
+
+        if (!dateEditElement.value) {
+          timeEditElement.value = '';
+          recurringEditElement.value = '';
+          document.getElementById("edit-date-warn").style.visibility = "hidden";
+          document.getElementById("edit-time-warn").style.visibility = "hidden";
+        }
+
       });
     }
 

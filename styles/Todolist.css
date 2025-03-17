@@ -9,6 +9,8 @@
   --button-hover-bg: #38a3ea;
   --button-hover-text: #fff;
   --input-border-hover: 2px solid #38a3ea;
+  --disabled-edit-bg: #e0e0e0;
+  --disabled-edit-text: #888;
   --cancel-edit-bg: #858585;
   --cancel-edit-hover: #3b3b3b;
   --cancel-edit-border: none;
@@ -22,6 +24,8 @@
   --button-hover-bg: #007bff;
   --input-border-hover: 2px solid #007bff;
   --button-hover-text: #fafafe;
+  --disabled-edit-bg: #dddddd;
+  --disabled-edit-text: #888;
   --cancel-edit-bg: #4f4f4f;
   --cancel-edit-hover: #272727;
   --cancel-edit-border: none;
@@ -36,6 +40,8 @@
   --button-hover-bg: #ff9000;
   --button-hover-text: #fff;
   --input-border-hover: 2px solid #ff5900;
+  --disabled-edit-bg: #3b3b3b;
+  --disabled-edit-text: #fafafe;
   --cancel-edit-bg: #858585;
   --cancel-edit-hover: #3b3b3b;
   --button-border: 1px solid #fff000;
@@ -292,6 +298,14 @@
 .js-edit-recurring:hover,
 .js-edit-recurring:focus-visible {
   border: var(--input-border-hover);
+}
+
+.js-edit-time:disabled,
+.js-edit-recurring:disabled {
+  background-color: var(--disabled-edit-bg);
+  color: var(--disabled-edit-text);
+  border: none;
+  cursor: not-allowed;
 }
 
 .task-edit {
