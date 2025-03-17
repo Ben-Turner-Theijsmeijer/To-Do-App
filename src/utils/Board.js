@@ -1,15 +1,6 @@
 import Task from "./task.js";
 
 document.addEventListener("DOMContentLoaded", function() {
-    // Function to toggle between light and dark mode
-    document.getElementById("themesSelection").addEventListener("change", (event) => {
-        if (event.target.value === "dark") {
-            document.body.classList.add("dark-mode");
-        } else {
-            document.body.classList.remove("dark-mode");
-        }
-    });
-
     // Function to load tasks from local storage
     const loadTasksFromLocalStorage = () => {
         const taskList = JSON.parse(localStorage.getItem("taskList")) || [];
@@ -17,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         tasks.forEach(task => {
             const taskElement = createTaskElement(task);
-            const targetColumn = document.getElementById(`${task.completed ? "complete" : task.date === "" ? "backlog" : "upcoming"}-list`);
+            const targetColumn = document.getElementById(`${task.completed ? "complete" : task.date === "" ? "backlog" : task.isOverdue() == "overdue" ? "overdue" : "upcoming"}-list`);
             targetColumn.appendChild(taskElement);
         });
 
@@ -38,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 ${task.isOverdue() == 'due' ? 'class="due-tooltip"' : ''}>
                 ${task.isOverdue() == 'overdue' ? `<span>⚠️</span>` : ''}
                 ${task.isOverdue() == 'due' ? `<span>🕓</span>` : ''}
-                <strong>${task.name}</strong>, ${task.date}
+                <strong>${task.name}</strong> ${task.date == '' ? '' : ','} ${task.date}
             </div> <!-- Name and Date -->
             <div class="task-details">
                 ${task.recurring ? `<span class="tag recurring ${task.recurring ? `recurring-tag` : ""}">${task.recurring}</span>` : ""}
@@ -62,13 +53,17 @@ document.addEventListener("DOMContentLoaded", function() {
             updateTasksCount();  // Recalculate task count after deletion
         });
 
-        // Determine the correct task column and apply the correct class (e.g., upcoming-task, backlog-task, or complete-task)
-        if (task.date === "") {
-            taskElement.classList.add("backlog-task"); 
-        } else if (!task.completed) {
-            taskElement.classList.add("upcoming-task"); // Make sure upcoming-task is used here
-        } else {
+        // Determine the correct task column and apply the correct class (e.g., upcoming-task, backlog-task, overdue-task, or complete-task)
+        if (task.completed === true) {
             taskElement.classList.add("complete-task");
+        }else if (task.date === "") {
+            taskElement.classList.add("backlog-task"); 
+        } else if (!task.complete && task.isOverdue() !== 'overdue') {
+            taskElement.classList.add("upcoming-task"); // Make sure upcoming-task is used here
+        } else if (!task.completed) {
+            taskElement.classList.add("overdue-task"); 
+        } else {
+            taskElement.classList.add("backlog-task");
         }
 
         return taskElement;
@@ -114,16 +109,21 @@ document.addEventListener("DOMContentLoaded", function() {
     const updateTasksCount = () => {
         const backlogColumn = document.getElementById("backlog");
         const upcomingColumn = document.getElementById("upcoming");
+        const overdueColumn = document.getElementById("overdue");
         const completeColumn = document.getElementById("complete");
 
         const backlogHeader = document.getElementById("backlog-header");
         const upcomingHeader = document.getElementById("upcoming-header");
+        const overdueHeader = document.getElementById("overdue-header");
         const completeHeader = document.getElementById("complete-header");
 
         // Update task counts and headers for each section
         updateHeader("Backlog: No date", backlogHeader, backlogColumn, "#FFC107");
         updateHeader("Upcoming", upcomingHeader, upcomingColumn, "#007BFF");
+        updateHeader("Overdue", overdueHeader, overdueColumn, "#ff0000");
         updateHeader("Complete", completeHeader, completeColumn, "#28A745");
+
+        hideOverdueBoardVisibility();
     };
 
     // Function to update the header text with the correct task count
@@ -139,6 +139,22 @@ document.addEventListener("DOMContentLoaded", function() {
         const updatedTaskList = taskList.filter(task => task.name !== taskToDelete.name || task.date !== taskToDelete.date); // Assuming unique task based on name & date
         localStorage.setItem("taskList", JSON.stringify(updatedTaskList));
     };
+
+    // Hide overdue Tasks board if there are none
+    const hideOverdueBoardVisibility = () => {
+        const overdueTaskList = document.getElementById('overdue-list');
+        const overdueBoard = document.getElementById('overdue');
+        const overdueHeader = document.getElementById('overdue-header');
+    
+        // Check if the overdue task list has any child elements
+        if (overdueTaskList.children.length === 0) {
+            overdueBoard.style.display = 'none';
+            overdueHeader.style.display = 'none';
+        } else {
+            overdueBoard.style.display = 'block';
+            overdueHeader.style.display = 'block';
+        }
+    }
 
     // Example of adding a new task (ensure task count updates after adding/removing tasks)
     const addTask = (task) => {
