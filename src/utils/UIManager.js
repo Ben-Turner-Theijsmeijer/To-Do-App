@@ -113,7 +113,7 @@ class UIManager {
     // add function to filter reset button
     document.querySelector("#reset-filters").addEventListener("click", () => {
       var select = document.querySelector(".filter-completion");
-      select.selectedIndex = 0;
+      select.selectedIndex = 1;
       select = document.querySelector(".filter-category");
       select.selectedIndex = 0;
       select = document.querySelector(".filter-priority");
