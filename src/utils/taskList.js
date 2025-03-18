@@ -5,7 +5,7 @@ class TaskList {
   constructor(sortManager, filterManager) {
     this.taskListData = JSON.parse(localStorage.getItem('taskList')) || [];
     
-    this.taskList = []
+    this.taskList = [];
     // Turning saved json into task objects
     this.taskListData.forEach( (savedTask) => {
       this.taskList.push(new Task(savedTask.name, savedTask.date, savedTask.time, savedTask.category, savedTask.priority, savedTask.completed, savedTask.recurring))
@@ -14,7 +14,7 @@ class TaskList {
     this.taskListhtml = '';
     this.index = null;
     this.taskEditingIndex = null;
-
+    this.taskDraggingIndex = null;
     this.sortManager = sortManager;
     this.filterManager = filterManager;
     
@@ -416,20 +416,18 @@ class TaskList {
 
   moveTaskInTasklist(startIndex, destinationIndex){
     
-    console.log("MOVED TASK AT: " + startIndex + " to: " + destinationIndex);
-
     //Removing item from list
     var taskToMove = this.taskList.splice(startIndex, 1)[0];
-    console.log(taskToMove);
 
     //Adding back item in new location
     this.taskList.splice(destinationIndex, 0, taskToMove);
-    console.log(this.taskList);
 
   }
 
   // Add event listeners for dynamic page elements
   addListeners(tasksToDisplay) {
+    
+    /******** Task button listeners ********/
     document.querySelectorAll('.js-delete-button').forEach((button) => {
       button.addEventListener('click', (event) => {
         this.index = event.currentTarget.getAttribute('data-index');
@@ -473,6 +471,7 @@ class TaskList {
       });
     });
 
+    /******** Task editing listeners ********/
     var cancelEditElement = document.querySelector('.js-cancel-edit-button');
     if (cancelEditElement){
       cancelEditElement.addEventListener('click', (event) => {
@@ -531,42 +530,69 @@ class TaskList {
       });
     }
 
-    /******* Drag and drop listeners *******/
+    /******** Task drag and drop listeners ********/
     document.querySelectorAll('.task').forEach((task) => {
       
       task.addEventListener('dragstart', (event) => {
-        event.dataTransfer.setData("text/plain", event.target.getAttribute('data-index'));
+        task.classList.add("dragging");
         event.dataTransfer.effectAllowed = "move";
+
+
+        //Saving index of task being dragged
+        this.taskDraggingIndex = event.target.getAttribute('data-index');
       });
 
-      task.addEventListener('drop', (event) => {
+      task.addEventListener('dragover', (event) => {
         event.preventDefault();
-
-        //Retrieving indexes of drag and drop locations in displayed list
-        var draggedTaskIndex = event.dataTransfer.getData("text/plain");
-        var dragEndIndex = event.currentTarget.getAttribute('data-index');
-        if (draggedTaskIndex == dragEndIndex){
+        
+        //Return if dragging over itself
+        var dragOverIndex = task.getAttribute("data-index");
+        if (dragOverIndex == this.taskDraggingIndex){
           return;
         }
-
+        
         //Finding the indexes in the actual list by checking equality for each task in displayed list (accounting for filters)
-        var draggedIndexInFullList = this.taskList.map( task => task.isEqual(tasksToDisplay[draggedTaskIndex]) ).indexOf(true) ;
-        var endIndexInFullList = this.taskList.map( task => task.isEqual(tasksToDisplay[dragEndIndex]) ).indexOf(true) ;
+        var draggedIndexInFullList = this.taskList.map( t => t.isEqual(tasksToDisplay[this.taskDraggingIndex]) ).indexOf(true) ;
+        var dragOverIndexInFullList = this.taskList.map( t => t.isEqual(tasksToDisplay[dragOverIndex]) ).indexOf(true) ;
 
         //Moving task to new location and displaying updated list order
-        this.moveTaskInTasklist(draggedIndexInFullList, endIndexInFullList);
-        this.updateAndDisplayTaskList(); 
+        this.moveTaskInTasklist(draggedIndexInFullList, dragOverIndexInFullList);
+        this.updateAndDisplayTaskList();
+
+        //Set dragging task index to new index now that it has been moved
+        this.taskDraggingIndex = dragOverIndex;
+
+        //Adding back dragging class to dragging task for styling
+        document.querySelectorAll(".task").forEach((taskBeingDisplayed) => {
+          taskBeingDisplayed.classList.add("no-hover");
+          if (taskBeingDisplayed.getAttribute("data-index") == this.taskDraggingIndex){
+            taskBeingDisplayed.classList.add("dragging");
+          }
+        });
+
+      });
+
+      task.addEventListener('dragend', (event) => {
+        console.log("dragEND");
+
+        //Removing dragging styling from tasks
+        document.querySelectorAll(".task").forEach((taskBeingDisplayed) => {
+          taskBeingDisplayed.classList.remove("dragging");
+          taskBeingDisplayed.classList.remove("no-hover");
+        });
+
+        //No task is being dragged
+        this.taskDraggingIndex = null;
       });
 
     });
 
-    var list = document.querySelector('.js-add-html');
-    if (list){
-        list.addEventListener('dragover', (event) => {
-          event.preventDefault();
-          event.dataTransfer.dropEffect = "move";
-        });
-    }
+    //Removing finicky default animation when task is dropped
+    var tasksContainer = document.body;
+    document.body.addEventListener('dragover', (event) => {
+      event.preventDefault();
+    });
+
 
   }
 
