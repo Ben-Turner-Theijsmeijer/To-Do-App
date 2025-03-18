@@ -140,7 +140,8 @@
 }
 
 /* Single task styling */
-.task {
+.task, 
+.task.no-hover:hover {
   width: 80%;
   margin: 0 auto;
   font-size: 1.2em;
@@ -160,11 +161,6 @@
   cursor: move;
 }
 
-/* .task.dragging:hover {
-  width: 80%;
-  box-shadow: none;
-} */
-
 .task:active { 
   width: 80%;
   box-shadow: none;
@@ -174,7 +170,6 @@
   opacity: 0.3;
   width: 80%;
 }
-
 
 .small-container {
   height: 85%;

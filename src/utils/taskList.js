@@ -416,15 +416,11 @@ class TaskList {
 
   moveTaskInTasklist(startIndex, destinationIndex){
     
-    console.log("MOVED TASK AT: " + startIndex + " to: " + destinationIndex);
-
     //Removing item from list
     var taskToMove = this.taskList.splice(startIndex, 1)[0];
-    console.log(taskToMove);
 
     //Adding back item in new location
     this.taskList.splice(destinationIndex, 0, taskToMove);
-    console.log(this.taskList);
 
   }
 
@@ -538,7 +534,6 @@ class TaskList {
     document.querySelectorAll('.task').forEach((task) => {
       
       task.addEventListener('dragstart', (event) => {
-        console.log("dragSTART")
         task.classList.add("dragging");
         event.dataTransfer.effectAllowed = "move";
 
@@ -547,22 +542,15 @@ class TaskList {
         this.taskDraggingIndex = event.target.getAttribute('data-index');
       });
 
-      task.addEventListener('drop', (event) => {
-        event.preventDefault(); //todo: delete??
-      });
-
-      //I am avoiding using dragenter and dragleave because they suck. They don't work well, I tried to make them work and its not worth it
       task.addEventListener('dragover', (event) => {
         event.preventDefault();
         
-        //return if dragging over itself
+        //Return if dragging over itself
         var dragOverIndex = task.getAttribute("data-index");
         if (dragOverIndex == this.taskDraggingIndex){
           return;
         }
         
-        console.log("dragoverEventIndex: " + dragOverIndex + ", savedDraggingTaskIndex: " + this.taskDraggingIndex);
-
         //Finding the indexes in the actual list by checking equality for each task in displayed list (accounting for filters)
         var draggedIndexInFullList = this.taskList.map( t => t.isEqual(tasksToDisplay[this.taskDraggingIndex]) ).indexOf(true) ;
         var dragOverIndexInFullList = this.taskList.map( t => t.isEqual(tasksToDisplay[dragOverIndex]) ).indexOf(true) ;
@@ -576,6 +564,7 @@ class TaskList {
 
         //Adding back dragging class to dragging task for styling
         document.querySelectorAll(".task").forEach((taskBeingDisplayed) => {
+          taskBeingDisplayed.classList.add("no-hover");
           if (taskBeingDisplayed.getAttribute("data-index") == this.taskDraggingIndex){
             taskBeingDisplayed.classList.add("dragging");
           }
@@ -589,6 +578,7 @@ class TaskList {
         //Removing dragging styling from tasks
         document.querySelectorAll(".task").forEach((taskBeingDisplayed) => {
           taskBeingDisplayed.classList.remove("dragging");
+          taskBeingDisplayed.classList.remove("no-hover");
         });
 
         //No task is being dragged
