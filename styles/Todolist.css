@@ -9,6 +9,8 @@
   --button-hover-bg: #38a3ea;
   --button-hover-text: #fff;
   --input-border-hover: 2px solid #38a3ea;
+  --disabled-edit-bg: #e0e0e0;
+  --disabled-edit-text: #888;
   --cancel-edit-bg: #858585;
   --cancel-edit-hover: #3b3b3b;
   --cancel-edit-border: none;
@@ -22,6 +24,8 @@
   --button-hover-bg: #007bff;
   --input-border-hover: 2px solid #007bff;
   --button-hover-text: #fafafe;
+  --disabled-edit-bg: #dddddd;
+  --disabled-edit-text: #888;
   --cancel-edit-bg: #4f4f4f;
   --cancel-edit-hover: #272727;
   --cancel-edit-border: none;
@@ -36,6 +40,8 @@
   --button-hover-bg: #ff9000;
   --button-hover-text: #fff;
   --input-border-hover: 2px solid #ff5900;
+  --disabled-edit-bg: #3b3b3b;
+  --disabled-edit-text: #fafafe;
   --cancel-edit-bg: #858585;
   --cancel-edit-hover: #3b3b3b;
   --button-border: 1px solid #fff000;
@@ -62,9 +68,11 @@
 .js-add-grid {
   display: grid;
   grid-template-columns: 2.5fr 11rem 8rem 8rem 8rem 7.3rem 1fr;
-  row-gap: 1rem;
+  /* row-gap: 1rem; */
   background-color: var(--secondary-bg);
-  padding: 20px;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 0.813rem;
@@ -192,6 +200,33 @@
   font-size: 0.8em;
 }
 
+#add-date-warn {
+  font-size: small;
+  color: #ff5900;
+  visibility: hidden;
+}
+
+#add-time-warn {
+  font-size: small;
+  color: #ff5900;
+  visibility: hidden;
+}
+
+#edit-date-warn {
+  font-size: small;
+  color: #ff5900;
+  margin-top: -8px;
+  visibility: hidden;
+}
+
+#edit-time-warn {
+  font-size: small;
+  color: #ff5900;
+  margin-top: -8px;
+  margin-left: 70px;
+  visibility: hidden;
+}
+
 .task-info {
   display: flex;
   align-items: center;
@@ -293,6 +328,14 @@
   border: var(--input-border-hover);
 }
 
+.js-edit-time:disabled,
+.js-edit-recurring:disabled {
+  background-color: var(--disabled-edit-bg);
+  color: var(--disabled-edit-text);
+  border: none;
+  cursor: not-allowed;
+}
+
 .task-edit {
   width: 81%;
   font-size: 1.25rem;
@@ -307,7 +350,7 @@
 .task-edit-fields {
   display: flex;
   flex: 1 1 500px;
-  gap: 10px 20px;
+  gap: 5px 20px;
   flex-wrap: wrap;
 }
 

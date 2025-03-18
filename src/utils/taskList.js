@@ -1,4 +1,5 @@
 import Task from "./task.js";
+import UIManager from "./UIManager.js";
 
 class TaskList {
   constructor(sortManager, filterManager) {
@@ -153,15 +154,15 @@ class TaskList {
   setupDateChangeListeners() {
     const inputDateElement = document.querySelector('.js-date-input');
     const inputTimeElement = document.querySelector('.js-time-input');
-    const inputRecurringElement = document.querySelector('.js-recurring-input');    
-
+    const inputRecurringElement = document.querySelector('.js-recurring-input');
+    
     if (inputDateElement && inputTimeElement && inputRecurringElement) {
       // Initially disable the all inputs if no date is present
       inputTimeElement.disabled = !inputDateElement.value;
       inputTimeElement.classList.toggle('disabled', !inputDateElement.value);
 
-      inputRecurringElement.disabled = !inputRecurringElement.value;
-      inputRecurringElement.classList.toggle('disabled', !inputRecurringElement.value);
+      inputRecurringElement.disabled = !inputDateElement.value;
+      inputRecurringElement.classList.toggle('disabled', !inputDateElement.value);
 
       // Add event listener to enable all input when a date is entered
       inputDateElement.addEventListener('input', () => {
@@ -171,6 +172,14 @@ class TaskList {
 
         inputRecurringElement.disabled = !inputDateElement.value;
         inputRecurringElement.classList.toggle('disabled', !inputDateElement.value);
+
+        // reset date dependant varibles when date gets cleared
+        if (!inputDateElement.value) {
+          inputTimeElement.value = '';
+          inputRecurringElement.value = '';
+          document.getElementById("add-date-warn").style.visibility = "hidden";
+          document.getElementById("add-time-warn").style.visibility = "hidden";
+        }
       });
     }
   }
@@ -251,6 +260,9 @@ class TaskList {
     inputPriorityElement.value = '';
     inputRecurringElement.value = '';
 
+    document.getElementById("add-date-warn").style.visibility = "hidden";
+    document.getElementById("add-time-warn").style.visibility = "hidden";
+
     // Update the displayed list
     this.updateAndDisplayTaskList();
   }
@@ -321,6 +333,9 @@ class TaskList {
             <option value="Weekly">Weekly</option>
             <option value="Monthly">Monthly</option>
           </select>
+          <span style="width:100%;"></span>
+          <span id="edit-date-warn">Warning: Past date!</span>
+          <span id="edit-time-warn">Warning: Past time!</span>
         </div>
         
         <div class="task-edit-buttons">
@@ -388,7 +403,14 @@ class TaskList {
     let priority = editPriorityElement.value;
     let complete = task.completed;
     let recurring = editRecurringElement.value;
-    
+
+    // check that a date is set before allowing a time and recurring status to be set
+    const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+    if (!datePattern.test(editDateElement.value)) {
+      time = '';
+      recurring = '';
+    }
+
     task.updateTask(name, date, time, category, priority, complete, recurring);
   }
 
@@ -406,7 +428,7 @@ class TaskList {
 
   }
 
-  // Add event listeners for delete, edit, and complete buttons
+  // Add event listeners for dynamic page elements
   addListeners(tasksToDisplay) {
     
     /******** Task button listeners ********/
@@ -429,6 +451,19 @@ class TaskList {
         var name = editName.value; 
         editName.value = '';
         editName.value = name;
+
+        // disable editing of time and recurring if no selected date
+        let dateEditElement = document.querySelector('.js-edit-date');
+        let timeEditElement = document.querySelector('.js-edit-time');
+        let recurringEditElement = document.querySelector('.js-edit-recurring');
+
+        if (!dateEditElement.value) {
+          timeEditElement.disabled = !dateEditElement.value;
+          timeEditElement.classList.toggle('disabled', !dateEditElement.value);
+    
+          recurringEditElement.disabled = !dateEditElement.value;
+          recurringEditElement.classList.toggle('disabled', !dateEditElement.value);
+        }
       });
     });
 
@@ -457,6 +492,45 @@ class TaskList {
         this.saveEditTask(tasksToDisplay[this.index]);
         this.taskEditingIndex = null;
         this.updateAndDisplayTaskList();
+      });
+    }
+
+    /******* Date and Time Event Listeners *******/
+    var dateEditElement = document.querySelector('.js-edit-date');
+    if (dateEditElement){
+      dateEditElement.addEventListener('change', (event) => {
+        UIManager.datePastCheck(event.target.value, "edit-date-warn");
+        UIManager.timePastCheck(document.querySelector(".js-edit-time")?.value, "edit-time-warn");
+      
+      });
+    }
+
+    var timeEditElement = document.querySelector('.js-edit-time');
+    if (timeEditElement){
+      timeEditElement.addEventListener('change', (event) => {
+        UIManager.datePastCheck(document.querySelector(".js-edit-date")?.value, "edit-date-warn");
+        UIManager.timePastCheck(event.target.value, "edit-time-warn");
+      
+      });
+    }
+
+    // remove and disable time and recurring status fields on date clear
+    var recurringEditElement = document.querySelector('.js-edit-recurring');
+    if (dateEditElement){
+      dateEditElement.addEventListener('input', () => {
+        timeEditElement.disabled = !dateEditElement.value;
+        timeEditElement.classList.toggle('disabled', !dateEditElement.value);
+
+        recurringEditElement.disabled = !dateEditElement.value;
+        recurringEditElement.classList.toggle('disabled', !dateEditElement.value);
+
+        if (!dateEditElement.value) {
+          timeEditElement.value = '';
+          recurringEditElement.value = '';
+          document.getElementById("edit-date-warn").style.visibility = "hidden";
+          document.getElementById("edit-time-warn").style.visibility = "hidden";
+        }
+
       });
     }
 

@@ -1,6 +1,7 @@
 class UIManager {
   constructor(taskList) {
     this.taskList = taskList;
+    this.sameDayCheck = false;
 
     this.setupEventListeners();
   }
@@ -57,17 +58,24 @@ class UIManager {
       }
     });
 
+    document.querySelector(".js-date-input").addEventListener("change", e => {
+      UIManager.datePastCheck(e.target.value, "add-date-warn");
+      UIManager.timePastCheck(document.querySelector(".js-time-input")?.value, "add-time-warn");
+    });
+
     document.querySelector(".js-date-input").addEventListener("blur", () => {
       dateCheck = false;
     });
 
+
+    // I tried getting rid of this because it seemed to be a check for if date was empty, but turns out it causes bugs - Emily
     document.querySelector(".js-time-input").addEventListener("click", e => {
       e.preventDefault();
       if (!timeCheck) {
         e.target.showPicker();
         timeCheck = true;
 
-        //Setting date to today if time is clicked while date is empty
+        //Setting date to today if time is clicked while date is empty 
         const inputDateElement = document.querySelector(".js-date-input");
         if (!inputDateElement.value) {
           const now = new Date();
@@ -82,6 +90,11 @@ class UIManager {
 
     document.querySelector(".js-time-input").addEventListener("blur", () => {
       timeCheck = false;
+    });
+
+    document.querySelector(".js-time-input").addEventListener("change", e => {
+      UIManager.datePastCheck(document.querySelector(".js-date-input")?.value, "add-date-warn");
+      UIManager.timePastCheck(e.target.value, "add-time-warn");
     });
 
     // add function to open Filter Menu
@@ -100,7 +113,7 @@ class UIManager {
     // add function to filter reset button
     document.querySelector("#reset-filters").addEventListener("click", () => {
       var select = document.querySelector(".filter-completion");
-      select.selectedIndex = 0;
+      select.selectedIndex = 1;
       select = document.querySelector(".filter-category");
       select.selectedIndex = 0;
       select = document.querySelector(".filter-priority");
@@ -122,6 +135,51 @@ class UIManager {
       this.taskList.updateAndDisplayTaskList();  
     });
 
+  }
+
+  static datePastCheck(date, Id) {
+    if (date){
+      let currentDate = new Date();
+  
+      let [year, month, day] = date.split("-").map(Number);
+      let selectedDate = new Date(year, month - 1, day);
+    
+      currentDate.setHours(0, 0, 0, 0);
+      
+      if (selectedDate.getTime() < currentDate.getTime()){
+        
+        document.getElementById(Id).style.visibility = "visible";
+        console.log(document.getElementById(Id).style.visibility);
+      }
+      else {
+        document.getElementById(Id).style.visibility = "hidden";
+      }
+    
+      if (selectedDate.getTime() == currentDate.getTime()){
+        this.sameDayCheck = true;
+      }
+      else {
+        this.sameDayCheck = false;
+      }
+    }
+  }
+
+  static timePastCheck(time, Id) {
+    if (time){
+      let currentTime = new Date(); 
+      let specificTime = new Date();
+      let [hours, minutes] = time.split(":").map(num => parseInt(num));
+
+      specificTime.setHours(hours, minutes, 59, 0);
+
+      if ((specificTime.getTime() < currentTime.getTime()) && this.sameDayCheck) {
+        document.getElementById(Id).style.visibility = "visible";
+      }
+      else {
+        document.getElementById(Id).style.visibility = "hidden";
+      }
+    }
+    
   }
 }
 
