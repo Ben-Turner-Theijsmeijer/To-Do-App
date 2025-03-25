@@ -50,10 +50,11 @@
 - **Filter:** Filter the list to only display the selected options (Completion status, Category, Priority)
 - **Search:** Find a task based on its name
 <!-- (TODO: any other things search will check?) -->
+- **Due Date:** Any tasks due "today" will have a clock emoji next to the date and time. The due dates on tasks due in the past will be shown in red with an alert emoji.
 
 ## Calendar
 
-### Caendar Capabilities
+### Calendar Capabilities
 
 - View tasks on the days they're due
 - View by month or by week
