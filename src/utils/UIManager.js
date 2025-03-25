@@ -188,12 +188,15 @@ class UIManager {
 document.addEventListener("DOMContentLoaded", () => {
   // Set focus on the name input field
   const inputNameElement = document.querySelector(".js-name-input");
-  inputNameElement.focus();
+  if (inputNameElement !== null)
+  {
+    inputNameElement.focus();
+  }
 
   // Set up switch position
   const switch24Hour = document.querySelector("#switch24Hour");
   const savedTimeFormat = localStorage.getItem('timeFormat24Hr');
-  if (savedTimeFormat !== null) {
+  if (savedTimeFormat !== null && switch24Hour !== null) {
     switch24Hour.checked = (savedTimeFormat === 'true');
   }
 });
