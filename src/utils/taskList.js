@@ -78,7 +78,7 @@ class TaskList {
     }
 
     // CSV Header Row
-    let csvContent = "TaskName,Date,Time,Category,Priority,Recurring,Description\n";
+    let csvContent = "TaskName,Date,Time,Category,Priority,Recurring\n";
 
     // Loop through all tasks and format their data
     this.taskList.forEach((task) => {
@@ -88,10 +88,11 @@ class TaskList {
       const category = task.category ? task.category.trim() : ""; 
       const priority = task.priority ? task.priority.trim() : ""; 
       const recurring = task.recurring ? task.recurring : ""; 
-      const description = task.description ? task.description : "";
+      // Note: I am commenting because csv was not in my ticket - will need more weights to implement
+      // const description = task.description ? task.description : "";
 
       // Append the task to CSV content
-      csvContent += `${taskName},${date},${time},${category},${priority},${recurring},${description}\n`;
+      csvContent += `${taskName},${date},${time},${category},${priority},${recurring}\n`;
     });
 
     // Create a downloadable CSV file
@@ -121,13 +122,13 @@ class TaskList {
       let lines = text.split("\n").map((line) => line.trim()).filter(line => line);
 
       // Check if the first line contains the expected headers, and skip it
-      if (lines[0].toLowerCase().startsWith("taskname,date,time,category,priority,description")) {
+      if (lines[0].toLowerCase().startsWith("taskname,date,time,category,priority")) {
         lines.shift(); // Remove the first line (headers)
       }
 
       // Process each remaining line as a task
       lines.forEach((line) => {
-        const [name, date, time, category, priority, recurring, description] = line.split(",").map(item => item.trim());
+        const [name, date, time, category, priority, recurring] = line.split(",").map(item => item.trim());
 
         if (name) { // Only add tasks with a name
           const newTask = new Task(
@@ -138,7 +139,6 @@ class TaskList {
             priority || "", // Default empty if missing
             false, // Task is not completed by default
             recurring || "",
-            description || ""
           );
 
           this.taskList.push(newTask);
@@ -363,8 +363,6 @@ class TaskList {
     // This was added to fix a hover-over issue with the big date field
     let missingTag = !task.recurring || !task.category || !task.priority;
 
-    console.log('task desc:' + task.description);
-
     return `
       <div class="task" ${draggableText} data-index="${referenceNumber}">
         
@@ -386,7 +384,7 @@ class TaskList {
           </div>
         </div>
         ${task.description ? 
-          `<span class="js-desc-toggle" data-index="${referenceNumber}" tabindex="0">
+        `<span class="js-desc-toggle" data-index="${referenceNumber}" tabindex="0">
           <i class="fa-solid fa-chevron-right fa-2xs"></i>
           <i class="fa-solid fa-info-circle"></i>
         </span>` : '<span></span>'}
@@ -450,11 +448,12 @@ class TaskList {
       span.addEventListener('click', (event) => {
         this.index = event.currentTarget.getAttribute('data-index');
         const descBox = document.querySelector(`.description-box[data-index="${this.index}"]`);
+        const toggleSwitch = document.querySelector(`.js-desc-toggle[data-index="${this.index}"]`);
 
         descBox.classList.toggle("hidden");
         
         // handles rotation of chevron when clicked
-        const chevron = document.querySelector(".fa-chevron-right");
+        const chevron = toggleSwitch.querySelector(".fa-chevron-right");
         if (chevron) {
           chevron.classList.toggle("fa-rotate-90");
         }
