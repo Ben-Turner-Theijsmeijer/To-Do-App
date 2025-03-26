@@ -1,6 +1,6 @@
 class Task {
   
-  constructor(name, date, time, category, priority, completed, recurring) {
+  constructor(name, date, time, category, priority, completed, recurring, description) {
     this.name = name;
     this.date = date;
     this.time = time;
@@ -8,13 +8,14 @@ class Task {
     this.priority = priority;
     this.completed = completed;
     this.recurring = recurring;
+    this.description = description;
     
     this.updateTimeString();
     this.recurringUpdated = false;
   }
 
   // Single responsibility: Task updates itself
-  updateTask(name, date, time, category, priority, completed, recurring){
+  updateTask(name, date, time, category, priority, completed, recurring, description){
     this.name = name;
     this.date = date;
     this.time = time;
@@ -22,6 +23,7 @@ class Task {
     this.priority = priority;
     this.completed = completed;
     this.recurring = recurring;
+    this.description = description;
   }
 
   updateTimeString(){
