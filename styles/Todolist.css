@@ -65,14 +65,19 @@
   min-width: 150px;
 }
 
+.js-desc-input {
+  grid-column: 1 / -1;
+  min-width: 150px;
+  height: 3rem;
+  width: 87.5%;
+}
+
 .js-add-grid {
   display: grid;
   grid-template-columns: 2.5fr 11rem 8rem 8rem 8rem 7.3rem 1fr;
   /* row-gap: 1rem; */
   background-color: var(--secondary-bg);
-  padding-top: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 0.813rem;
@@ -146,7 +151,7 @@
   margin: 0 auto;
   font-size: 1.2em;
   display: grid;
-  grid-template-columns: 6fr 1fr 1fr;
+  grid-template-columns: 6fr 1fr 1fr 1fr;
   background-color: var(--secondary-bg);
   border: 1px var(--border-color) solid;
   border-radius: 10px;
@@ -169,6 +174,25 @@
 .dragging {
   opacity: 0.3;
   width: 80%;
+}
+
+.hidden {
+  display: none;
+}
+
+.description-box {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 110%;
+  font-size: 14px;
+  word-break: break-all;
+  white-space: pre-wrap;
+  /* transition: all 0.3s ease;*/
 }
 
 .small-container {
@@ -232,6 +256,12 @@
 
 .task-name {
   overflow-wrap: anywhere;
+}
+
+.js-desc-toggle {
+  margin-left: 2rem;
+  cursor: pointer;
+  width: 50%;
 }
 
 .js-delete-button,
