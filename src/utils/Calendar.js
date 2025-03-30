@@ -35,7 +35,8 @@ class Calendar {
           taskData.category,
           taskData.priority,
           taskData.completed,
-          taskData.recurring
+          taskData.recurring,
+          taskData.description
         )
     );
   }
@@ -179,7 +180,7 @@ class Calendar {
     const timeStr = task.time != "" ? ", " + task.time : "";
     dateTime.innerText = dateStr + timeStr;
     // category and priority
-    const catPri = document.getElementById("calendarTaskTags");
+    const calendarTaskTags = document.getElementById("calendarTaskTags");
     calendarTaskTags.innerHTML = "";
     if (task.recurring != "") {
       console.log(task);
@@ -201,6 +202,9 @@ class Calendar {
       priority.innerText = task.priority;
       calendarTaskTags.appendChild(priority);
     }
+    // description
+    const description = document.getElementById("taskDetailsDescription");
+    description.innerText = task.description ?? "";
   }
 
   addTasksToCell(cell, date) {
@@ -275,6 +279,30 @@ class Calendar {
       priority.innerText = task.priority;
       taskInfo.appendChild(priority);
     }
+    // description
+    if (task.description != null) {
+      const descInfo = document.createElement("i");
+      descInfo.classList = "fa-solid fa-info-circle";
+
+      const descChevron = document.createElement("i");
+      descChevron.classList = "fa-solid fa-chevron-right fa-2xs";
+
+      const description = document.createElement("span");
+      description.classList = "description-box";
+      description.style.display = "none";
+      description.innerText = task.description;
+
+      taskInfo.appendChild(descInfo);
+      taskInfo.appendChild(descChevron);
+      taskInfo.appendChild(description);
+
+      descChevron.addEventListener("click", event => {
+        description.style.display =
+          description.style.display == "none" ? "block" : "none";
+        descChevron.classList.toggle("fa-rotate-90");
+      });
+    }
+
     return taskInfo;
   }
 }

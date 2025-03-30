@@ -11,7 +11,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../favicon_io/favicon-16x16.png">
     <link rel="manifest" href="../../favicon_io/site.webmanifest">
-    
+
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -20,8 +20,8 @@
     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
     crossorigin="anonymous" referrerpolicy="no-referrer">
 
-  <link rel="stylesheet" href="../../styles/General.css" />
-  <link rel="stylesheet" href="../../styles/Calendar.css" />
+    <link rel="stylesheet" href="../../styles/General.css" />
+  <link rel="stylesheet" href="../../styles/Board.css" />
 </head>
 
 <body>
@@ -66,37 +66,52 @@
     </div>
   </nav>
 
-  <!-- Main Container -->
-  <div class="container" id="calendarAndDateless">
-    <h1 class="subtitle text-center mt-4">Calendar Task View</h1>
-    <div class="container-cal mt-4">
-      <div class="calendar-header d-flex justify-content-between align-items-center">
-        <button id="prevBtn" class="btn btn-outline-primary">◀</button>
-        <h2 id="currentDate"></h2>
-        <button id="nextBtn" class="btn btn-outline-primary">▶</button>
-      </div>
-
-      <div class="view-toggle my-3">
-        <button id="monthViewBtn" class="btn btn-primary">Month View</button>
-        <button id="weekViewBtn" class="btn btn-outline-primary">Week View</button>
-        <button id="todayBtn" class="btn btn-secondary">Today</button>
-      </div>
-
-      <div id="calendar" class="calendar"></div>
+  <div class="container">
+    <h1 class="subtitle text-center mt-4">Board View</h1>
+    <h2 class="subtitle-2 text-center mt-4">Category</h2>
+    <div class="header">
+        <h4 id="backlog-header">None/Other</h4>
+        <h4 id="work-header">Work</h4>
+        <h4 id="personal-header">Personal</h4>
+        <h4 id="shopping-header">Shopping</h4>
     </div>
-  </div>
 
-  <!-- Task Details Popup -->
-  <div class="popup container-cal mt-4" id="taskDetails" style="display: none;">
-    <p class="task-name" id="taskDetailsNameAndStatus"></p>
-    <div id="calendarTaskTags"></div>
-    <p id="taskDetailsDateTime"></p>
-    <p id="taskDetailsDescription" class="description-box"></p>
-    <button class="btn btn-primary" id="taskDetailsCloseBtn"
-      onclick="document.getElementById('taskDetails').style.display = 'none'">
-      Close
-    </button>
-  </div>
+    <div class="drag-drop-container">
+        <!-- Columns where tasks will be dynamically injected -->
+        <div id="backlog" class="col3" ondrop="drop(event)" ondragover="allowdrop(event)">
+            <div class="task-list display" id="backlog-list"></div>
+            <!-- Add Task Button for Backlog Column -->
+            <div class="add-task-link">
+                <a href="Todolist.html"><i class="fa-solid fa-plus"></i></a>
+            </div>
+        </div>
+
+        <div id="work" class="col3" ondrop="drop(event)" ondragover="allowdrop(event)">
+            <div class="task-list display" id="work-list"></div>
+            <!-- Add Task Button for Upcoming Column -->
+            <div class="add-task-link">
+                <a href="Todolist.html"><i class="fa-solid fa-plus"></i></a>
+            </div>
+        </div>
+
+        <div id="personal" class="col3" ondrop="drop(event)" ondragover="allowdrop(event)">
+            <div class="task-list display" id="personal-list"></div>
+            <!-- Add Task Button for Overdue Column -->
+            <div class="add-task-link">
+                <a href="Todolist.html"><i class="fa-solid fa-plus"></i></a>
+            </div>
+        </div>
+
+        <div id="shopping" class="col3" ondrop="drop(event)" ondragover="allowdrop(event)">
+            <div class="task-list display" id="shopping-list"></div>
+            <!-- Add Task Button for Complete Column -->
+            <div class="add-task-link">
+                <a href="Todolist.html"><i class="fa-solid fa-plus"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+        
 
   <!-- Themes Dropdown -->
   <div style="padding-bottom: 15px; padding-top: 15px">
@@ -121,7 +136,7 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script type="module" src="../utils/Calendar.js"></script>
+  <script type="module" src="../utils/CategoryBoard.js"></script>
   <script src="../utils/themes.js"></script>
 
 </body>

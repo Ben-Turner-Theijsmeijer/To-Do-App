@@ -302,7 +302,7 @@ td:hover,
     align-items: center;
 }
 
-.task-without-due-date span {
+.task-without-due-date span, .task-without-due-date i {
     margin: 2px;
 }
 

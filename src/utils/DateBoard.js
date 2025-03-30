@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const completeHeader = document.getElementById("complete-header");
 
         // Update task counts and headers for each section
-        updateHeader("Backlog: No date", backlogHeader, backlogColumn, "#FFC107");
+        updateHeader("No date", backlogHeader, backlogColumn, "#FFC107");
         updateHeader("Upcoming", upcomingHeader, upcomingColumn, "#007BFF");
         updateHeader("Overdue", overdueHeader, overdueColumn, "#ff0000");
         updateHeader("Complete", completeHeader, completeColumn, "#28A745");
