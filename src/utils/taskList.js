@@ -271,7 +271,7 @@ class TaskList {
     // reset textarea size
     if (inputDescElement.value.trim() === "") {
       inputDescElement.style.height = "3rem";
-   }
+    }
 
     // Update the displayed list
     this.updateAndDisplayTaskList();
@@ -346,6 +346,15 @@ class TaskList {
           <span style="width:100%;"></span>
           <span id="edit-date-warn">Warning: Past date!</span>
           <span id="edit-time-warn">Warning: Past time!</span>
+          ${task.description ? `<textarea  
+            class="js-edit-desc form-control" 
+            maxlength="1000"
+            oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'>${task.description}</textarea>` 
+            : 
+            `<textarea placeholder="Add a description..." 
+            class="js-edit-desc form-control" 
+            maxlength="1000"
+            oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>`} 
         </div>
         
         <div class="task-edit-buttons">
@@ -411,6 +420,7 @@ class TaskList {
     let editCategoryElement = document.querySelector('.js-edit-category');
     let editPriorityElement = document.querySelector('.js-edit-priority');
     let editRecurringElement = document.querySelector('.js-edit-recurring');
+    let editDescElement = document.querySelector('.js-edit-desc');
 
     let name = editNameElement.value;
     let date = editDateElement.value;
@@ -419,7 +429,8 @@ class TaskList {
     let priority = editPriorityElement.value;
     let complete = task.completed;
     let recurring = editRecurringElement.value;
-
+    let description = editDescElement.value;
+    
     // check that a date is set before allowing a time and recurring status to be set
     const datePattern = /^\d{4}-\d{2}-\d{2}$/;
     if (!datePattern.test(editDateElement.value)) {
@@ -427,7 +438,11 @@ class TaskList {
       recurring = '';
     }
 
-    task.updateTask(name, date, time, category, priority, complete, recurring);
+    // if (editDescElement.value.trim() === "") {
+    //   editDescElement.style.height = "3rem";
+    // }
+
+    task.updateTask(name, date, time, category, priority, complete, recurring, description);
   }
 
   moveTaskInTasklist(startIndex, destinationIndex){

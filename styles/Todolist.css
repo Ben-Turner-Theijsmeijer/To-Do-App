@@ -70,6 +70,15 @@
   min-width: 150px;
   height: 3rem;
   width: 87.5%;
+  max-height: 180px;
+}
+
+.js-edit-desc {
+  grid-column: 1 / -1;
+  min-width: 150px;
+  height: 3rem;
+  width: 87.5%;
+  max-height: 100px;
 }
 
 .js-add-grid {
@@ -349,7 +358,8 @@
 .js-filter-input:hover,
 .js-filter-input:focus-visible,
 .js-edit-recurring:hover,
-.js-edit-recurring:focus-visible {
+.js-edit-recurring:focus-visible,
+.js-edit-desc:focus-visible {
   border: var(--input-border-hover);
 }
 
@@ -374,7 +384,7 @@
 
 .task-edit-fields {
   display: flex;
-  flex: 1 1 500px;
+  flex: 1 1 560px;
   gap: 5px 20px;
   flex-wrap: wrap;
 }
