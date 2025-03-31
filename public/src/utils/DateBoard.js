@@ -26,8 +26,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const taskElement = document.createElement("div");
     taskElement.classList.add("task");
     taskElement.id = task.name; // Assuming name is unique
-    taskElement.draggable = true;
-    taskElement.ondragstart = drag;
+    // taskElement.draggable = true;
+    // taskElement.ondragstart = drag;
 
     // Create the content for the task
     taskElement.innerHTML = `
@@ -40,11 +40,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 <strong>${task.name}</strong> ${task.date == ""
       ? ""
       : ","} ${task.date}
-                ${task.description == null
-                  ? ""
-                  : `<i class="fa-solid fa-info-circle"></i>
+            </div>
+            <div>
+            ${task.description == null
+              ? ""
+              : `<div class="task-desc">
+              <i class="fa-solid fa-info-circle"></i>
                 <i id="chevron" class="fa-solid fa-chevron-right fa-2xs"></i>
-                <span class="description-box" id="description" style="display:none;">${task.description}</span>`}
+                <span class="description-box" id="description" style="display:none;">${task.description}</span>
+                </div>`}
             </div>
             <div class="task-details">
                 ${task.recurring
@@ -68,7 +72,19 @@ document.addEventListener("DOMContentLoaded", function() {
     if (task.description != null) {
       const desc = taskElement.querySelector("#description");
       const chevron = taskElement.querySelector("#chevron");
-      chevron.addEventListener("click", event => {
+      console.log(task.description);
+      console.log(desc);
+      console.log(chevron);
+      chevron.addEventListener("click", () => {
+        alert("a");
+        desc.style.display = desc.style.display == "none" ? "block" : "none";
+        chevron.classList.toggle("fa-rotate-90");
+      });
+
+      const b = taskElement.querySelector(".task-desc");
+      b.addEventListener("click", () => {
+        // event.stopPropagation();
+        alert("b");
         desc.style.display = desc.style.display == "none" ? "block" : "none";
         chevron.classList.toggle("fa-rotate-90");
       });
