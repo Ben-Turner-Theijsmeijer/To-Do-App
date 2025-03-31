@@ -376,9 +376,16 @@ body.high-contrast-mode .calendar-table td.today {
     #prevBtn,
     #nextBtn {
         padding: 5px 10px;
+        margin-bottom: 3px;
     }
 
     #weekViewBtn {
         padding: 3px 8px;
+        margin-bottom: 3px;
+    }
+  }
+  @media only screen and (max-width: 400px) {
+    #currentDate {
+        font-size: 1.7rem;
     }
   }
