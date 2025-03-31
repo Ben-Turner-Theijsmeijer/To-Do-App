@@ -5,9 +5,6 @@ body {
   display: grid;
 }
 
-/* ========================= */
-/*        Light Mode         */
-/* ========================= */
 /* Hero Section */
 .hero-section {
   height: 85vh;
@@ -30,6 +27,9 @@ body {
   margin-top: 40px;
 }
 
+/* ========================= */
+/*        Light Mode         */
+/* ========================= */
 .feature-icons i {
   font-size: 2rem;
   color: #007bff;
@@ -40,4 +40,18 @@ body {
 /* ========================= */
 .dark-mode .feature-icons i {
   color: #66b2ff;
+}
+
+/* ========================= */
+/*       Media Queries       */
+/* ========================= */
+@media only screen and (max-width: 600px) {
+  .hero-section {
+    height: 75vh;
+  }
+}
+@media only screen and (max-width: 770px) {
+  .col-md-6 {
+    margin-bottom: 3%;
+  }
 }
