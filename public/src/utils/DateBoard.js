@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
             ${task.description == null
               ? ""
               : `<div class="task-desc">
-              <i class="fa-solid fa-info-circle"></i>
+                <i class="fa-solid fa-info-circle"></i>
                 <i id="chevron" class="fa-solid fa-chevron-right fa-2xs"></i>
                 <span class="description-box" id="description" style="display:none;">${task.description}</span>
                 </div>`}
@@ -69,27 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
         `;
 
-    if (task.description != null) {
-      const desc = taskElement.querySelector("#description");
-      const chevron = taskElement.querySelector("#chevron");
-      console.log(task.description);
-      console.log(desc);
-      console.log(chevron);
-      chevron.addEventListener("click", () => {
-        alert("a");
-        desc.style.display = desc.style.display == "none" ? "block" : "none";
-        chevron.classList.toggle("fa-rotate-90");
-      });
-
-      const b = taskElement.querySelector(".task-desc");
-      b.addEventListener("click", () => {
-        // event.stopPropagation();
-        alert("b");
-        desc.style.display = desc.style.display == "none" ? "block" : "none";
-        chevron.classList.toggle("fa-rotate-90");
-      });
-    }
-
+    //Note: https://stackoverflow.com/questions/22512467/addeventlistener-will-not-attach-a-listener-to-the-element
     // Add the delete button (X) to each task
     taskElement.innerHTML += `
             <div class="delete-btn">
@@ -105,6 +85,19 @@ document.addEventListener("DOMContentLoaded", function() {
       updateTasksCount(); // Recalculate task count after deletion
     });
 
+    // add event listener to toggle description visibility
+    if (task.description != null) {
+      const desc = taskElement.querySelector("#description");
+      const chevron = taskElement.querySelector("#chevron");
+      const descDiv = taskElement.querySelector(".task-desc");
+
+      console.log(descDiv);
+      descDiv.addEventListener("click", () => {
+        desc.style.display = desc.style.display == "none" ? "block" : "none";
+        chevron.classList.toggle("fa-rotate-90");
+      });
+    }
+
     // Determine the correct task column and apply the correct class (e.g., upcoming-task, backlog-task, overdue-task, or complete-task)
     if (task.completed === true) {
       taskElement.classList.add("complete-task");
@@ -119,41 +112,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     return taskElement;
-  };
-
-  // Function to handle task dragging
-  const drag = event => {
-    event.dataTransfer.setData("text", event.target.id);
-  };
-
-  // Function to handle dropping a task
-  const drop = event => {
-    event.preventDefault();
-    let taskID = event.dataTransfer.getData("text");
-
-    if (event.target.classList.contains("task")) return;
-
-    const task = document.getElementById(taskID);
-    event.target.appendChild(task);
-
-    // Determine the new class for the task based on the drop target column
-    if (event.target.id === "upcoming-list") {
-      task.classList.remove("backlog-task", "complete-task");
-      task.classList.add("upcoming-task"); // Assign upcoming-task class
-    } else if (event.target.id === "backlog-list") {
-      task.classList.remove("upcoming-task", "complete-task");
-      task.classList.add("backlog-task"); // Assign backlog-task class
-    } else if (event.target.id === "complete-list") {
-      task.classList.remove("backlog-task", "upcoming-task");
-      task.classList.add("complete-task"); // Assign complete-task class
-    }
-
-    updateTasksCount();
-  };
-
-  // Function to handle allowing task to drop
-  const allowdrop = event => {
-    event.preventDefault();
   };
 
   // Function to update task counts
@@ -208,19 +166,6 @@ document.addEventListener("DOMContentLoaded", function() {
       overdueBoard.style.display = "block";
       overdueHeader.style.display = "block";
     }
-  };
-
-  // Example of adding a new task (ensure task count updates after adding/removing tasks)
-  const addTask = task => {
-    const upcomingColumn = document.getElementById("upcoming");
-    upcomingColumn.appendChild(createTaskElement(task)); // Render task with delete button
-    updateTasksCount(); // Recalculate task count after adding a new task
-  };
-
-  // Example of removing a task (ensure task count updates after removal)
-  const removeTask = task => {
-    task.remove();
-    updateTasksCount(); // Recalculate task count after removing a task
   };
 
   // Call `updateTasksCount` whenever the page or task list changes (like onload or after any task manipulation)
