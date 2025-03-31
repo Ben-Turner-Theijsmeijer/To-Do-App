@@ -79,11 +79,14 @@
     height: 70vh;
 }
 
+.col {
+    width: 95%;
+}
+
 .board-column {
+    margin: 15px;
     position: relative;
     height: 65vh;
-    width: 98%;
-    margin: 15px;
     background: var(--col3-bg);
     border: 2px solid var(--col3-border);
     border-radius: 12px;
@@ -100,8 +103,7 @@
 
 .task-list {
     position: inherit;
-    max-height: 65vh;
-    /* width: 98%; */
+    max-height: inherit;
     padding: 15px;
     overflow-y: auto;
 }
@@ -282,7 +284,14 @@ select {
     }
 
     .board-column {
+        margin: 0px;
         height: fit-content;
-        width: 90%;
+        width: 100%;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .col {
+        width: 100%;
+        padding-bottom: 7%;
     }
 }
