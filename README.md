@@ -76,8 +76,23 @@
 
 ## Board View
 
-<!-- TODO: Add this section -->
-Awaiting changes from Sprint 4 to include this.
+## Date
+
+The most common prioritisation method is by due date, so we provide a board that divides tasks into multiple lists: No due date, upcoming (today or in the future), overdue (due in the past), and complete.
+
+![Board View - Date](/readme-imgs/Board%20Date.png)
+
+## Category
+
+Categories mean related tasks, so it may be useful to view them as separate lists divided by category.
+
+![Board View - Category](/readme-imgs/Board%20Category.png)
+
+## Priority
+
+Tasks are divided by priority, so that they can be considered by their importance.
+
+![Board View - Priority](/readme-imgs/Board%20Priority.png)
 
 ## 👀 Previous Contributors
 
