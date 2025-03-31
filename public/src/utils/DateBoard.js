@@ -41,7 +41,6 @@ document.addEventListener("DOMContentLoaded", function() {
       ? ""
       : ","} ${task.date}
             </div>
-            <div>
             ${task.description == null
               ? ""
               : `<div class="task-desc">
@@ -49,7 +48,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 <i id="chevron" class="fa-solid fa-chevron-right fa-2xs"></i>
                 <span class="description-box" id="description" style="display:none;">${task.description}</span>
                 </div>`}
-            </div>
             <div class="task-details">
                 ${task.recurring
                   ? `<span class="tag recurring ${task.recurring
