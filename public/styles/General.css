@@ -301,6 +301,15 @@ body {
   border: 1px solid var(--border-color);
 }
 
+.high-contrast-mode .navbar-toggler {
+  border: 1px solid var(--border-color);
+}
+
+.high-contrast-mode .navbar-toggler:hover,
+.high-contrast-mode .navbar-toggler:focus-visible{
+  border: 1px solid var(--hover-border-color);
+}
+
 /* board dropdown */
 .high-contrast-mode .dropdown-menu {
   background-color: var(--navbar-bg);
