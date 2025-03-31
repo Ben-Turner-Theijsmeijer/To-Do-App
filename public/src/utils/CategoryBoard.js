@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Create the content for the task
     taskElement.innerHTML = `
             <strong>${task.name}</strong>
-            ${task.description == null
+            ${task.description == null || task.description == ""
               ? ""
               : `<div class="task-desc">
                 <i class="fa-solid fa-info-circle"></i>
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // add event listener to toggle description visibility
-    if (task.description != null) {
+    if (task.description != null && task.description != "") {
       const desc = taskElement.querySelector("#description");
       const chevron = taskElement.querySelector("#chevron");
       const descDiv = taskElement.querySelector(".task-desc");

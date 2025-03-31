@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
       ? ""
       : ","} ${task.date}
             </div>
-            ${task.description == null
+            ${task.description == null || task.description == ""
               ? ""
               : `<div class="task-desc">
                 <i class="fa-solid fa-info-circle"></i>
@@ -84,12 +84,12 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // add event listener to toggle description visibility
-    if (task.description != null) {
+    if (task.description != null && task.description != "") {
+      console.log(task.description);
       const desc = taskElement.querySelector("#description");
       const chevron = taskElement.querySelector("#chevron");
       const descDiv = taskElement.querySelector(".task-desc");
 
-      console.log(descDiv);
       descDiv.addEventListener("click", () => {
         desc.style.display = desc.style.display == "none" ? "block" : "none";
         chevron.classList.toggle("fa-rotate-90");
