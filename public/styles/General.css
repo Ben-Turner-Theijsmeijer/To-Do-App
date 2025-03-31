@@ -301,6 +301,31 @@ body {
   border: 1px solid var(--border-color);
 }
 
+/* board dropdown */
+.high-contrast-mode .dropdown-menu {
+  background-color: var(--navbar-bg);
+}
+
+.high-contrast-mode .dropdown-menu:hover,
+.high-contrast-mode .dropdown-menu:focus-visible {
+  background-color: var(--navbar-bg);
+}
+
+.high-contrast-mode .dropdown-menu a {
+  color: var(--navbar-text);
+  padding: 10px;
+  margin-top: 3px;
+  display: block;
+  text-decoration: none;
+  outline: 1px solid var(--border-color);
+}
+
+.high-contrast-mode .dropdown-menu a:hover,
+.high-contrast-mode .dropdown-menu a:focus-visible {
+  background-color: var(--secondary-bg);
+  outline: 2px solid var(--hover-border-color);
+}
+
 /* Primary buttons */
 .high-contrast-mode .btn-primary {
   border: 1px solid var(--button-border-color);

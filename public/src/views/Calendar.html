@@ -5,6 +5,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Todo-List</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="../../favicon_io/site.webmanifest">
+    
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -34,14 +41,25 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="Calendar.html">
               <i class="fa-solid fa-calendar-days"></i> Calendar
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="Board.html">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="boardDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa-solid fa-chalkboard"></i> Board
             </a>
+            <ul class="dropdown-menu" aria-labelledby="boardDropdown">
+              <li>
+                <a class="dropdown-item" href="DateBoard.html">Date</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="PriorityBoard.html">Priority</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="CategoryBoard.html">Category</a>
+              </li>
+            </ul>
           </li>
         </ul>
       </div>
@@ -73,6 +91,7 @@
     <p class="task-name" id="taskDetailsNameAndStatus"></p>
     <div id="calendarTaskTags"></div>
     <p id="taskDetailsDateTime"></p>
+    <p id="taskDetailsDescription" class="description-box"></p>
     <button class="btn btn-primary" id="taskDetailsCloseBtn"
       onclick="document.getElementById('taskDetails').style.display = 'none'">
       Close
@@ -86,12 +105,8 @@
   
       <select name="themes" id="themesSelection">
         <option value="light">Light Mode</option>
-        <option value="dark">
-          <i class="fa-solid fa-moon"></i> Dark Mode
-        </option>
-        <option value="high-contrast">
-          <i class="fa-solid fa-circle-half-stroke"></i> High Contrast Mode
-        </option>
+        <option value="dark">Dark Mode</option>
+        <option value="high-contrast">High Contrast Mode</option>
       </select>
     </div>
   </div>

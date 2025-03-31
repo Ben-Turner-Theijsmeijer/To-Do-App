@@ -6,10 +6,12 @@
     --task-shadow: rgba(0, 0, 0, 0.1);
     --no-date-primary: #FFC107;
     --no-date-bg: rgba(255, 193, 7, 0.3);
-    --upcoming-primary: #007bff;
-    --upcoming-bg: rgba(0, 123, 255, 0.25);
-    --overdue-primary: #ff0000;
-    --overdue-bg: rgba(255, 0, 0, 0.25);
+    --low-priority-primary: #007bff;
+    --low-priority-bg: rgba(0, 123, 255, 0.25);
+    --medium-priority-primary: #ff8000;
+    --medium-priority-bg: rgba(255, 128, 0, 0.25);
+    --high-priority-primary: #ff0000;
+    --high-priority-bg: rgba(255, 0, 0, 0.25);
     --complete-primary: #28A745;
     --complete-bg: rgba(40, 167, 69, 0.25);
 }
@@ -21,10 +23,12 @@
     --task-shadow: rgba(0, 0, 0, 0.3);
     --no-date-primary: #f4d03f;
     --no-date-bg: rgba(244, 208, 63, 0.2);
-    --upcoming-primary: #3498db;
-    --upcoming-bg: rgba(52, 152, 219, 0.2);
-    --overdue-primary: #dd2222;
-    --overdue-bg: rgba(169, 0, 0, 0.25);
+    --low-priority-primary: #3498db;
+    --low-priority-bg: rgba(52, 152, 219, 0.2);
+    --medium-priority-primary: #e67e22;
+    --medium-priority-bg: rgba(230, 126, 34, 0.2);
+    --high-priority-primary: #e74c3c;
+    --high-priority-bg: rgba(231, 76, 60, 0.2);
     --complete-primary: #2ecc71;
     --complete-bg: rgba(46, 204, 113, 0.2);
 }
@@ -36,10 +40,12 @@
     --task-shadow: rgba(0, 0, 0, 0.3);
     --no-date-primary: #FFC107;
     --no-date-bg: rgba(255, 193, 7, 0.3);
-    --upcoming-primary: #007bff;
-    --upcoming-bg: rgba(0, 123, 255, 0.25);
-    --overdue-primary: #ff0000;
-    --overdue-bg: rgba(255, 0, 0, 0.25);
+    --low-priority-primary: #007bff;
+    --low-priority-bg: rgba(0, 123, 255, 0.25);
+    --medium-priority-primary: #ff8000;
+    --medium-priority-bg: rgba(255, 128, 0, 0.25);
+    --high-priority-primary: #ff0000;
+    --high-priority-bg: rgba(255, 0, 0, 0.25);
     --complete-primary: #2ecc71;
     --complete-bg: rgba(46, 204, 113, 0.2);
 }
@@ -59,6 +65,12 @@
 
 .subtitle {
     color: var(--primary-text);
+}
+
+.subtitle-2 {
+    color: var(--primary-text);
+    font-weight: bold;
+    padding-bottom: 1rem;
 }
 
 /* Column Styling */
@@ -91,7 +103,7 @@
     max-height: 65vh;
     width: 100%;
     padding: 15px;
-    overflow-y: auto; 
+    overflow-y: auto;
 }
 
 /* Task Styling */
@@ -109,6 +121,10 @@
     font-weight: 500;
     /* Subtle shadow for better visibility */
     box-shadow: 0px 3px 6px var(--task-shadow);
+}
+
+#chevron {
+    cursor: pointer;
 }
 
 /* Task Hover Effect */
@@ -180,14 +196,27 @@
     background-color: var(--no-date-bg);
 }
 
-.upcoming-task {
-    border: 3px solid var(--upcoming-primary);
-    background-color: var(--upcoming-bg);
+.upcoming-task,
+.work-task {
+    border: 3px solid var(--low-priority-primary);
+    background-color: var(--low-priority-bg);
 }
 
-.overdue-task {
-    border: 3px solid var(--overdue-primary);
-    background-color: var(--overdue-bg);
+.low-task {
+    border: 3px solid var(--low-priority-primary);
+    background-color: var(--low-priority-bg);
+}
+
+.overdue-task,
+.shopping-task {
+    border: 3px solid var(--high-priority-primary);
+    background-color: var(--high-priority-bg);
+}
+
+.medium-task,
+.personal-task {
+    border: 3px solid var(--medium-priority-primary);
+    background-color: var(--medium-priority-bg);
 }
 
 .complete-task {
@@ -195,21 +224,26 @@
     background-color: var(--complete-bg);
 }
 
+.high-task {
+    border: 3px solid var(--high-priority-primary);
+    background-color: var(--high-priority-bg);
+}
+
 /* Task Count Colors - Matching Borders */
 #backlog-header span {
     color: var(--no-date-primary);
 }
 
-#upcoming-header span {
-    color: var(--upcoming-primary);
+#low-header span {
+    color: var(--low-priority-primary);
 }
 
-#overdue-header span {
-    color: var(--overdue-primary);
+#medium-header span {
+    color: var(--medium-priority-primary);
 }
 
-#complete-header span {
-    color: var(--complete-primary);
+#high-header span {
+    color: var(--high-priority-primary);
 }
 
 select {

@@ -8,7 +8,7 @@ class TaskList {
     this.taskList = [];
     // Turning saved json into task objects
     this.taskListData.forEach( (savedTask) => {
-      this.taskList.push(new Task(savedTask.name, savedTask.date, savedTask.time, savedTask.category, savedTask.priority, savedTask.completed, savedTask.recurring))
+      this.taskList.push(new Task(savedTask.name, savedTask.date, savedTask.time, savedTask.category, savedTask.priority, savedTask.completed, savedTask.recurring, savedTask.description))
     });
 
     this.taskListhtml = '';
@@ -66,7 +66,7 @@ class TaskList {
 
   /**
    * Exports the current task list as a CSV file and prompts the user to download it.
-   * - The CSV includes headers: TaskName, Date, Time, Category, Priority
+   * - The CSV includes headers: TaskName, Date, Time, Category, Priority, Recurring, Description
    * - Dates are formatted as YYYY-MM-DD
    * - Time is in 24-hour format (if provided)
    * - Category and priority are converted to lowercase
@@ -88,6 +88,8 @@ class TaskList {
       const category = task.category ? task.category.trim() : ""; 
       const priority = task.priority ? task.priority.trim() : ""; 
       const recurring = task.recurring ? task.recurring : ""; 
+      // Note: I am commenting because csv was not in my ticket - will need more weights to implement
+      // const description = task.description ? task.description : "";
 
       // Append the task to CSV content
       csvContent += `${taskName},${date},${time},${category},${priority},${recurring}\n`;
@@ -136,7 +138,7 @@ class TaskList {
             category || "", // Default empty if missing
             priority || "", // Default empty if missing
             false, // Task is not completed by default
-            recurring || ""
+            recurring || "",
           );
 
           this.taskList.push(newTask);
@@ -232,6 +234,7 @@ class TaskList {
     const inputCategoryElement = document.querySelector('.js-category-input');
     const inputPriorityElement = document.querySelector('.js-priority-input');
     const inputRecurringElement = document.querySelector('.js-recurring-input');
+    const inputDescElement = document.querySelector('.js-desc-input');
 
     let name = inputNameElement.value;
     let date = inputDateElement.value;
@@ -239,6 +242,7 @@ class TaskList {
     let category = inputCategoryElement.value;
     let priority = inputPriorityElement.value;
     let recurring = inputRecurringElement.value;
+    let description = inputDescElement.value;
 
     // Validation checks
     if (!name) {
@@ -249,7 +253,7 @@ class TaskList {
     }
 
     // Add a new task
-    const newTask = new Task(name, date, time, category, priority, false, recurring);
+    const newTask = new Task(name, date, time, category, priority, false, recurring, description);
     this.taskList.push(newTask);     
 
     // Reset the inputs
@@ -259,9 +263,15 @@ class TaskList {
     inputCategoryElement.value = '';
     inputPriorityElement.value = '';
     inputRecurringElement.value = '';
+    inputDescElement.value = '';
 
     document.getElementById("add-date-warn").style.visibility = "hidden";
     document.getElementById("add-time-warn").style.visibility = "hidden";
+
+    // reset textarea size
+    if (inputDescElement.value.trim() === "") {
+      inputDescElement.style.height = "3rem";
+    }
 
     // Update the displayed list
     this.updateAndDisplayTaskList();
@@ -336,6 +346,15 @@ class TaskList {
           <span style="width:100%;"></span>
           <span id="edit-date-warn">Warning: Past date!</span>
           <span id="edit-time-warn">Warning: Past time!</span>
+          ${task.description ? `<textarea  
+            class="js-edit-desc form-control" 
+            maxlength="1000"
+            oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'>${task.description}</textarea>` 
+            : 
+            `<textarea placeholder="Add a description..." 
+            class="js-edit-desc form-control" 
+            maxlength="1000"
+            oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>`} 
         </div>
         
         <div class="task-edit-buttons">
@@ -373,13 +392,19 @@ class TaskList {
             </div>
           </div>
         </div>
+        ${task.description ? 
+        `<span class="js-desc-toggle" data-index="${referenceNumber}" tabindex="0">
+          <i class="fa-solid fa-chevron-right fa-2xs"></i>
+          <i class="fa-solid fa-info-circle"></i>
+        </span>` : '<span></span>'}
         <button class="js-delete-button" data-index="${referenceNumber}">
         <i class="fa-solid fa-trash"></i>
         </button>
         <button class="js-edit-button" data-index="${referenceNumber}">
         <i class="fa-solid fa-pen"></i>
         </button>
-
+        ${task.description ?
+        `<span class="description-box hidden" data-index="${referenceNumber}">${task.description}</span>` : ''}
       </div>`;
 
   }
@@ -395,6 +420,7 @@ class TaskList {
     let editCategoryElement = document.querySelector('.js-edit-category');
     let editPriorityElement = document.querySelector('.js-edit-priority');
     let editRecurringElement = document.querySelector('.js-edit-recurring');
+    let editDescElement = document.querySelector('.js-edit-desc');
 
     let name = editNameElement.value;
     let date = editDateElement.value;
@@ -403,7 +429,8 @@ class TaskList {
     let priority = editPriorityElement.value;
     let complete = task.completed;
     let recurring = editRecurringElement.value;
-
+    let description = editDescElement.value;
+    
     // check that a date is set before allowing a time and recurring status to be set
     const datePattern = /^\d{4}-\d{2}-\d{2}$/;
     if (!datePattern.test(editDateElement.value)) {
@@ -411,7 +438,11 @@ class TaskList {
       recurring = '';
     }
 
-    task.updateTask(name, date, time, category, priority, complete, recurring);
+    // if (editDescElement.value.trim() === "") {
+    //   editDescElement.style.height = "3rem";
+    // }
+
+    task.updateTask(name, date, time, category, priority, complete, recurring, description);
   }
 
   moveTaskInTasklist(startIndex, destinationIndex){
@@ -428,6 +459,23 @@ class TaskList {
   addListeners(tasksToDisplay) {
     
     /******** Task button listeners ********/
+    document.querySelectorAll('.js-desc-toggle').forEach((span) =>{
+      span.addEventListener('click', (event) => {
+        this.index = event.currentTarget.getAttribute('data-index');
+        const descBox = document.querySelector(`.description-box[data-index="${this.index}"]`);
+        const toggleSwitch = document.querySelector(`.js-desc-toggle[data-index="${this.index}"]`);
+
+        descBox.classList.toggle("hidden");
+        
+        // handles rotation of chevron when clicked
+        const chevron = toggleSwitch.querySelector(".fa-chevron-right");
+        if (chevron) {
+          chevron.classList.toggle("fa-rotate-90");
+        }
+
+      });
+    });
+
     document.querySelectorAll('.js-delete-button').forEach((button) => {
       button.addEventListener('click', (event) => {
         this.index = event.currentTarget.getAttribute('data-index');

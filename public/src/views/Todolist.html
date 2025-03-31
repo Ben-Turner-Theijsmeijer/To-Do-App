@@ -5,6 +5,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Todo-List</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="../../favicon_io/site.webmanifest">
+
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -28,7 +35,7 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="Todolist.html">
               <i class="fa-solid fa-list-check"></i> To Do Manager
             </a>
           </li>
@@ -37,10 +44,21 @@
               <i class="fa-solid fa-calendar-days"></i> Calendar
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="Board.html">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="boardDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa-solid fa-chalkboard"></i> Board
             </a>
+            <ul class="dropdown-menu" aria-labelledby="boardDropdown">
+              <li>
+                <a class="dropdown-item" href="DateBoard.html">Date</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="PriorityBoard.html">Priority</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="CategoryBoard.html">Category</a>
+              </li>
+            </ul>
           </li>
         </ul>
       </div>
@@ -101,6 +119,14 @@
         <span></span>
         <span id="add-date-warn">Warning: Past date!</span>
         <span id="add-time-warn">Warning: Past time!</span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <textarea placeholder="Add a description..." 
+        class="js-desc-input form-control" 
+        maxlength="1000"
+        oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
       </div>
 
     <!-- Sorting, Filtering, and Searching Section -->
@@ -183,12 +209,8 @@
 
       <select name="themes" id="themesSelection">
         <option value="light">Light Mode</option>
-        <option value="dark">
-          <i class="fa-solid fa-moon"></i> Dark Mode
-        </option>
-        <option value="high-contrast">
-          <i class="fa-solid fa-circle-half-stroke"></i> High Contrast Mode
-        </option>
+        <option value="dark">Dark Mode</option>
+        <option value="high-contrast">High Contrast Mode</option>
       </select>
     </div>
   </div>
