@@ -23,7 +23,13 @@
   - Calendar
   - Board
 
-## Installation
+## Using the App
+
+### Online
+
+[Access our application, as hosted on Gitlab Pages](http://groverio-to-do-list-77b0b5.pages.socs.uoguelph.ca/).
+
+### Locally
 
 1. Clone the repository: `git clone https://gitlab.socs.uoguelph.ca/cis42503/groverio-to-do-list.git`
 2. Install the [Live Preview Extension by Microsoft](https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server) in Visual Studio Code (VSCode)
