@@ -123,16 +123,34 @@ class Calendar {
 
   createCalendarGrid(startDate, endDate) {
     const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const shortDaysofWeek = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+    const letterDaysofWeek = ["S", "M", "T", "W", "T", "F", "S"];
     let table = document.createElement("table");
     table.className = "table table-bordered calendar-table";
 
     let thead = document.createElement("thead");
     let headerRow = document.createElement("tr");
-    daysOfWeek.forEach(day => {
-      let th = document.createElement("th");
-      th.textContent = day;
-      headerRow.appendChild(th);
-    });
+    if (window.innerWidth > 370) {
+      daysOfWeek.forEach(day => {
+        let th = document.createElement("th");
+        th.textContent = day;
+        headerRow.appendChild(th);
+      });
+    }
+    else if (window.innerWidth > 300) {
+      shortDaysofWeek.forEach(day => {
+        let th = document.createElement("th");
+        th.textContent = day;
+        headerRow.appendChild(th);
+      });
+    }
+    else {
+      letterDaysofWeek.forEach(day => {
+        let th = document.createElement("th");
+        th.textContent = day;
+        headerRow.appendChild(th);
+      });
+    }
     thead.appendChild(headerRow);
     table.appendChild(thead);
 
