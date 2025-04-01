@@ -23,6 +23,7 @@
   --button-hover-color-secondary: #38a3ea;
   --button-hover-text-color-secondary: #fff;
   --border-color: #757575;
+  --hover-border-color: #38a3ea;
   --shadow-color: #d9d9d9;
   --delete-bg: red;
   --delete-bg-hover: darkred;
@@ -52,6 +53,7 @@
   --button-hover-color-secondary: #0056b3;
   --button-hover-text-color-secondary: #fff;
   --border-color: #000;
+  --hover-border-color: #38a3ea;
   --shadow-color: #000;
   --delete-bg: red;
   --delete-bg-hover: darkred;
@@ -141,7 +143,8 @@ body {
 .nav-link:hover,
 .nav-link:focus-visible,
 .navbar-brand:focus-visible {
-  color: var(--button-color) !important;
+  /* color: var(--button-color) !important; */
+  color: #38a3ea !important;
 }
 
 /* Footer */
@@ -242,7 +245,7 @@ body {
   color: var(--overdue-date);
 }
 
-.overdue-tooltip{
+.overdue-tooltip {
   display: inline-block;
   width: auto;
   /* cursor: pointer; not clickable, shouldn't be pointer*/
@@ -280,16 +283,6 @@ body {
   top: -20px;
   left: 0;
   white-space: nowrap;
-}
-
-/* ========================= */
-/*         Dark Mode         */
-/* ========================= */
-/* Themes Selection Dropdown */
-.dark-mode #themesSelection,
-.dark-mode #themesSelection option {
-  background-color: #fff;
-  color: #222;
 }
 
 /* ========================= */
@@ -368,19 +361,6 @@ body {
   border: 2px solid var(--hover-border-color);
 }
 
-/* Themes Selection Dropdown */
-.high-contrast-mode #themesSelection,
-.high-contrast-mode #themesSelection option {
-  background-color: var(--secondary-bg);
-  color: var(--primary-text);
-  border: 2px solid var(--border-color);
-}
-
-.high-contrast-mode #themesSelection:hover,
-.high-contrast-mode #themesSelection:focus-visible {
-  border: 2px solid var(--hover-border-color);
-}
-
 /* ========================= */
 /*          Themes           */
 /* ========================= */
@@ -397,11 +377,32 @@ body {
 #themesSelection,
 #themesSelection option {
   background-color: #333;
-  color: white;
+  color: #fafafe;
   border: none;
   padding: 10px 15px;
   font-size: 14px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+
+/* Dark Mode */
+.dark-mode #themesSelection,
+.dark-mode #themesSelection option {
+  background-color: #fff;
+  color: #222;
+}
+
+/* High Contrast Mode */
+.high-contrast-mode #themesSelection,
+.high-contrast-mode #themesSelection option {
+  background-color: var(--secondary-bg);
+  color: var(--primary-text);
+  border: 2px solid var(--border-color);
+}
+
+/* hover */
+#themesSelection:hover,
+#themesSelection:focus-visible {
+  border: 2px solid var(--hover-border-color);
 }
