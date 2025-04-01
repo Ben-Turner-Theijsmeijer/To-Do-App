@@ -30,36 +30,38 @@
   --delete-border: red;
   --delete-border-hover: darkred;
   --overdue-date: red;
+  --overdue-date-bg: none;
   --due-date: #ff5900;
 }
 
 /* Dark Mode */
 .dark-mode {
   --primary-bg: #252525;
-  --primary-text: #fefefe;
-  --secondary-bg: #8c8c8c;
+  --primary-text: #dedede;
+  --secondary-bg: #4c4c4c;
   --navbar-bg: #161616;
   --navbar-text: #f0f0f0;
   --footer-bg: #161616;
   --footer-text: #f0f0f0;
-  --task-text: #fff;
-  --button-color: #007bff;
-  --button-text-color: #fff;
+  --task-text: #dedede;
+  --button-color: #117bee;
+  --button-text-color: #fefefe;
   --button-hover-color: #004997;
   --button-border-color: #007bff;
   --button-color-secondary: #777f80;
-  --button-text-color-secondary: #fff;
+  --button-text-color-secondary: #dedede;
   --button-border-color-secondary: transparent;
   --button-hover-color-secondary: #0056b3;
-  --button-hover-text-color-secondary: #fff;
+  --button-hover-text-color-secondary: #dedede;
   --border-color: #000;
   --hover-border-color: #38a3ea;
   --shadow-color: #000;
-  --delete-bg: red;
-  --delete-bg-hover: darkred;
-  --delete-border: red;
-  --delete-border-hover: darkred;
-  --overdue-date: red;
+  --delete-bg: #e33;
+  --delete-bg-hover: #811;
+  --delete-border: #e33;
+  --delete-border-hover: #811;
+  --overdue-date: #fefefe;
+  --overdue-date-bg: #e33;
   --due-date: #ff5900;
 }
 
@@ -90,7 +92,8 @@
   --delete-bg-hover: #000;
   --delete-border: #fff000;
   --delete-border-hover: #ff5900;
-  --overdue-date: red;
+  --overdue-date: #fefefe;
+  --overdue-date-bg: #e33;
   --due-date: #ff5900;
 }
 
@@ -243,6 +246,8 @@ body {
 
 .overdue {
   color: var(--overdue-date);
+  background-color: var(--overdue-date-bg);
+  padding-right: 1%;
 }
 
 .overdue-tooltip {
