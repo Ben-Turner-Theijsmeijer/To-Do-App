@@ -125,6 +125,10 @@
     box-shadow: 0px 3px 6px var(--task-shadow);
 }
 
+#chevron {
+    cursor: pointer;
+}
+
 /* Task Hover Effect */
 .task:hover {
     transform: scale(1.03);
