@@ -1,6 +1,6 @@
 import Task from "./task.js";
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
   // Function to load tasks from local storage
   const loadTasksFromLocalStorage = () => {
     const taskList = JSON.parse(localStorage.getItem("taskList")) || [];
@@ -32,38 +32,38 @@ document.addEventListener("DOMContentLoaded", function () {
     // Create the content for the task
     taskElement.innerHTML = `
             <div ${task.isOverdue() == "overdue"
-        ? 'class="overdue-tooltip"'
-        : ""}
+              ? 'class="overdue-tooltip"'
+              : ""}
                 ${task.isOverdue() == "due" ? 'class="due-tooltip"' : ""}>
                 ${task.isOverdue() == "overdue" ? `<span>⚠️</span>` : ""}
                 ${task.isOverdue() == "due" ? `<span>🕓</span>` : ""}
                 <strong>${task.name}</strong> ${task.date == ""
-        ? ""
-        : ","} ${task.date}
+      ? ""
+      : ","} ${task.date}
             </div>
             ${task.description == null || task.description == ""
-        ? ""
-        : `<div class="task-desc" tabindex="0">
+              ? ""
+              : `<div class="task-desc" tabindex="0">
                 <i class="fa-solid fa-info-circle"></i>
                 <i id="chevron" class="fa-solid fa-chevron-right fa-2xs"></i>
                 <span class="description-box" id="description" style="display:none;">${task.description}</span>
                 </div>`}
             <div class="task-details">
                 ${task.recurring
-        ? `<span class="tag recurring ${task.recurring
-          ? `recurring-tag`
-          : ""}">${task.recurring}</span>`
-        : ""}
+                  ? `<span class="tag recurring ${task.recurring
+                      ? `recurring-tag`
+                      : ""}">${task.recurring}</span>`
+                  : ""}
                 ${task.category
-        ? `<span class="tag category ${task.category
-          ? `category-tag`
-          : ""}">${task.category}</span>`
-        : ""}
+                  ? `<span class="tag category ${task.category
+                      ? `category-tag`
+                      : ""}">${task.category}</span>`
+                  : ""}
                 ${task.priority
-        ? `<span class="tag priority ${task.priority
-          ? `priority-${task.priority}`
-          : ""}">${task.priority}</span>`
-        : ""}
+                  ? `<span class="tag priority ${task.priority
+                      ? `priority-${task.priority}`
+                      : ""}">${task.priority}</span>`
+                  : ""}
             </div>
         `;
 
@@ -92,13 +92,16 @@ document.addEventListener("DOMContentLoaded", function () {
       const chevron = taskElement.querySelector("#chevron");
       const descDiv = taskElement.querySelector(".task-desc");
 
-      const viewDescription = (e) => {
-        if (e.type === "click" || (e.type === "keypress" && e.key === "Enter")){
+      const viewDescription = e => {
+        if (
+          e.type === "click" ||
+          (e.type === "keypress" && e.key === "Enter")
+        ) {
           desc.style.display = desc.style.display == "none" ? "block" : "none";
           chevron.classList.toggle("fa-rotate-90");
         }
-      }
-      
+      };
+
       descDiv.addEventListener("click", viewDescription);
       descDiv.addEventListener("keypress", viewDescription);
     }
@@ -134,18 +137,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Update task counts and headers for each section
     updateHeader("No date", backlogHeader, backlogColumn, "#FFC107");
-    updateHeader("Upcoming", upcomingHeader, upcomingColumn, "#007BFF");
-    updateHeader("Overdue", overdueHeader, overdueColumn, "#ff0000");
-    updateHeader("Complete", completeHeader, completeColumn, "#28A745");
+    updateHeader("Upcoming", upcomingHeader, upcomingColumn);
+    updateHeader("Overdue", overdueHeader, overdueColumn);
+    updateHeader("Complete", completeHeader, completeColumn);
 
     hideOverdueBoardVisibility();
   };
 
   // Function to update the header text with the correct task count
-  const updateHeader = (title, header, column, color) => {
+  const updateHeader = (title, header, column) => {
     const taskCount = column.querySelectorAll(".task").length; // Counting only task elements
     const taskLabel = taskCount === 1 ? "Task" : "Tasks"; // Singular or plural form based on count
-    header.innerHTML = `<span style="font-weight: bold; color: ${color};">${title} (<span style="color: ${color}">${taskCount} ${taskLabel}</span>)</span>`;
+    header.innerHTML = `${title} (${taskCount} ${taskLabel})`;
   };
 
   // Function to delete the task from local storage

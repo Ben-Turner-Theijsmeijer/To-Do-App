@@ -14,6 +14,21 @@
     --high-priority-bg: rgba(255, 0, 0, 0.25);
     --complete-primary: #28A745;
     --complete-bg: rgba(40, 167, 69, 0.25);
+    --low-tag-text: #d3edda;
+    --low-tag-bg: #155724;
+    --medium-tag-text: #feefb3;
+    --medium-tag-bg: #9f6000;
+    --high-tag-text: #fefefe;
+    --high-tag-bg: #d41821;
+    --category-tag-text: #fafafe;
+    --category-tag-bg: #888;
+    --recurring-tag-text: #cee5ed;
+    --recurring-tag-bg: #344c8b;
+    --yellow-header: #d3ab32;
+    --blue-header: #007bff;
+    --red-header: #ff0000;
+    --green-header: #28a745;
+    --orange-header: #FF8000;
 }
 
 .dark-mode {
@@ -31,6 +46,21 @@
     --high-priority-bg: rgba(231, 76, 60, 0.2);
     --complete-primary: #2ecc71;
     --complete-bg: rgba(46, 204, 113, 0.2);
+    --low-tag-text: #155724;
+    --low-tag-bg: #d3edda;
+    --medium-tag-text: #9f6000;
+    --medium-tag-bg: #feefb3;
+    --high-tag-text: #d8000c;
+    --high-tag-bg: #fefefe;
+    --category-tag-text: #333;
+    --category-tag-bg: #e0e0e0;
+    --recurring-tag-text: #1f3a81;
+    --recurring-tag-bg: #81b8ca;
+    --yellow-header: #ffc107;
+    --blue-header: #81baf7;
+    --red-header: #ea8f8f;
+    --green-header: #9bdfa8;
+    --orange-header: #FF8000;
 }
 
 .high-contrast-mode {
@@ -48,6 +78,21 @@
     --high-priority-bg: rgba(255, 0, 0, 0.25);
     --complete-primary: #2ecc71;
     --complete-bg: rgba(46, 204, 113, 0.2);
+    --low-tag-text: #155724;
+    --low-tag-bg: #d3edda;
+    --medium-tag-text: #9f6000;
+    --medium-tag-bg: #feefb3;
+    --high-tag-text: #d8000c;
+    --high-tag-bg: #fefefe;
+    --category-tag-text: #333;
+    --category-tag-bg: #e0e0e0;
+    --recurring-tag-text: #0c1e4d;
+    --recurring-tag-bg: #cee5ed;
+    --yellow-header: #ffc107;
+    --blue-header: #81baf7;
+    --red-header: #ea8f8f;
+    --green-header: #9bdfa8;
+    --orange-header: #FF8000;
 }
 
 /* Header */
@@ -86,7 +131,8 @@
 .board-column {
     margin: 15px;
     position: relative;
-    height: 65vh;
+    /* height: 65vh; */
+    height: 60vh;
     background: var(--col3-bg);
     border: 2px solid var(--col3-border);
     border-radius: 12px;
@@ -146,6 +192,12 @@
     right: 10px;
     /* Make it look clickable */
     cursor: pointer;
+    /* Style it */
+    background-color: var(--button-hover-text-color-secondary);
+    border: none;
+    border-radius: 15px;
+    padding-left: 2px;
+    padding-right: 2px;
 }
 
 .delete-btn i {
@@ -170,9 +222,9 @@
 }
 
 /* Show the add task button when hovering over the column */
-.board-column:hover .add-task-link, 
+.board-column:hover .add-task-link,
 .board-column:focus .add-task-link,
-.board-column:focus-within .add-task-link{ 
+.board-column:focus-within .add-task-link {
     display: block;
 }
 
@@ -236,20 +288,38 @@
 }
 
 /* Task Count Colors - Matching Borders */
-#backlog-header span {
-    color: var(--no-date-primary);
+#backlog-header {
+    font-weight: bold;
+    /* color: var(--no-date-primary); */
+    color: var(--yellow-header);
 }
 
-#low-header span {
-    color: var(--low-priority-primary);
+#upcoming-header,
+#low-header,
+#work-header {
+    font-weight: bold;
+    /* color: var(--low-priority-primary); */
+    color: var(--blue-header);
 }
 
-#medium-header span {
-    color: var(--medium-priority-primary);
+#medium-header,
+#personal-header {
+    font-weight: bold;
+    /* color: var(--medium-priority-primary); */
+    color: var(--orange-header);
 }
 
-#high-header span {
-    color: var(--high-priority-primary);
+#overdue-header,
+#high-header,
+#shopping-header {
+    font-weight: bold;
+    /* color: var(--high-priority-primary); */
+    color: var(--red-header);
+}
+
+#complete-header {
+    font-weight: bold;
+    color: var(--green-header);
 }
 
 select {
@@ -273,6 +343,29 @@ select {
     font-size: 14px;
     text-transform: capitalize;
     font-weight: bold;
+}
+
+/* Priority Tags */
+.priority-Low {
+    color: var(--low-tag-text);
+    background-color: var(--low-tag-bg);
+
+}
+
+.priority-Medium {
+    color: var(--medium-tag-text);
+    background-color: var(--medium-tag-bg);
+}
+
+.priority-High {
+    color: var(--high-tag-text);
+    background-color: var(--high-tag-bg);
+}
+
+/* Category Tag Color */
+.category-tag {
+    background-color: var(--category-tag-bg);
+    color: var(--category-tag-text);
 }
 
 /* Recurring Tag Color */

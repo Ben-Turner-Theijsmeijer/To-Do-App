@@ -72,13 +72,16 @@ document.addEventListener("DOMContentLoaded", function() {
       const chevron = taskElement.querySelector("#chevron");
       const descDiv = taskElement.querySelector(".task-desc");
 
-      const viewDescription = (e) => {
-        if (e.type === "click" || (e.type === "keypress" && e.key === "Enter")){
+      const viewDescription = e => {
+        if (
+          e.type === "click" ||
+          (e.type === "keypress" && e.key === "Enter")
+        ) {
           desc.style.display = desc.style.display == "none" ? "block" : "none";
           chevron.classList.toggle("fa-rotate-90");
         }
-      }
-      
+      };
+
       descDiv.addEventListener("click", viewDescription);
       descDiv.addEventListener("keypress", viewDescription);
     }
@@ -148,17 +151,17 @@ document.addEventListener("DOMContentLoaded", function() {
     const highHeader = document.getElementById("high-header");
 
     // Update task counts and headers for each section
-    updateHeader("No Priority", backlogHeader, backlogColumn, "#FFC107");
-    updateHeader("Low", lowHeader, lowColumn, "#007BFF");
-    updateHeader("Medium", mediumHeader, mediumColumn, "#FF8000");
-    updateHeader("High", highHeader, highColumn, "#FF0000");
+    updateHeader("No Priority", backlogHeader, backlogColumn);
+    updateHeader("Low", lowHeader, lowColumn);
+    updateHeader("Medium", mediumHeader, mediumColumn);
+    updateHeader("High", highHeader, highColumn);
   };
 
   // Function to update the header text with the correct task count
-  const updateHeader = (title, header, column, color) => {
+  const updateHeader = (title, header, column) => {
     const taskCount = column.querySelectorAll(".task").length; // Count task elements
     const taskLabel = taskCount === 1 ? "Task" : "Tasks"; // Singular or plural form based on count
-    header.innerHTML = `<span style="font-weight: bold; color: ${color};">${title} (<span style="color: ${color}">${taskCount} ${taskLabel}</span>)</span>`;
+    header.innerHTML = `${title} (${taskCount} ${taskLabel})`;
   };
 
   // Function to delete the task from local storage
