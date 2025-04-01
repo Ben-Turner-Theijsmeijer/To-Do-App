@@ -61,6 +61,17 @@
   margin-bottom: 0;
 }
 
+.top-page-section{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.upload-export-buttons{
+  display: flex;
+  gap: 5px;
+}
+
 .js-name-input {
   min-width: 250px;
   max-width: 600px;
@@ -79,26 +90,32 @@
   /* grid-column: 1 / -1; */
   min-width: 150px;
   height: 3rem;
-  width: 87.5%;
-  width: 100%;
+  width: 100% !important;
   max-height: 100px;
+
 }
 
 .add-tasks-area {
-  display: flex;
-  flex-direction:row;
-  flex-wrap:  wrap;
   /* grid-template-columns: 2.5fr 11rem 8rem 8rem 8rem 7.3rem 1fr; */
   /* row-gap: 1rem; */
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
   background-color: var(--secondary-bg);
   padding: 20px;
-  gap: 10px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 0.813rem;
-  column-gap: 10px;
   overflow: auto;
   border: var(--add-grid-border);
+}
+
+.add-task-fields {
+  gap: 10px;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .add-task-dropdowns{
@@ -146,7 +163,7 @@
   gap: 1rem;
   grid-row: auto;
   grid-column: auto;
-  width: 100%;;
+  /* width: 100%;; */
 }
 
 .js-time-input:disabled,
@@ -544,6 +561,9 @@
   }
   .js-delete-button, .js-edit-button {
     margin: 0 !important;
+  }
+  .add-tasks-area{
+    flex-wrap: wrap;
   }
   
 }
