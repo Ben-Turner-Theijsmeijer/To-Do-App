@@ -298,7 +298,7 @@ class Calendar {
       taskInfo.appendChild(priority);
     }
     // description
-    if (task.description != null) {
+    if (task.description != null && task.description != "") {
       const descInfo = document.createElement("i");
       descInfo.classList = "fa-solid fa-info-circle";
 

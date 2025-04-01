@@ -59,7 +59,7 @@
 
 .header h4 {
     color: var(--primary-text);
-    width: 100%;
+    width: 98%;
     text-align: center;
 }
 
@@ -72,18 +72,22 @@
     font-weight: bold;
     padding-bottom: 1rem;
 }
+
 /* Column Styling */
 .drag-drop-container {
     display: flex;
     height: 70vh;
 }
 
-.col3 {
-    position: relative;
-    background: var(--col3-bg);
-    height: 65vh;
-    width: 100%;
+.col {
+    width: 95%;
+}
+
+.board-column {
     margin: 15px;
+    position: relative;
+    height: 65vh;
+    background: var(--col3-bg);
     border: 2px solid var(--col3-border);
     border-radius: 12px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
@@ -92,17 +96,16 @@
 }
 
 /* Subtle Hover Effect */
-.col3:hover {
+.board-column:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 16px var(--task-shadow);
 }
 
 .task-list {
     position: inherit;
-    max-height: 65vh;
-    width: 100%;
+    max-height: 100%;
     padding: 15px;
-    overflow-y: auto; 
+    overflow-y: auto;
 }
 
 /* Task Styling */
@@ -120,6 +123,10 @@
     font-weight: 500;
     /* Subtle shadow for better visibility */
     box-shadow: 0px 3px 6px var(--task-shadow);
+}
+
+#chevron {
+    cursor: pointer;
 }
 
 /* Task Hover Effect */
@@ -161,7 +168,7 @@
 }
 
 /* Show the add task button when hovering over the column */
-.col3:hover .add-task-link {
+.board-column:hover .add-task-link {
     display: block;
 }
 
@@ -191,7 +198,8 @@
     background-color: var(--no-date-bg);
 }
 
-.upcoming-task, .work-task {
+.upcoming-task,
+.work-task {
     border: 3px solid var(--low-priority-primary);
     background-color: var(--low-priority-bg);
 }
@@ -201,12 +209,14 @@
     background-color: var(--low-priority-bg);
 }
 
-.overdue-task, .shopping-task {
+.overdue-task,
+.shopping-task {
     border: 3px solid var(--high-priority-primary);
     background-color: var(--high-priority-bg);
 }
 
-.medium-task, .personal-task {
+.medium-task,
+.personal-task {
     border: 3px solid var(--medium-priority-primary);
     background-color: var(--medium-priority-bg);
 }
@@ -265,4 +275,27 @@ select {
 .recurring-tag {
     background-color: #81b8ca;
     color: #1f3a81;
+}
+
+/* Mobile View/Media Queries */
+
+/* Column Styling */
+@media screen and (max-width: 1000px) {
+    .drag-drop-container {
+        display: flex;
+        height: fit-content;
+        flex-direction: column;
+    }
+
+    .board-column {
+        margin: 0px;
+        height: fit-content;
+        width: 100%;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .col {
+        width: 100%;
+        padding-bottom: 7%;
+    }
 }
