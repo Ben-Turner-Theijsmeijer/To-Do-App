@@ -159,10 +159,17 @@ class Calendar {
       let cell = document.createElement("td");
       cell.classList.add("calendar-cell");
       if (dateIterator.getMonth() === this.currentDate.getMonth() || this.viewMode === "week") {
-        cell.textContent = dateIterator.getDate();
         if (dateIterator.toDateString() === new Date().toDateString()) {
           cell.classList.add("today");
+          var temptext = document.createElement("p");
+          temptext.textContent = dateIterator.getDate();
+          temptext.classList.add("today-number")
+          cell.appendChild(temptext);
         }
+        else{
+          cell.textContent = dateIterator.getDate();
+        }
+
         this.addTasksToCell(cell, dateIterator);
       } else {
         cell.classList.add("empty");
