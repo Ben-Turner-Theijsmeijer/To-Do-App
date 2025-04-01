@@ -4,11 +4,11 @@
     --calendar-header: #013874;
     --calendar-primary-bg: #fff;
     --calendar-table-bg: #fff;
-    --weekday-header-bg: #fff;
-    --task-bg-color: #00b7ff;
-    --task-text: #000;
-    --today-bg-color: #00b7ff;
-    --today-text: #fff;
+    --weekday-header-bg: #e6e6e6;
+    --task-bg-color:  #4b4b4b;
+    --task-text: #f1f1f1;
+    --today-bg-color: #0072dc;
+    --today-text: #0c0c0c;
     --today-task-text: #000;
     --today-task-bg: #fff;
     --empty: #fefefe;
@@ -16,13 +16,13 @@
     --day-text: #000;
     --day-hover-bg: #e0efff;
     --weekday-header-border-a: 1px solid #333;
-    --weekday-header-border-b: 0px;
+    --weekday-header-border-b: 1px solid #333;
     --cal-nav-bg: #fafafe;
     --cal-nav-text: #38a3ea;
     --cal-nav-border: 2px solid #38a3ea;
     --cal-nav-hover: #ddd;
     --cal-nav-hover-border: 2px solid;
-    --box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    --box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .dark-mode {
@@ -30,13 +30,13 @@
     --calendar-table-bg: #333;
     --calendar-table-text: #e0e0e0;
     --calendar-table-border: 1px solid #444;
-    --weekday-header-bg: #444;
+    --weekday-header-bg: #141414;
     --day-bg: #2a2a2a;
     --day-text: #e0e0e0;
     --day-hover-bg: #333;
-    --task-bg-color: #38a3ea;
+    --task-bg-color: #e0e0e0;
     --task-text: #000;
-    --today-bg-color: #38a3ea;
+    --today-bg-color: hsl(203, 100%, 76%);
     --today-text: #fff;
     --today-task-text: #000;
     --today-task-bg: #fff;
@@ -61,6 +61,8 @@
     --day-border: 1px solid #40ff00;
     --day-hover-bg: #000;
     --day-hover-border: 2px solid #fff000;
+    --task-bg-color:  #ffffff;
+
     --task-text: #000;
     --today-bg-color: #ff9800;
     --today-text: #fff;
@@ -150,7 +152,7 @@ h2 {
     table-layout: fixed;
     /* Makes sure it spans the available space */
     width: 100%;
-    background-color: var(--calendar-table-bg);
+    background-color: var(--calendar-primary-bg);
     color: var(--calendar-table-text);
     border: var(--calendar-table-border);
 }
@@ -162,6 +164,7 @@ th {
     border-radius: 8px;
     font-size: 16px;
     text-transform: uppercase;
+    border: none;
 }
 
 .calendar-table th {
@@ -184,6 +187,7 @@ td,
     /* Stronger shadow */
     box-shadow: var(--box-shadow);
     transition: transform 0.2s ease-in-out, background-color 0.3s ease;
+    border:  var(--weekday-header-border-a) ;
 }
 
 /* Empty cells (previous and next month's days) */
@@ -202,16 +206,26 @@ td:hover,
 
 /* Today's date styling */
 .today {
-    background-color: var(--today-bg-color) !important;
+    /* background-color: var(--today-bg-color) !important; */
     color: var(--today-text) !important;
     font-weight: bold;
     border-radius: 10px;
 }
 
+.today-number {
+    margin: 0 0 5px 0;
+    padding: 3px 10px;
+    background-color: var(--today-bg-color);
+    color: var(--task-text);
+    border-radius: 10px;
+    justify-self: center;
+    text-align: center;
+}
+
 /* Change task background to white if inside today's cell */
 .today .task-label {
-    background-color: var(--today-task-bg) !important;
-    color: var(--today-task-text) !important;
+    background-color: var(--task-bg-color) !important;
+    color: var(--task-text) !important;
     font-weight: bold;
 }
 
