@@ -17,7 +17,6 @@ class Calendar {
     this.currentDate = new Date();
     this.taskList = this.getTaskList();
 
-    this.initDarkMode();
     this.addEventListeners();
     this.renderCalendar();
     this.addTasksWithNoDate();
@@ -41,16 +40,7 @@ class Calendar {
     );
   }
 
-  initDarkMode() {
-    if (localStorage.getItem("darkMode") === "enabled") {
-      this.body.classList.add("dark-mode");
-      this.themeSelection.value = "dark";
-      this.themeSelection.innerHTML = "Dark Mode";
-    }
-  }
-
   addEventListeners() {
-    // this.darkModeBtn.addEventListener("click", () => this.toggleDarkMode());
     this.prevBtn.addEventListener("click", () => this.changeDate(-1));
     this.nextBtn.addEventListener("click", () => this.changeDate(1));
     this.todayBtn.addEventListener("click", () => this.goToToday());
@@ -122,6 +112,7 @@ class Calendar {
   }
 
   createCalendarGrid(startDate, endDate) {
+    // Calendar Days of the Week
     const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const shortDaysofWeek = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
     const letterDaysofWeek = ["S", "M", "T", "W", "T", "F", "S"];
@@ -130,21 +121,21 @@ class Calendar {
 
     let thead = document.createElement("thead");
     let headerRow = document.createElement("tr");
-    if (window.innerWidth > 370) {
+    if (window.innerWidth > 370) { // Regualar Sized Screens
       daysOfWeek.forEach(day => {
         let th = document.createElement("th");
         th.textContent = day;
         headerRow.appendChild(th);
       });
     }
-    else if (window.innerWidth > 300) {
+    else if (window.innerWidth > 300) { // Smaller Screens
       shortDaysofWeek.forEach(day => {
         let th = document.createElement("th");
         th.textContent = day;
         headerRow.appendChild(th);
       });
     }
-    else {
+    else { // Very Small Screens
       letterDaysofWeek.forEach(day => {
         let th = document.createElement("th");
         th.textContent = day;
@@ -154,6 +145,7 @@ class Calendar {
     thead.appendChild(headerRow);
     table.appendChild(thead);
 
+    // Calendar Body
     let tbody = document.createElement("tbody");
     let row = document.createElement("tr");
     let dateIterator = new Date(startDate);
