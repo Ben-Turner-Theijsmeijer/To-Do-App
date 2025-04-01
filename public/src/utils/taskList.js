@@ -179,8 +179,8 @@ class TaskList {
         if (!inputDateElement.value) {
           inputTimeElement.value = '';
           inputRecurringElement.value = '';
-          document.getElementById("add-date-warn").style.visibility = "hidden";
-          document.getElementById("add-time-warn").style.visibility = "hidden";
+          document.getElementById("add-date-warn").style.display = "none";
+          document.getElementById("add-time-warn").style.display = "none";
         }
       });
     }
@@ -265,8 +265,8 @@ class TaskList {
     inputRecurringElement.value = '';
     inputDescElement.value = '';
 
-    document.getElementById("add-date-warn").style.visibility = "hidden";
-    document.getElementById("add-time-warn").style.visibility = "hidden";
+    document.getElementById("add-date-warn").style.display = "none";
+    document.getElementById("add-time-warn").style.display = "none";
 
     // reset textarea size
     if (inputDescElement.value.trim() === "") {
@@ -391,12 +391,12 @@ class TaskList {
               <span>${task.dateText}</span>
             </div>
           </div>
+          ${task.description ? 
+          `<span class="js-desc-toggle" data-index="${referenceNumber}" tabindex="0">
+            <i class="fa-solid fa-chevron-right fa-2xs"></i>
+            <i class="fa-solid fa-info-circle"></i>
+          </span>` : '<span></span>'}
         </div>
-        ${task.description ? 
-        `<span class="js-desc-toggle" data-index="${referenceNumber}" tabindex="0">
-          <i class="fa-solid fa-chevron-right fa-2xs"></i>
-          <i class="fa-solid fa-info-circle"></i>
-        </span>` : '<span></span>'}
         <button class="js-delete-button" data-index="${referenceNumber}">
         <i class="fa-solid fa-trash"></i>
         </button>
@@ -571,8 +571,8 @@ class TaskList {
         if (!dateEditElement.value) {
           timeEditElement.value = '';
           recurringEditElement.value = '';
-          document.getElementById("edit-date-warn").style.visibility = "hidden";
-          document.getElementById("edit-time-warn").style.visibility = "hidden";
+          document.getElementById("edit-date-warn").style.display = "none";
+          document.getElementById("edit-time-warn").style.display = "none";
         }
 
       });

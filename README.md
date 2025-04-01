@@ -1,6 +1,8 @@
 # To-Do-List
 
-<img width="950" alt="{C4591A30-5564-48AD-9ACC-1DAA32FA68B4}" src="https://github.com/user-attachments/assets/927a61f2-0908-4b76-98fd-7a77191b0177">
+<!-- This works on Gitlab -->
+<!-- <img width="950" alt="{To Do Manager}" src="/readme-imgs/To Do Manager.png"> -->
+![Landing](/readme-imgs/Landing.png)
 
 - Simple
 - Interactive
@@ -11,72 +13,101 @@
 - Add new tasks
 - Edit existing tasks
 - Delete tasks
-- Set a date for each task
-- Responsive design
-- Time feature
-- Sort By Priority
-- Sort By Time
+- Set a due date for each task
+- Sort and filter by:
+  - Priority
+  - Category
+  - Date & Time
+- View tasks in a:
+  - List
+  - Calendar
+  - Board
 
-## Installation
+## Using the App
 
-Clone the repository:
+### Online
 
-```bash
-git clone https://github.com/Anshgrover23/To-Do-List.git
-```
+[Access our application, as hosted on Gitlab Pages](http://groverio-to-do-list-77b0b5.pages.socs.uoguelph.ca/).
 
-Open `index.html` in your browser to use the application.
+### Locally
 
-## Usage
+1. Clone the repository: `git clone https://gitlab.socs.uoguelph.ca/cis42503/groverio-to-do-list.git`
+2. Install the [Live Preview Extension by Microsoft](https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server) in Visual Studio Code (VSCode)
+3. Open the repository in VSCode
+4. Click "Go Live" in the bottom right corner of VSCode
 
-- **Add a Task:** Enter a task in the input field and click the "Add" button.
-- **Task Adding Limitation:** User can not add todo without given full details
-- **Edit a Task:** Click the edit icon next to the task, make your changes, and save.
+## To Do Manager
+
+![To Do Manager](/readme-imgs/To%20Do%20Manager.png)
+
+### Primary To Do Manager Usage
+
+- **Add a Task:** Enter a task in the input field and click the "Add" button. All tasks must have a name.
+- **Edit a Task:** Click the edit icon next to the task, make your changes, and save by clicking "Update." You may also click "Cancel" to discard all your changes.
 - **Delete a Task:** Click the delete icon next to the task.
 
-## Linting and Formatting
+### Other To Do Manager Capabilities
 
-This project uses **ESLint** and **Prettier** to ensure code quality and consistency.
+- **Export Tasks:** Download a CSV file, containing all tasks currently in your list
+- **Upload Tasks:** Upload a CSV file to add tasks to your list
+  - Limitation: This will create duplicate tasks, if you export/upload the same file without deleting any
+- **Recurring Tasks:** Whether daily, weekly, or monthly, a new task with the same information will be created for the next due date automatically when the existing one is marked as complete
+- **Sort:** Sort by ascending or descending order of the selected option (Category, Priority, or Date)
+- **Filter:** Filter the list to only display the selected options (Completion status, Category, Priority)
+- **Search:** Find a task based on its name
+<!-- (TODO: any other things search will check?) -->
+- **Due Date:** Any tasks due "today" will have a clock emoji next to the date and time. The due dates on tasks due in the past will be shown in red with an alert emoji.
 
-- **ESLint** helps identify and fix problems in your JavaScript code.
-- **Prettier** automatically formats your code to follow consistent styling rules.
+## Calendar
 
-### Running the Linter
+### Calendar Capabilities
 
-To check your code for issues, run the following command:
+- View tasks on the days they're due
+- View by month or by week
+- View tasks without a due date below the calendar
+- Navigate back to "Today" if you are looking at other months/weeks than the current one
+- Look at specific task details by clicking on them
 
-```bash
-npm run lint
-```
+### Month View
 
-This command will execute ESLint on your project files and report any errors or warnings.
+![Calendar Month View](/readme-imgs/Calendar%20Month.png)
 
-### Running the Formatter
+### Week View
 
-To format your code, run the following command:
+![Calendar Week View](/readme-imgs/Calendar%20Week.png)
 
-```bash
-npm run format
-```
+### Task Popup
 
-This command will execute Prettier on your project files and apply consistent formatting according to the rules defined in your configuration.
+![Calendar Task Popup](/readme-imgs/Calendar%20Popup.png)
 
-## Contribution Guide:
+## Board View
 
-For detailed instructions on how to contribute, please check out the [CONTRIBUTING.md](CONTRIBUTING.md) file.
+## Date
 
-Let's make this project even better together! 🎉
+The most common prioritisation method is by due date, so we provide a board that divides tasks into multiple lists: No due date, upcoming (today or in the future), overdue (due in the past), and complete.
 
-## 👀 Our Contributors
+![Board View - Date](/readme-imgs/Board%20Date.png)
 
-- We extend our heartfelt gratitude for your invaluable contribution to our project! Your efforts play a pivotal role in elevating To-Do-List to greater heights.
-- Make sure you show some love by giving ⭐ to our repository.
+## Category
+
+Categories mean related tasks, so it may be useful to view them as separate lists divided by category.
+
+![Board View - Category](/readme-imgs/Board%20Category.png)
+
+## Priority
+
+Tasks are divided by priority, so that they can be considered by their importance.
+
+![Board View - Priority](/readme-imgs/Board%20Priority.png)
+
+## 👀 Previous Contributors
+
+Thank you to all developers who have contributed to this project prior to our project.
 
 <div align="center">
-
   <a href="https://github.com/Groverio/To-Do-List">
     <img src="https://contrib.rocks/image?repo=Groverio/To-Do-List" />
   </a>
 </div>
 
-Feel free to reach out to either of us for any issues or contributions.
+You can find the original repository at [Groviero's To-Do-List](https://github.com/Groverio/To-Do-List)
