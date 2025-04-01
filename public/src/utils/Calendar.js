@@ -58,7 +58,12 @@ class Calendar {
   }
 
   goToToday() {
-    this.currentDate = new Date();
+    if(this.viewMode === "week"){
+      this.currentDate = new Date();
+    } else {
+      let now = new Date();
+      this.currentDate = new Date(now.getFullYear(), now.getMonth(), now.getDay());
+    }
     this.renderCalendar();
   }
 
@@ -219,7 +224,7 @@ class Calendar {
 
   addTasksToCell(cell, date) {
     const tasksForDate = this.taskList.filter(
-      task => task.date === date.toISOString().split("T")[0]
+      task => task.date === date.toLocaleDateString("en-CA").split("T")[0]
     );
 
     if (tasksForDate.length > 0) {
