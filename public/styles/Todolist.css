@@ -106,6 +106,10 @@
   border: var(--input-border-hover);
 }
 
+.form-select:focus-visible {
+  color: var(--primary-text);
+}
+
 .js-actions-wrapper {
   display: flex;
   justify-content: center;
@@ -349,7 +353,8 @@
 .js-edit-date,
 .js-edit-time,
 .js-edit-recurring,
-.js-filter-input {
+.js-filter-input,
+.js-edit-desc {
   background-color: var(--primary-edit-bg);
   color: var(--primary-edit-text);
 }
@@ -368,6 +373,8 @@
 .js-filter-input:focus-visible,
 .js-edit-recurring:hover,
 .js-edit-recurring:focus-visible,
+.js-edit-desc:focus-visible,
+.js-edit-desc:hover,
 .js-edit-desc:focus-visible {
   border: var(--input-border-hover);
 }
@@ -399,7 +406,8 @@
 }
 
 .task-edit-fields>input,
-.task-edit-fields>select {
+.task-edit-fields>select,
+.task-edit-fields>textarea {
   border: var(--form-border);
   border-radius: 5px;
   padding: 2px 5px;
@@ -484,6 +492,10 @@
   background-color: var(--button-color);
   border-color: var(--button-color);
   cursor: pointer;
+}
+
+#switch24Hour:focus-visible, #switch24Hour:hover {
+  border: var(--input-border-hover);
 }
 
 .small-container,
