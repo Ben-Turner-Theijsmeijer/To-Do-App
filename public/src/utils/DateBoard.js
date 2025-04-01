@@ -141,7 +141,8 @@ document.addEventListener("DOMContentLoaded", function() {
     updateHeader("Overdue", overdueHeader, overdueColumn);
     updateHeader("Complete", completeHeader, completeColumn);
 
-    hideOverdueBoardVisibility();
+    // re-implement this functionality
+    // hideOverdueBoardVisibility();
   };
 
   // Function to update the header text with the correct task count
