@@ -301,13 +301,24 @@ body {
   border: 1px solid var(--border-color);
 }
 
+.high-contrast-mode .navbar-toggler {
+  border: 1px solid var(--border-color);
+}
+
+.high-contrast-mode .navbar-toggler:hover,
+.high-contrast-mode .navbar-toggler:focus-visible,
+.high-contrast-mode .navbar-toggler:active {
+  border: 1px solid var(--hover-border-color);
+}
+
 /* board dropdown */
 .high-contrast-mode .dropdown-menu {
   background-color: var(--navbar-bg);
 }
 
 .high-contrast-mode .dropdown-menu:hover,
-.high-contrast-mode .dropdown-menu:focus-visible {
+.high-contrast-mode .dropdown-menu:focus-visible,
+.high-contrast-mode .dropdown-menu:active {
   background-color: var(--navbar-bg);
 }
 
@@ -321,7 +332,8 @@ body {
 }
 
 .high-contrast-mode .dropdown-menu a:hover,
-.high-contrast-mode .dropdown-menu a:focus-visible {
+.high-contrast-mode .dropdown-menu a:focus-visible,
+.high-contrast-mode .dropdown-menu a:active {
   background-color: var(--secondary-bg);
   outline: 2px solid var(--hover-border-color);
 }
@@ -332,7 +344,8 @@ body {
 }
 
 .high-contrast-mode .btn-primary:hover,
-.high-contrast-mode .btn-primary:focus-visible {
+.high-contrast-mode .btn-primary:focus-visible,
+.high-contrast-mode .btn-primary:active {
   border: 2px solid var(--button-border-color);
 }
 
@@ -341,7 +354,8 @@ body {
 }
 
 .high-contrast-mode .btn-outline-primary:hover,
-.high-contrast-mode .btn-outline-primary:focus-visible {
+.high-contrast-mode .btn-outline-primary:focus-visible,
+.high-contrast-mode .btn-outline-primary:active {
   border: 2px solid var(--button-border-color) !important;
 }
 
@@ -352,7 +366,8 @@ body {
 }
 
 .high-contrast-mode .btn-secondary:hover,
-.high-contrast-mode .btn-secondary:focus-visible {
+.high-contrast-mode .btn-secondary:focus-visible,
+.high-contrast-mode .btn-secondary:active {
   background-color: #222222;
   border: 2px solid var(--hover-border-color);
 }
@@ -363,7 +378,8 @@ body {
 }
 
 .high-contrast-mode .btn-outline-secondary:hover,
-.high-contrast-mode .btn-outline-secondary:focus-visible {
+.high-contrast-mode .btn-outline-secondary:focus-visible,
+.high-contrast-mode .btn-outline-secondary:active {
   background-color: #222222;
   border: 2px solid var(--hover-border-color);
 }
@@ -377,7 +393,8 @@ body {
 }
 
 .high-contrast-mode #themesSelection:hover,
-.high-contrast-mode #themesSelection:focus-visible {
+.high-contrast-mode #themesSelection:focus-visible,
+.high-contrast-mode #themesSelection:active {
   border: 2px solid var(--hover-border-color);
 }
 
