@@ -22,11 +22,11 @@
   --primary-edit-bg: #fafafe;
   --primary-edit-text: #333;
   --button-hover-bg: #007bff;
-  --input-border-hover: 2px solid #007bff;
+  --input-border-hover: 2px solid #38a3ea;
   --button-hover-text: #fafafe;
   --disabled-edit-bg: #dddddd;
   --disabled-edit-text: #888;
-  --cancel-edit-bg: #4f4f4f;
+  --cancel-edit-bg: #888;
   --cancel-edit-hover: #272727;
   --cancel-edit-border: none;
   --cancel-border-hover: 2px solid #38a3ea;
@@ -108,6 +108,22 @@
   margin-bottom: 0.813rem;
   overflow: auto;
   border: var(--add-grid-border);
+}
+
+/* input, select, button, textarea on focus/hover */
+.js-add-grid select:hover,
+.js-add-grid select:focus-visible,
+.js-add-grid input:hover,
+.js-add-grid input:focus-visible,
+.js-add-grid button:hover,
+.js-add-grid button:focus-visible,
+.js-add-grid textarea:hover,
+.js-add-grid textarea:focus-visible {
+  border: var(--input-border-hover);
+}
+
+.form-select:focus-visible {
+  color: var(--primary-text);
 }
 
 .add-task-fields {
@@ -221,7 +237,7 @@
 }
 
 /* Single task styling */
-.task, 
+.task,
 .task.no-hover:hover {
   width: 80%;
   margin: 0 auto;
@@ -242,7 +258,7 @@
   cursor: move;
 }
 
-.task:active { 
+.task:active {
   width: 80%;
   box-shadow: none;
 }
@@ -258,7 +274,6 @@
 
 .description-box {
   padding: 10px;
-  background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 5px;
   margin-left: 10px;
@@ -268,7 +283,6 @@
   font-size: 14px;
   word-break: break-all;
   white-space: pre-wrap;
-  /* transition: all 0.3s ease;*/
 }
 
 .small-container {
@@ -398,9 +412,14 @@
 .js-edit-date,
 .js-edit-time,
 .js-edit-recurring,
-.js-filter-input {
+.js-filter-input,
+.js-edit-desc {
   background-color: var(--primary-edit-bg);
   color: var(--primary-edit-text);
+}
+
+.overdue-tooltip:hover::after{
+  top: 20px;
 }
 
 .js-edit-name:hover,
@@ -417,6 +436,8 @@
 .js-filter-input:focus-visible,
 .js-edit-recurring:hover,
 .js-edit-recurring:focus-visible,
+.js-edit-desc:focus-visible,
+.js-edit-desc:hover,
 .js-edit-desc:focus-visible {
   border: var(--input-border-hover);
 }
@@ -448,7 +469,8 @@
 }
 
 .task-edit-fields>input,
-.task-edit-fields>select {
+.task-edit-fields>select,
+.task-edit-fields>textarea {
   border: var(--form-border);
   border-radius: 5px;
   padding: 2px 5px;
@@ -533,6 +555,10 @@
   background-color: var(--button-color);
   border-color: var(--button-color);
   cursor: pointer;
+}
+
+#switch24Hour:focus-visible, #switch24Hour:hover {
+  border: var(--input-border-hover);
 }
 
 .small-container,
