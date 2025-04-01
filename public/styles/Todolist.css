@@ -418,6 +418,10 @@
   color: var(--primary-edit-text);
 }
 
+.overdue-tooltip:hover::after{
+  top: 20px;
+}
+
 .js-edit-name:hover,
 .js-edit-category:hover,
 .js-edit-priority:hover,
