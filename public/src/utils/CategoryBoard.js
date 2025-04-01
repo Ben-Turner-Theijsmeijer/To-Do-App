@@ -54,24 +54,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Add the delete button (X) to each task
     taskElement.innerHTML += `
-            <div class="delete-btn" tabindex="0">
+            <button class="delete-btn">
                 <i class="fa-solid fa-times"></i>
-            </div>
+            </button>
         `;
 
     // Add event listener to the delete button (X)
     const deleteBtn = taskElement.querySelector(".delete-btn");
 
-    const handleDelete = (e) => {
-      if (e.type === "click" || (e.type === "keypress" && e.key === "Enter")){
-        deleteTaskFromLocalStorage(task); // Delete task from local storage
-        taskElement.remove(); // Remove task from UI
-        updateTasksCount(); // Recalculate task count after deletion
-      }
-    }
+    const handleDelete = e => {
+      deleteTaskFromLocalStorage(task); // Delete task from local storage
+      taskElement.remove(); // Remove task from UI
+      updateTasksCount(); // Recalculate task count after deletion
+    };
 
     deleteBtn.addEventListener("click", handleDelete);
-    deleteBtn.addEventListener("keypress", handleDelete);
 
     // add event listener to toggle description visibility
     if (task.description != null && task.description != "") {
