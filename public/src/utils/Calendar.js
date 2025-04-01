@@ -153,7 +153,7 @@ class Calendar {
     while (dateIterator <= endDate) {
       let cell = document.createElement("td");
       cell.classList.add("calendar-cell");
-      if (dateIterator.getMonth() === this.currentDate.getMonth()) {
+      if (dateIterator.getMonth() === this.currentDate.getMonth() || this.viewMode === "week") {
         cell.textContent = dateIterator.getDate();
         if (dateIterator.toDateString() === new Date().toDateString()) {
           cell.classList.add("today");
