@@ -121,6 +121,7 @@
     font-weight: 500;
     /* Subtle shadow for better visibility */
     box-shadow: 0px 3px 6px var(--task-shadow);
+    overflow-wrap: anywhere;
 }
 
 #chevron {

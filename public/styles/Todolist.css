@@ -62,31 +62,37 @@
 }
 
 .js-name-input {
-  min-width: 150px;
+  min-width: 250px;
+  max-width: 600px;
+  width: 35% !important;
 }
 
 .js-desc-input {
-  grid-column: 1 / -1;
+  grid-column: 1 / -1; /*????*/
+  width: 100% !important;
   min-width: 150px;
   height: 3rem;
-  width: 87.5%;
   max-height: 180px;
 }
 
 .js-edit-desc {
-  grid-column: 1 / -1;
+  /* grid-column: 1 / -1; */
   min-width: 150px;
   height: 3rem;
   width: 87.5%;
+  width: 100%;
   max-height: 100px;
 }
 
-.js-add-grid {
-  display: grid;
-  grid-template-columns: 2.5fr 11rem 8rem 8rem 8rem 7.3rem 1fr;
+.add-tasks-area {
+  display: flex;
+  flex-direction:row;
+  flex-wrap:  wrap;
+  /* grid-template-columns: 2.5fr 11rem 8rem 8rem 8rem 7.3rem 1fr; */
   /* row-gap: 1rem; */
   background-color: var(--secondary-bg);
   padding: 20px;
+  gap: 10px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 0.813rem;
@@ -95,12 +101,52 @@
   border: var(--add-grid-border);
 }
 
+.add-task-dropdowns{
+  width: 100%;
+  display: flex;
+  padding: 0 10px 0 0;
+  gap: 10px;
+  /* flex-direction: row; */
+
+}
+
+#add-date-warn {
+  font-size: small;
+  color: #ff5900;
+  /* visibility: hidden; */
+  display: none;
+}
+
+#add-time-warn {
+  font-size: small;
+  color: #ff5900;
+  /* visibility: hidden; */
+  display: none;
+}
+
+.form-control, .form-select {
+  width: auto;
+}
+  
+.js-add-button {
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 15px;
+  border-radius: 5px;
+}
+
 .js-actions-wrapper {
   display: flex;
-  justify-content: center;
+  justify-content:left;
   gap: 1rem;
   grid-row: auto;
   grid-column: auto;
+  width: 100%;;
 }
 
 .js-time-input:disabled,
@@ -113,33 +159,37 @@
   cursor: not-allowed;
 }
 
-.js-add-button {
-  border: none;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2px 15px;
-  border-radius: 5px;
-}
 
 /* Filter Menu Styling */
+.search-wrapper{
+  display: flex;
+  align-items: end;
+}
+
 #sort-and-filter {
   display: flex;
   flex-direction: row;
   justify-self: center;
+  justify-content: space-between;
   margin-top: 2.5em;
-  gap: 65px
+  width: 80%;
+  gap:10px;
 }
 
 /* Sort Buttons */
+.sort-buttons > *{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  justify-content: end;
+}
+
 .btn-outline-primary:hover,
 .btn-outline-primary:focus-visible {
   background-color: var(--button-hover-bg);
   color: var(--button-hover-text);
 }
+
 
 /* Task list */
 .js-add-html {
@@ -160,7 +210,7 @@
   margin: 0 auto;
   font-size: 1.2em;
   display: grid;
-  grid-template-columns: 6fr 1fr 1fr 1fr;
+  grid-template-columns: 6fr 1fr 1fr;
   background-color: var(--secondary-bg);
   border: 1px var(--border-color) solid;
   border-radius: 10px;
@@ -228,23 +278,13 @@
   font-size: 0.8em;
 }
 
-#add-date-warn {
-  font-size: small;
-  color: #ff5900;
-  visibility: hidden;
-}
-
-#add-time-warn {
-  font-size: small;
-  color: #ff5900;
-  visibility: hidden;
-}
 
 #edit-date-warn {
   font-size: small;
   color: #ff5900;
   margin-top: -8px;
-  visibility: hidden;
+  /* visibility: hidden; */
+  display: none;
 }
 
 #edit-time-warn {
@@ -252,7 +292,8 @@
   color: #ff5900;
   margin-top: -8px;
   margin-left: 70px;
-  visibility: hidden;
+  /* visibility: hidden; */
+  display: none;
 }
 
 .task-info {
@@ -397,7 +438,7 @@
 }
 
 .js-edit-name {
-  min-width: 200px;
+  min-width: 125px;
   max-width: 300px;
   font-weight: 600;
   /* field-sizing: content; */
@@ -480,4 +521,29 @@
 .small-container,
 .form-switch {
   border: var(--task-border);
+}
+
+/* Mobile styling */
+@media only screen and (max-width: 767px) {
+  #sort-and-filter{
+    flex-wrap: wrap;
+  }
+  .task{
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding:0 0 10px 0;
+    justify-content: center;
+  }
+  .task-name{
+    min-width: 75px;
+  }
+  .js-edit-name {
+    max-width: 150px !important;
+  }
+  .js-delete-button, .js-edit-button {
+    margin: 0 !important;
+  }
+  
 }

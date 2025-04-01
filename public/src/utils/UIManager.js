@@ -148,11 +148,10 @@ class UIManager {
       
       if (selectedDate.getTime() < currentDate.getTime()){
         
-        document.getElementById(Id).style.visibility = "visible";
-        console.log(document.getElementById(Id).style.visibility);
+        document.getElementById(Id).style.display = "block";
       }
       else {
-        document.getElementById(Id).style.visibility = "hidden";
+        document.getElementById(Id).style.display = "none";
       }
     
       if (selectedDate.getTime() == currentDate.getTime()){
@@ -173,10 +172,10 @@ class UIManager {
       specificTime.setHours(hours, minutes, 59, 0);
 
       if ((specificTime.getTime() < currentTime.getTime()) && this.sameDayCheck) {
-        document.getElementById(Id).style.visibility = "visible";
+        document.getElementById(Id).style.display = "block";
       }
       else {
-        document.getElementById(Id).style.visibility = "hidden";
+        document.getElementById(Id).style.display = "none";
       }
     }
     
