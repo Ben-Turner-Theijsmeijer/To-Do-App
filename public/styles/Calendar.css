@@ -326,3 +326,66 @@ body.high-contrast-mode .calendar-table td.empty {
 body.high-contrast-mode .calendar-table td.today {
     border: 2px solid var(--hover-border-color);
 }
+
+/* ========================= */
+/*       Media Queries       */
+/* ========================= */
+@media only screen and (max-width: 600px) {
+    .container-cal {
+        width: 100%;
+    }
+
+    .task-without-due-date {
+        margin: 2%;
+    }
+
+    .calendar-table th {
+        overflow: hidden;
+        text-overflow: clip;
+        padding: 0.5rem 0.1rem;
+        font-size: 14px;
+    }
+
+    .calendar-table td {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-left: 3px;
+        padding-right: 3px;
+        font-size: 14px;
+    }
+  }
+  
+@media only screen and (max-width: 500px) {
+    .container-cal {
+        padding-top: 25px;
+        padding-left: 3px;
+        padding-right: 3px;
+        padding-bottom: 25px;
+    }
+
+    #prevBtn {
+        margin-left: 3%;
+    }
+
+    #nextBtn {
+        margin-right: 3%;
+    }
+
+    .btn-primary,
+    #todayBtn,
+    #prevBtn,
+    #nextBtn {
+        padding: 5px 10px;
+        margin-bottom: 3px;
+    }
+
+    #weekViewBtn {
+        padding: 3px 8px;
+        margin-bottom: 3px;
+    }
+  }
+  @media only screen and (max-width: 400px) {
+    #currentDate {
+        font-size: 1.7rem;
+    }
+  }
