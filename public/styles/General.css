@@ -31,6 +31,7 @@
   --delete-border-hover: darkred;
   --overdue-date: red;
   --overdue-date-bg: none;
+  --overdue-date-tooltip: red;
   --due-date: #ff5900;
 }
 
@@ -62,6 +63,7 @@
   --delete-border-hover: #811;
   --overdue-date: #fefefe;
   --overdue-date-bg: #e33;
+  --overdue-date-tooltip: #e33;
   --due-date: #ff5900;
 }
 
@@ -94,6 +96,7 @@
   --delete-border-hover: #ff5900;
   --overdue-date: #fefefe;
   --overdue-date-bg: #e33;
+  --overdue-date-tooltip: #e33;
   --due-date: #ff5900;
 }
 
@@ -248,6 +251,7 @@ body {
   color: var(--overdue-date);
   background-color: var(--overdue-date-bg);
   padding-right: 1%;
+  border-radius: 5px;
 }
 
 .overdue-tooltip {
@@ -260,7 +264,7 @@ body {
 .overdue-tooltip:hover::after {
   content: "Overdue";
   position: absolute;
-  background: var(--overdue-date);
+  background: var(--overdue-date-tooltip);
   color: white;
   font-size: 0.8em;
   padding: 2px 5px;
