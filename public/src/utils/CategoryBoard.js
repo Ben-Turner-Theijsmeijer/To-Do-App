@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <strong>${task.name}</strong>
             ${task.description == null || task.description == ""
               ? ""
-              : `<div class="task-desc">
+              : `<div class="task-desc" tabindex="0">
                 <i class="fa-solid fa-info-circle"></i>
                 <i id="chevron" class="fa-solid fa-chevron-right fa-2xs"></i>
                 <span class="description-box" id="description" style="display:none;">${task.description}</span>
@@ -54,18 +54,24 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Add the delete button (X) to each task
     taskElement.innerHTML += `
-            <div class="delete-btn">
+            <div class="delete-btn" tabindex="0">
                 <i class="fa-solid fa-times"></i>
             </div>
         `;
 
     // Add event listener to the delete button (X)
     const deleteBtn = taskElement.querySelector(".delete-btn");
-    deleteBtn.addEventListener("click", () => {
-      deleteTaskFromLocalStorage(task); // Delete task from local storage
-      taskElement.remove(); // Remove task from UI
-      updateTasksCount(); // Recalculate task count after deletion
-    });
+
+    const handleDelete = (e) => {
+      if (e.type === "click" || (e.type === "keypress" && e.key === "Enter")){
+        deleteTaskFromLocalStorage(task); // Delete task from local storage
+        taskElement.remove(); // Remove task from UI
+        updateTasksCount(); // Recalculate task count after deletion
+      }
+    }
+
+    deleteBtn.addEventListener("click", handleDelete);
+    deleteBtn.addEventListener("keypress", handleDelete);
 
     // add event listener to toggle description visibility
     if (task.description != null && task.description != "") {
@@ -73,11 +79,15 @@ document.addEventListener("DOMContentLoaded", function() {
       const chevron = taskElement.querySelector("#chevron");
       const descDiv = taskElement.querySelector(".task-desc");
 
-      console.log(descDiv);
-      descDiv.addEventListener("click", () => {
-        desc.style.display = desc.style.display == "none" ? "block" : "none";
-        chevron.classList.toggle("fa-rotate-90");
-      });
+      const viewDescription = (e) => {
+        if (e.type === "click" || (e.type === "keypress" && e.key === "Enter")){
+          desc.style.display = desc.style.display == "none" ? "block" : "none";
+          chevron.classList.toggle("fa-rotate-90");
+        }
+      }
+      
+      descDiv.addEventListener("click", viewDescription);
+      descDiv.addEventListener("keypress", viewDescription);
     }
 
     // Determine the correct task class (e.g., low-task, medium-task, high-task, or backlog-task)
