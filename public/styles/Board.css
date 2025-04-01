@@ -154,7 +154,8 @@
 }
 
 /* Optional: Add a hover effect to the delete button */
-.delete-btn:hover i {
+.delete-btn:hover i,
+.delete-btn:focus i {
     color: var(--delete-border-hover);
 }
 
@@ -168,7 +169,9 @@
 }
 
 /* Show the add task button when hovering over the column */
-.board-column:hover .add-task-link {
+.board-column:hover .add-task-link, 
+.board-column:focus .add-task-link,
+.board-column:focus-within .add-task-link{ 
     display: block;
 }
 

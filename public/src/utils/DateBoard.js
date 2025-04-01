@@ -1,6 +1,6 @@
 import Task from "./task.js";
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   // Function to load tasks from local storage
   const loadTasksFromLocalStorage = () => {
     const taskList = JSON.parse(localStorage.getItem("taskList")) || [];
@@ -32,68 +32,78 @@ document.addEventListener("DOMContentLoaded", function() {
     // Create the content for the task
     taskElement.innerHTML = `
             <div ${task.isOverdue() == "overdue"
-              ? 'class="overdue-tooltip"'
-              : ""}
+        ? 'class="overdue-tooltip"'
+        : ""}
                 ${task.isOverdue() == "due" ? 'class="due-tooltip"' : ""}>
                 ${task.isOverdue() == "overdue" ? `<span>⚠️</span>` : ""}
                 ${task.isOverdue() == "due" ? `<span>🕓</span>` : ""}
                 <strong>${task.name}</strong> ${task.date == ""
-      ? ""
-      : ","} ${task.date}
+        ? ""
+        : ","} ${task.date}
             </div>
             ${task.description == null || task.description == ""
-              ? ""
-              : `<div class="task-desc">
+        ? ""
+        : `<div class="task-desc" tabindex="0">
                 <i class="fa-solid fa-info-circle"></i>
                 <i id="chevron" class="fa-solid fa-chevron-right fa-2xs"></i>
                 <span class="description-box" id="description" style="display:none;">${task.description}</span>
                 </div>`}
             <div class="task-details">
                 ${task.recurring
-                  ? `<span class="tag recurring ${task.recurring
-                      ? `recurring-tag`
-                      : ""}">${task.recurring}</span>`
-                  : ""}
+        ? `<span class="tag recurring ${task.recurring
+          ? `recurring-tag`
+          : ""}">${task.recurring}</span>`
+        : ""}
                 ${task.category
-                  ? `<span class="tag category ${task.category
-                      ? `category-tag`
-                      : ""}">${task.category}</span>`
-                  : ""}
+        ? `<span class="tag category ${task.category
+          ? `category-tag`
+          : ""}">${task.category}</span>`
+        : ""}
                 ${task.priority
-                  ? `<span class="tag priority ${task.priority
-                      ? `priority-${task.priority}`
-                      : ""}">${task.priority}</span>`
-                  : ""}
+        ? `<span class="tag priority ${task.priority
+          ? `priority-${task.priority}`
+          : ""}">${task.priority}</span>`
+        : ""}
             </div>
         `;
 
     //Note: https://stackoverflow.com/questions/22512467/addeventlistener-will-not-attach-a-listener-to-the-element
     // Add the delete button (X) to each task
     taskElement.innerHTML += `
-            <div class="delete-btn">
+            <div class="delete-btn" tabindex="0">
                 <i class="fa-solid fa-times"></i>
             </div>
         `;
 
     // Add event listener to the delete button (X)
     const deleteBtn = taskElement.querySelector(".delete-btn");
-    deleteBtn.addEventListener("click", () => {
-      deleteTaskFromLocalStorage(task); // Delete task from local storage
-      taskElement.remove(); // Remove task from UI
-      updateTasksCount(); // Recalculate task count after deletion
-    });
+
+    const handleDelete = (e) => {
+      if (e.type === "click" || (e.type === "keypress" && e.key === "Enter")){
+        deleteTaskFromLocalStorage(task); // Delete task from local storage
+        taskElement.remove(); // Remove task from UI
+        updateTasksCount(); // Recalculate task count after deletion
+      }
+    }
+
+    deleteBtn.addEventListener("click", handleDelete);
+    deleteBtn.addEventListener("keypress", handleDelete);
 
     // add event listener to toggle description visibility
     if (task.description != null && task.description != "") {
-      console.log(task.description);
       const desc = taskElement.querySelector("#description");
       const chevron = taskElement.querySelector("#chevron");
       const descDiv = taskElement.querySelector(".task-desc");
 
-      descDiv.addEventListener("click", () => {
-        desc.style.display = desc.style.display == "none" ? "block" : "none";
-        chevron.classList.toggle("fa-rotate-90");
-      });
+      const viewDescription = (e) => {
+        if (e.type === "click" || (e.type === "keypress" && e.key === "Enter")){
+          desc.style.display = desc.style.display == "none" ? "block" : "none";
+          chevron.classList.toggle("fa-rotate-90");
+        }
+      }
+      
+      descDiv.addEventListener("click", viewDescription);
+      descDiv.addEventListener("keypress", viewDescription);
     }
 
     // Determine the correct task column and apply the correct class (e.g., upcoming-task, backlog-task, overdue-task, or complete-task)
