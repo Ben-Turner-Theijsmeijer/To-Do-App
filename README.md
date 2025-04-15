@@ -27,11 +27,11 @@
 
 ### Online
 
-[Access our application, as hosted on Gitlab Pages](http://groverio-to-do-list-77b0b5.pages.socs.uoguelph.ca/).
+[Access our application, as hosted on Gitlab Pages](http://groverio-to-do-list-77b0b5.pages.socs.uoguelph.ca/). (May stop working soon -2025)
 
 ### Locally
 
-1. Clone the repository: `git clone https://gitlab.socs.uoguelph.ca/cis42503/groverio-to-do-list.git`
+1. Clone the repository: `git clone https://github.com/Ben-Turner-Theijsmeijer/To-Do-App.git`
 2. Install the [Live Preview Extension by Microsoft](https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server) in Visual Studio Code (VSCode)
 3. Open the repository in VSCode
 4. Click "Go Live" in the bottom right corner of VSCode
