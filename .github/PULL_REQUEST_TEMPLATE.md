@@ -7,13 +7,13 @@ Please include a summary of the changes and the related issue. Include relevant 
 ## Implemented Changes
 Type of Change:
 
-- [ ] Bug fix (non-breaking change)
-- [ ] New feature (non-breaking change)
-- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
-- [ ] This change requires a documentation update
+- Bug fix (non-breaking change)
+- New feature (non-breaking change)
+- Breaking change (fix or feature that would cause existing functionality to not work as expected)
+- This change requires a documentation update
 
 Describe the implemented Changes:
-- [ ]
+- 
 
 ## Demonstrated Changes
 Provide evidence of the changes implemented and their functionality (Include Screenshots or Videos)
@@ -23,7 +23,7 @@ Please describe the tests that you ran to verify your changes.
 - [ ] Test A
 - [ ] Test B
 
-## Checklist (DELETE ME IF ALL ANSWERS ARE YES)
+## Checklist
 
 - [ ] My code follows the style guidelines of this project
 - [ ] I have performed a self-review of my code
