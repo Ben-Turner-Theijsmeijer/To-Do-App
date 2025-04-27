@@ -1,26 +1,29 @@
 ## Description
 
+relevant ticket(s): #(issue number)
+
 Please include a summary of the changes and the related issue. Include relevant motivation and context.
 
-Fixes #(issue number)
+## Implemented Changes
+Type of Change:
 
-## Type of change
+- Bug fix (non-breaking change)
+- New feature (non-breaking change)
+- Breaking change (fix or feature that would cause existing functionality to not work as expected)
+- This change requires a documentation update
 
-Please delete options that are not relevant.
+Describe the implemented Changes:
+- 
 
-- [ ] Bug fix (non-breaking change)
-- [ ] New feature (non-breaking change)
-- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
-- [ ] This change requires a documentation update
+## Demonstrated Changes
+Provide evidence of the changes implemented and their functionality (Include Screenshots or Videos)
 
-## How Has This Been Tested?
-
-Please describe the tests that you ran to verify your changes. Provide instructions so that they can be reproduced.
+Please describe the tests that you ran to verify your changes.
 
 - [ ] Test A
 - [ ] Test B
 
-## Checklist:
+## Checklist
 
 - [ ] My code follows the style guidelines of this project
 - [ ] I have performed a self-review of my code

@@ -50,7 +50,7 @@
               aria-expanded="false">
               <i class="fa-solid fa-chalkboard"></i> Board
             </a>
-            <ul class="dropdown-menu" aria-labelledby="boardDropdown">
+            <ul class="dropdown-menu" id="themes-selection" aria-labelledby="boardDropdown">
               <li>
                 <a class="dropdown-item" href="DateBoard.html">Date</a>
               </li>
@@ -69,14 +69,14 @@
 
   <div class="container">
     <h1 class="subtitle text-center mt-4">Board View</h1>
-    <h2 class="subtitle-2 text-center mt-4">Priority</h2>
+    <h2 class="subtitle-2 text-center mt-4">Date</h2>
 
     <!-- Columns where tasks will be dynamically injected -->
     <div class="drag-drop-container">
 
       <div class="col">
         <div class="header">
-          <h4 id="backlog-header">No Priority</h4>
+          <h4 id="backlog-header">No date</h4>
         </div>
         <div id="backlog" class="board-column" tabindex="0">
           <div class="task-list display" id="backlog-list"></div>
@@ -89,10 +89,10 @@
 
       <div class="col">
         <div class="header">
-          <h4 id="low-header">Low</h4>
+          <h4 id="upcoming-header">Upcoming</h4>
         </div>
-        <div id="low" class="board-column" tabindex="0">
-          <div class="task-list display" id="low-list"></div>
+        <div id="upcoming" class="board-column" tabindex="0">
+          <div class="task-list display" id="upcoming-list"></div>
           <!-- Add Task Button for Upcoming Column -->
           <div class="add-task-link">
             <a href="Todolist.html"><i class="fa-solid fa-plus"></i></a>
@@ -102,10 +102,10 @@
 
       <div class="col">
         <div class="header">
-          <h4 id="medium-header">Medium</h4>
+          <h4 id="overdue-header">Overdue</h4>
         </div>
-        <div id="medium" class="board-column" tabindex="0">
-          <div class="task-list display" id="medium-list"></div>
+        <div id="overdue" class="board-column" tabindex="0">
+          <div class="task-list display" id="overdue-list"></div>
           <!-- Add Task Button for Overdue Column -->
           <div class="add-task-link">
             <a href="Todolist.html"><i class="fa-solid fa-plus"></i></a>
@@ -115,10 +115,10 @@
 
       <div class="col">
         <div class="header">
-          <h4 id="high-header">High</h4>
+          <h4 id="complete-header">Complete</h4>
         </div>
-        <div id="high" class="board-column" tabindex="0">
-          <div class="task-list display" id="high-list"></div>
+        <div id="complete" class="board-column" tabindex="0">
+          <div class="task-list display" id="complete-list"></div>
           <!-- Add Task Button for Complete Column -->
           <div class="add-task-link">
             <a href="Todolist.html"><i class="fa-solid fa-plus"></i></a>
@@ -146,14 +146,14 @@
   <footer class="footer">
     <div class="container">
       <p>
-        &copy; <span class="year"></span> Made with &#10084; by Ansh Grover. All rights reserved.
+        &copy; <span class="year"></span> Made with &#10084; by Ben, Emily, Jen, Jeremy, Sara, & all previous contributors. All rights reserved.
       </p>
     </div>
   </footer>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script type="module" src="../utils/PriorityBoard.js"></script>
+  <script type="module" src="../utils/DateBoard.js"></script>
   <script src="../utils/themes.js"></script>
 
 </body>
